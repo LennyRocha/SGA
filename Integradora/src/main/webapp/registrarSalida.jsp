@@ -111,7 +111,7 @@
                         </div>
                         <br>
                         <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="subir()">Finalizar</button>
-                            <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg">Cancelar</button></center>
+                            <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg" onclick="location.href='InicioAlmacenista.jsp'">Cancelar</button></center>
                     </form>
                 </div>
                 <br>

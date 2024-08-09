@@ -111,7 +111,7 @@
 
                             <hr class="my-4">
 
-                            <button class="w-100 btn btn-outline-warning btn-lg" id="salir">GENERAR REPORTE</button>
+                            <button class="w-100 btn btn-outline-warning btn-lg" id="salir" onclick="location.href='Inicio.jsp'">VOLVER</button>
                         </div>
                     </form>
                 </div>

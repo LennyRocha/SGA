@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col">
                         <img class="img-fluid" id="btns" src="IMG/Btn3_Admin.png" alt="Gesionar usuarios">
-                        <button class="btn btn-secondary.btn-sm mt-1 mb-2 w-98 btn btn-sm" id="btnAdmin" onclick="location.href='gestionUsuario.jsp'">USUARIOS</button>
+                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-98 btn btn-sm" id="btnAdmin" onclick="location.href='gestionUsuario.jsp'">USUARIOS</button>
                     </div>
                     <div class="col">
                         <img class="img-fluid" id="btns" src="IMG/Btn2_Admin.png" alt="ver historial">

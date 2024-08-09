@@ -22,6 +22,7 @@ import java.io.IOException;
         "/gestionUsuario.jsp",
         "/Inicio.jsp",
         "/registrarUsuario.jsp",
+        "/almacen.jsp"
 }) //Direcciones que va a proteger este filtro
 public class AdminSessionFilter implements Filter {
     @Override

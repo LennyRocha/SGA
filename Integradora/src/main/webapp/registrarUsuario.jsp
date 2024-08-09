@@ -16,6 +16,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='${pageContext.request.contextPath}/CSS/bootstrap.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='${pageContext.request.contextPath}/CSS/StyleUser.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='${pageContext.request.contextPath}/CSS/StyleFooter.css'>
     <link rel="icon" type="image/png" sizes="32x32" href="ICONOS/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="ICONOS/favicon-16x16.png">
     <link rel="manifest" href="ICONOS/site.webmanifest">
@@ -183,6 +184,11 @@
 %>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
-<jsp:include page="/Templates/Footer.jsp" />
+<br>
+<footer class="footer mt-auto py-3 text-white-50" style="background-color: #1D3557;">
+    <div class="container">
+        <span class="text-muted">Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</span>
+    </div>
+</footer>
 </body>
 </html>
