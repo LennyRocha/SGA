@@ -85,7 +85,6 @@ public class DetalleEntradaDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return detallesList;
     }
 

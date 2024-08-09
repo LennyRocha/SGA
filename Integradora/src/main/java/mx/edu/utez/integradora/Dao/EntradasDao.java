@@ -8,7 +8,6 @@ import mx.edu.utez.integradora.Utils.DatabaseConnectionManager;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.lang.String;
 
 public class EntradasDao {
 
@@ -41,7 +40,6 @@ public class EntradasDao {
                 usuario.setId(rs.getInt("usuario_id"));
                 usuario.setNombre_usuario(rs.getString("usuario_nombre"));
                 entrada.setUsuario(usuario);
-
                 entrada.setEstado(rs.getString("estado"));
 
                 // Obtener los detalles asociados
@@ -62,6 +60,51 @@ public class EntradasDao {
                 "FROM Entradas e " +
                 "JOIN Proveedor p ON e.proveedor_id = p.proveedor_id " +
                 "JOIN Usuario u ON e.usuario_id = u.usuario_id";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Entradas entrada = new Entradas();
+                entrada.setEntrada_id(rs.getInt("entrada_id"));
+                entrada.setEntrada_folio(rs.getInt("entrada_folio"));
+                entrada.setEntrada_fecha(rs.getTimestamp("entrada_fecha"));
+
+                // Obtener información del proveedor
+                Proveedor proveedor = new Proveedor();
+                proveedor.setProveedor_id(rs.getInt("proveedor_id"));
+                proveedor.setProveedor_nombre(rs.getString("proveedor_nombre"));
+                entrada.setProveedor(proveedor);
+
+                // Obtener información del usuario
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("usuario_id"));
+                usuario.setNombre_usuario(rs.getString("usuario_nombre"));
+                entrada.setUsuario(usuario);
+
+                entrada.setEstado(rs.getString("estado"));
+
+                // Obtener los detalles asociados
+                DetalleEntradaDao detalleDao = new DetalleEntradaDao();
+                ArrayList<DetalleEntrada> detalles = detalleDao.getAllByEntradaId(entrada.getEntrada_id());
+                entrada.setDetalles(detalles);
+
+                entradasList.add(entrada);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return entradasList;
+    }
+
+    public ArrayList<Entradas> getAllUnfinished() {
+        ArrayList<Entradas> entradasList = new ArrayList<>();
+        String query = "SELECT e.*, p.*, u.* " +
+                "FROM Entradas e " +
+                "JOIN Proveedor p ON e.proveedor_id = p.proveedor_id " +
+                "JOIN Usuario u ON e.usuario_id = u.usuario_id WHERE e.estado = 'pendiente'";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);

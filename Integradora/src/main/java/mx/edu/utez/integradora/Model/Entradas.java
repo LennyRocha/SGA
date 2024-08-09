@@ -1,7 +1,5 @@
 package mx.edu.utez.integradora.Model;
 
-import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
