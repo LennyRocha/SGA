@@ -15,6 +15,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/bootstrap.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/StyleRecupera.css">
+    <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/StyleFooter.css">
     <link rel="icon" type="image/png" sizes="32x32" href="ICONOS/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="ICONOS/favicon-16x16.png">
     <link rel="manifest" href="ICONOS/site.webmanifest">
@@ -95,7 +96,7 @@
             <div class="alert alert-primary d-flex align-items-center" role="alert">
                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
                 <div>
-                    <%=mensaje2%><strong><a href="https://mail.google.com/">Ir a gmail</a><strong>
+                    <%=mensaje2%><strong><a href="https://mail.google.com/">Ir a gmail</a></strong>
                 </div>
             </div>
             <% } %>
