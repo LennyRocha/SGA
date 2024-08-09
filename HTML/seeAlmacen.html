@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.104.2">
+    <title>Ver almacen</title>
+    <link href="../CSS/bootstrap.min.css" rel="stylesheet">
+    <link href="../CSS/StyleVerAlmacen.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Remover --><header>
+      <!-- Header -->
+      <div class="navbar-expand-lg">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+          <a id="botoncito" class="content" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          <svg class="img-fluid" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="34.7727" width="45" height="10.2273" rx="5.11364" fill="white"/>
+            <rect y="17.3864" width="45" height="10.2273" rx="5.11364" fill="white"/>
+            <rect width="45" height="10.2273" rx="5.11364" fill="white"/>
+          </svg> 
+          </a>
+    
+          <label id="textheader2" class=" d-flex align-items-center mb-3 mb-md-0 me-md-auto">
+            <img src="../IMG/cajaIcon.png" alt="Logo" width="50" height="50">
+            GESTIÓN DE ALMACÉN
+          </label>
+    
+          <div class="col-md-3 text-end">                    
+            <div class="dropstart" id="w">
+              <a class="content" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+              <svg id="bt" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect y="23.1818" width="30" height="6.81818" rx="3.40909" fill="white"/>
+                <rect y="11.5909" width="30" height="6.81818" rx="3.40909" fill="white"/>
+                <rect width="30" height="6.81818" rx="3.40909" fill="white"/>
+              </svg>
+              </a>
+              <label for="button" id="UserData">¡Bienvenido!</label>
+              <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="../IMG/UserI.png" id="perfil" width="45" height="45" alt="Perfil">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><center><img src="../IMG/UserI.png" id="perfil" width="35" height="35" alt="Perfil"></center></li>
+                  <li><center><label>¡Hola, <strong id="name">User</strong>!</label></center></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a id="on" class="dropdown-item" href="#">Cerrar sesión</a></li>
+              </ul>
+            </div>
+          </div>
+        </header>
+              <!-- Offcanvas -->
+      </div>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <svg class="img-fluid" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg"
+                data-bs-dismiss="offcanvas">
+                    <rect y="34.7727" width="45" height="10.2273" rx="5.11364" fill="#FFDF8E"/>
+                    <rect y="17.3864" width="45" height="10.2273" rx="5.11364" fill="#FFDF8E"/>
+                    <rect width="45" height="10.2273" rx="5.11364" fill="#FFDF8E"/>
+                </svg>                    
+            </div>
+            <!-- si --><div class="offcanvas-body">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <rect width="40" height="40" fill="url(#pattern0_115_142)"/>
+                            <defs>
+                            <pattern id="pattern0_115_142" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_115_142" transform="scale(0.0111111)"/>
+                            </pattern>
+                            <image id="image0_115_142" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACjElEQVR4nO2csWoUURSGP1FimsDWKlZaxC42PoLaaKudlZWa0tbO5BGshOgLaOUTqGmMlY2VYmKpMRACikcGZkAHd7PZnJlz5u7/wd/ssCz349+7c7jLgBBCCCGE+JdFYB3YAb4Ca/VrwpEzwFvAWnkHnJdpH1aAT/+R3GQbuCLZx+MWsD9BcpMD4I5kH52T9R5sR8wT4NQMnzeXLAEvZpDc5BUwil5Edi4AH44huclHYDl6MVm5CnxzkNzkB3AjelHZuAv8dJTc5BfwMHpxGVgENjoQ3M7GFMPNwl8DUfv2ca2+PtghZLMHyU02688cx2F3OdX14oYQ6yg7E4abdpPbqcb+QXF7yiGkq4wbbqZ5b9FDiHWU9nBThOgl4GUCuZOGm8GLvug0hHSVZrgZtOjrwPcEMg/LtINSSlbrgcEKSipOA08TSLGSRY87CbFCkoLLwOcEMqxk0dFDiJUuOtsQYiWKHtU3/DZHGfUtOfsQYh0ON5f6knzN+STEBpbq5OZm15JLHEJshvwGHgEnvAVXpwvPEyzQkuWZ98nL4wSLsqSp3LixnWBBljTVyYxE073oL56i52koscitY6GWrS2EmL8h2JwljOiFm0THSzE1mnBh2jrIHe3RSPRg2qdGI9Hhe6ap0RLtSnRrTY2WaFeiW2tqtES7Et1aU6Ml2pXo1poaLdGuRLfW1GiJdiW6taZGS7Qr0a01NVqiXYluranREu1KdGtNjZZoV6Jba2q0RLsS3VpL/i2RaCSa6NambPRegsVbT9mNFN3nAwItOG8iRT9IIMB6yr3ox/q8TyDBOs5WhmeTnitc9hZwliRUzb5f72Ml/EDuAa/r7SK8yUIIIYQQQgghhBAk4w9m9qGhd3r3SQAAAABJRU5ErkJggg=="/>
+                            </defs>
+                        </svg>
+                      <span class="fs-4">Inicio</span>
+                    </a>
+                    <hr>
+    <ul class="dropdown-menu dropdown-menu-dark col" style="display:contents;">
+        <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg> Menu principal</a></p></li>
+            <li><hr class="dropdown-divider"></li>
+        <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> Usuarios</a></p></li>
+            <li><hr class="dropdown-divider"></li>
+        <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table" fill="black"/></svg>  Revisar almacen</a></p></li>
+            <li><hr class="dropdown-divider"></li>
+        <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" fill="black"/></svg> Consultar historial</a></p></li>
+            <li><hr class="dropdown-divider"></li>
+        <li><p><a class="dropdown-item" href="#"> <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#profile"/></svg> Mi perfil</a></p></li>
+            <li><hr class="dropdown-divider"></li>
+        <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#truck"/></svg> Gestionar áreas de entrega</a></p></li>
+            <li><hr class="dropdown-divider"></li>
+    </ul>
+      <hr>
+    <p id="copy">© 2024 SGA</p>
+    </div> <!-- si -->
+    </header>
+    <style>
+        .offcanvas-header{
+            background-color: #1E1E1E;
+        }
+
+        hr, strong{
+            color: #ffffff;
+        }
+
+        .offcanvas-body{
+            background-color: #3C3C3C;
+        }
+
+        #copy{
+            color: #D2D2D2;
+            font-style: italic;
+            text-align: center;
+        }
+
+        #on:active{
+          background-color: #E63946;
+        }
+
+        @media (min-width: 577px) {
+          #textheader2{
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+          }
+          #bt{
+            display: none;
+          }
+          #botoncito{
+            margin-left: 10px;
+          }
+          #perfil
+          {
+            margin-right: 10px;
+          }
+        }
+        @media (max-width: 576px) {
+          #bt{
+            display: inline;
+          }
+          #botoncito{
+            display: none;
+          }
+        }
+
+        #back{
+margin-right: 50px;
+margin-left: 20px;
+width: 100px;
+}
+
+/*Aqui terminan*/
+    </style><!-- Remover -->
+    
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="../IMG/LogoBuenou.png" alt="" width="75" height="60">
+      <h2>MI ALMACEN</h2>
+      <p class="lead">Consulta el estado del almacén desde la última fecha de corte.</p>
+    </div>
+
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-success">RESUMEN</span>
+          <span class="badge bg-success rounded-pill">i</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Total de productos</h6>
+              <small class="text-muted">Productos disponibles</small>
+            </div>
+            <span class="text-muted">15</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Ingresos</h6>
+              <small class="text-muted">En entradas</small>
+            </div>
+            <span class="text-muted">$8</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Egresos</h6>
+              <small class="text-muted">En salidas</small>
+            </div>
+            <span class="text-muted">$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Fecha de corte</h6>
+              <small class="text-muted">Más reciente</small>
+            </div>
+            <span class="text-muted">08/08/24</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between text-success">
+            <span>Total (MXN)</span>
+            <strong>$220</strong>
+          </li>
+        </ul>
+
+        <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar por fecha">
+            <button type="search" class="btn btn-secondary">Buscar</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">PRODUCTOS ALMACENADOS</h4>
+        <form class="needs-validation" novalidate>
+          <div class="row g-3">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <th>Nombre del producto</th>
+                <th>Precio Unitario</th>
+                <th>Unidades disp</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Gansito</td>
+                  <td>20 MXN</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>Pinguinos marinela</td>
+                  <td>25 MXN</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>Rebanadas bimbo</td>
+                  <td>10 MXN</td>
+                  <td>8</td>
+                </tr>
+              </tbody>
+            </table>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-outline-warning btn-lg" id="salir">GENERAR REPORTE</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+<br>
+<footer class="footer mt-auto py-3 text-white-50" style="background-color: #1D3557;">
+    <div class="container">
+        <span class="text-muted">Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</span>
+    </div>
+</footer>
+
+
+    <script src="../JS/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

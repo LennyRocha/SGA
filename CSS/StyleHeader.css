@@ -1,0 +1,71 @@
+@font-face
+{
+    font-family: 'Inter';
+    src: url('Inter.ttf')
+}
+header
+{
+    background-color: #1D3557;
+    font-family: 'Inter';
+}
+
+#textheader
+{
+    color: white;
+    font-weight: 800;
+}  
+
+#tituloLogin
+{
+    font-size: 32px;
+    font-weight: 800;
+}
+
+label
+{
+    color: #D9D9D9;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 576px) {
+    #tituloLogin {
+        font-size: 28px;
+    }
+}
+
+/* Para el inicio */
+
+#textheader2
+{
+    margin-left: auto;
+    font-size: 30px;
+    margin-right: auto;
+    color: white;
+    font-weight: 800;
+}
+
+#UserData
+{
+    position: relative;
+    margin-left: auto;
+}
+
+#perfil
+{
+    position: relative;
+}
+
+.offcanvas-header
+{
+    color: white;
+}
+
+.offcanvas-body
+{
+    background-color: darkgrey;
+}
+
+.boton
+{
+    background-color: darkgrey;
+}

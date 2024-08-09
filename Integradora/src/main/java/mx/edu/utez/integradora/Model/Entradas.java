@@ -1,0 +1,78 @@
+package mx.edu.utez.integradora.Model;
+
+import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
+public class Entradas implements Serializable {
+    private int entrada_id;
+    private int entrada_folio;
+    private Timestamp entrada_fecha;
+    private Proveedor proveedor;
+    private Usuario usuario;
+    private String estado;
+    private ArrayList<DetalleEntrada> detalles;
+
+    public Entradas(){
+
+    }
+
+    public Entradas(int entrada_id, int entrada_folio, Timestamp entrada_fecha, Usuario usuario, String estado, ArrayList<DetalleEntrada> detalles){
+        this.entrada_id = entrada_id;
+        this.entrada_folio = entrada_folio;
+        this.entrada_fecha = entrada_fecha;
+        this.usuario = usuario;
+        this.estado = estado;
+        this.detalles = detalles;
+    }
+    public int getEntrada_id() {
+        return entrada_id;
+    }
+    public void setEntrada_id(int entrada_id) {
+        this.entrada_id = entrada_id;
+    }
+
+    public int getEntrada_folio() {
+        return entrada_folio;
+    }
+    public void setEntrada_folio(int entrada_folio) {
+        this.entrada_folio = entrada_folio;
+    }
+
+    public Timestamp getEntrada_fecha() {
+        return entrada_fecha;
+    }
+    public void setEntrada_fecha(Timestamp entrada_fecha) {
+        this.entrada_fecha = entrada_fecha;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public ArrayList<DetalleEntrada> getDetalles() {
+        return detalles;
+    }
+    public void setDetalles(ArrayList<DetalleEntrada> detalles) {
+        this.detalles = detalles;
+    }
+}

@@ -1,0 +1,17 @@
+#perfil{
+    width: 50px;
+    height: 50px;
+    position: relative;
+  }
+#hola{
+    color: white;
+  }
+.offcanvas-header{
+    color: white;
+  }
+.offcanvas-body{
+    background-color: darkgrey;
+  }
+.boton{
+    background-color: darkgrey;
+  }

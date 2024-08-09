@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Registrar salida</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/bootstrap.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/StyleProducto.css'>
+</head>
+<body>   
+    <main>
+        <div class="container-fluid">
+            <div class="col"></div>
+            <div class="col">
+            <br>
+            <div class="container-fluid" id="contInicio">
+              <form action="#" method="post" id="entrada">
+                  <div class="container-sm">
+                  <h1 id="tit">REGISTRAR SALIDA</h1>
+                  </div>
+                    <!-- Inicio de columna -->
+                        <div class="row">
+                          <div class="col">
+                            <label for="">Folio:*</label>
+                            <input type="text" class="form-control" placeholder="Folio" maxlength="7">
+                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar area de salida">
+                              <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Area de salida:*</a>
+                              </span>
+                            <br>
+                            <select class="form-select form-control" name="types" id="types">
+                              <option value="" disabled selected>Selecciona un area</option>
+                              <option value="1">Administrador</option>
+                              <option value="2">Almacenista</option>
+                            </select>
+                          </div>
+                          <div class="col">
+                            <label for="">Fecha:*</label>
+                            <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual">
+                            <label for="">Empleado:*</label>
+                            <br>
+                            <select class="form-select form-control" name="types" id="types">
+                              <option value="" disabled selected>Selecciona un empleado</option>
+                              <option value="1">Administrador</option>
+                              <option value="2">Almacenista</option>
+                            </select>
+                          </div>
+                        </div>
+                      </form>
+                    <br>
+                    <hr>
+                    <br>
+                    <form action="VerProds.html" method="post" id="producto">
+                      <div class="row container-sm">
+                        <div class="col"><label for="">No.</label></div>
+                        <div class="col"><label for="">PRODUCTO</label></div>
+                        <div class="col"><label for="">CANTIDAD</label></div>
+                        <div class="col"><label for="">PRECIO UNIT</label></div>
+                        <div class="col">
+                          <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">U. MEDIDA</a>
+                          </span>
+                        </div>
+                        <div class="col"><label for="">PRECIO TOTAL</label></div>
+                        <div class="col"><label for="">--</label></div>
+                      </div> 
+                      <div class="container-sm">
+                        <div class="row">
+                          <div class="col" id="numero"><label for="">1</label></div>
+                          <div class="col"><input type="text" class="form-control" placeholder="Producto 1" id="producto1"></div>
+                          <div class="col"><input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1"></div>
+                          <div class="col"><input type="text" class="form-control" placeholder="Precio 1" id="precio1"></div>
+                          <div class="col"><input type="text" class="form-control" placeholder="Unidad 1" id="unidad1"></div>
+                          <div class="col"><input type="text" class="form-control" placeholder="Precio Total 1" id="precioT1"></div>
+                          <div class="col"><a class="btn btn-outline-success" type="button" id="nuevo">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C8.27614 2 8.5 2.22386 8.5 2.5V7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H8.5V13.5C8.5 13.7761 8.27614 14 8 14C7.72386 14 7.5 13.7761 7.5 13.5V8.5H2.5C2.22386 8.5 2 8.27614 2 8C2 7.72386 2.22386 7.5 2.5 7.5H7.5V2.5C7.5 2.22386 7.72386 2 8 2Z" fill="black"/>
+                            </svg>
+                          </a></div>
+                        </div>
+                      </div>
+                      <br>
+                        <div id="nuevos" class="container-sm"></div>
+                        <br>                        
+                        <div class="row">
+                          <div class="col"><label for="prodFin">Total de productos:</label></div>
+                          <div class="col"><input type="text" class="form-control" placeholder="Productos totales" id="prodFin" readonly></div>
+                          <div class="col"><label for="precFin">Monto total:</label></div>
+                          <div class="col"><input type="text" class="form-control" placeholder="Monto total" id="precFin" readonly></div>
+                        </div>
+                        <br>
+                        <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="subir()">Finalizar</button>
+                        <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg">Cancelar</button></center>
+                    </form>
+                  </div>
+                  <br>
+                </div><!-- Inicio de columna -->
+            </div>
+            <div class="col"></div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"  id="close" onclick="exit()">Exit</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    <script>
+      let productos = [];
+  
+      /*document.getElementById('save').addEventListener('click', function () {
+          agregarProducto();
+      });*/
+  
+      function agregarProducto() {
+          let numero = productos.length + 1;
+          let nuevosDiv = document.createElement('div');
+          nuevosDiv.classList.add('row');
+          nuevosDiv.innerHTML = `
+              <div class="col" id="numero"><label for="">${numero}</label></div>
+              <div class="col"><input type="text" class="form-control" placeholder="Producto ${numero}" id="producto${numero}"></div>
+              <div class="col"><input type="number" class="form-control" placeholder="Cantidad ${numero}" id="cantidad${numero}"></div>
+              <div class="col"><input type="text" class="form-control" placeholder="Precio ${numero}" id="precio${numero}"></div>
+              <div class="col"><input type="text" class="form-control" placeholder="Unidad ${numero}" id="unidad${numero}"></div>
+              <div class="col"><a class="btn btn-outline-success" type="button" onclick="agregarProducto()">+</a></div>
+          `;
+          document.getElementById('watch').appendChild(nuevosDiv);
+      }
+  
+      function guardarProductos() {
+          productos = []; // Limpiar el array de productos
+  
+          for (let i = 1; i <= document.querySelectorAll('#nuevos .row').length + 1; i++) {
+              let producto = {
+                  nombre: document.getElementById(`Producto${i}`).value,
+                  cantidad: document.getElementById(`Cantidad${i}`).value,
+                  precio: document.getElementById(`Precio${i}`).value,
+                  unidad: document.getElementById(`Unidad${i}`).value
+              };
+              productos.push(producto);
+          }
+  
+          console.log('Productos:', productos);
+      }
+  
+      document.getElementById('save').addEventListener('click', function () {
+          guardarProductos();
+          // Aquí puedes enviar los productos al servidor
+          // Por ejemplo, usando fetch o XMLHttpRequest
+      });
+  
+      document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('cancelar').addEventListener('click', function () {
+        // Guardar los datos temporalmente
+        guardarProductos();
+
+        $('#exampleModal').modal('show');
+    });
+})
+
+      function exit(){
+        window.location.href='InicioAlmacenista.html';
+      }
+    </script>  
+    <script src="../JS/ScriptSalidaP.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../JS/bootstrap.bundle.min.js"></script>
+    <script src="../JS/popper.min.js"></script>
+    <script src="../JS/bootstrap.js"></script>
+</body>
+</html>

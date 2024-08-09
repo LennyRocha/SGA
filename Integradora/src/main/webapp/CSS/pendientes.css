@@ -1,0 +1,174 @@
+@font-face 
+{
+    font-family: 'Inter';
+    src: url('Inter.ttf') 
+}
+
+/* Media queries para responsividad */
+@media (max-width: 576px) {
+    #tituloLogin {
+        font-size: 28px;
+    }
+
+    #logito{
+        width: 100%;
+        display: flex;
+        padding: 0 25px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    #logito{
+        width: 90%;
+        padding:10%;
+        margin-left: 5px;
+    }
+}
+
+/* Para el inicio */
+#textheader2
+{
+    margin-left: auto;
+    font-size: 30px;
+    margin-right: auto;
+    color: white;
+    font-weight: 800;
+}
+
+#back{
+    margin-right: 50px;
+    margin-left: 20px;
+    width: 100px;
+}
+
+#UserData
+{
+    position: relative;
+    margin-left: auto;
+    color: #D9D9D9;
+}
+
+#perfil
+{
+    position: relative;
+}
+
+h4{
+    background-color: #BABABA;
+}
+
+.offcanvas-header
+{
+    color: white;
+}
+
+.offcanvas-body
+{
+    background-color: darkgrey;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1D3557;
+    color: white;
+    padding: 10px;
+}
+
+.menu-icon, .profile-icon {
+    font-size: 24px;
+}
+
+.header-title {
+    font-style: italic;
+    text-align: center;
+}
+
+.main-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.back-button {
+    background-color: #D1D1D1;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.register-card {
+    background-color: #fcfcfc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    margin-bottom: 20px;
+    padding: 30px;
+}
+
+.register-info p {
+    margin: 0;
+}
+
+.continue-button {
+    background-color: #4A4E69;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 10px;
+    width: 40%;
+    margin-left: auto;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.continue-button:hover
+{
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+
+.continue-button:active{
+    background-color: #4A4EFF;
+    border: #4A4EFF;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.options {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (min-width: 577px) {
+    .header-title {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .continue-button{
+        width: 50%;
+        margin: 1px;
+        font-size: 12px;
+        white-space: normal;
+        padding: 15px 10px;
+    }
+}
+
+body {
+    font-family: 'Inter';
+    margin: 0;
+    padding: 0;
+    background-color: #F2E9E4;
+}

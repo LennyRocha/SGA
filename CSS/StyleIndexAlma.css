@@ -1,0 +1,242 @@
+@font-face 
+{
+    font-family: 'Inter';
+    src: url('Inter.ttf') 
+}
+
+header
+{
+    background-color: #1D3557;
+}
+
+#textheader
+{
+    color: white;
+    font-weight: 800;
+}
+
+body
+{
+    background-color: #F2E9E4;
+    font-family: 'Inter';
+}
+
+.sign-in-container
+{
+    background-color: #FFFFFF;
+    width: 100%;
+    display: flex;
+    padding: 15px 50px;
+    height: 45%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    border-radius: 18px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#tituloLogin
+{
+    font-size: 32px;
+    font-weight: 800;
+    font-style: normal;
+    line-height: 39px;
+    letter-spacing: 0.11em;
+}
+
+label
+{
+    color: #D9D9D9;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 576px) {
+
+    #btnAlma{
+        width: 50%;
+        font-size: smaller;
+    }
+
+    .sign-in-container {
+        width: 120%;
+        padding: 0,5px;
+    }
+
+    #miFormulario {
+        width: 500px;
+    }
+
+    #tituloLogin {
+        font-size: 28px;
+    }
+
+    #logito{
+        width: 100%;
+        display: flex;
+        padding: 0 25px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    #logito{
+        width: 90%;
+        padding:10%;
+        margin-left: 5px;
+    }
+
+    #miFormulario {
+        width: 1000px;
+    }
+
+    #btnAlma{
+        width: 40%;
+    }
+}
+
+@media (max-width: 400px) {
+
+}
+
+/* Para el inicio */
+
+#barritas
+{
+    align-items: flex-start;
+    margin-right: auto;
+}
+
+#rw
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+rect:active
+{
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#textheader2
+{
+    margin-left: auto;
+    font-size: 30px;
+    margin-right: auto;
+    color: white;
+    font-weight: 800;
+}
+
+#nav
+{
+    height: 60px;
+    width: auto;
+}
+
+#UserData
+{
+    position: relative;
+    margin-left: auto;
+}
+
+#perfil
+{
+    position: relative;
+}
+
+#tituloInicio
+{
+    font-size: 48px;
+    letter-spacing: 27%;
+    font-weight: normal;
+}
+
+#btns
+{
+    height: 134px;
+    width: 198px;
+}
+
+#contInicio
+{
+    position: relative;
+    margin: auto;
+    background-color: #FFFFFF;
+    width: 100%;
+    padding: 20px 50px;
+    height: 100%;
+    justify-content: center;
+    align-items:center;
+    text-align: center;
+
+    border-radius: 18px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#theRow
+{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#btnAlma
+{
+    color:#000;
+    background-color: #D9D9D9;
+    border-color:#D9D9D9;
+    border-radius: 60px;
+    width: 100%;
+}
+
+#btnAlma:hover{
+    transition: 0.2s;
+    transform: scale(1.2);
+}
+
+#btnAlma:active
+{
+    border-color: #DFDFFF;
+    background-color: #DFDFFF;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    
+}
+
+#exit
+{
+    background-color: #E63946;
+    border-color: #E63946;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-radius: 18px;
+    font-size: small;
+    width: 190px;
+}
+
+#exit:hover
+{
+    transition: 0.2s;
+    transform: scale(1.2);
+}
+
+#exit:active
+{
+    border-color: #D62828;
+    background-color: #D62828;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.offcanvas-header
+{
+    color: white;
+}
+
+.offcanvas-body
+{
+    background-color: darkgrey;
+}
+
+.boton
+{
+    background-color: darkgrey;
+}
