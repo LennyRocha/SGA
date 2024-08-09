@@ -75,4 +75,5 @@ public class Entradas implements Serializable {
     public void setDetalles(ArrayList<DetalleEntrada> detalles) {
         this.detalles = detalles;
     }
+
 }
