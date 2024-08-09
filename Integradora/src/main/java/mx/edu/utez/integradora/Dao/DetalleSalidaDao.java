@@ -23,7 +23,7 @@ public class DetalleSalidaDao {
 
             if (rs.next()) {
                 detalleSalida = new DetalleSalida();
-                detalleSalida.setDetalle_id(rs.getInt("id_detalle"));
+                detalleSalida.setDetalle_id(rs.getInt("id_detalle_salida"));
 
                 Producto producto = new Producto();
                 producto.setProducto_id(rs.getInt("producto_id"));
@@ -46,22 +46,22 @@ public class DetalleSalidaDao {
         return detalleSalida;
     }
 
-    public ArrayList<DetalleEntrada> getAllByEntradaId(int entrada_id) {
-        ArrayList<DetalleEntrada> detallesList = new ArrayList<>();
+    public ArrayList<DetalleSalida> getAllBySalidaId(int salida_id) {
+        ArrayList<DetalleSalida> detalleSalidas = new ArrayList<>();
         String query = "SELECT d.*, p.*, um.* " +
-                "FROM Detalle_Entrada d " +
+                "FROM Detalle_Salida " +
                 "JOIN Producto p ON d.producto_id = p.producto_id " +
                 "JOIN Unidad_medida um ON p.unidad_medida = um.unidad_id " +
-                "WHERE d.entrada_id = ?";
+                "WHERE d.salida_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, entrada_id);
+            ps.setInt(1, salida_id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                DetalleEntrada detalleEntrada = new DetalleEntrada();
-                detalleEntrada.setDetalle_id(rs.getInt("id_detalle"));
+                DetalleSalida detalleSal= new DetalleSalida();
+                detalleSal.setDetalle_id(rs.getInt("detalle_salida_id"));
 
                 Producto producto = new Producto();
                 producto.setProducto_id(rs.getInt("producto_id"));
@@ -73,29 +73,29 @@ public class DetalleSalidaDao {
                 unidadMedida.setUnidad_nombre(rs.getString("unidad_nombre"));
                 // Set other fields of UnidMed if needed
 
-                detalleEntrada.setProductos(producto);
-                detalleEntrada.setCantidad(rs.getInt("cantidad"));
-                detalleEntrada.setValor_total(rs.getDouble("valor_total"));
+                detalleSal.setProductos(producto);
+                detalleSal.setCantidad(rs.getInt("cantidad"));
+                detalleSal.setValor_salida(rs.getDouble("valor_salida"));
 
-                detallesList.add(detalleEntrada);
+                detalleSalidas.add(detalleSal);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return detallesList;
+        return detalleSalidas;
     }
 
-    public boolean insertDetalleEntrada(DetalleEntrada detalle) {
+    public boolean insertDetalleSalida(DetalleSalida detalleSal) {
         boolean respuesta = false;
-        String query = "INSERT INTO Detalle_Entrada (entrada_id, producto_id, cantidad, valor_total) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Detalle_Salida (detalle_salida_id, salidas, productos, salida_cantidad, valor_salida) VALUES (?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, detalle.getEntradas().getEntrada_id()); // Foreign key from Entradas
-            ps.setInt(2, detalle.getProductos().getProducto_id()); // Foreign key from Producto
-            ps.setInt(3, detalle.getCantidad());
-            ps.setDouble(4, detalle.getValor_total());
+            ps.setInt(1, detalleSal.getSalidas().getSalida_id()); // Foreign key from Entradas
+            ps.setInt(2, detalleSal.getProductos().getProducto_id()); // Foreign key from Producto
+            ps.setInt(3, detalleSal.getCantidad());
+            ps.setDouble(4, detalleSal.getValor_salida());
 
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -107,17 +107,17 @@ public class DetalleSalidaDao {
         return respuesta;
     }
 
-    public boolean updateDetalleEntrada(DetalleEntrada detalle) {
+    public boolean updateDetalleSalida(DetalleSalida detalleSal) {
         boolean respuesta = false;
-        String query = "UPDATE Detalle_Entrada SET entrada_id = ?, producto_id = ?, cantidad = ?, valor_total = ? WHERE id_detalle = ?";
+        String query = "UPDATE Detalle_Salida SET salida_id = ?, producto_id = ?, cantidad = ?, valor_total = ? WHERE id_detalle = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, detalle.getEntradas().getEntrada_id()); // Foreign key from Entradas
-            ps.setInt(2, detalle.getProductos().getProducto_id()); // Foreign key from Producto
-            ps.setInt(3, detalle.getCantidad());
-            ps.setDouble(4, detalle.getValor_total());
-            ps.setInt(5, detalle.getDetalle_id());
+            ps.setInt(1, detalleSal.getSalidas().getSalida_id()); // Foreign key from Entradas
+            ps.setInt(2, detalleSal.getProductos().getProducto_id()); // Foreign key from Producto
+            ps.setInt(3, detalleSal.getCantidad());
+            ps.setDouble(4, detalleSal.getValor_salida());
+            ps.setInt(5, detalleSal.getDetalle_id());
 
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -129,13 +129,13 @@ public class DetalleSalidaDao {
         return respuesta;
     }
 
-    public boolean deleteByEntradaId(int entrada_id) {
+    public boolean deleteBySalidaId(int salida_id) {
         boolean respuesta = false;
-        String query = "DELETE FROM Detalle_Entrada WHERE entrada_id = ?";
+        String query = "DELETE FROM Detalle_Salida WHERE salida_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, entrada_id);
+            ps.setInt(1, salida_id);
 
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -147,13 +147,13 @@ public class DetalleSalidaDao {
         return respuesta;
     }
 
-    public boolean deleteDetalleEntrada(int detalle_id) {
+    public boolean deleteDetalleSalida(int detalle_salida_id) {
         boolean respuesta = false;
-        String query = "DELETE FROM Detalle_Entrada WHERE id_detalle = ?";
+        String query = "DELETE FROM Detalle_Salida WHERE detalle_salida_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, detalle_id);
+            ps.setInt(1, detalle_salida_id);
 
             if (ps.executeUpdate() > 0) {
                 respuesta = true;

@@ -14,12 +14,14 @@ public class Salidas implements Serializable {
     private Areas areas;
     private String estado_salida;
     private Double salida_valor_total;
+    private ArrayList<DetalleSalida> detalleSalida;
+
 
     public Salidas() {
 
     }
 
-    public Salidas(int salida_id, int salida_folio, ArrayList<Producto> productos, Usuario usuarios, int salida_cantidad, Timestamp salida_fecha, Areas areas, String estado_salida, Double salida_valor_total) {
+    public Salidas(int salida_id, int salida_folio, ArrayList<Producto> productos, Usuario usuarios, int salida_cantidad, Timestamp salida_fecha, Areas areas, String estado_salida, Double salida_valor_total, ArrayList<DetalleSalida> detalleSalida) {
         this.salida_id = salida_id;
         this.salida_folio = salida_folio;
         this.productos = productos;
@@ -29,6 +31,7 @@ public class Salidas implements Serializable {
         this.areas = areas;
         this.estado_salida = estado_salida;
         this.salida_valor_total = salida_valor_total;
+        this.detalleSalida = detalleSalida;
     }
 
     public void setSalida_id(int salida_id) {
@@ -94,4 +97,10 @@ public class Salidas implements Serializable {
         return estado_salida;
     }
 
+    public void setDetalleSalida(ArrayList<DetalleSalida> detalleSalida) {
+        this.detalleSalida = detalleSalida;
+    }
+    public ArrayList<DetalleSalida> getDetalleSalida() {
+        return detalleSalida;
+    }
 }

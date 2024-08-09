@@ -30,7 +30,7 @@ public class DetalleSalida implements Serializable {
     public Salidas getSalidas() {
         return salidas;
     }
-    public void setEntradas(Salidas salidas) {
+    public void setSalidas(Salidas salidas) {
         this.salidas = salidas;
     }
 

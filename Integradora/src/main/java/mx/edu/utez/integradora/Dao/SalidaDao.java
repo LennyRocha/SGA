@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class SalidaDao {
 
-    public Salidas getOne(int entrada_id) {
+    public Salidas getOne(int salida_id) {
         Salidas salida = new Salidas();
         String query = "SELECT s.*, asa.*, u.* " +
                 "FROM Salidas s " +
@@ -18,20 +18,20 @@ public class SalidaDao {
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, entrada_id);
+            ps.setInt(1, salida_id);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                salida.setSalida_id(rs.getInt("entrada_id"));
-                salida.setSalida_folio(rs.getInt("entrada_folio"));
-                salida.setSalida_fecha(rs.getTimestamp("entrada_fecha"));
+                salida.setSalida_id(rs.getInt("salida_id"));
+                salida.setSalida_folio(rs.getInt("salida_folio"));
+                salida.setSalida_fecha(rs.getTimestamp("salida_fecha"));
 
                 // Obtener información del area
-                Areas aria = new Areas();
-                aria.setArea_id(rs.getInt("area_id"));
-                aria.setArea_nombre(rs.getString("area_nombre"));
-                aria.setArea_identidad(rs.getString("area_identidad"));
-                salida.setAreas(aria);
+                Areas area = new Areas();
+                area.setArea_id(rs.getInt("area_id"));
+                area.setArea_nombre(rs.getString("area_nombre"));
+                area.setArea_identidad(rs.getString("area_identidad"));
+                salida.setAreas(area);
 
                 // Obtener información del usuario
                 Usuario usuario = new Usuario();
@@ -41,9 +41,9 @@ public class SalidaDao {
                 salida.setEstado_salida(rs.getString("estado"));
 
                 // Obtener los detalles asociados
-                DetalleSalidaDao detalleSDao = new DetalleSalidaDao();
-                ArrayList<DetalleSalida> detalles = detalleSDao.getAllBySalidaId(salida_id);
-                salida.setDetalle(detalles);
+                DetalleSalidaDao detallesDao = new DetalleSalidaDao();
+                ArrayList<DetalleSalida> detalles = detallesDao.getAllBySalidaId(salida_id);
+                salida.setDetalleSalida(detalles);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,7 +53,7 @@ public class SalidaDao {
     }
 
     public ArrayList<Salidas> getAll() {
-        ArrayList<Salidas> entradasList = new ArrayList<>();
+        ArrayList<Salidas> salidasList = new ArrayList<>();
         String query = "SELECT s.*, asa.*, u.* " +
                 "FROM Salidas s " +
                 "JOIN area_salida asa ON s.area_id = asa.area_id " +
@@ -88,15 +88,15 @@ public class SalidaDao {
                 // Obtener los detalles asociados
                 DetalleSalidaDao detalleSDao = new DetalleSalidaDao();
                 ArrayList<DetalleSalida> detalles = detalleSDao.getAllBySalidaId(salida.getSalida_id());
-                salida.setDetalles(detalles);
+                salida.setDetalleSalida(detalles);
 
-                entradasList.add(salida);
+                salidasList.add(salida);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return entradasList;
+        return salidasList;
     }
 
     public ArrayList<Salidas> getAllUnfinished() {
@@ -136,7 +136,7 @@ public class SalidaDao {
                 // Obtener los detalles asociados
                 DetalleSalidaDao detalleSDao = new DetalleSalidaDao();
                 ArrayList<DetalleSalida> detalles = detalleSDao.getAllBySalidaId(salida.getSalida_id());
-                salida.setDetalles(detalles);
+                salida.setDetalleSalida(detalles);
 
                 salidasList.add(salida);
             }
@@ -170,9 +170,9 @@ public class SalidaDao {
 
                     // Insertar los detalles asociados
                     DetalleSalidaDao detallesDao = new DetalleSalidaDao();
-                    for (DetalleSalida detalle : salida.getDetalles()) {
+                    for (DetalleSalida detalle : salida.getDetalleSalida()) {
                         detalle.setSalidas(salida); // Asignar la entrada a cada detalle
-                        if (!detalleSDao.insertDetalleSalida(detalle)) {
+                        if (!detallesDao.insertDetalleSalida(detalle)) {
                             con.rollback();
                             return false;
                         }
@@ -209,7 +209,7 @@ public class SalidaDao {
             if (ps.executeUpdate() > 0) {
                 // Actualizar los detalles asociados
                 DetalleSalidaDao detalleSDao = new DetalleSalidaDao();
-                for (DetalleSalida detalle : salida.getDetalles()) {
+                for (DetalleSalida detalle : salida.getDetalleSalida()) {
                     detalle.setSalidas(salida); // Asegurar que los detalles tienen la referencia correcta a la entrada
                     if (!detalleSDao.updateDetalleSalida(detalle)) {
                         con.rollback();
