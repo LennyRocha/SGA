@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Iniciar sesión</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='CSS/bootstrap.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='CSS/StyleLogin.css'>
+    <link rel="apple-touch-icon" sizes="180x180" href="Favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+    <header class="container-fluid">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <p class="container-fluid" id="textheader2">
+                    <img src="IMG/LogoBuenou.png" alt="Logo" width="60" height="60">
+                    GESTIÓN DE ALMACÉN
+                </p>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="wrapper">
+            <!--<div class="row">-->
+                <div class="col"><div class="container-fluid"></div></div>
+                <div class="col-4 offset-4 col-xs-8 offset-2"><!--form-->
+                    <div class="row"><center>
+                        <div class="container-fluid" id="logito"><img src="IMG/LogoBuenou.png" alt="Logo provisional" width="150" height="120"></div>
+                    </center></div>
+                    <div class=" form-container sign-in-container">
+                    <form action="EjemplosIntegra.html" method="post" id="miFormulario">
+                        <h1 id="tituloLogin">INICIAR SESIÓN AHORA</h1>
+                        <div class="form-group mt-3 mb-2">
+                            <label for="correo">Correo electrónico:* </label>
+                            <div class="">
+                            <input class="form-control" id="correo" type="email" name="correo" required placeholder="Ingresa el correo electrónico">
+                            </div>
+                            <label for="contra">Contraseña:* </label>
+                            <div class="">
+                            <input class="form-control" id="contra" type="password" name="contra" required placeholder="Ingresa tu contraseña">
+                            </div>
+                            <a href="HTML/RecuContra.html">¿Olvidaste tu contraseña?</a>
+                            <br>
+                            <center><p><input class="w-100 btn btn-lg btn btn-info mt-3 mb-0" type="submit" id="enter" value="INICIAR SESIÓN" /></p></center>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                <div class="col"><div class="container-fluid"></div></div>
+            <!--</div>-->
+        </div>
+    </main>
+    <br>
+    <footer class="footer mt-auto py-3 text-white-50" style="background-color: #1D3557;">
+        <div class="container">
+          <span class="text-muted">Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</span>
+        </div>
+    </footer>
+    <script src='JS/bootstrap.js'></script>
+</body>
+</html>
