@@ -149,24 +149,49 @@ BEGIN
         END IF;
     END IF;
 END$$
-
 DELIMITER ;
+
 -- Crear vista vista_almacen
 CREATE VIEW vista_almacen AS 
 SELECT
-    p.producto_nombre, 
-    SUM(p.producto_precio * p.producto_cantidad) AS monto_total
+    p.nombre_producto AS Producto, 
+    SUM(p.cantidad) AS Cantidad_total,
+    SUM(p.precio_unitario * p.cantidad) AS Monto_total
 FROM Producto p
-GROUP BY p.producto_nombre;
+GROUP BY p.nombre_producto;
 
 -- Crear vista Catalogo
 CREATE VIEW Catalogo AS
 SELECT 
-    p.producto_nombre, 
-    p.producto_cantidad, 
-    p.producto_precio
+    p.nombre_producto AS Producto, 
+    p.cantidad AS Cantidad,
+    p.precio_unitario AS Precio
 FROM Producto p
-GROUP BY p.producto_nombre;
+ORDER BY p.nombre_producto;
+
+DROP VIEW Catalogo;
+
+-- Actualizar Catalogo
+DELIMITER //
+
+CREATE PROCEDURE RefreshMyView()
+BEGIN
+    REFRESH VIEW Catalogo;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER RefreshMyView
+AFTER INSERT OR UPDATE OR DELETE ON Producto
+FOR EACH ROW
+BEGIN
+    CALL RefreshMyView();
+END //
+
+DELIMITER ;
+
 
 CREATE UNIQUE INDEX Idx_proveedores ON Proveedor (proveedor_nombre);
 CREATE INDEX Idx_areas ON Area_salida (area_identidad);

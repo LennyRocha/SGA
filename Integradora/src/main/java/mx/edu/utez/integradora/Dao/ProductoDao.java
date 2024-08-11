@@ -124,23 +124,41 @@ public class ProductoDao {
         return respuesta;
     }
 
-    public boolean verCatalogo (boolean confirma){
-        boolean respuesta = false;
+    public ArrayList<Producto> verCatalogo (){
+        ArrayList<Producto> Listaa = new ArrayList<>();
         String query = "select * from Catalogo";
-        if(confirma)
-        {
-            try(Connection con = DatabaseConnectionManager.getConnection();)
-            {
-                PreparedStatement ps = con.prepareStatement(query);
-                if(ps.executeUpdate()>0)
-                {
-                    respuesta = true;
-                }
-            }catch(SQLException e)
-            {
-            e.printStackTrace();
+
+        try(Connection con = DatabaseConnectionManager.getConnection();){
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Producto pro = new Producto();
+                pro.setProducto_nombre(rs.getString("Producto"));
+                pro.setProducto_precio(rs.getDouble("Precio"));
+                pro.setProducto_cantidad(rs.getInt("Cantidad"));
+
+                Listaa.add(pro);
             }
+        } catch(SQLException e){
+            e.printStackTrace();
         }
-        return respuesta;
+        return Listaa;
+    }
+
+    public Producto verAlmacen (){
+        Producto prods = new Producto();
+        String query = "select * from vista_almacen";
+
+        try(Connection con = DatabaseConnectionManager.getConnection();){
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                prods.setProducto_precio(rs.getDouble("Monto_total"));
+                prods.setProducto_cantidad(rs.getInt("Cantidad_total"));
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return prods;
     }
 }

@@ -11,6 +11,7 @@ public class Entradas implements Serializable {
     private Proveedor proveedor;
     private Usuario usuario;
     private String estado;
+    private Double entrada_valor_total;
     private ArrayList<DetalleEntrada> detalles;
 
     public Entradas(){
@@ -66,6 +67,9 @@ public class Entradas implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public Double getEntrada_valor_total() {return entrada_valor_total;}
+    public void setEntrada_valor_total(Double entrada_valor_total) { this.entrada_valor_total = entrada_valor_total; }
 
     public ArrayList<DetalleEntrada> getDetalles() {
         return detalles;

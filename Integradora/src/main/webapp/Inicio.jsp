@@ -43,7 +43,7 @@
                     </div>
                     <div class="col">
                         <img class="img-fluid" id="btns" src="IMG/Btn1_Admin.png" alt="ver almacen">
-                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-98 btn btn-sm" id="btnAdmin" onclick="location.href='almacen.jsp'">ALMACÉN</button>
+                        <a class="btn btn-secondary.btn-sm mt-2 mb-3 w-98 btn btn-sm" id="btnAdmin" href="ver">ALMACÉN</a>
                     </div>
                     <br>
                 </div>

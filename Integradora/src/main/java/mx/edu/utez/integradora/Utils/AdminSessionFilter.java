@@ -7,18 +7,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 @WebFilter(urlPatterns = {
-        //Borrar despues
-        "/Productos",
-        "/Colonia",
-        "/Municipio",
-        "/Estado",
-        "/Pais",
-        "/productos.jsp",
-        "/nuevoProducto.jsp",
         //Administrador
         "/sign_in",
         "/delete",
         "/revive",
+        "/ver",
         "/gestionUsuario.jsp",
         "/Inicio.jsp",
         "/registrarUsuario.jsp",

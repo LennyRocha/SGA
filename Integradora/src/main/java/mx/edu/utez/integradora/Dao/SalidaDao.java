@@ -4,6 +4,7 @@ import mx.edu.utez.integradora.Model.*;
 import mx.edu.utez.integradora.Utils.DatabaseConnectionManager;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SalidaDao {
@@ -97,6 +98,23 @@ public class SalidaDao {
         }
 
         return salidasList;
+    }
+
+    public Salidas getTotal() {
+        Salidas salida = new Salidas();
+        String query = "SELECT SUM(montoSaliente) AS Egreso FROM salidas";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                salida.setSalida_valor_total(rs.getDouble("Egreso"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return salida;
     }
 
     public ArrayList<Salidas> getAllUnfinished() {

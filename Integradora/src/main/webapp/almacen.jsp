@@ -1,4 +1,7 @@
-<%--
+<%@ page import="mx.edu.utez.integradora.Model.Producto" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.integradora.Dao.ProductoDao" %>
+<%@ page import="java.time.LocalDate" %><%--
   Created by IntelliJ IDEA.
   User: Lenny
   Date: 08/08/2024
@@ -22,6 +25,14 @@
 </head>
 <body>
 <jsp:include page="/Templates/Header.jsp" />
+<%
+    HttpSession sesion = (HttpSession) request.getSession();
+    int total = (int) sesion.getAttribute("totalProd");
+    double totEnt = (double) sesion.getAttribute("totalEntrada");
+    double totSal = (double) sesion.getAttribute("totalSalida");
+    double totPrec = (double) sesion.getAttribute("totalPrec");
+    LocalDate fechaActual = LocalDate.now();
+%>
     <div class="container">
         <main>
             <div class="py-5 text-center">
@@ -42,32 +53,32 @@
                                 <h6 class="my-0">Total de productos</h6>
                                 <small class="text-muted">Productos disponibles</small>
                             </div>
-                            <span class="text-muted">15</span>
+                            <span class="text-muted"><%=total%></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 class="my-0">Ingresos</h6>
                                 <small class="text-muted">En entradas</small>
                             </div>
-                            <span class="text-muted">$8</span>
+                            <span class="text-muted">+ $<%=totEnt%></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 class="my-0">Egresos</h6>
                                 <small class="text-muted">En salidas</small>
                             </div>
-                            <span class="text-muted">$5</span>
+                            <span class="text-muted">- $<%=totSal%></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 class="my-0">Fecha de corte</h6>
                                 <small class="text-muted">Más reciente</small>
                             </div>
-                            <span class="text-muted">08/08/24</span>
+                            <span class="text-muted"><%=fechaActual%></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between text-success">
                             <span>Total (MXN)</span>
-                            <strong class="text-success">$220</strong>
+                            <strong class="text-success">$<%=totPrec%></strong>
                         </li>
                     </ul>
 
@@ -91,6 +102,7 @@
                                 <th>Unidades disp</th>
                                 </thead>
                                 <tbody>
+
                                 <tr>
                                     <td>Gansito</td>
                                     <td>20 MXN</td>
@@ -106,6 +118,21 @@
                                     <td>10 MXN</td>
                                     <td>8</td>
                                 </tr>
+                                <%
+                                    ProductoDao dao = new ProductoDao();
+                                    ArrayList<Producto> lista = dao.verCatalogo();
+                                    if(lista.isEmpty()){%>
+                                <h1>NO HAY PRODUCTOS DISPONIBLES EN EL CATÁLOGO</h1>
+                                <%}else{
+                                    for(Producto pr : lista){
+                                %>
+                                <tr>
+                                    <td><%=pr.getProducto_nombre()%></td>
+                                    <td><%=pr.getProducto_precio()%></td>
+                                    <td><%=pr.getProducto_cantidad()%></td>
+                                </tr>
+                                    <%}
+                                }%>
                                 </tbody>
                             </table>
 

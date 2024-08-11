@@ -7,6 +7,7 @@ import mx.edu.utez.integradora.Model.Usuario;
 import mx.edu.utez.integradora.Utils.DatabaseConnectionManager;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class EntradasDao {
@@ -46,6 +47,23 @@ public class EntradasDao {
                 DetalleEntradaDao detalleDao = new DetalleEntradaDao();
                 ArrayList<DetalleEntrada> detalles = detalleDao.getAllByEntradaId(entrada_id);
                 entrada.setDetalles(detalles);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return entrada;
+    }
+
+    public Entradas getTotal() {
+        Entradas entrada = new Entradas();
+        String query = "SELECT SUM(monto_entrante) AS Ingreso FROM entradas_confirmadas";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                entrada.setEntrada_valor_total(rs.getDouble("Ingreso"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
