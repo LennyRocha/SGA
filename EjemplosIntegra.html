@@ -135,19 +135,48 @@
                           <span class="fs-4">Inicio</span>
                         </a>
                         <hr>
-        <ul class="dropdown-menu dropdown-menu-dark col" style="display:contents;">
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg> Menu principal</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> Usuarios</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table" fill="black"/></svg>  Revisar almacen</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" fill="black"/></svg> Consultar historial</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"> <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#profile"/></svg> Mi perfil</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#truck"/></svg> Gestionar áreas de entrega</a></p></li>
-                <li><hr class="dropdown-divider"></li>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;" aria-current="page">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#home"/></svg>
+              Menu principal
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#people-circle"/></svg>
+              Usuarios
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#table"/></svg>
+              Revisar almacen
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#grid"/></svg>
+              Consultar historial
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#profile"/></svg>
+              Mi perfil
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="16" height="18"><use xlink:href="#truck"/></svg>
+              Gestionar areas de entrega
+            </a>
+          </li>
         </ul>
           <hr>
         <p id="copy">© 2024 SGA</p>
@@ -164,6 +193,19 @@
     
             .offcanvas-body{
                 background-color: #3C3C3C;
+            }
+
+            #a{
+              background-color: #3C3C3C;
+            }
+
+            #a:active{
+              background-color: #E63946;
+            }
+
+            #a:hover{
+              transform: scale(1.1);
+              transition: 0.2s;
             }
     
             #copy{
