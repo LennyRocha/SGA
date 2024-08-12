@@ -1,6 +1,8 @@
 <%@ page import="mx.edu.utez.integradora.Model.Usuario" %>
 <%@ page import="mx.edu.utez.integradora.Dao.UsuarioDao" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.integradora.Model.Proveedor" %>
+<%@ page import="mx.edu.utez.integradora.Dao.ProveedorDao" %><%--
   Created by IntelliJ IDEA.
   User: Lenny
   Date: 01/08/2024
@@ -25,14 +27,16 @@
     <jsp:include page="/Templates/Header2.jsp" />
     <%
         UsuarioDao dao = new UsuarioDao();
+        ProveedorDao pDao = new ProveedorDao();
         ArrayList<Usuario> list = dao.getSome();
+        ArrayList<Proveedor> listP = pDao.getAll();
     %>
     <main>
         <div class="container-fluid">
             <div class="col"></div>
             <div class="col">
                     <br>
-                        <form action="#" method="post" id="entrada">
+                        <form action="entrada" method="post" id="entrada">
                             <div class="container-fluid" id="contInicio">
                                 <div class="container-sm">
                                     <h1 id="tit">REGISTRAR ENTRADA</h1>
@@ -41,9 +45,9 @@
                                 <div class="row">
                                     <div class="col">
                                         <label>Folio:*</label>
-                                        <input type="text" class="form-control" placeholder="Folio" maxlength="7">
+                                        <input type="text" name="folio" class="form-control" placeholder="Folio" maxlength="7">
                                         <label>Fecha:*</label>
-                                        <input type="date" class="form-control" id="fecha" placeholder="Fecha actual">
+                                        <input type="date" name="fecha" class="form-control" id="fecha" placeholder="Fecha actual">
                                         <label>Empleado:*</label>
                                         <br>
                                         <select class="form-select form-control" name="employees" id="types">
@@ -51,8 +55,6 @@
                                             <% for(Usuario u : list){ %>
                                             <option value="<%=u.getNombre_usuario()%>"><%=u.getNombre_usuario()%></option>
                                             <% } %>
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Almacenista</option>
                                         </select>
                                     </div>
                                     <div class="col">
@@ -62,11 +64,12 @@
                                         <br>
                                         <select class="form-select form-control" name="suppliers" id="suppliers">
                                             <option value="" disabled selected>Selecciona un Proveedor</option>
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Almacenista</option>
+                                            <% for(Proveedor p : listP){ %>
+                                            <option value="<%=p.getProveedor_nombre()%>"><%=p.getProveedor_nombre()%></option>
+                                            <% } %>
                                         </select>
                                         <label>Folio de factura:*</label>
-                                        <input type="text" class="form-control" maxlength="32" placeholder="Ingresa el folio de factura">
+                                        <input type="text" class="form-control" name="fact" maxlength="32" placeholder="Ingresa el folio de factura">
                                         </div>
                                     </div>
                                     <br>
@@ -102,9 +105,9 @@
                                     </div>
                                     <br>
                                     <div id="nuevos" class="container-sm"></div>
-                                    <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="subir()">Guardar</button> <button type="button" id="leave" class="btn btn-outline-warning btn-lg" onclick="location.href='InicioAlmacenista.jsp'">Cancelar</button></center>
+                                    <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" type="submit">Guardar</button> <button type="button" id="leave" class="btn btn-outline-warning btn-lg" onclick="location.href='InicioAlmacenista.jsp'">Cancelar</button></center>
                         </div>
-                    </form>
+                        </form>
             </div><!-- Inicio de columna -->
         </div>
         <div class="col"></div>
@@ -126,15 +129,6 @@
             </div>
         </div>
     </main>
-    <script>
-        function subir(){
-            const form1 = document.getElementById("entrada");
-            const form2 = document.getElementById("producto");
-            form1.sumbit();
-            form2.sumbit();
-            console.log("Entrada exitosa");
-        }
-    </script>
     <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
     <script src="${pageContext.request.contextPath}/JS/ScriptEntradaP.js"></script>
     <script src='${pageContext.request.contextPath}/JS/bootstrap.js'></script>

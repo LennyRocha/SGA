@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Entradas implements Serializable {
     private int entrada_id;
     private int entrada_folio;
+    private int entrada_folio_factura;
     private Timestamp entrada_fecha;
     private Proveedor proveedor;
     private Usuario usuario;
@@ -18,10 +19,20 @@ public class Entradas implements Serializable {
 
     }
 
-    public Entradas(int entrada_id, int entrada_folio, Timestamp entrada_fecha, Usuario usuario, String estado, ArrayList<DetalleEntrada> detalles){
+    public Entradas(int entrada_id, int entrada_folio, Timestamp entrada_fecha, Usuario usuario, int entrada_folio_factura, String estado, ArrayList<DetalleEntrada> detalles){
         this.entrada_id = entrada_id;
         this.entrada_folio = entrada_folio;
+        this.entrada_folio_factura = entrada_folio_factura;
         this.entrada_fecha = entrada_fecha;
+        this.usuario = usuario;
+        this.estado = estado;
+        this.detalles = detalles;
+    }
+
+    public Entradas(int entrada_folio, Timestamp entrada_fecha, Usuario usuario, int entrada_folio_factura, String estado, ArrayList<DetalleEntrada> detalles){
+        this.entrada_folio = entrada_folio;
+        this.entrada_fecha = entrada_fecha;
+        this.entrada_folio_factura = entrada_folio_factura;
         this.usuario = usuario;
         this.estado = estado;
         this.detalles = detalles;
@@ -39,6 +50,9 @@ public class Entradas implements Serializable {
     public void setEntrada_folio(int entrada_folio) {
         this.entrada_folio = entrada_folio;
     }
+
+    public int getEntrada_folio_factura() {return entrada_folio_factura;}
+    public void setEntrada_folio_factura(int entrada_folio_factura) {this.entrada_folio_factura = entrada_folio_factura; }
 
     public Timestamp getEntrada_fecha() {
         return entrada_fecha;

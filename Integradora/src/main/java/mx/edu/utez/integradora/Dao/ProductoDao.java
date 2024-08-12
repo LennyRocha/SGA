@@ -87,6 +87,23 @@ public class ProductoDao {
         return respuesta;
     }
 
+    public boolean anadirProducto (String nombreProducto, int cantidad)
+    {
+        boolean respuesta = false;
+        String query = "update producto set cantidad = ? where nombre_producto = ?";
+        try(Connection con = DatabaseConnectionManager.getConnection();){
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,cantidad);
+            ps.setString(2,nombreProducto);
+            if(ps.executeUpdate()==1){
+                respuesta = true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return respuesta;
+    }
+
     public boolean deleteProducto (Producto prod){
         boolean respuesta = false;
         String query = "delete from Producto where producto_id = ?";

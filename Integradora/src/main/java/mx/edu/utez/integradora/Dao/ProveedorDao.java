@@ -20,6 +20,24 @@ public class ProveedorDao {
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
+                p.setProveedor_id(rs.getInt("proveedor_id"));
+                p.setProveedor_nombre(rs.getString("proveedor_nombre"));
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return p;
+    }
+
+    public Proveedor getOne (String nombre){
+        Proveedor p = new Proveedor();
+        String query = "select * from Proveedor where proveedor_nombre = ?";
+        try(Connection con = DatabaseConnectionManager.getConnection()){
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,nombre);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                p.setProveedor_id(rs.getInt("proveedor_id"));
                 p.setProveedor_nombre(rs.getString("proveedor_nombre"));
             }
         } catch(SQLException e){

@@ -22,7 +22,7 @@
               col1.setAttribute("class", "col");
               const input = document.createElement("input");
               input.setAttribute("type", "text");
-              input.setAttribute("name", "Producto" + i);
+              input.setAttribute("name", "Producto");
               input.setAttribute("id", "Producto"+i);
               input.setAttribute("placeholder", "Producto " + i);
               input.setAttribute("class", "form-control");
@@ -32,7 +32,7 @@
               col2.setAttribute("class", "col");
               const input2 = document.createElement("input");
               input2.setAttribute("type", "number");
-              input2.setAttribute("name", "Cantidad" + i);
+              input2.setAttribute("name", "Cantidad");
               input2.setAttribute("id", "Cantidad"+i);
               input2.setAttribute("placeholder", "Cantidad " + i);
               input2.setAttribute("class", "form-control");
@@ -42,7 +42,7 @@
               col3.setAttribute("class", "col");
               const input3 = document.createElement("input");
               input3.setAttribute("type", "text");
-              input3.setAttribute("name", "Precio" + i);
+              input3.setAttribute("name", "Precio");
               input3.setAttribute("id", "Precio"+i);
               input3.setAttribute("placeholder", "Precio " + i);
               input3.setAttribute("class", "form-control");
@@ -52,7 +52,7 @@
               col4.setAttribute("class", "col");
               const input4 = document.createElement("input");
               input4.setAttribute("type", "text");
-              input4.setAttribute("name", "Unidad" + i);
+              input4.setAttribute("name", "Unidad");
               input4.setAttribute("id", "Unidad"+i);
               input4.setAttribute("placeholder", "Unidad " + i);
               input4.setAttribute("class", "form-control");
@@ -62,7 +62,7 @@
               col5.setAttribute("class", "col");
               const button = document.createElement("a");
               button.innerHTML = svgString;
-              button.setAttribute("name", "quitar" + i);
+              button.setAttribute("name", "quitar");
               button.setAttribute("id", i);
               button.setAttribute("class", "btn btn-outline-danger");
               button.setAttribute("type", "button");

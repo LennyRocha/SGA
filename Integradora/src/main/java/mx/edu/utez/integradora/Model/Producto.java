@@ -1,6 +1,8 @@
 package mx.edu.utez.integradora.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Producto implements Serializable {
     private int producto_id;
@@ -8,6 +10,7 @@ public class Producto implements Serializable {
     private double producto_precio;
     private UnidMed producto_unidad_medida;
     private int producto_cantidad;
+    private List<Producto> producto_Lista_medida;
 
     public Producto(){
 
@@ -19,6 +22,17 @@ public class Producto implements Serializable {
         this.producto_precio = producto_precio;
         this.producto_unidad_medida = producto_unidad_medida;
         this.producto_cantidad = producto_cantidad;
+    }
+
+    public Producto(String producto_nombre, double producto_precio, UnidMed producto_unidad_medida, int producto_cantidad) {
+        this.producto_nombre = producto_nombre;
+        this.producto_precio = producto_precio;
+        this.producto_unidad_medida = producto_unidad_medida;
+        this.producto_cantidad = producto_cantidad;
+    }
+
+    public Producto(ArrayList<Producto> producto_Lista_medida) {
+        this.producto_Lista_medida = producto_Lista_medida;
     }
 
     public int getProducto_id() {
@@ -45,9 +59,7 @@ public class Producto implements Serializable {
     public int getProducto_unidad_medida() {
         return producto_unidad_medida.getUnidad_id();
     }
-    public void setProducto_unidad_medida(UnidMed producto_unidad_medida) {
-        this.producto_unidad_medida = producto_unidad_medida;
-    }
+    public void setProducto_unidad_medida(UnidMed producto_unidad_medida) {this.producto_unidad_medida = producto_unidad_medida;}
 
     public int getProducto_cantidad() {
         return producto_cantidad;
@@ -56,5 +68,11 @@ public class Producto implements Serializable {
         this.producto_cantidad = producto_cantidad;
     }
 
+    public List<Producto> getProducto_Lista_medida() {
+        return producto_Lista_medida;
+    }
 
+    public void setProducto_Lista_medida(List<Producto> producto_Lista_medida) {
+        this.producto_Lista_medida = producto_Lista_medida;
+    }
 }

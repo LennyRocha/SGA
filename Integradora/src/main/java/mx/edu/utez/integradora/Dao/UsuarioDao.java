@@ -124,6 +124,27 @@ public class UsuarioDao {
         return u;
     }
 
+    public Usuario getOne(String nombre)
+    {
+        Usuario u = new Usuario();
+        String query = "select * from usuarios where nombre = ?";
+        try(PreparedStatement ps = DatabaseConnectionManager.getConnection().prepareStatement(query)){
+            ps.setString(1,nombre);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                u.setId(rs.getInt("id"));
+                u.setNombre_usuario(rs.getString("nombre"));
+                u.setContra(rs.getString("contra"));
+                u.setCorreo(rs.getString("correo"));
+                u.setTipo_usuario(rs.getInt("tipo_cuenta"));
+                u.setEstado(rs.getBoolean("estado"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return u;
+    }
+
     public Usuario getEmail(String correo){
         Usuario u = new Usuario();
         String query = "select * from usuarios where correo = ?";
