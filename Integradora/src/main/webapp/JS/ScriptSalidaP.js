@@ -24,7 +24,7 @@ const svgString = `
                 col1.setAttribute("class", "col");
                 const input = document.createElement("input");
                 input.setAttribute("type", "text");
-                input.setAttribute("name", "Producto" + i);
+                input.setAttribute("name", "Producto");
                 input.setAttribute("id", "Producto"+i);
                 input.setAttribute("placeholder", "Producto " + i);
                 input.setAttribute("class", "form-control");
@@ -35,17 +35,18 @@ const svgString = `
                 col2.setAttribute("class", "col");
                 const input2 = document.createElement("input");
                 input2.setAttribute("type", "number");
-                input2.setAttribute("name", "Cantidad" + i);
+                input2.setAttribute("name", "Cantidad");
                 input2.setAttribute("id", "Cantidad"+i);
                 input2.setAttribute("placeholder", "Cantidad " + i);
                 input2.setAttribute("class", "form-control");
+                input2.setAttribute("min", "0");
                 col2.appendChild(input2);
 
                 const col3 = document.createElement("div");
                 col3.setAttribute("class", "col");
                 const input3 = document.createElement("input");
                 input3.setAttribute("type", "text");
-                input3.setAttribute("name", "Precio" + i);
+                input3.setAttribute("name", "Precio");
                 input3.setAttribute("id", "Precio"+i);
                 input3.setAttribute("placeholder", "Precio " + i);
                 input3.setAttribute("class", "form-control");
@@ -55,9 +56,9 @@ const svgString = `
                 col4.setAttribute("class", "col");
                 const input4 = document.createElement("input");
                 input4.setAttribute("type", "text");
-                input4.setAttribute("name", "Unidad" + i);
-                input4.setAttribute("id", "Unidad"+i);
-                input4.setAttribute("placeholder", "Unidad " + i);
+                input4.setAttribute("name", "Area");
+                input4.setAttribute("id", "Area"+i);
+                input4.setAttribute("placeholder", "Area " + i);
                 input4.setAttribute("class", "form-control");
                 col4.appendChild(input4);
 
@@ -87,7 +88,7 @@ const svgString = `
                 const col6 = document.createElement("div");
                 col6.setAttribute("class", "col-auto");
                 const label = document.createElement("label");
-                label.setAttribute("id", "numero"+i);
+                label.setAttribute("id", "numero");
                 label.innerText = i;
                 col6.appendChild(label);
 

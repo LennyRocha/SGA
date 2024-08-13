@@ -83,7 +83,7 @@ const svgString = `
                 col5.appendChild(button);
 
                 const col6 = document.createElement("div");
-                col6.setAttribute("class", "col");
+                col6.setAttribute("class", "col-auto");
                 const label = document.createElement("label");
                 label.setAttribute("id", "numero");
                 label.innerText = i;

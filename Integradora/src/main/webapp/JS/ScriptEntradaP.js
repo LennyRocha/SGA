@@ -37,6 +37,7 @@
               input2.setAttribute("id", "Cantidad"+i);
               input2.setAttribute("placeholder", "Cantidad " + i);
               input2.setAttribute("class", "form-control");
+              input2.setAttribute("min", "0");
               col2.appendChild(input2);
 
               const col3 = document.createElement("div");

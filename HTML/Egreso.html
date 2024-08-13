@@ -51,8 +51,8 @@
                     <hr>
                     <br>
                     <form action="VerProds.html" method="post" id="producto">
-                      <div class="row container-sm">
-                        <div class="col"><label for="">No.</label></div>
+                      <!--<div class="row">
+                        <div class="col-auto"><label for="">No.</label></div>
                         <div class="col"><label for="">PRODUCTO</label></div>
                         <div class="col"><label for="">CANTIDAD</label></div>
                         <div class="col"><label for="">PRECIO UNIT</label></div>
@@ -63,20 +63,50 @@
                         </div>
                         <div class="col"><label for="">PRECIO TOTAL</label></div>
                         <div class="col"><label for="">--</label></div>
-                      </div> 
+                      </div>-->
                       <div class="container-sm">
                         <div class="row">
-                          <div class="col" id="numero"><label for="">1</label></div>
-                          <div class="col"><input type="text" class="form-control" placeholder="Producto 1" id="producto1"></div>
-                          <div class="col"><input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1"></div>
-                          <div class="col"><input type="text" class="form-control" placeholder="Precio 1" id="precio1"></div>
-                          <div class="col"><input type="text" class="form-control" placeholder="Unidad 1" id="unidad1"></div>
-                          <div class="col"><input type="text" class="form-control" placeholder="Precio Total 1" id="precioT1"></div>
-                          <div class="col"><a class="btn btn-outline-success" type="button" id="nuevo">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C8.27614 2 8.5 2.22386 8.5 2.5V7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H8.5V13.5C8.5 13.7761 8.27614 14 8 14C7.72386 14 7.5 13.7761 7.5 13.5V8.5H2.5C2.22386 8.5 2 8.27614 2 8C2 7.72386 2.22386 7.5 2.5 7.5H7.5V2.5C7.5 2.22386 7.72386 2 8 2Z" fill="black"/>
-                            </svg>
-                          </a></div>
+                          <div class="col-auto">
+                            <label for="">#</label>
+                            <br>
+                            <label for="" id="numero">1</label>
+                          </div>
+                          <div class="col-sm">
+                            <label for="">PRODUCTO</label>
+                            <br>
+                            <input type="text" class="form-control" placeholder="Producto 1" id="producto1">
+                          </div>
+                          <div class="col-sm">
+                            <label for="">CANTIDAD</label>
+                            <br>
+                            <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1">
+                          </div>
+                          <div class="col-sm">
+                            <label for="">PRECIO UNIT</label>
+                            <br>
+                            <input type="text" class="form-control" placeholder="Precio 1" id="precio1">
+                          </div>
+                          <div class="col-sm">
+                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">
+                              <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">U. MEDIDA</a>
+                            </span>
+                            <br>
+                            <input type="text" class="form-control" placeholder="Unidad 1" id="unidad1">
+                          </div>
+                          <div class="col-sm">
+                            <label for="">PRECIO TOTAL</label>
+                            <br>
+                            <input type="text" class="form-control" placeholder="Precio Total 1" id="precioT1">
+                          </div>
+                          <div class="col-sm">
+                            <label for="">--</label>
+                            <br>
+                            <a class="btn btn-outline-success" type="button" id="nuevo">
+                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C8.27614 2 8.5 2.22386 8.5 2.5V7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H8.5V13.5C8.5 13.7761 8.27614 14 8 14C7.72386 14 7.5 13.7761 7.5 13.5V8.5H2.5C2.22386 8.5 2 8.27614 2 8C2 7.72386 2.22386 7.5 2.5 7.5H7.5V2.5C7.5 2.22386 7.72386 2 8 2Z" fill="black"/>
+                              </svg>
+                            </a>
+                          </div>
                         </div>
                       </div>
                       <br>

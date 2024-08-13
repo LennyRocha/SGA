@@ -75,7 +75,7 @@
                     <hr>
                     <br>
                     <form action="salida" method="post" id="producto">
-                        <div class="row container-sm">
+                        <!--<div class="row container-sm">
                             <div class="col-auto"><label>No.</label></div>
                             <div class="col"><label>PRODUCTO</label></div>
                             <div class="col"><label>CANTIDAD</label></div>
@@ -87,20 +87,50 @@
                             </div>
                             <div class="col"><label>PRECIO TOTAL</label></div>
                             <div class="col"><label>--</label></div>
-                        </div>
+                        </div>-->
                         <div class="container-sm">
                             <div class="row">
-                                <div class="col-auto" id="numero"><label>1</label></div>
-                                <div class="col"><input type="text" class="form-control" placeholder="Producto 1" id="producto1" required></div>
-                                <div class="col"><input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1"></div>
-                                <div class="col"><input type="text" class="form-control" placeholder="Precio 1" id="precio1"></div>
-                                <div class="col"><input type="text" class="form-control" placeholder="Unidad 1" id="unidad1"></div>
-                                <div class="col"><input type="text" class="form-control" placeholder="Precio Total 1" id="precioT1" readonly></div>
-                                <div class="col"><a class="btn btn-outline-success" type="button" id="nuevoz">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C8.27614 2 8.5 2.22386 8.5 2.5V7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H8.5V13.5C8.5 13.7761 8.27614 14 8 14C7.72386 14 7.5 13.7761 7.5 13.5V8.5H2.5C2.22386 8.5 2 8.27614 2 8C2 7.72386 2.22386 7.5 2.5 7.5H7.5V2.5C7.5 2.22386 7.72386 2 8 2Z" fill="black"/>
-                                    </svg>
-                                </a></div>
+                                <div class="col-auto">
+                                    <label>#</label>
+                                    <br>
+                                    <label id="numero">1</label>
+                                </div>
+                                <div class="col-sm">
+                                    <label>PRODUCTO</label>
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required>
+                                </div>
+                                <div class="col-sm">
+                                    <label>CANTIDAD</label>
+                                    <br>
+                                    <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1" min="0">
+                                </div>
+                                <div class="col-sm">
+                                    <label>PREC UNIT</label>
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="Precio 1" id="precio1">
+                                </div>
+                                <div class="col-sm">
+                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">
+                              <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">A. SALIDA</a>
+                            </span>
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="Area 1" id="area1">
+                                </div>
+                                <div class="col-sm">
+                                    <label>PREC TOT</label>
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="Precio Total 1" id="precioT1" readonly>
+                                </div>
+                                <div class="col-sm">
+                                    <label>--</label>
+                                    <br>
+                                    <a class="btn btn-outline-success" type="button" id="nuevoz">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C8.27614 2 8.5 2.22386 8.5 2.5V7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H8.5V13.5C8.5 13.7761 8.27614 14 8 14C7.72386 14 7.5 13.7761 7.5 13.5V8.5H2.5C2.22386 8.5 2 8.27614 2 8C2 7.72386 2.22386 7.5 2.5 7.5H7.5V2.5C7.5 2.22386 7.72386 2 8 2Z" fill="black"/>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -110,7 +140,7 @@
                             <div class="col"><label for="prodFin">Total de productos:</label></div>
                             <div class="col"><input type="text" class="form-control" placeholder="Productos totales" id="prodFin" readonly></div>
                             <div class="col"><label for="precFin">Monto total:</label></div>
-                            <div class="col"><input type="text" class="form-control" placeholder="Monto total" id="precFin" readonly></div>
+                            <div class="col"><input type="number" class="form-control" placeholder="Monto total" id="precFin" readonly min="0"></div>
                         </div>
                         <br>
                         <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="subir()">Finalizar</button>
