@@ -28,6 +28,7 @@ const svgString = `
                 input.setAttribute("id", "Producto"+i);
                 input.setAttribute("placeholder", "Producto " + i);
                 input.setAttribute("class", "form-control");
+                input.setAttribute("required", "required");
                 col1.appendChild(input);
         
                 const col2 = document.createElement("div");
@@ -69,6 +70,7 @@ const svgString = `
                 input5.setAttribute("id", "precioT"+i);
                 input5.setAttribute("placeholder", "Precio Total " + i);
                 input5.setAttribute("class", "form-control");
+                input5.setAttribute("readonly", "readonly");
                 col7.appendChild(input5);
 
                 const col5 = document.createElement("div");
@@ -83,12 +85,12 @@ const svgString = `
                 col5.appendChild(button);
 
                 const col6 = document.createElement("div");
-                col6.setAttribute("class", "col");
+                col6.setAttribute("class", "col-auto");
                 const label = document.createElement("label");
-                label.setAttribute("id", "numero");
+                label.setAttribute("id", "numero"+i);
                 label.innerText = i;
                 col6.appendChild(label);
-        
+
                 div.appendChild(col6);
                 div.appendChild(col1);
                 div.appendChild(col2);

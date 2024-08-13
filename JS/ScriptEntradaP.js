@@ -26,6 +26,7 @@
               input.setAttribute("id", "Producto"+i);
               input.setAttribute("placeholder", "Producto " + i);
               input.setAttribute("class", "form-control");
+              input.setAttribute("required", "required");
               col1.appendChild(input);
       
               const col2 = document.createElement("div");

@@ -26,6 +26,7 @@
               input.setAttribute("id", "Producto"+i);
               input.setAttribute("placeholder", "Producto " + i);
               input.setAttribute("class", "form-control");
+              input.setAttribute("required", "required");
               col1.appendChild(input);
       
               const col2 = document.createElement("div");
@@ -70,7 +71,7 @@
               col5.appendChild(button);
 
               const col6 = document.createElement("div");
-              col6.setAttribute("class", "col");
+              col6.setAttribute("class", "col-auto");
               const label = document.createElement("label");
               label.setAttribute("id", "numero");
               label.innerText = i;

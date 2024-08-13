@@ -9,6 +9,10 @@ input:invalid{
     color: #E63946;
 }
 
+input:required{
+    border-color: #CED4DA;
+}
+
 #numero{
     width: 20px;
 }
@@ -46,11 +50,7 @@ hr{
     border: 1px solid;
 }
 
-select{
-    color: #75778C;
-}
-
-option{
+#types{
     color: #75778C;
 }
 

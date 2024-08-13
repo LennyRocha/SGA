@@ -77,7 +77,7 @@
                                     <br>
                                     <div class="container-sm">
                                     <div class="row">
-                                        <div class="col"><label>No.</label></div>
+                                        <div class="col-auto"><label>No.</label></div>
                                         <div class="col"><label>PRODUCTO</label></div>
                                         <div class="col"><label>CANTIDAD</label></div>
                                         <div class="col"><label>PRECIO UNIT</label></div>
@@ -91,8 +91,8 @@
                                     </div>
                                     <div class="container-sm">
                                     <div class="row">
-                                        <div class="col"><label id="numero">1</label></div>
-                                        <div class="col"><input type="text" class="form-control" placeholder="Producto 1"></div>
+                                        <div class="col-auto"><label id="numero">1</label></div>
+                                        <div class="col"><input type="text" class="form-control" placeholder="Producto 1" required></div>
                                         <div class="col"><input type="number" class="form-control" placeholder="Cantidad 1"></div>
                                         <div class="col"><input type="text" class="form-control" placeholder="Precio 1"></div>
                                         <div class="col"><input type="text" class="form-control" placeholder="Unidad 1"></div>

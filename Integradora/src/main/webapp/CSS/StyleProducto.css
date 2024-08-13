@@ -8,6 +8,10 @@ input:invalid{
     border-color: #E63946;
 }
 
+input:required{
+    border-color: #CED4DA;
+}
+
 body
 {
     background-color: #F2E9E4;
@@ -49,5 +53,21 @@ input[type="date"]{
 }
 
 #numero{
+    color: #75778C;
+}
+
+#suppliers{
+    color: #75778C;
+}
+
+#types{
+    color: #75778C;
+}
+
+#empleados{
+    color: #75778C;
+}
+
+#areas{
     color: #75778C;
 }
