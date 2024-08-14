@@ -115,7 +115,6 @@
                             </div>
                         </div>
                     </div>
-                    <br>
                     <div id="nuevos" class="container-sm"></div>
                     <br>
                     <div class="row">
