@@ -30,7 +30,7 @@
         <div class="container-fluid">
             <p class="container-fluid" id="textheader2">
                 <img src="IMG/cajaIcon.png" alt="Logo" width="60" height="60">
-                GESTIÓN DE ALMACÉN
+                ALMACENNOVA
             </p>
         </div>
     </nav>

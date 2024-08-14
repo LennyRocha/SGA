@@ -37,6 +37,13 @@
         <path fill-rule="evenodd" clip-rule="evenodd" d="M15.625 5.46875C15.625 5.03728 15.2752 4.6875 14.8437 4.6875L2.34375 4.6875C1.91228 4.6875 1.5625 5.03728 1.5625 5.46875L1.5625 19.5312C1.5625 19.9627 1.91228 20.3125 2.34375 20.3125H14.8438C15.2752 20.3125 15.625 19.9627 15.625 19.5312L15.625 16.4062C15.625 15.9748 15.9748 15.625 16.4062 15.625C16.8377 15.625 17.1875 15.9748 17.1875 16.4062V19.5312C17.1875 20.8257 16.1382 21.875 14.8438 21.875H2.34375C1.04933 21.875 0 20.8257 0 19.5312V5.46875C0 4.17433 1.04933 3.125 2.34375 3.125L14.8437 3.125C16.1382 3.125 17.1875 4.17433 17.1875 5.46875V8.59375C17.1875 9.02522 16.8377 9.375 16.4062 9.375C15.9748 9.375 15.625 9.02522 15.625 8.59375V5.46875Z" fill="black"/>
         <path fill-rule="evenodd" clip-rule="evenodd" d="M6.47882 13.0524C6.17373 12.7473 6.17373 12.2527 6.47882 11.9476L11.1663 7.26007C11.4714 6.95498 11.9661 6.95498 12.2712 7.26007C12.5763 7.56517 12.5763 8.05983 12.2712 8.36493L8.91735 11.7188H22.6562C23.0877 11.7188 23.4375 12.0685 23.4375 12.5C23.4375 12.9315 23.0877 13.2812 22.6562 13.2812H8.91735L12.2712 16.6351C12.5763 16.9402 12.5763 17.4348 12.2712 17.7399C11.9661 18.045 11.4714 18.045 11.1663 17.7399L6.47882 13.0524Z" fill="black"/>
     </symbol>
+    <symbol id="cata" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 6.5C13 6.22386 12.7761 6 12.5 6H7.5C7.22386 6 7 6.22386 7 6.5C7 6.77614 7.22386 7 7.5 7H12.5C12.7761 7 13 6.77614 13 6.5Z" fill="black"/>
+        <path d="M13 9.5C13 9.22386 12.7761 9 12.5 9H7.5C7.22386 9 7 9.22386 7 9.5C7 9.77614 7.22386 10 7.5 10H12.5C12.7761 10 13 9.77614 13 9.5Z" fill="black"/>
+        <path d="M12.5 12C12.7761 12 13 12.2239 13 12.5C13 12.7761 12.7761 13 12.5 13H7.5C7.22386 13 7 12.7761 7 12.5C7 12.2239 7.22386 12 7.5 12H12.5Z" fill="black"/>
+        <path d="M14 0C15.1046 0 16 0.895431 16 2V14C16 15.1046 15.1046 16 14 16H2C0.895431 16 0 15.1046 0 14V2C0 0.895431 0.895431 0 2 0H14ZM2 1C1.44772 1 1 1.44772 1 2V3H15V2C15 1.44772 14.5523 1 14 1H2ZM1 4V14C1 14.5523 1.44772 15 2 15H4V4H1ZM5 4V15H14C14.5523 15 15 14.5523 15 14V4H5Z" fill="black"/>
+    </symbol>
+
 </svg>
 <%
     HttpSession sesion = (HttpSession) request.getSession();
@@ -56,7 +63,7 @@
 
             <p id="tituloLogin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto" style="color: white; margin-left: auto">
                 <img src="IMG/cajaIcon.png" alt="Logo" width="50" height="50">
-                GESTIÓN DE ALMACÉN
+                ALMACENNOVA
             </p>
 
             <div class="col-md-3 text-end">
@@ -78,7 +85,7 @@
     </div>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
-            <svg class="img-fluid" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg"
+            <svg class="img-fluid" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg" id="cursor"
                  data-bs-dismiss="offcanvas">
                 <rect y="34.7727" width="45" height="10.2273" rx="5.11364" fill="#FFDF8E"/>
                 <rect y="17.3864" width="45" height="10.2273" rx="5.11364" fill="#FFDF8E"/>
@@ -136,18 +143,29 @@
             </li>
             <li><hr class="nav-divider"></li>
             <li class="nav-item">
-                <a href="index.jsp" id="f" class="nav-link text-white" style="text-align: left;">
+                <a href="#" id="f" class="nav-link text-white" style="text-align: left;">
+                    <svg class="bi pe-none me-2" width="20" height="20"><use xlink:href="#cata"/></svg>
+                    Ver Catalogo
+                </a>
+            </li>
+            <li><hr class="nav-divider"></li>
+            <li class="nav-item">
+                <a href="index.jsp" id="g" class="nav-link text-white" style="text-align: left;">
                     <svg class="bi pe-none me-2" width="20" height="20"><use xlink:href="#leave"/></svg>
                     Salir
                 </a>
             </li>
         </ul>
         <hr>
-        <p id="copy">© 2024 SGA</p>
+        <p id="copy">© 2024 ALMACENNOVA</p>
         </div>
     </div> <!-- si -->
 </header>
 <style>
+    #cursor{
+        cursor: pointer;
+    }
+
     .offcanvas-header{
         background-color: #1E1E1E;
     }
@@ -295,6 +313,20 @@
     }
 
     #f:hover{
+        transform: scale(1.1);
+        transition: 0.2s;
+    }
+
+    #g{
+        background-color: #3C3C3C;
+        font-size: larger;
+    }
+
+    #g:active{
+        background-color: #E63946;
+    }
+
+    #g:hover{
         transform: scale(1.1);
         transition: 0.2s;
     }

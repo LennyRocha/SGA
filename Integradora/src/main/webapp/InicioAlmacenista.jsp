@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col">
                         <img class="img-fluid" id="btns" src="IMG/Btn1_Almacen.png" alt="Gesionar usuarios">
-                        <button class="btn btn-secondary.btn-sm mt-2 mb-3" id="btnAlma" onclick="location.href='Entrada1.jsp.jsp'">ENTRADAS</button>
+                        <button class="btn btn-secondary.btn-sm mt-2 mb-3" id="btnAlma" onclick="location.href='Entrada1.jsp'">ENTRADAS</button>
                     </div>
                     <div class="col">
                         <img class="img-fluid" id="btns" src="IMG/Btn2_Almacen.png" alt="ver historial">

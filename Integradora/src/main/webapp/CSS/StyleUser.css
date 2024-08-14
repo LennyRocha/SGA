@@ -171,3 +171,19 @@ rect:active
 {
     background-color: darkgrey;
 }
+
+#types{
+    color: #75778C;
+}
+
+select{
+    color: #75778C;
+}
+
+#tipos{
+    color: #75778C;
+}
+
+input{
+    color: #75778C;
+}

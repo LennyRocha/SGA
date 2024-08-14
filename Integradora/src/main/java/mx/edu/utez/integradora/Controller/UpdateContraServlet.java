@@ -44,8 +44,7 @@ public class UpdateContraServlet extends HttpServlet
             }
             req.getSession().setAttribute("mensaje2","¡Contraseña corregida!");
         }else{
-            req.getSession().setAttribute("mensaje","No se pudo actualizar la contra");
-            System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+            req.getSession().setAttribute("mensaje","No se pudo actualizar la contraseña");
         }
         resp.sendRedirect(req.getContextPath()+"/index.jsp");
     }

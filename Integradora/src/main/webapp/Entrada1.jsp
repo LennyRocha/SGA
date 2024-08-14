@@ -27,9 +27,10 @@
 <body>
 <jsp:include page="/Templates/Header2.jsp" />
 <%
+    HttpSession sesion = (HttpSession) request.getSession();
     UsuarioDao dao = new UsuarioDao();
     ProveedorDao pDao = new ProveedorDao();
-    ArrayList<Usuario> list = dao.getSome();
+    String name = (String) sesion.getAttribute("name");
     ArrayList<Proveedor> listP = pDao.getAll();
 %>
 <main>
@@ -46,12 +47,12 @@
                     <!-- Inicio de columna -->
                     <div class="row">
                         <div class="col">
-                            <label for="">Folio:*</label>
+                            <label>Folio:*</label>
                             <input type="text" class="form-control" placeholder="Folio" readonly style="background-color: #D9D9D9;">
-                            <label for="">Fecha:*</label>
+                            <label>Fecha:*</label>
                             <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual">
-                            <label for="">Empleado:*</label>
-                            <input type="text" class="form-control" id="empleado" value="Empleado" readonly style="background-color: #D9D9D9;">
+                            <label>Empleado:*</label>
+                            <input type="text" class="form-control" id="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;">
                         </div>
                         <div class="col">
                             <label>Proveedor:*</label>
@@ -60,11 +61,12 @@
                             </span>
                             <br>
                             <select class="form-select form-control" name="types" id="types">
-                                <option value="" disabled selected>Selecciona un Proveedor</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Almacenista</option>
+                                <option value="" disabled selected>Selecciona un proveedor</option>
+                                <% for(Proveedor p : listP){ %>
+                                <option value="<%=p.getProveedor_nombre()%>"><%=p.getProveedor_nombre()%></option>
+                                <% } %>
                             </select>
-                            <label for="">Folio de factura:*</label>
+                            <label>Folio de factura:*</label>
                             <input type="text" class="form-control" maxlength="32" placeholder="Ingresa el folio de factura">
                         </div>
                     </div>
@@ -76,27 +78,27 @@
                     <div class="container-fluid" id="cf">
                         <div class="row">
                             <div class="col-auto">
-                                <label for="">#</label>
+                                <label>#</label>
                                 <br>
-                                <label for="" id="numero">1</label>
+                                <label id="numero">1</label>
                             </div>
                             <div class="col-sm">
-                                <label for="">PRODUCTO</label>
+                                <label>PRODUCTO</label>
                                 <br>
                                 <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required>
                             </div>
                             <div class="col-sm">
-                                <label for="">CANTIDAD</label>
+                                <label>CANTIDAD</label>
                                 <br>
                                 <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1">
                             </div>
                             <div class="col-sm">
-                                <label for="">PRECIO UNIT</label>
+                                <label>PRECIO UNIT</label>
                                 <br>
                                 <input type="text" class="form-control" placeholder="Precio 1" id="precio1">
                             </div>
                             <div class="col-sm">
-                                <label for="">--</label>
+                                <label>--</label>
                                 <br>
                                 <a class="btn btn-outline-success" type="button" id="nuevoz">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

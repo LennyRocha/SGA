@@ -207,15 +207,11 @@
     <main>
     <div class="container-fluid">
         <div class="col"></div>
+        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Regresar">
+          <button type="button" id="back" class="btn btn-outline-info"><img src="../IMG/Back.png" class="img-fluid" width="40" height="40"></button>
+        </span>
         <div class="col-8 offset-2">
           <form action="" method="post">
-            <div class="row" id="contInicio2">
-              <div class="col"><button type="button" id="back" class="btn btn-outline-info"><img src="../IMG/Back.png" class="img-fluid" width="40" height="40"></button></div>
-              <div class="col"></div>
-              <div class="col"></div>
-              <div class="col"><button type="submit" id="confirm" class="btn btn-outline-success">Confirmar registro</button></div>
-            </div>
-            <br>
             <div class="container-fluid" id="contInicio">
                 <div class="container-sm">
                 <p style="font-size: 5vw;" id="tit">REGISTRAR USUARIO</p>
@@ -242,13 +238,25 @@
                         <input type="password" class="form-control" placeholder="Confirm Password">
                       </div>
                     </div>
-                  </form>              
+                  </form>   
+                  <br>
+                  <div class="col"><button type="submit" id="confirm" class="btn btn-outline-success">Confirmar registro</button></div>           
                 </div><!-- Inicio de columna -->
             </div>
         </div>
         <div class="col"></div>
     </div>
+    <script>
+                  document.addEventListener('DOMContentLoaded', function () {
+              var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+              var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+              })
+            });
+    </script>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../JS/bootstrap.bundle.min.js"></script>
     <script src="../JS/popper.min.js"></script>
     <script src="../JS/bootstrap.js"></script>
 </body>

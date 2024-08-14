@@ -32,6 +32,8 @@
     AreaDao aDao = new AreaDao();
     ArrayList<Usuario> list = dao.getSome();
     ArrayList<Areas> listA = aDao.getAll();
+    HttpSession sesion = (HttpSession) request.getSession();
+    String name = (String) sesion.getAttribute("name");
 %>
 <main>
     <div class="container-fluid">
@@ -53,17 +55,18 @@
                               <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addArea">+</button>
                             </span>
                             <br>
-                            <select class="form-select form-control" name="types" id="types">
+                            <select class="form-select form-control" name="types" id="areas">
                                 <option value="" disabled selected>Selecciona un area</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Almacenista</option>
+                                <% for(Areas a : listA){ %>
+                                <option value="<%=a.getArea_identidad()%>"><%=a.getArea_nombre()%></option>
+                                <% } %>
                             </select>
                         </div>
                         <div class="col">
                             <label>Fecha:*</label>
                             <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual">
                             <label>Empleado:*</label>
-                            <input type="text" class="form-control" id="empleado" value="Empleado" readonly style="background-color: #D9D9D9;">
+                            <input type="text" class="form-control" id="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;">
                         </div>
                     </div>
                 <br>

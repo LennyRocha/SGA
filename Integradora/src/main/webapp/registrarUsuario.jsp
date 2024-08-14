@@ -36,14 +36,11 @@
 </svg>
 <div class="container-fluid">
     <div class="col"></div>
+    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Regresar">
+          <button type="button" id="back" class="btn btn-outline-info" onclick="location.href='Inicio.jsp'"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
+    </span>
     <div class="col-8 offset-2">
         <form action="sign_in" method="post" id="form">
-            <div class="row" id="contInicio2">
-                <div class="col"><button type="button" onclick="location.href='gestionUsuario.jsp'" id="back" class="btn btn-outline-info"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button></div>
-                <div class="col"></div>
-                <div class="col"></div>
-                <div class="col"><button onclick="compara()" id="confirm" class="btn btn-outline-success">Confirmar registro</button></div>
-            </div>
             <br>
             <div class="container-fluid" id="contInicio">
                 <div class="container-sm">
@@ -53,9 +50,9 @@
                     <div class="row">
                         <div class="col">
                             <label>Nombre:*</label>
-                            <input type="text" class="form-control" name="nombre_usuario" placeholder="Name">
+                            <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre">
                             <label for="pass1">Contraseña:*</label>
-                            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Password" required>
+                            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Ingresa una contraseña" required>
                             <label>Tipo de usuario:*</label>
                             <br>
                             <select class="form-select form-control" name="tipo_usuario" id="types">
@@ -66,12 +63,14 @@
                         </div>
                         <div class="col">
                             <label>Correo:*</label>
-                            <input type="email" class="form-control" placeholder="Email" name="correo">
+                            <input type="email" class="form-control" placeholder="Correo" name="correo">
                             <label for="pass2">Confirmar contraseña:*</label>
-                            <input type="password" class="form-control" placeholder="Confirm Password" id="pass2" name="pass2" required>
+                            <input type="password" class="form-control" placeholder="Repite la contraseña" id="pass2" name="pass2" required>
                             <input type="hidden" name="status" value="true">
                         </div>
                     </div>
+                    <br>
+                    <div class="col"><button onclick="compara()" id="confirm" class="btn btn-outline-success">Confirmar registro</button></div>
                 </div>
             </div>
             <script>
@@ -96,14 +95,11 @@
 <div class="col"></div>
 <% }else{ %><div class="container-fluid">
     <div class="col"></div>
+    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Regresar">
+          <button type="button" id="back" class="btn btn-outline-info" onclick="location.href='Inicio.jsp'"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
+    </span>
     <div class="col-8 offset-2">
         <form action="sign_in" method="post" id="form2">
-            <div class="row" id="contInicio2">
-                <div class="col"><button type="button" onclick="location.href='gestionUsuario.jsp'" id="back" class="btn btn-outline-info"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button></div>
-                <div class="col"></div>
-                <div class="col"></div>
-                <div class="col"><button onclick="compara()" id="confirm" class="btn btn-outline-success">Actualizar usuario</button></div>
-            </div>
             <br>
             <div class="container-fluid" id="contInicio">
                 <div class="container-sm">
@@ -118,7 +114,7 @@
                             <input type="password" class="form-control" id="pass" name="pass" value="<%=u.getContra()%>" required>-->
                             <label>Tipo de usuario:*</label>
                             <br>
-                            <select class="form-select form-control" name="tipo_usuario">
+                            <select class="form-select form-control" name="tipo_usuario" id="tipos">
                                 <% if(u.getTipo_usuario() == 1) { %>
                                 <option value="1" selected>Administrador</option>
                                 <option value="2">Almacenista</option>
@@ -132,17 +128,10 @@
                         <div class="col">
                             <label>Correo:*</label>
                             <input type="email" class="form-control" value="<%=u.getCorreo()%>" name="correo">
-                            <!--<label for="pass3">Confirmar contraseña:*</label>
-                            <input type="password" class="form-control" placeholder="Confirm Password" id="pass3" name="pass3" required>
-                            <label>Estatus actual:*</label>
-                            <br>
-                            <select class="form-select form-control" name="status" id="status">
-                                <option value="" disabled selected>Selecciona su estatus</option>
-                                <option value="true">Activo</option>
-                                <option value="false">Inactivo</option>
-                            </select>-->
                         </div>
                     </div>
+                    <br>
+                    <div class="col"><button onclick="compara()" id="confirm" class="btn btn-outline-success">Actualizar usuario</button></div>
                 </div>
             </div>
             <input type="hidden" name="operacion" value="actualizar">
@@ -182,6 +171,15 @@
     sesion.removeAttribute("usuario");
     sesion.removeAttribute("mensaje");
 %>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
 <br>

@@ -38,7 +38,7 @@ public class ContraServlet extends HttpServlet
                 String name = u.getNombre_usuario();
                 try {
                     GmailSender mail = new GmailSender();
-                    mail.sendMail(correo,"Recuperación de contraseña","<H1>HOLA "+u.getNombre_usuario()+"</H1>"+
+                    mail.sendMail(correo,"Recuperación de contraseña","<H1>HOLA "+u.getNombre_usuario().toUpperCase()+"</H1>"+
                             "<H2>Se ha confirmado tu correo electrónico, aqui tienes tu codigo de confirmación:</H2>"+
                             "<CENTER>"+rands+"</CENTER>"+
                             "<center><a href=http://localhost:8080/Integradora_war_exploded/recuContra?codigo="+rands+">RECUPERAR MI CONTRASEÑA</a></center>"

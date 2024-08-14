@@ -20,7 +20,7 @@
         <div class="container-fluid">
             <p class="container-fluid" id="tituloLogin" style="color: white">
                 <img src="IMG/cajaIcon.png" alt="Logo" width="60" height="60">
-                GESTIÓN DE ALMACÉN
+                ALMACENNOVA
             </p>
         </div>
     </nav>
@@ -30,7 +30,7 @@
     <div class="wrapper">
         <!--<div class="row">-->
         <div class="col"><div class="container-fluid"></div></div>
-        <div class="col-4 offset-4 col-xs-8 offset-2"><!--form-->
+        <div class="col-4 offset-4 col-xs-8 offset-2" id="adminMenu"><!--form-->
             <center>
                 <div class="container-fluid" id="logito"><img src="${pageContext.request.contextPath}/IMG/cajaIcon.png" alt="Logo provisional" width="120" height="120"></div>
             </center>
