@@ -21,7 +21,7 @@ const svgString = `
                 const br = document.createElement("br");
         
                 const col1 = document.createElement("div");
-                col1.setAttribute("class", "col-sm");
+                col1.setAttribute("class", "col");
                 const input = document.createElement("input");
                 input.setAttribute("type", "text");
                 input.setAttribute("name", "Producto" + i);
@@ -31,7 +31,7 @@ const svgString = `
                 col1.appendChild(input);
         
                 const col2 = document.createElement("div");
-                col2.setAttribute("class", "col-sm");
+                col2.setAttribute("class", "col");
                 const input2 = document.createElement("input");
                 input2.setAttribute("type", "number");
                 input2.setAttribute("name", "Cantidad" + i);
@@ -41,7 +41,7 @@ const svgString = `
                 col2.appendChild(input2);
 
                 const col3 = document.createElement("div");
-                col3.setAttribute("class", "col-sm");
+                col3.setAttribute("class", "col");
                 const input3 = document.createElement("input");
                 input3.setAttribute("type", "text");
                 input3.setAttribute("name", "Precio" + i);
@@ -51,7 +51,7 @@ const svgString = `
                 col3.appendChild(input3);
 
                 const col4 = document.createElement("div");
-                col4.setAttribute("class", "col-sm");
+                col4.setAttribute("class", "col");
                 const input4 = document.createElement("input");
                 input4.setAttribute("type", "text");
                 input4.setAttribute("name", "Unidad" + i);
@@ -62,7 +62,7 @@ const svgString = `
 
                 
                 const col7 = document.createElement("div");
-                col7.setAttribute("class", "col-sm");
+                col7.setAttribute("class", "col");
                 const input5 = document.createElement("input");
                 input5.setAttribute("type", "text");
                 input5.setAttribute("name", "precioT" + i);
@@ -72,7 +72,7 @@ const svgString = `
                 col7.appendChild(input5);
 
                 const col5 = document.createElement("div");
-                col5.setAttribute("class", "col-sm");
+                col5.setAttribute("class", "col");
                 const button = document.createElement("a");
                 button.innerHTML = svgString;
                 button.setAttribute("name", "quitar" + i);

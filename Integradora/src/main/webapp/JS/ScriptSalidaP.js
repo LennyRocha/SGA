@@ -1,5 +1,5 @@
-const nuevosz = document.getElementById("nuevosz");
-const nuevoz = document.getElementById("nuevoz");
+const nuevos = document.getElementById("nuevosz");
+const nuevo = document.getElementById("nuevoz");
 const save = document.getElementById("save");
 
 let i = 2;
@@ -10,7 +10,7 @@ const svgString = `
 </svg>
 `;
 
-            nuevoz.addEventListener("click", () => {
+            nuevo.addEventListener("click", () => {
 
                 const wrapper = document.createElement("div");
                 wrapper.setAttribute("class", "row-wrapper");
@@ -19,63 +19,60 @@ const svgString = `
                 div.setAttribute("class", "row");
 
                 const br = document.createElement("br");
-        
+
                 const col1 = document.createElement("div");
-                col1.setAttribute("class", "col");
+                col1.setAttribute("class", "col-sm");
                 const input = document.createElement("input");
                 input.setAttribute("type", "text");
-                input.setAttribute("name", "Producto");
+                input.setAttribute("name", "Producto" + i);
                 input.setAttribute("id", "Producto"+i);
                 input.setAttribute("placeholder", "Producto " + i);
                 input.setAttribute("class", "form-control");
-                input.setAttribute("required", "required");
                 col1.appendChild(input);
-        
+
                 const col2 = document.createElement("div");
-                col2.setAttribute("class", "col");
+                col2.setAttribute("class", "col-sm");
                 const input2 = document.createElement("input");
                 input2.setAttribute("type", "number");
-                input2.setAttribute("name", "Cantidad");
+                input2.setAttribute("name", "Cantidad" + i);
                 input2.setAttribute("id", "Cantidad"+i);
                 input2.setAttribute("placeholder", "Cantidad " + i);
                 input2.setAttribute("class", "form-control");
-                input2.setAttribute("min", "0");
                 col2.appendChild(input2);
 
                 const col3 = document.createElement("div");
-                col3.setAttribute("class", "col");
+                col3.setAttribute("class", "col-sm");
                 const input3 = document.createElement("input");
                 input3.setAttribute("type", "text");
-                input3.setAttribute("name", "Precio");
+                input3.setAttribute("name", "Precio" + i);
                 input3.setAttribute("id", "Precio"+i);
                 input3.setAttribute("placeholder", "Precio " + i);
                 input3.setAttribute("class", "form-control");
                 col3.appendChild(input3);
 
                 const col4 = document.createElement("div");
-                col4.setAttribute("class", "col");
+                col4.setAttribute("class", "col-sm");
                 const input4 = document.createElement("input");
                 input4.setAttribute("type", "text");
-                input4.setAttribute("name", "Area");
-                input4.setAttribute("id", "Area"+i);
-                input4.setAttribute("placeholder", "Area " + i);
+                input4.setAttribute("name", "Unidad" + i);
+                input4.setAttribute("id", "Unidad"+i);
+                input4.setAttribute("placeholder", "Unidad " + i);
                 input4.setAttribute("class", "form-control");
                 col4.appendChild(input4);
 
-                
+
                 const col7 = document.createElement("div");
-                col7.setAttribute("class", "col");
+                col7.setAttribute("class", "col-sm");
                 const input5 = document.createElement("input");
                 input5.setAttribute("type", "text");
                 input5.setAttribute("name", "precioT" + i);
                 input5.setAttribute("id", "precioT"+i);
                 input5.setAttribute("placeholder", "Precio Total " + i);
                 input5.setAttribute("class", "form-control");
-                input5.setAttribute("readonly", "readonly");
                 col7.appendChild(input5);
 
                 const col5 = document.createElement("div");
-                col5.setAttribute("class", "col");
+                col5.setAttribute("class", "col-sm");
                 const button = document.createElement("a");
                 button.innerHTML = svgString;
                 button.setAttribute("name", "quitar" + i);
@@ -102,15 +99,17 @@ const svgString = `
                 wrapper.appendChild(div);
                 wrapper.appendChild(br);
 
-                nuevosz.appendChild(wrapper);
-        
+                nuevos.appendChild(wrapper);
+
                 i++;
+
+                console.log("hola");
             });
 
             function borrar(element) {
                 element.parentElement.parentElement.parentElement.remove();
                 i--;
-                
+
             }
 
             document.addEventListener('DOMContentLoaded', function () {

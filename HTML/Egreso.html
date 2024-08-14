@@ -24,9 +24,10 @@
                           <div class="col">
                             <label for="">Folio:*</label>
                             <input type="text" class="form-control" placeholder="Folio" maxlength="7">
+                            <label for="">Área de salida:*</label>
                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar area de salida">
-                              <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Area de salida:*</a>
-                              </span>
+                              <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addArea">+</button>
+                            </span>
                             <br>
                             <select class="form-select form-control" name="types" id="types">
                               <option value="" disabled selected>Selecciona un area</option>
@@ -87,9 +88,9 @@
                             <input type="text" class="form-control" placeholder="Precio 1" id="precio1">
                           </div>
                           <div class="col-sm">
-                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">
+                            <!--<span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">-->
                               <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">U. MEDIDA</a>
-                            </span>
+                            <!--</span>-->
                             <br>
                             <input type="text" class="form-control" placeholder="Unidad 1" id="unidad1">
                           </div>

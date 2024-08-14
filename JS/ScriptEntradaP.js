@@ -19,7 +19,7 @@
               const br = document.createElement("br");
       
               const col1 = document.createElement("div");
-              col1.setAttribute("class", "col");
+              col1.setAttribute("class", "col-sm");
               const input = document.createElement("input");
               input.setAttribute("type", "text");
               input.setAttribute("name", "Producto" + i);
@@ -30,7 +30,7 @@
               col1.appendChild(input);
       
               const col2 = document.createElement("div");
-              col2.setAttribute("class", "col");
+              col2.setAttribute("class", "col-sm");
               const input2 = document.createElement("input");
               input2.setAttribute("type", "number");
               input2.setAttribute("name", "Cantidad" + i);
@@ -40,7 +40,7 @@
               col2.appendChild(input2);
 
               const col3 = document.createElement("div");
-              col3.setAttribute("class", "col");
+              col3.setAttribute("class", "col-sm");
               const input3 = document.createElement("input");
               input3.setAttribute("type", "text");
               input3.setAttribute("name", "Precio" + i);
@@ -81,7 +81,7 @@
               divs.appendChild(col1);
               divs.appendChild(col2);
               divs.appendChild(col3);
-              divs.appendChild(col4);
+              //divs.appendChild(col4);
               divs.appendChild(col5);
               wrappers.appendChild(divs);
               wrappers.appendChild(br);

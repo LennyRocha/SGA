@@ -1,21 +1,41 @@
-@font-face
+@font-face 
 {
     font-family: 'Inter';
-    src: url('Inter.ttf')
+    src: url('Inter.ttf') 
 }
 
+body{
+    background-color: #F2E9E4;
+}
 input:invalid{
     border-color: #E63946;
+    color: #E63946;
 }
 
 input:required{
     border-color: #CED4DA;
 }
 
-body
-{
-    background-color: #F2E9E4;
-    font-family: 'Inter';
+#producto{
+    border-color: #CED4DA;
+}
+
+
+
+#numero{
+    width: 20px;
+}
+
+@media (max-width: 400px) {
+    #addProv {
+        margin-top: 3px;
+        padding-bottom: 20px;
+    }
+
+    #addArea {
+        margin-top: 3px;
+        padding-bottom: 20px;
+    }
 }
 
 /* Media queries para responsividad */
@@ -29,6 +49,7 @@ body
     background-color: #FFFFFF;
     width: 100%;
     padding: 20px 50px;
+    height: 100%;
 
     border-radius: 18px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -41,11 +62,11 @@ body
 }
 
 hr{
-    border: 1px solid gray;
+    border: 1px solid;
 }
 
-select{
-    color: #C4C4C4;
+#types{
+    color: #75778C;
 }
 
 input[type="date"]{
@@ -53,21 +74,5 @@ input[type="date"]{
 }
 
 #numero{
-    color: #75778C;
-}
-
-#suppliers{
-    color: #75778C;
-}
-
-#types{
-    color: #75778C;
-}
-
-#empleados{
-    color: #75778C;
-}
-
-#areas{
     color: #75778C;
 }

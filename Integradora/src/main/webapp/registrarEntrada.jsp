@@ -10,7 +10,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="es-MX">
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -58,9 +59,10 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar proveedor">
-                                    <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Proveedor:*</a>
-                                    </span>
+                                        <label>Proveedor:*</label>
+                                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar proveedor">
+                                            <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addProv">+</button>
+                                        </span>
                                         <br>
                                         <select class="form-select form-control" name="suppliers" id="suppliers">
                                             <option value="" disabled selected>Selecciona un Proveedor</option>
@@ -99,7 +101,7 @@
                                         <div class="col">
                                             <label>PRODUCTO</label>
                                             <br>
-                                            <input type="text" class="form-control" placeholder="Producto 1" required>
+                                            <input type="text" class="form-control" placeholder="Producto 1" required id="producto">
                                         </div>
                                         <div class="col">
                                             <label>CANTIDAD</label>
@@ -111,12 +113,13 @@
                                             <br>
                                             <input type="text" class="form-control" placeholder="Precio 1">
                                         </div>
-                                        <div class="col">
+                                        <!--<div class="col">
                                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">
                                                 <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">U. MEDIDA</a>
                                             </span>
                                             <br>
-                                            <input type="text" class="form-control" placeholder="Unidad 1"></div>
+                                            <input type="text" class="form-control" placeholder="Unidad 1">
+                                        </div>-->
                                         <div class="col">
                                             <label>--</label>
                                             <br>

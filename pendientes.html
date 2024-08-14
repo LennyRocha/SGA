@@ -51,11 +51,15 @@
                 <p>Última modificación: xx/xx/xxxx</p>
             </div>
             <button class="continue-button button-sm">Continuar registro</button>
-            <span class="options" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">&#8942;</span>
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
+                <span class="options">&#8942;</span>
+            </span>
         </div>
         <br>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="JS/bootstrap.bundle.min.js"></script>
+    <script src="JS/popper.min.js"></script>
     <script src="JS/bootstrap.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
