@@ -23,17 +23,12 @@
                     <!-- Inicio de columna -->
                         <div class="row">
                           <div class="col">
-                            <label for="">Folio:*</label>
-                            <input type="text" class="form-control" placeholder="Folio" maxlength="7">
+                            <label>Folio:*</label>
+                            <input type="text" class="form-control" placeholder="Folio" readonly style="background-color: #D9D9D9;">
                             <label for="">Fecha:*</label>
                             <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual">
                             <label for="">Empleado:*</label>
-                            <br>
-                            <select class="form-select form-control" name="types" id="types">
-                              <option value="" disabled selected>Selecciona un usuario</option>
-                              <option value="1">Administrador</option>
-                              <option value="2">Almacenista</option>
-                            </select>
+                            <input type="text" class="form-control" id="empleado" placeholder="Empleado" readonly style="background-color: #D9D9D9;">
                           </div>
                           <div class="col">
                             <label>Proveedor:*</label>
@@ -69,7 +64,7 @@
                           <div class="col-sm"><label for="">--</label></div>
                         </div> -->
                       </div>
-                      <div class="container-fluid">
+                      <div class="container-fluid" id="cf">
                         <div class="row">
                           <div class="col-auto">
                             <label for="">No.</label>

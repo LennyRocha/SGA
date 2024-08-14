@@ -1,22 +1,20 @@
-const nuevosz = document.getElementById("nuevosz");
-const nuevoz = document.getElementById("nuevoz");
+const nuevos = document.getElementById("nuevos");
+const nuevo = document.getElementById("nuevo");
 const save = document.getElementById("save");
-
 let i = 2;
 
 const svgString = `
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M2 8C2 7.72386 2.22386 7.5 2.5 7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H2.5C2.22386 8.5 2 8.27614 2 8Z" fill="black"/>
-</svg>
-`;
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M2 8C2 7.72386 2.22386 7.5 2.5 7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H2.5C2.22386 8.5 2 8.27614 2 8Z" fill="black"/>
+            </svg>
+            `;
 
 nuevoz.addEventListener("click", () => {
+    const wrappers = document.createElement("div");
+    wrappers.setAttribute("class", "row-wrapper");
 
-    const wrapper = document.createElement("div");
-    wrapper.setAttribute("class", "row-wrapper");
-
-    const div = document.createElement("div");
-    div.setAttribute("class", "row");
+    const divs = document.createElement("div");
+    divs.setAttribute("class", "row");
 
     const br = document.createElement("br");
 
@@ -28,6 +26,7 @@ nuevoz.addEventListener("click", () => {
     input.setAttribute("id", "Producto"+i);
     input.setAttribute("placeholder", "Producto " + i);
     input.setAttribute("class", "form-control");
+    input.setAttribute("required", "required");
     col1.appendChild(input);
 
     const col2 = document.createElement("div");
@@ -51,7 +50,7 @@ nuevoz.addEventListener("click", () => {
     col3.appendChild(input3);
 
     const col4 = document.createElement("div");
-    col4.setAttribute("class", "col-sm");
+    col4.setAttribute("class", "col");
     const input4 = document.createElement("input");
     input4.setAttribute("type", "text");
     input4.setAttribute("name", "Unidad" + i);
@@ -60,19 +59,8 @@ nuevoz.addEventListener("click", () => {
     input4.setAttribute("class", "form-control");
     col4.appendChild(input4);
 
-
-    const col7 = document.createElement("div");
-    col7.setAttribute("class", "col-sm");
-    const input5 = document.createElement("input");
-    input5.setAttribute("type", "text");
-    input5.setAttribute("name", "precioT" + i);
-    input5.setAttribute("id", "precioT"+i);
-    input5.setAttribute("placeholder", "Precio Total " + i);
-    input5.setAttribute("class", "form-control");
-    col7.appendChild(input5);
-
     const col5 = document.createElement("div");
-    col5.setAttribute("class", "col-sm");
+    col5.setAttribute("class", "col");
     const button = document.createElement("a");
     button.innerHTML = svgString;
     button.setAttribute("name", "quitar" + i);
@@ -89,33 +77,36 @@ nuevoz.addEventListener("click", () => {
     label.innerText = i;
     col6.appendChild(label);
 
-    div.appendChild(col6);
-    div.appendChild(col1);
-    div.appendChild(col2);
-    div.appendChild(col3);
-    div.appendChild(col4);
-    div.appendChild(col7);
-    div.appendChild(col5);
-    wrapper.appendChild(div);
-    wrapper.appendChild(br);
+    divs.appendChild(col6);
+    divs.appendChild(col1);
+    divs.appendChild(col2);
+    divs.appendChild(col3);
+    //divs.appendChild(col4);
+    divs.appendChild(col5);
+    wrappers.appendChild(divs);
+    wrappers.appendChild(br);
 
-    nuevosz.appendChild(wrapper);
+    nuevosz.appendChild(wrappers);
 
     i++;
 });
 
-            function borrar(element) {
-                element.parentElement.parentElement.parentElement.remove();
-                i--;
+function borrar(element) {
+    element.parentElement.parentElement.parentElement.remove();
+    i--;
 
-            }
+}
 
-            document.addEventListener('DOMContentLoaded', function () {
-              var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-              var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-              })
-            });
+document.addEventListener('DOMContentLoaded', function () {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+});
 
-            var today = new Date().toISOString().split('T')[0];
-            document.getElementById("fecha").setAttribute('min', today);
+var today = new Date().toISOString().split('T')[0];
+document.getElementById("fecha").setAttribute('min', today);
+
+const saveP = document.getElementById("producto");
+const watch = document.getElementById("watch");
+

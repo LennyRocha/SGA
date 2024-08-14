@@ -10,7 +10,7 @@ const svgString = `
 </svg>
 `;
 
-nuevoz.addEventListener("click", () => {
+nuevo.addEventListener("click", () => {
 
     const wrapper = document.createElement("div");
     wrapper.setAttribute("class", "row-wrapper");
@@ -99,23 +99,23 @@ nuevoz.addEventListener("click", () => {
     wrapper.appendChild(div);
     wrapper.appendChild(br);
 
-    nuevosz.appendChild(wrapper);
+    nuevos.appendChild(wrapper);
 
     i++;
 });
 
-            function borrar(element) {
-                element.parentElement.parentElement.parentElement.remove();
-                i--;
+function borrar(element) {
+    element.parentElement.parentElement.parentElement.remove();
+    i--;
 
-            }
+}
 
-            document.addEventListener('DOMContentLoaded', function () {
-              var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-              var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-              })
-            });
+document.addEventListener('DOMContentLoaded', function () {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+});
 
-            var today = new Date().toISOString().split('T')[0];
-            document.getElementById("fecha").setAttribute('min', today);
+var today = new Date().toISOString().split('T')[0];
+document.getElementById("fecha").setAttribute('min', today);

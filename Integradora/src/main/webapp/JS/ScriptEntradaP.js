@@ -9,7 +9,7 @@
             </svg>
             `;
 
-            nuevoz.addEventListener("click", () => {
+            nuevo.addEventListener("click", () => {
               const wrappers = document.createElement("div");
               wrappers.setAttribute("class", "row-wrapper");
 
@@ -85,7 +85,7 @@
               wrappers.appendChild(divs);
               wrappers.appendChild(br);
 
-              nuevosz.appendChild(wrappers);
+              nuevos.appendChild(wrappers);
       
               i++;
             });

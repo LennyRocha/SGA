@@ -60,12 +60,20 @@ body
     position: relative;
     margin: auto;
     background-color: #FFFFFF;
-    width: 100%;
+    max-width: 900px;
     padding: 20px 50px;
     height: 100%;
 
     border-radius: 18px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#cf{
+    padding: 0 120px;
+}
+
+#nuevosz{
+    padding: 0 120px;
 }
 
 #tit{

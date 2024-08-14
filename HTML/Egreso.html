@@ -65,7 +65,7 @@
                         <div class="col"><label for="">PRECIO TOTAL</label></div>
                         <div class="col"><label for="">--</label></div>
                       </div>-->
-                      <div class="container-sm">
+                      <div class="container-sm" id="cs">
                         <div class="row">
                           <div class="col-auto">
                             <label for="">#</label>
@@ -83,19 +83,20 @@
                             <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1">
                           </div>
                           <div class="col-sm">
-                            <label for="">PRECIO UNIT</label>
+                            <label for="">PREC UNIT</label>
                             <br>
                             <input type="text" class="form-control" placeholder="Precio 1" id="precio1">
                           </div>
                           <div class="col-sm">
-                            <!--<span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">-->
-                              <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">U. MEDIDA</a>
-                            <!--</span>-->
+                            <label for="">U. MEDIDA</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">
+                              <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addArea">+</button>
+                            </span>
                             <br>
                             <input type="text" class="form-control" placeholder="Unidad 1" id="unidad1">
                           </div>
                           <div class="col-sm">
-                            <label for="">PRECIO TOTAL</label>
+                            <label for="">PREC TOTAL</label>
                             <br>
                             <input type="text" class="form-control" placeholder="Precio Total 1" id="precioT1">
                           </div>
