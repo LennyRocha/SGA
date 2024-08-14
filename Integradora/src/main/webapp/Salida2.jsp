@@ -127,8 +127,8 @@
                         <div class="col"><input type="text" class="form-control" placeholder="Monto total" id="precFin" readonly></div>
                     </div>
                     <br>
-                    <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="subir()">Finalizar</button>
-                        <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg">Cancelar</button></center>
+                    <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" type="submit">Finalizar</button>
+                        <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg" onclick="location.href='InicioAlmacenista.jsp'">Cancelar</button></center>
                 </form>
             </div>
             <br>

@@ -115,14 +115,14 @@
             </li>
             <li><hr class="nav-divider"></li>
             <li class="nav-item">
-                <a href="registrarEntrada.jsp" id="b" class="nav-link text-white" style="text-align: left;">
+                <a href="Entrada1.jsp" id="b" class="nav-link text-white" style="text-align: left;">
                     <svg class="bi pe-none me-2" width="20" height="20"><use xlink:href="#plus"/></svg>
                     Registrar entrada
                 </a>
             </li>
             <li><hr class="nav-divider"></li>
             <li class="nav-item">
-                <a href="registrarSalida.jsp" id="c" class="nav-link text-white" style="text-align: left;">
+                <a href="Salida2.jsp" id="c" class="nav-link text-white" style="text-align: left;">
                     <svg class="bi pe-none me-2" width="20" height="20"><use xlink:href="#minus" fill="black"/></svg>
                     Registrar salida
                 </a>

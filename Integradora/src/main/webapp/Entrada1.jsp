@@ -111,7 +111,7 @@
                     <br>
                     <div id="nuevosz" class="container-fluid"></div>
                     <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" type="submit">Guardar</button>
-                        <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg">Cancelar</button></center>
+                        <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg" onclick="location.href='InicioAlmacenista.jsp'">Cancelar</button></center>
                 </form>
             </div>
         </div>
