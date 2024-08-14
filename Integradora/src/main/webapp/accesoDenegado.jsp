@@ -23,20 +23,17 @@
         <div class="container-fluid">
             <p class="container-fluid" id="tituloLogin" style="color: white">
                 <img src="IMG/cajaIcon.png" alt="Logo" width="60" height="60">
-                GESTIÓN DE ALMACÉN
+                ERROR 403
             </p>
         </div>
     </nav>
 </header>
     <div class="container-sm">
         <center>
-        <img src="IMG/Denegao.png" class="img-fluid" width="300" height="300" alt="Imagen de error">
+        <img src="IMG/Denegao.png" class="img-fluid" width="400" height="400" alt="Imagen de error">
         <br>
-        <p style="font-size: 4vw;">ERROR 403</p>
+        <h1 id="tituloLogin">¡USTED NO TIENE PERMISOS PARA VER ESTE CONTENIDO!</h1>
         <br>
-        <h1 id="tituloLogin">¡YOU, SHALL NOT PASS!</h1>
-        <br>
-        <h5>Se te ha bloqueado el acceso a esta página</h5>
         </center>
     </div>
     <center><h6><a href="InicioAlmacenista.jsp">PULSA AQUI PARA REGRESAR AL MENÚ PRINCIPAL</a></h6></center>

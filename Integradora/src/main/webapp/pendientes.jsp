@@ -25,14 +25,15 @@
 </head>
 <body>
 <jsp:include page="/Templates/Header2.jsp" />
-<button id="back" onclick="location.href='InicioAlmacenista.jsp'" class="btn btn-outline-primary">&#8592;</button>
+<button id="back" onclick="location.href='InicioAlmacenista.jsp'" class="btn btn-outline-primary"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
 <main class="main-content">
-    <h4>REGISTROS PENDIENTES</h4>
+    <h2 style="background-color: #BABABA;">REGISTROS PENDIENTES</h2>
     <br>
     <div class="register-card">
         <div class="register-info">
             <p>Folio: XXXXXXX</p>
             <p>Última modificación: xx/xx/xxxx</p>
+            <p>Tipo: xxxxx</p>
         </div>
         <button class="continue-button button-sm">Continuar registro</button>
         <span class="options">&#8942;</span>
@@ -41,6 +42,7 @@
         <div class="register-info">
             <p>Folio: XXXXXXX</p>
             <p>Última modificación: xx/xx/xxxx</p>
+            <p>Tipo: xxxxx</p>
         </div>
         <button class="continue-button button-sm">Continuar registro</button>
         <span class="options">&#8942;</span>
@@ -49,6 +51,7 @@
         <div class="register-info">
             <p>Folio: XXXXXXX</p>
             <p>Última modificación: xx/xx/xxxx</p>
+            <p>Tipo: xxxxx</p>
         </div>
         <button class="continue-button button-sm">Continuar registro</button>
         <span class="options">&#8942;</span>
