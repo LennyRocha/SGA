@@ -29,15 +29,11 @@ public class VerAlmacenServlet extends HttpServlet {
         double totalValorEntradas = eDao.getTotalIngresos();
         double totalValorSalidas = sDao.getTotalEgresos();
 
-        int totalProd = producto.getProducto_cantidad();
-        double totalPrec = producto.getProducto_precio();
-
-        sesion.setAttribute("totalProd", totalProd);
-        sesion.setAttribute("totalPrec", totalPrec);
+        sesion.setAttribute("datosAlmacen", producto);
         sesion.setAttribute("totalEntrada", totalValorEntradas);
         sesion.setAttribute("totalSalida", totalValorSalidas);
 
-        resp.sendRedirect(req.getContextPath()+"/almacen.jsp");
+        resp.sendRedirect(req.getContextPath()+"/VerAlmacen.jsp");
     }
 
     @Override

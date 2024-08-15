@@ -23,20 +23,38 @@
     <link rel="manifest" href="ICONOS/site.webmanifest">
 </head>
 <body>
-<jsp:include page="/Templates/Header.jsp" />
-<div class="container-sm" style="max-width: 960px">
-    <center><h1>CATÁLOGO</h1></center>
 <%
     HttpSession sesion = (HttpSession) request.getSession();
+    int type = (int) sesion.getAttribute("type");
+    String ruta = "";
+    if (type == 1){
+        ruta = "Inicio.jsp";
+%>
+<jsp:include page="/Templates/Header.jsp" />
+<script>
+    document.body.style.backgroundColor = "#F1FAEE";
+</script>
+<%} else if (type == 2) {
+    ruta = "InicioAlmacenista.jsp";
+%>
+<jsp:include page="/Templates/Header2.jsp" />
+<script>
+    document.body.style.backgroundColor = "#F2E9E4";
+</script>
+<%}%>
+<span data-bs-toggle="tooltip" data-bs-placement="top" title="Regresar">
+    <button id="back" onclick="location.href='<%=ruta%>'" class="btn btn-outline-primary btn-lg" style="margin-left: 10px"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
+</span>
+<div class="container-sm" style="max-width: 960px">
+    <center><p style="font-size: 5vw;">CATÁLOGO</p></center>
+<%
     String mensaje = (String) sesion.getAttribute("mensaje");
     String mensaje2 = (String) sesion.getAttribute("mensaje2");
 
     ProductoDao dao = new ProductoDao();
-    ArrayList<Producto> lista = dao.getAll();
+    ArrayList<Producto> lista = dao.verCatalogo();
     for(Producto p : lista){
 %>
-    <div class="container-sm" style="max-width: 960px">
-        <center><h1>CATÁLOGO</h1></center>
         <div class="row">
             <div class="col-sm-6">
                 <div class="card">
@@ -113,6 +131,14 @@
         <span class="text-muted">Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</span>
     </div>
 </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+</script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.bundle.min.js"></script>
 </body>

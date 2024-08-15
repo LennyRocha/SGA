@@ -15,6 +15,10 @@
     <link rel="manifest" href="ICONOS/site.webmanifest">
 </head>
 <body>
+<%
+    HttpSession sesion = request.getSession();
+    sesion.removeAttribute("usuario");
+%>
 <header class="container-fluid">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -62,7 +66,6 @@
             </symbol>
             </svg>
             <%
-                HttpSession sesion = request.getSession();
                 String mensaje = (String) sesion.getAttribute("mensaje");
                 String mensaje2 = (String) sesion.getAttribute("mensaje2");
 

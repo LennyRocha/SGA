@@ -34,7 +34,7 @@ public class ProductoDao {
 
     public ArrayList<Producto> getAll() {
         ArrayList<Producto> lista = new ArrayList<>();
-        String query = "SELECT * FROM Producto";
+        String query = "SELECT * FROM Producto WHERE producto_cantidad > 0";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);

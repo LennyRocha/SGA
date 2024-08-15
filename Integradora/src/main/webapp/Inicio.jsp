@@ -42,12 +42,12 @@
                     </div>
                     <div class="col">
                         <img class="img-fluid" src="IMG/Btn1_Admin.png" alt="ver almacen">
-                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" onclick="location.href='almacen.jsp'">ALMACÉN</button>
+                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" onclick="location.href='ver'">ALMACÉN</button>
                     </div>
                     <br>
                     <br>
                     <center><div class="row" id="theRow">
-                        <a class="btn btn-info mt- mb-1" id="exit" href="Index.jsp">SALIR</a>
+                        <a class="btn btn-info mt- mb-1" id="exit" href="index.jsp">SALIR</a>
                     </div></center>
                 </div>
                 <br>
