@@ -110,4 +110,9 @@ public class EntradaServlet extends HttpServlet {
             response.getWriter().write("No se encontraron productos válidos para guardar.");
         }
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //
+    }
 }
