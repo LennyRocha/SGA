@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS Producto (
 -- Crear la tabla de Entrada con el identificador
 CREATE TABLE IF NOT EXISTS Entrada (
     entrada_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    entrada_folio INT NOT NULL,
+    entrada_folio VARCHAR(100) NOT NULL,
     entrada_fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     entrada_proveedor_id INT NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'pendiente',
+    entrada_estado VARCHAR(20) NOT NULL DEFAULT 'pendiente',
     CONSTRAINT entrada_proveedor_fk FOREIGN KEY (entrada_proveedor_id) REFERENCES Proveedor (proveedor_id)
 );
 
@@ -61,13 +61,13 @@ CREATE TABLE IF NOT EXISTS Detalle_Entrada (
 
 CREATE TABLE IF NOT EXISTS Salida (
     salida_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    salida_folio INT NOT NULL,
+    salida_folio VARCHAR(100) NOT NULL,
     salida_producto_id INT NOT NULL,
     salida_usuario_id INT NOT NULL,
     salida_cantidad INT NOT NULL,
     salida_fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     salida_area_id INT NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'pendiente',
+    salida_estado VARCHAR(20) NOT NULL DEFAULT 'pendiente',
     salida_valor_total DOUBLE,
     CONSTRAINT salida_producto_fk FOREIGN KEY (salida_producto_id) REFERENCES Producto (producto_id),
     CONSTRAINT salida_usuario_fk FOREIGN KEY (salida_usuario_id) REFERENCES Usuarios(id),
@@ -75,15 +75,15 @@ CREATE TABLE IF NOT EXISTS Salida (
 );
 
 CREATE TABLE Detalle_Salida(
-detalle_salida_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-salida_id INT NOT NULL,
-producto_salida_id INT NOT NULL,
-cantidad INT NOT NULL,
-valor_salida DOUBLE,
-CONSTRAINT detalle_salida_fk FOREIGN KEY (salida_id)
-REFERENCES Salida(salida_id),
-CONSTRAINT producto_fk FOREIGN KEY (producto_salida_id)
-REFERENCES Producto(producto_id)
+    detalle_salida_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    salida_id INT NOT NULL,
+    producto_salida_id INT NOT NULL,
+    cantidad INT NOT NULL,
+    valor_salida DOUBLE,
+    CONSTRAINT detalle_salida_fk FOREIGN KEY (salida_id)
+    REFERENCES Salida(salida_id),
+    CONSTRAINT producto_fk FOREIGN KEY (producto_salida_id)
+    REFERENCES Producto(producto_id)
 );
 
 DELIMITER $$
@@ -109,7 +109,7 @@ CREATE TRIGGER after_entrada_update
 AFTER UPDATE ON Entrada
 FOR EACH ROW
 BEGIN
-    IF NEW.estado = 'exitoso' AND OLD.estado <> 'exitoso' THEN
+    IF NEW.entrada_estado = 'exitoso' AND OLD.entrada_estado <> 'exitoso' THEN
         UPDATE Producto
         SET producto_cantidad = producto_cantidad + (
             SELECT SUM(cantidad)
@@ -131,7 +131,7 @@ FOR EACH ROW
 BEGIN
     DECLARE cantidad_disponible INT;
 
-    IF NEW.estado = 'exitoso' AND OLD.estado <> 'exitoso' THEN
+    IF NEW.salida_estado = 'exitoso' AND OLD.salida_estado <> 'exitoso' THEN
         SELECT producto_cantidad INTO cantidad_disponible
         FROM Producto
         WHERE producto_id = NEW.salida_producto_id;
@@ -154,20 +154,20 @@ DELIMITER ;
 -- Crear vista vista_almacen
 CREATE VIEW vista_almacen AS 
 SELECT
-    p.nombre_producto AS Producto, 
-    SUM(p.cantidad) AS Cantidad_total,
-    SUM(p.precio_unitario * p.cantidad) AS Monto_total
+    p.producto_nombre AS Producto,
+    SUM(p.producto_cantidad) AS Cantidad_total,
+    SUM(p.producto_precio * p.producto_cantidad) AS Monto_total
 FROM Producto p
-GROUP BY p.nombre_producto;
+GROUP BY p.producto_nombre;
 
 -- Crear vista Catalogo
 CREATE VIEW Catalogo AS
 SELECT 
-    p.nombre_producto AS Producto, 
-    p.cantidad AS Cantidad,
-    p.precio_unitario AS Precio
+    p.producto_nombre AS Producto,
+    p.producto_cantidad AS Cantidad,
+    p.producto_precio AS Precio
 FROM Producto p
-ORDER BY p.nombre_producto;
+ORDER BY p.producto_nombre;
 
 DROP VIEW Catalogo;
 
@@ -176,7 +176,15 @@ DELIMITER //
 
 CREATE PROCEDURE RefreshMyView()
 BEGIN
-    REFRESH VIEW Catalogo;
+    DROP VIEW Catalogo;
+
+    CREATE VIEW Catalogo AS
+    SELECT
+        p.producto_nombre AS Producto,
+        p.producto_cantidad AS Cantidad,
+        p.producto_precio AS Precio
+    FROM Producto p
+    ORDER BY p.producto_nombre;
 END //
 
 DELIMITER ;
