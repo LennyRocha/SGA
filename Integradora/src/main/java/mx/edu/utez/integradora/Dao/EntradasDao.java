@@ -7,7 +7,6 @@ import mx.edu.utez.integradora.Model.Usuario;
 import mx.edu.utez.integradora.Utils.DatabaseConnectionManager;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class EntradasDao {
@@ -41,6 +40,7 @@ public class EntradasDao {
                 usuario.setId(rs.getInt("usuario_id"));
                 usuario.setNombre_usuario(rs.getString("usuario_nombre"));
                 entrada.setUsuario(usuario);
+
                 entrada.setEstado(rs.getString("estado"));
 
                 // Obtener los detalles asociados
@@ -55,21 +55,21 @@ public class EntradasDao {
         return entrada;
     }
 
-    public Entradas getTotal() {
-        Entradas entrada = new Entradas();
-        String query = "SELECT SUM(monto_entrante) AS Ingreso FROM entradas_confirmadas";
+    public double getTotal() {
+        double totalIngreso = 0.0;
+        String query = "SELECT SUM(valor_entrada) AS Ingreso FROM Detalle_Entrada";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                entrada.setEntrada_valor_total(rs.getDouble("Ingreso"));
+                totalIngreso = rs.getDouble("Ingreso");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return entrada;
+        return totalIngreso;
     }
 
     public ArrayList<Entradas> getAll() {
@@ -122,7 +122,8 @@ public class EntradasDao {
         String query = "SELECT e.*, p.*, u.* " +
                 "FROM Entradas e " +
                 "JOIN Proveedor p ON e.proveedor_id = p.proveedor_id " +
-                "JOIN Usuario u ON e.usuario_id = u.usuario_id WHERE e.estado = 'pendiente'";
+                "JOIN Usuario u ON e.usuario_id = u.usuario_id " +
+                "WHERE e.estado = 'pendiente'";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -164,7 +165,7 @@ public class EntradasDao {
 
     public boolean insertEntrada(Entradas entrada) {
         boolean respuesta = false;
-        String query = "INSERT INTO Entradas (entrada_folio, entrada_fecha, proveedor, usuario, estado) " +
+        String query = "INSERT INTO Entradas (entrada_folio, entrada_fecha, proveedor_id, usuario_id, estado) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -176,7 +177,7 @@ public class EntradasDao {
             ps.setTimestamp(2, entrada.getEntrada_fecha());
             ps.setInt(3, entrada.getProveedor().getProveedor_id());
             ps.setInt(4, entrada.getUsuario().getId());
-            ps.setString(5, String.valueOf(entrada.getEstado()));
+            ps.setString(5, entrada.getEstado());
 
             if (ps.executeUpdate() > 0) {
                 ResultSet generatedKeys = ps.getGeneratedKeys();
@@ -218,7 +219,7 @@ public class EntradasDao {
             ps.setTimestamp(2, entrada.getEntrada_fecha());
             ps.setInt(3, entrada.getProveedor().getProveedor_id());
             ps.setInt(4, entrada.getUsuario().getId());
-            ps.setString(5, String.valueOf(entrada.getEstado()));
+            ps.setString(5, entrada.getEstado());
             ps.setInt(6, entrada.getEntrada_id());
 
             if (ps.executeUpdate() > 0) {

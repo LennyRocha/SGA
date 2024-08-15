@@ -1,7 +1,6 @@
 package mx.edu.utez.integradora.Dao;
 
 import mx.edu.utez.integradora.Model.DetalleEntrada;
-import mx.edu.utez.integradora.Model.Entradas;
 import mx.edu.utez.integradora.Model.Producto;
 import mx.edu.utez.integradora.Model.UnidMed;
 import mx.edu.utez.integradora.Utils.DatabaseConnectionManager;
@@ -13,11 +12,11 @@ public class DetalleEntradaDao {
 
     public DetalleEntrada getOne(int detalle_id) {
         DetalleEntrada detalleEntrada = null;
-        String query = "SELECT d.*, p.*, um.* " +
+        String query = "SELECT d.*, p.*, um.unidad_nombre " +
                 "FROM Detalle_Entrada d " +
                 "JOIN Producto p ON d.producto_id = p.producto_id " +
-                "JOIN Unidad_medida um ON p.unidad_medida = um.unidad_id " +
-                "WHERE d.id_detalle = ?";
+                "JOIN Unidad_medida um ON p.unidad_id = um.unidad_id " +
+                "WHERE d.detalle_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -26,17 +25,17 @@ public class DetalleEntradaDao {
 
             if (rs.next()) {
                 detalleEntrada = new DetalleEntrada();
-                detalleEntrada.setDetalle_id(rs.getInt("id_detalle"));
+                detalleEntrada.setDetalle_id(rs.getInt("detalle_id"));
 
                 Producto producto = new Producto();
                 producto.setProducto_id(rs.getInt("producto_id"));
                 producto.setProducto_nombre(rs.getString("producto_nombre"));
-                // Set other fields of Producto if needed
+                producto.setProducto_precio(rs.getDouble("producto_precio"));
+                producto.setProducto_cantidad(rs.getInt("producto_cantidad"));
 
                 UnidMed unidadMedida = new UnidMed();
                 unidadMedida.setUnidad_id(rs.getInt("unidad_id"));
                 unidadMedida.setUnidad_nombre(rs.getString("unidad_nombre"));
-                // Set other fields of UnidMed if needed
 
                 detalleEntrada.setProductos(producto);
                 detalleEntrada.setCantidad(rs.getInt("cantidad"));
@@ -51,10 +50,10 @@ public class DetalleEntradaDao {
 
     public ArrayList<DetalleEntrada> getAllByEntradaId(int entrada_id) {
         ArrayList<DetalleEntrada> detallesList = new ArrayList<>();
-        String query = "SELECT d.*, p.*, um.* " +
+        String query = "SELECT d.*, p.*, um.unidad_nombre " +
                 "FROM Detalle_Entrada d " +
                 "JOIN Producto p ON d.producto_id = p.producto_id " +
-                "JOIN Unidad_medida um ON p.unidad_medida = um.unidad_id " +
+                "JOIN Unidad_medida um ON p.unidad_id = um.unidad_id " +
                 "WHERE d.entrada_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -64,17 +63,17 @@ public class DetalleEntradaDao {
 
             while (rs.next()) {
                 DetalleEntrada detalleEntrada = new DetalleEntrada();
-                detalleEntrada.setDetalle_id(rs.getInt("id_detalle"));
+                detalleEntrada.setDetalle_id(rs.getInt("detalle_id"));
 
                 Producto producto = new Producto();
                 producto.setProducto_id(rs.getInt("producto_id"));
                 producto.setProducto_nombre(rs.getString("producto_nombre"));
-                // Set other fields of Producto if needed
+                producto.setProducto_precio(rs.getDouble("producto_precio"));
+                producto.setProducto_cantidad(rs.getInt("producto_cantidad"));
 
                 UnidMed unidadMedida = new UnidMed();
                 unidadMedida.setUnidad_id(rs.getInt("unidad_id"));
                 unidadMedida.setUnidad_nombre(rs.getString("unidad_nombre"));
-                // Set other fields of UnidMed if needed
 
                 detalleEntrada.setProductos(producto);
                 detalleEntrada.setCantidad(rs.getInt("cantidad"));
@@ -109,9 +108,26 @@ public class DetalleEntradaDao {
         return respuesta;
     }
 
+    public double getTotalIngresos() {
+        double totalIngresos = 0.0;
+        String query = "SELECT SUM(valor_total) AS Ingresos FROM Detalle_Entrada";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalIngresos = rs.getDouble("Ingresos");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalIngresos;
+    }
+
     public boolean updateDetalleEntrada(DetalleEntrada detalle) {
         boolean respuesta = false;
-        String query = "UPDATE Detalle_Entrada SET entrada_id = ?, producto_id = ?, cantidad = ?, valor_total = ? WHERE id_detalle = ?";
+        String query = "UPDATE Detalle_Entrada SET entrada_id = ?, producto_id = ?, cantidad = ?, valor_total = ? WHERE detalle_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -151,7 +167,7 @@ public class DetalleEntradaDao {
 
     public boolean deleteDetalleEntrada(int detalle_id) {
         boolean respuesta = false;
-        String query = "DELETE FROM Detalle_Entrada WHERE id_detalle = ?";
+        String query = "DELETE FROM Detalle_Entrada WHERE detalle_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);

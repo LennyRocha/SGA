@@ -1,8 +1,6 @@
 package mx.edu.utez.integradora.Dao;
 
 import mx.edu.utez.integradora.Model.Producto;
-import mx.edu.utez.integradora.Model.UnidMed;
-import mx.edu.utez.integradora.Model.Producto;
 import mx.edu.utez.integradora.Utils.DatabaseConnectionManager;
 
 import java.sql.Connection;
@@ -13,167 +11,159 @@ import java.util.ArrayList;
 
 public class ProductoDao {
 
-    public Producto getOne (int producto_id){
-
+    public Producto getOne(int producto_id) {
         Producto p = new Producto();
-        UnidMed ume = new UnidMed();
-        String query = "select p.*, u.unidad_nombre from Producto p JOIN Unidad_medida u ON p.producto_unidad_id = u.unidad_id where p.producto_id = ?";
-        try(Connection con = DatabaseConnectionManager.getConnection();){
+        String query = "SELECT * FROM Producto WHERE producto_id = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1,producto_id);
+            ps.setInt(1, producto_id);
             ResultSet rs = ps.executeQuery();
-            if(rs.next())
-            {
+
+            if (rs.next()) {
                 p.setProducto_id(rs.getInt("producto_id"));
-                p.setProducto_nombre(rs.getString("nombre_producto"));
-                p.setProducto_precio(rs.getDouble("precio_unitario"));
-                p.setProducto_cantidad(rs.getInt("cantidad"));
-
-                ume.setUnidad_id(rs.getInt("unidad_id"));
-                ume.setUnidad_nombre(rs.getString("unidad_nombre"));
-
-                p.setProducto_unidad_medida(ume);
+                p.setProducto_nombre(rs.getString("producto_nombre"));
+                p.setProducto_precio(rs.getDouble("producto_precio"));
+                p.setProducto_cantidad(rs.getInt("producto_cantidad"));
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return p;
     }
 
-    public ArrayList<Producto> getAll(){
-        ArrayList<Producto> List = new ArrayList<>();
-        String query = "select p.*, u.unidad_nombre from Producto p JOIN Unidad_medida u ON p.producto_unidad_id = u.unidad_id";
+    public ArrayList<Producto> getAll() {
+        ArrayList<Producto> lista = new ArrayList<>();
+        String query = "SELECT * FROM Producto";
 
-        try(Connection con = DatabaseConnectionManager.getConnection();){
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+
+            while (rs.next()) {
                 Producto pro = new Producto();
                 pro.setProducto_id(rs.getInt("producto_id"));
-                pro.setProducto_nombre(rs.getString("nombre_producto"));
-                pro.setProducto_precio(rs.getDouble("precio_unitario"));
-                pro.setProducto_cantidad(rs.getInt("cantidad"));
+                pro.setProducto_nombre(rs.getString("producto_nombre"));
+                pro.setProducto_precio(rs.getDouble("producto_precio"));
+                pro.setProducto_cantidad(rs.getInt("producto_cantidad"));
 
-                UnidMed ume = new UnidMed();
-                ume.setUnidad_id(rs.getInt("unidad_id"));
-                ume.setUnidad_nombre(rs.getString("unidad_nombre"));
-
-                pro.setProducto_unidad_medida(ume);
-
-                List.add(pro);
+                lista.add(pro);
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return List;
+        return lista;
     }
 
-    public boolean insertProducto (Producto prod)
-    {
+    public boolean insertProducto(Producto prod) {
         boolean respuesta = false;
-        String query = "insert into producto(nombre_producto,precio_unitario,unidad_medida,cantidad)values(?,?,?,?)";
-        try(Connection con = DatabaseConnectionManager.getConnection();){
+        String query = "INSERT INTO Producto (producto_nombre, producto_precio, producto_cantidad) VALUES (?, ?, ?)";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,prod.getProducto_nombre());
-            ps.setDouble(2,prod.getProducto_precio());
-            ps.setInt(3,prod.getProducto_unidad_medida());
-            ps.setInt(4,prod.getProducto_cantidad());
-            if(ps.executeUpdate()==1){
+            ps.setString(1, prod.getProducto_nombre());
+            ps.setDouble(2, prod.getProducto_precio());
+            ps.setInt(3, prod.getProducto_cantidad());
+
+            if (ps.executeUpdate() > 0) {
                 respuesta = true;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return respuesta;
     }
 
-    public boolean anadirProducto (String nombreProducto, int cantidad)
-    {
+    public boolean anadirProducto(String nombreProducto, int cantidad) {
         boolean respuesta = false;
-        String query = "update producto set cantidad = ? where nombre_producto = ?";
-        try(Connection con = DatabaseConnectionManager.getConnection();){
+        String query = "UPDATE Producto SET producto_cantidad = producto_cantidad + ? WHERE producto_nombre = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1,cantidad);
-            ps.setString(2,nombreProducto);
-            if(ps.executeUpdate()==1){
+            ps.setInt(1, cantidad);
+            ps.setString(2, nombreProducto);
+
+            if (ps.executeUpdate() > 0) {
                 respuesta = true;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return respuesta;
     }
 
-    public boolean deleteProducto (Producto prod){
+    public boolean deleteProducto(Producto prod) {
         boolean respuesta = false;
-        String query = "delete from Producto where producto_id = ?";
-        try(Connection con = DatabaseConnectionManager.getConnection();){
+        String query = "DELETE FROM Producto WHERE producto_id = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1,prod.getProducto_id());
-            System.out.println(prod.getProducto_id());
-            if(ps.executeUpdate()>0){
+            ps.setInt(1, prod.getProducto_id());
+
+            if (ps.executeUpdate() > 0) {
                 respuesta = true;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return respuesta;
     }
 
-    public boolean updateProducto (Producto prod) {
+    public boolean updateProducto(Producto prod) {
         boolean respuesta = false;
-        String query = "update producto set nombre_producto = ?, precio_unitario = ?, unidad_medida = ?, cantidad = ? where producto_id = ?";
-        try(Connection con = DatabaseConnectionManager.getConnection();){
+        String query = "UPDATE Producto SET producto_nombre = ?, producto_precio = ?, producto_cantidad = ? WHERE producto_id = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, prod.getProducto_nombre());
+            ps.setDouble(2, prod.getProducto_precio());
+            ps.setInt(3, prod.getProducto_cantidad());
+            ps.setInt(4, prod.getProducto_id());
 
-            ps.setString(1,prod.getProducto_nombre());
-            ps.setDouble(2,prod.getProducto_precio());
-
-            ps.setInt(3,prod.getProducto_unidad_medida());
-            ps.setInt(4,prod.getProducto_cantidad());
-            ps.setInt(5,prod.getProducto_id());
-            if(ps.executeUpdate()>0){
+            if (ps.executeUpdate() > 0) {
                 respuesta = true;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return respuesta;
     }
 
-    public ArrayList<Producto> verCatalogo (){
-        ArrayList<Producto> Listaa = new ArrayList<>();
-        String query = "select * from Catalogo";
+    public ArrayList<Producto> verCatalogo() {
+        ArrayList<Producto> lista = new ArrayList<>();
+        String query = "SELECT * FROM Catalogo";
 
-        try(Connection con = DatabaseConnectionManager.getConnection();){
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+
+            while (rs.next()) {
                 Producto pro = new Producto();
                 pro.setProducto_nombre(rs.getString("Producto"));
                 pro.setProducto_precio(rs.getDouble("Precio"));
                 pro.setProducto_cantidad(rs.getInt("Cantidad"));
 
-                Listaa.add(pro);
+                lista.add(pro);
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Listaa;
+        return lista;
     }
 
-    public Producto verAlmacen (){
+    public Producto verAlmacen() {
         Producto prods = new Producto();
-        String query = "select * from vista_almacen";
+        String query = "SELECT * FROM vista_almacen";
 
-        try(Connection con = DatabaseConnectionManager.getConnection();){
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+
+            if (rs.next()) {
                 prods.setProducto_precio(rs.getDouble("Monto_total"));
                 prods.setProducto_cantidad(rs.getInt("Cantidad_total"));
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return prods;

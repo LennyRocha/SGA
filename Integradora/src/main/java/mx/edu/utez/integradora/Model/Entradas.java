@@ -12,24 +12,24 @@ public class Entradas implements Serializable {
     private Proveedor proveedor;
     private Usuario usuario;
     private String estado;
-    private Double entrada_valor_total;
     private ArrayList<DetalleEntrada> detalles;
 
     public Entradas(){
 
     }
 
-    public Entradas(int entrada_id, int entrada_folio, Timestamp entrada_fecha, Usuario usuario, int entrada_folio_factura, String estado, ArrayList<DetalleEntrada> detalles){
+    public Entradas(int entrada_id, int entrada_folio, int entrada_folio_factura, Timestamp entrada_fecha, Proveedor proveedor, Usuario usuario, String estado, ArrayList<DetalleEntrada> detalles){
         this.entrada_id = entrada_id;
         this.entrada_folio = entrada_folio;
         this.entrada_folio_factura = entrada_folio_factura;
         this.entrada_fecha = entrada_fecha;
+        this.proveedor = proveedor;
         this.usuario = usuario;
         this.estado = estado;
         this.detalles = detalles;
     }
 
-    public Entradas(int entrada_folio, Timestamp entrada_fecha, Usuario usuario, int entrada_folio_factura, String estado, ArrayList<DetalleEntrada> detalles){
+    public Entradas(int entrada_folio, int entrada_folio_factura, Timestamp entrada_fecha, Proveedor proveedor, Usuario usuario , String estado, ArrayList<DetalleEntrada> detalles){
         this.entrada_folio = entrada_folio;
         this.entrada_fecha = entrada_fecha;
         this.entrada_folio_factura = entrada_folio_factura;
@@ -81,9 +81,6 @@ public class Entradas implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
-    public Double getEntrada_valor_total() {return entrada_valor_total;}
-    public void setEntrada_valor_total(Double entrada_valor_total) { this.entrada_valor_total = entrada_valor_total; }
 
     public ArrayList<DetalleEntrada> getDetalles() {
         return detalles;

@@ -6,13 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import mx.edu.utez.integradora.Dao.EntradasDao;
-import mx.edu.utez.integradora.Dao.ProductoDao;
-import mx.edu.utez.integradora.Dao.SalidaDao;
-import mx.edu.utez.integradora.Dao.UsuarioDao;
-import mx.edu.utez.integradora.Model.Entradas;
+import mx.edu.utez.integradora.Dao.*;
+import mx.edu.utez.integradora.Model.DetalleSalida;
 import mx.edu.utez.integradora.Model.Producto;
-import mx.edu.utez.integradora.Model.Salidas;
+import mx.edu.utez.integradora.Model.DetalleEntrada;
 import mx.edu.utez.integradora.Model.Usuario;
 
 import java.io.IOException;
@@ -26,13 +23,13 @@ public class VerAlmacenServlet extends HttpServlet {
         HttpSession sesion = req.getSession();
 
         ProductoDao pDao = new ProductoDao();
-        EntradasDao eDao = new EntradasDao();
-        SalidaDao sDao = new SalidaDao();
+        DetalleEntradaDao eDao = new DetalleEntradaDao();
+        DetalleSalidaDao sDao = new DetalleSalidaDao();
 
 
         Producto producto = pDao.verAlmacen();
-        Entradas entradas = eDao.getTotal();
-        Salidas salidas = sDao.getTotal();
+        double totalValorEntradas = eDao.getTotalIngresos();
+        double totalValorSalidas = sDao.getTotal();
 
         int totalProd = producto.getProducto_cantidad();
         double totalPrec = producto.getProducto_precio();
