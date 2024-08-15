@@ -14,9 +14,9 @@ public class EntradasDao {
     public Entradas getOne(int entrada_id) {
         Entradas entrada = new Entradas();
         String query = "SELECT e.*, p.*, u.* " +
-                "FROM Entradas e " +
-                "JOIN Proveedor p ON e.proveedor_id = p.proveedor_id " +
-                "JOIN Usuario u ON e.usuario_id = u.usuario_id " +
+                "FROM Entrada e " +
+                "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
+                "JOIN Usuarios u ON e.entrada_usuario_id = u.id " +
                 "WHERE e.entrada_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -37,8 +37,8 @@ public class EntradasDao {
 
                 // Obtener información del usuario
                 Usuario usuario = new Usuario();
-                usuario.setId(rs.getInt("usuario_id"));
-                usuario.setNombre_usuario(rs.getString("usuario_nombre"));
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre_usuario(rs.getString("nombre"));
                 entrada.setUsuario(usuario);
 
                 entrada.setEstado(rs.getString("estado"));
@@ -55,29 +55,56 @@ public class EntradasDao {
         return entrada;
     }
 
-    public double getTotal() {
-        double totalIngreso = 0.0;
-        String query = "SELECT SUM(valor_entrada) AS Ingreso FROM Detalle_Entrada";
+    public Entradas getOne(String folio) {
+        Entradas entrada = new Entradas();
+        String query = "SELECT e.*, p.*, u.* " +
+                "FROM Entrada e " +
+                "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
+                "JOIN Usuarios u ON e.entrada_usuario_id = u.id " +
+                "WHERE e.entrada_folio = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, folio);
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
-                totalIngreso = rs.getDouble("Ingreso");
+                entrada.setEntrada_id(rs.getInt("entrada_id"));
+                entrada.setEntrada_folio(rs.getInt("entrada_folio"));
+                entrada.setEntrada_fecha(rs.getTimestamp("entrada_fecha"));
+
+                // Obtener información del proveedor
+                Proveedor proveedor = new Proveedor();
+                proveedor.setProveedor_id(rs.getInt("proveedor_id"));
+                proveedor.setProveedor_nombre(rs.getString("proveedor_nombre"));
+                entrada.setProveedor(proveedor);
+
+                // Obtener información del usuario
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre_usuario(rs.getString("nombre"));
+                entrada.setUsuario(usuario);
+
+                entrada.setEstado(rs.getString("estado"));
+
+                // Obtener los detalles asociados
+                DetalleEntradaDao detalleDao = new DetalleEntradaDao();
+                ArrayList<DetalleEntrada> detalles = detalleDao.getAllByEntradaFolio(folio);
+                entrada.setDetalles(detalles);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return totalIngreso;
+        return entrada;
     }
 
     public ArrayList<Entradas> getAll() {
         ArrayList<Entradas> entradasList = new ArrayList<>();
         String query = "SELECT e.*, p.*, u.* " +
-                "FROM Entradas e " +
-                "JOIN Proveedor p ON e.proveedor_id = p.proveedor_id " +
-                "JOIN Usuario u ON e.usuario_id = u.usuario_id";
+                "FROM Entrada e " +
+                "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
+                "JOIN Usuarios u ON e.entrada_usuario_id = u.id";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -97,11 +124,11 @@ public class EntradasDao {
 
                 // Obtener información del usuario
                 Usuario usuario = new Usuario();
-                usuario.setId(rs.getInt("usuario_id"));
-                usuario.setNombre_usuario(rs.getString("usuario_nombre"));
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre_usuario(rs.getString("nombre"));
                 entrada.setUsuario(usuario);
 
-                entrada.setEstado(rs.getString("estado"));
+                entrada.setEstado(rs.getString("entrada_estado"));
 
                 // Obtener los detalles asociados
                 DetalleEntradaDao detalleDao = new DetalleEntradaDao();
@@ -120,10 +147,10 @@ public class EntradasDao {
     public ArrayList<Entradas> getAllUnfinished() {
         ArrayList<Entradas> entradasList = new ArrayList<>();
         String query = "SELECT e.*, p.*, u.* " +
-                "FROM Entradas e " +
-                "JOIN Proveedor p ON e.proveedor_id = p.proveedor_id " +
-                "JOIN Usuario u ON e.usuario_id = u.usuario_id " +
-                "WHERE e.estado = 'pendiente'";
+                "FROM Entrada e " +
+                "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
+                "JOIN Usuarios u ON e.entrada_usuario_id = u.id " +
+                "WHERE e.entrada_estado = 'pendiente'";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -143,11 +170,11 @@ public class EntradasDao {
 
                 // Obtener información del usuario
                 Usuario usuario = new Usuario();
-                usuario.setId(rs.getInt("usuario_id"));
-                usuario.setNombre_usuario(rs.getString("usuario_nombre"));
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre_usuario(rs.getString("nombre"));
                 entrada.setUsuario(usuario);
 
-                entrada.setEstado(rs.getString("estado"));
+                entrada.setEstado(rs.getString("entrada_estado"));
 
                 // Obtener los detalles asociados
                 DetalleEntradaDao detalleDao = new DetalleEntradaDao();
@@ -165,7 +192,7 @@ public class EntradasDao {
 
     public boolean insertEntrada(Entradas entrada) {
         boolean respuesta = false;
-        String query = "INSERT INTO Entradas (entrada_folio, entrada_fecha, proveedor_id, usuario_id, estado) " +
+        String query = "INSERT INTO Entrada (entrada_folio, entrada_fecha, entrada_proveedor_id, entrada_usuario_id, entrada_usuario_id) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -208,7 +235,7 @@ public class EntradasDao {
 
     public boolean updateEntrada(Entradas entrada) {
         boolean respuesta = false;
-        String query = "UPDATE Entradas SET entrada_folio = ?, entrada_fecha = ?, proveedor_id = ?, usuario_id = ?, estado = ? WHERE entrada_id = ?";
+        String query = "UPDATE Entrada SET entrada_folio = ?, entrada_fecha = ?, entrada_proveedor_id = ?, entrada_usuario_id = ?, entrada_estado = ? WHERE entrada_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             con.setAutoCommit(false);
@@ -246,7 +273,7 @@ public class EntradasDao {
 
     public boolean deleteEntrada(int entrada_id) {
         boolean respuesta = false;
-        String query = "DELETE FROM Entradas WHERE entrada_id = ?";
+        String query = "DELETE FROM Entrada WHERE entrada_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             con.setAutoCommit(false);
@@ -261,6 +288,37 @@ public class EntradasDao {
             // Eliminar la entrada
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, entrada_id);
+
+            if (ps.executeUpdate() > 0) {
+                con.commit();
+                respuesta = true;
+            } else {
+                con.rollback();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return respuesta;
+    }
+
+    public boolean deleteEntrada(String entrada_folio) {
+        boolean respuesta = false;
+        String query = "DELETE FROM Entrada WHERE entrada_folio = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            con.setAutoCommit(false);
+
+            // Eliminar los detalles asociados
+            DetalleEntradaDao detalleDao = new DetalleEntradaDao();
+            if (!detalleDao.deleteByEntradaFolio(entrada_folio)) {
+                con.rollback();
+                return false;
+            }
+
+            // Eliminar la entrada
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, entrada_folio);
 
             if (ps.executeUpdate() > 0) {
                 con.commit();

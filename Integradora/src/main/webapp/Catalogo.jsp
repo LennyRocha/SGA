@@ -1,4 +1,6 @@
-<%--
+<%@ page import="mx.edu.utez.integradora.Dao.ProductoDao" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.integradora.Model.Producto" %><%--
   Created by IntelliJ IDEA.
   User: Lenny
   Date: 14/08/2024
@@ -22,8 +24,43 @@
 </head>
 <body>
 <jsp:include page="/Templates/Header.jsp" />
+<div class="container-sm" style="max-width: 960px">
+    <center><h1>CATÁLOGO</h1></center>
+<%
+    HttpSession sesion = (HttpSession) request.getSession();
+    String mensaje = (String) sesion.getAttribute("mensaje");
+    String mensaje2 = (String) sesion.getAttribute("mensaje2");
+
+    ProductoDao dao = new ProductoDao();
+    ArrayList<Producto> lista = dao.getAll();
+    for(Producto p : lista){
+%>
     <div class="container-sm" style="max-width: 960px">
         <center><h1>CATÁLOGO</h1></center>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%=p.getProducto_nombre()%></h5>
+                        <p class="card-text">Precio: <%=p.getProducto_precio()%> MXN</p>
+                        <p class="card-text">Cantidad: <%=p.getProducto_cantidad()%></p>
+                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%=p.getProducto_nombre()%></h5>
+                        <p class="card-text">Precio: <%=p.getProducto_precio()%> MXN</p>
+                        <p class="card-text">Cantidad: <%=p.getProducto_cantidad()%></p>
+                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    <%}%>
         <div class="row">
             <div class="col-sm-6">
                 <div class="card">
@@ -31,7 +68,7 @@
                         <h5 class="card-title">Gansito Marinela</h5>
                         <p class="card-text">Precio: $20</p>
                         <p class="card-text">Cantidad: 5</p>
-                        <a href="#" class="btn btn-primary" disabled="true">Ver</a>
+                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
                     </div>
                 </div>
             </div>
@@ -41,7 +78,7 @@
                         <h5 class="card-title">Pinguinos Marinela</h5>
                         <p class="card-text">Precio: $25</p>
                         <p class="card-text">Cantidad: 2</p>
-                        <a href="#" class="btn btn-primary" disabled="true">Ver</a>
+                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
                     </div>
                 </div>
             </div>
@@ -54,7 +91,7 @@
                         <h5 class="card-title">Rebanadas Bimbo</h5>
                         <p class="card-text">Precio: $10</p>
                         <p class="card-text">Cantidad: 8</p>
-                        <a href="#" class="btn btn-primary" disabled="true">Ver</a>
+                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +101,7 @@
                         <h5 class="card-title">Nito Bimbo</h5>
                         <p class="card-text">Precio: $19</p>
                         <p class="card-text">Cantidad: 1</p>
-                        <a href="#" class="btn btn-primary" disabled="true">Ver</a>
+                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
                     </div>
                 </div>
             </div>

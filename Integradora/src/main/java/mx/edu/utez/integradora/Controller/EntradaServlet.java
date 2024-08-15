@@ -17,7 +17,6 @@ import java.util.Objects;
 
 @WebServlet(name = "EntradaServlet", value = "/entrada")
 public class EntradaServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -106,6 +105,6 @@ public class EntradaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        //
     }
 }

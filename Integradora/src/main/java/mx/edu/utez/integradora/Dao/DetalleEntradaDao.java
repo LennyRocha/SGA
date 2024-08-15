@@ -12,10 +12,9 @@ public class DetalleEntradaDao {
 
     public DetalleEntrada getOne(int detalle_id) {
         DetalleEntrada detalleEntrada = null;
-        String query = "SELECT d.*, p.*, um.unidad_nombre " +
+        String query = "SELECT d.*, p.*" +
                 "FROM Detalle_Entrada d " +
                 "JOIN Producto p ON d.producto_id = p.producto_id " +
-                "JOIN Unidad_medida um ON p.unidad_id = um.unidad_id " +
                 "WHERE d.detalle_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -33,10 +32,6 @@ public class DetalleEntradaDao {
                 producto.setProducto_precio(rs.getDouble("producto_precio"));
                 producto.setProducto_cantidad(rs.getInt("producto_cantidad"));
 
-                UnidMed unidadMedida = new UnidMed();
-                unidadMedida.setUnidad_id(rs.getInt("unidad_id"));
-                unidadMedida.setUnidad_nombre(rs.getString("unidad_nombre"));
-
                 detalleEntrada.setProductos(producto);
                 detalleEntrada.setCantidad(rs.getInt("cantidad"));
                 detalleEntrada.setValor_total(rs.getDouble("valor_total"));
@@ -50,10 +45,9 @@ public class DetalleEntradaDao {
 
     public ArrayList<DetalleEntrada> getAllByEntradaId(int entrada_id) {
         ArrayList<DetalleEntrada> detallesList = new ArrayList<>();
-        String query = "SELECT d.*, p.*, um.unidad_nombre " +
+        String query = "SELECT d.*, p.* " +
                 "FROM Detalle_Entrada d " +
                 "JOIN Producto p ON d.producto_id = p.producto_id " +
-                "JOIN Unidad_medida um ON p.unidad_id = um.unidad_id " +
                 "WHERE d.entrada_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -71,9 +65,39 @@ public class DetalleEntradaDao {
                 producto.setProducto_precio(rs.getDouble("producto_precio"));
                 producto.setProducto_cantidad(rs.getInt("producto_cantidad"));
 
-                UnidMed unidadMedida = new UnidMed();
-                unidadMedida.setUnidad_id(rs.getInt("unidad_id"));
-                unidadMedida.setUnidad_nombre(rs.getString("unidad_nombre"));
+                detalleEntrada.setProductos(producto);
+                detalleEntrada.setCantidad(rs.getInt("cantidad"));
+                detalleEntrada.setValor_total(rs.getDouble("valor_total"));
+
+                detallesList.add(detalleEntrada);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return detallesList;
+    }
+
+    public ArrayList<DetalleEntrada> getAllByEntradaFolio(String entrada_folio) {
+        ArrayList<DetalleEntrada> detallesList = new ArrayList<>();
+        String query = "SELECT d.*, p.*" +
+                "FROM Detalle_Entrada d " +
+                "JOIN Producto p ON d.producto_id = p.producto_id " +
+                "WHERE d.entrada_folio = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, entrada_folio);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                DetalleEntrada detalleEntrada = new DetalleEntrada();
+                detalleEntrada.setDetalle_id(rs.getInt("detalle_id"));
+
+                Producto producto = new Producto();
+                producto.setProducto_id(rs.getInt("producto_id"));
+                producto.setProducto_nombre(rs.getString("producto_nombre"));
+                producto.setProducto_precio(rs.getDouble("producto_precio"));
+                producto.setProducto_cantidad(rs.getInt("producto_cantidad"));
 
                 detalleEntrada.setProductos(producto);
                 detalleEntrada.setCantidad(rs.getInt("cantidad"));
@@ -165,13 +189,13 @@ public class DetalleEntradaDao {
         return respuesta;
     }
 
-    public boolean deleteDetalleEntrada(int detalle_id) {
+    public boolean deleteByEntradaFolio(String detalle_folio) {
         boolean respuesta = false;
-        String query = "DELETE FROM Detalle_Entrada WHERE detalle_id = ?";
+        String query = "DELETE FROM Detalle_Entrada WHERE entrada_folio = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, detalle_id);
+            ps.setString(1, detalle_folio);
 
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
