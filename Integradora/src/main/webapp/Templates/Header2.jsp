@@ -143,7 +143,7 @@
             </li>
             <li><hr class="nav-divider"></li>
             <li class="nav-item">
-                <a href="#" id="f" class="nav-link text-white" style="text-align: left;">
+                <a href="Catalogo.jsp" id="f" class="nav-link text-white" style="text-align: left;">
                     <svg class="bi pe-none me-2" width="20" height="20"><use xlink:href="#cata"/></svg>
                     Ver Catalogo
                 </a>
