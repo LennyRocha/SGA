@@ -65,7 +65,7 @@
                 </svg>
             </a>
 
-            <p id="tituloLogin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto" style="color: white; margin-left: auto">
+            <p id="tituloLogin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto" style="color: white; margin-left: auto;  margin-right: auto">
                 <img src="IMG/cajaIcon.png" alt="Logo" width="50" height="50">
                 ALMACENNOVA
             </p>

@@ -53,7 +53,7 @@
     <!-- Header -->
     <div class="navbar-expand-lg">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a id="botoncito" type="button" class="content" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+            <a id="botoncito" class="content" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                 <svg class="img-fluid" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect y="34.7727" width="45" height="10.2273" rx="5.11364" fill="white"/>
                     <rect y="17.3864" width="45" height="10.2273" rx="5.11364" fill="white"/>
@@ -61,7 +61,7 @@
                 </svg>
             </a>
 
-            <p id="tituloLogin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto" style="color: white; margin-left: auto">
+            <p id="tituloLogin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto" style="color: white; margin-left: auto;  margin-right: auto">
                 <img src="IMG/cajaIcon.png" alt="Logo" width="50" height="50">
                 ALMACENNOVA
             </p>
@@ -184,10 +184,6 @@
         text-align: center;
     }
 
-    body{
-        background-color: #F2E9E4;
-    }
-
     @media (min-width: 577px) {
         #textheader2{
             text-align: center;
@@ -199,6 +195,10 @@
         }
         #botoncito{
             margin-left: 10px;
+        }
+        #perfil
+        {
+            margin-right: 10px;
         }
     }
     @media (max-width: 576px) {
@@ -213,7 +213,6 @@
     .dropdown-divider{
         color: black;
     }
-
     .dropdown-item:active{
         background-color: #E63946;
     }
@@ -334,7 +333,6 @@
     #saludo{
         font-size: larger;
     }
-
     /*Aqui terminan*/
 </style>
 <!--  Antes de añadir el header, recuerda que solo se cierra dicha etiqueta, body y html NO-->
