@@ -46,9 +46,9 @@
                     </div>
                     <br>
                     <br>
-                    <div class="row" id="theRow">
+                    <center><div class="row" id="theRow">
                         <a class="btn btn-info mt- mb-1" id="exit" href="Index.jsp">SALIR</a>
-                    </div>
+                    </div></center>
                 </div>
                 <br>
             </div>
