@@ -87,12 +87,12 @@
                             <div class="col-sm">
                                 <label>PRODUCTO</label>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Producto 1" id="producto1">
+                                <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required maxlength="50">
                             </div>
                             <div class="col-sm">
                                 <label>CANTIDAD</label>
                                 <br>
-                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1">
+                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1" min="0">
                             </div>
                             <div class="col-sm">
                                 <label>PREC UNIT</label>
