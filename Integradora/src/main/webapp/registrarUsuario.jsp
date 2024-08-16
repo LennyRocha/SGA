@@ -50,7 +50,7 @@
                     <div class="row">
                         <div class="col">
                             <label>Nombre:*</label>
-                            <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre">
+                            <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre" max="30">
                             <label for="pass1">Contraseña:*</label>
                             <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Ingresa una contraseña" required max="10">
                             <label>Tipo de usuario:*</label>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col">
                             <label>Correo:*</label>
-                            <input type="email" class="form-control" placeholder="Correo" name="correo">
+                            <input type="email" class="form-control" placeholder="Correo" name="correo" max="50">
                             <label for="pass2">Confirmar contraseña:*</label>
                             <input type="password" class="form-control" placeholder="Repite la contraseña" id="pass2" name="pass2" required max="10">
                             <input type="hidden" name="status" value="true">
@@ -109,7 +109,7 @@
                     <div class="row">
                         <div class="col">
                             <label>Nombre:*</label>
-                            <input type="text" class="form-control" name="nombre_usuario" value="<%=u.getNombre_usuario()%>">
+                            <input type="text" class="form-control" name="nombre_usuario" value="<%=u.getNombre_usuario()%>" max="30">
                             <!--<label for="pass1">Contraseña:*</label>
                             <input type="password" class="form-control" id="pass" name="pass" value="<%=u.getContra()%>" required>-->
                             <label>Tipo de usuario:*</label>
@@ -127,7 +127,7 @@
                         </div>
                         <div class="col">
                             <label>Correo:*</label>
-                            <input type="email" class="form-control" value="<%=u.getCorreo()%>" name="correo">
+                            <input type="email" class="form-control" value="<%=u.getCorreo()%>" name="correo" max="50">
                         </div>
                     </div>
                     <br>
