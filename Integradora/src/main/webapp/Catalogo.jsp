@@ -13,7 +13,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Ver almacen</title>
+    <title>Ver catalogo</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/bootstrap.min.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/StyleVerAlmacen.css">
@@ -46,16 +46,19 @@
     <button id="back" onclick="location.href='<%=ruta%>'" class="btn btn-outline-primary btn-lg" style="margin-left: 10px"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
 </span>
 <div class="container-sm" style="max-width: 960px">
-    <center><p style="font-size: 5vw;">CATÁLOGO</p></center>
-<%
-    String mensaje = (String) sesion.getAttribute("mensaje");
-    String mensaje2 = (String) sesion.getAttribute("mensaje2");
+    <center><h1 id="tituloLogin">CATÁLOGO</h1></center>
+    <br>
+    <%
+        String mensaje = (String) sesion.getAttribute("mensaje");
+        String mensaje2 = (String) sesion.getAttribute("mensaje2");
 
-    ProductoDao dao = new ProductoDao();
-    ArrayList<Producto> lista = dao.verCatalogo();
-    for(Producto p : lista){
-%>
+        ProductoDao dao = new ProductoDao();
+        ArrayList<Producto> lista = dao.verCatalogo();
+        int count = 0;
+    %>
+    <div class="container">
         <div class="row">
+            <% for(Producto p : lista) { %>
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
@@ -66,65 +69,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><%=p.getProducto_nombre()%></h5>
-                        <p class="card-text">Precio: <%=p.getProducto_precio()%> MXN</p>
-                        <p class="card-text">Cantidad: <%=p.getProducto_cantidad()%></p>
-                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-    <%}%>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Gansito Marinela</h5>
-                        <p class="card-text">Precio: $20</p>
-                        <p class="card-text">Cantidad: 5</p>
-                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Pinguinos Marinela</h5>
-                        <p class="card-text">Precio: $25</p>
-                        <p class="card-text">Cantidad: 2</p>
-                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Rebanadas Bimbo</h5>
-                        <p class="card-text">Precio: $10</p>
-                        <p class="card-text">Cantidad: 8</p>
-                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Nito Bimbo</h5>
-                        <p class="card-text">Precio: $19</p>
-                        <p class="card-text">Cantidad: 1</p>
-                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
-                    </div>
-                </div>
-            </div>
+            <%
+                count++;
+                if(count % 2 == 0) {
+            %>
+        </div><br><div class="row">
+        <%
+                }
+            }
+        %>
         </div>
     </div>
+</div>
 <br>
 <footer class="footer mt-auto py-3 text-white-50" style="background-color: #1D3557;">
     <div class="container">
