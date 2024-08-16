@@ -6,7 +6,7 @@
     <title>Inicio</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../CSS/bootstrap.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/StyleSmall.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/StyleLogin.css'>
 </head>
 <body>
         <!-- Importar iconos -->
@@ -99,10 +99,10 @@
                   </a>
                   <label for="button" id="UserData">¡Bienvenido!</label>
                   <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="IMG/UserI.png" id="perfil" width="45" height="45" alt="Perfil">
+                      <img src="../IMG/Cajon.png" id="perfil" width="45" height="45" alt="Perfil">
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark">
-                      <li><center><img src="IMG/UserI.png" id="perfil" width="35" height="35" alt="Perfil"></center></li>
+                      <li><center><img src="../IMG/Cajon.png" id="perfil" width="35" height="35" alt="Perfil"></center></li>
                       <li><center><label>¡Hola, <strong id="name">User</strong>!</label></center></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a id="on" class="dropdown-item" href="#">Cerrar sesión</a></li>
@@ -135,19 +135,48 @@
                           <span class="fs-4">Inicio</span>
                         </a>
                         <hr>
-        <ul class="dropdown-menu dropdown-menu-dark col" style="display:contents;">
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg> Menu principal</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> Usuarios</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table" fill="black"/></svg>  Revisar almacen</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" fill="black"/></svg> Consultar historial</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"> <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#profile"/></svg> Mi perfil</a></p></li>
-                <li><hr class="dropdown-divider"></li>
-            <li><p><a class="dropdown-item" href="#"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#truck"/></svg> Gestionar áreas de entrega</a></p></li>
-                <li><hr class="dropdown-divider"></li>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;" aria-current="page">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#home"/></svg>
+              Menu principal
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#people-circle"/></svg>
+              Usuarios
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#table"/></svg>
+              Revisar almacen
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#grid"/></svg>
+              Consultar historial
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="18" height="18"><use xlink:href="#profile"/></svg>
+              Mi perfil
+            </a>
+          </li>
+          <li><hr class="nav-divider"></li>
+          <li class="nav-item">
+            <a href="#" id="a" class="nav-link active" style="text-align: left;">
+              <svg class="bi pe-none me-2" width="16" height="18"><use xlink:href="#truck"/></svg>
+              Gestionar areas de entrega
+            </a>
+          </li>
         </ul>
           <hr>
         <p id="copy">© 2024 SGA</p>
@@ -164,6 +193,19 @@
     
             .offcanvas-body{
                 background-color: #3C3C3C;
+            }
+
+            #a{
+              background-color: #3C3C3C;
+            }
+
+            #a:active{
+              background-color: #E63946;
+            }
+
+            #a:hover{
+              transform: scale(1.1);
+              transition: 0.2s;
             }
     
             #copy{
@@ -208,32 +250,37 @@
     <div class="container-fluid">
         <div class="col"></div>
         <div class="col-8 offset-2">
-            <div class="container-fluid" id="contInicio">
-              <div class="container-sm">
-              <p style="font-size: 5vw;">VER HISTORIAL</p>
-              </div>
-              <br>
-              <div class="row">
-              <div class="col">
-                  <img class="img-fluid" id="btns" src="../IMG/Btn1_Hist.png" alt="Gesionar usuarios">
-                  <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-md" id="btnAdmin">ENTRADAS</button>
-              </div>
-              <div class="col">
-                  <img class="img-fluid" id="btns" src="../IMG/Btn2_Hist.png" alt="ver historial">
-                  <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-md" id="btnAdmin">SALIDAS</button>
-              </div>
-              <br>
-              <br>
-              </div>
-              <div class="row" id="theRow">
-                <a class="btn btn-info mt- mb-1" id="exit" href="IndexIntegra.html">VOLVER</a>
+            <div class="container-fluid border-top" id="contInicio">
+                <div class="container-sm">
+                <p style="font-size: 5vw;">MENÚ DEL ALMACÉN</p>
+                </div>
+                <br>
+                <div class="row">
+                <div class="col">
+                    <img class="img-fluid" id="btns" src="IMG/Btn3_Admin.png" alt="Gesionar usuarios">
+                    <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin">USUARIOS</button>
+                </div>
+                <div class="col">
+                    <img class="img-fluid" id="btns" src="IMG/Btn2_Admin.png" alt="ver historial">
+                    <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" onclick="location.href='VerHistorial.html'">HISTORIAL</button>
+                </div>
+                <div class="col">
+                    <img class="img-fluid" id="btns" src="IMG/Btn1_Admin.png" alt="ver almacen">
+                    <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin">ALMACÉN</button>
+                </div>
+                <br>
+                </div>
+                <br>
             </div>
+            <br>
+            <div class="row" id="theRow">
+              <a class="btn btn-info mt- mb-1" id="exit" href="IndexIntegra.html">SALIR</a>
           </div>
-          <br>
         </div>
+        <div class="col"></div>
     </div>
     </main>
-    <script src="JS/popper.min.js"></script>
-    <script src="JS/bootstrap.js"></script>
+    <script src="../JS/popper.min.js"></script>
+    <script src="../JS/bootstrap.js"></script>
 </body>
 </html>

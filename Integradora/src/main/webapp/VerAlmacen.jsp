@@ -92,6 +92,7 @@
                 <h4 class="mb-3">PRODUCTOS ALMACENADOS</h4>
                 <form class="needs-validation" novalidate>
                     <div class="row g-3">
+                        <div class="overflow-scroll">
                         <table class="table table-striped table-hover">
                             <thead class="table-dark">
                             <th>Nombre del producto</th>
@@ -116,6 +117,7 @@
                             }%>
                             </tbody>
                         </table>
+                        </div>
 
                         <hr class="my-4">
 

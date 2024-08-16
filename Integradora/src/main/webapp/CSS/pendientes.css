@@ -147,6 +147,30 @@ h2{
     cursor: pointer;
 }
 
+.dropdown-item:active{
+    background-color: #E63946;
+}
+
+.dropdown-item:hover{
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+.register-card{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.register-info{
+    flex: 1 0 140px;
+}
+button{
+    flex: 1 0 60px;
+}
+#dropdownMenuButton1{
+    flex: 1 0 60px;
+}
+
 /* Responsive Styles */
 @media (min-width: 577px) {
     .header-title {
@@ -171,4 +195,44 @@ body {
     margin: 0;
     padding: 0;
     background-color: #F2E9E4;
+}
+
+/* Style the list */
+ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+}
+
+/* Display list items side by side */
+ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+ul.breadcrumb li a {
+    color: #01447e;
+    text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+    color: #4A4E69;
+    text-decoration: underline;
+}
+
+/* Style for the selected breadcrumb */
+ul.breadcrumb li.selected a {
+    color: #fff;
+    background-color: #1D3557;
+    padding: 5px 10px;
+    border-radius: 5px;
 }

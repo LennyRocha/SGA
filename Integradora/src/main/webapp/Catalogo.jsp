@@ -57,6 +57,7 @@
         int count = 0;
     %>
     <div class="container">
+        <div class="overflow-scroll">
         <div class="row">
             <% for(Producto p : lista) { %>
             <div class="col-sm-6">
@@ -78,6 +79,7 @@
                 }
             }
         %>
+        </div>
         </div>
     </div>
 </div>

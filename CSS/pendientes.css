@@ -54,7 +54,7 @@
     position: relative;
 }
 
-h4{
+h1{
     background-color: #BABABA;
 }
 
@@ -145,6 +145,15 @@ h4{
 .options {
     font-size: 24px;
     cursor: pointer;
+}
+
+.dropdown-item:active{
+    background-color: #E63946;
+}
+
+.dropdown-item:hover{
+    transform: scale(1.05);
+    transition: 0.3s;
 }
 
 /* Responsive Styles */
