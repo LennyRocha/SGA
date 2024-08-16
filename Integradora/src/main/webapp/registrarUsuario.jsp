@@ -52,7 +52,7 @@
                             <label>Nombre:*</label>
                             <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre">
                             <label for="pass1">Contraseña:*</label>
-                            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Ingresa una contraseña" required>
+                            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Ingresa una contraseña" required max="10">
                             <label>Tipo de usuario:*</label>
                             <br>
                             <select class="form-select form-control" name="tipo_usuario" id="types">
@@ -65,7 +65,7 @@
                             <label>Correo:*</label>
                             <input type="email" class="form-control" placeholder="Correo" name="correo">
                             <label for="pass2">Confirmar contraseña:*</label>
-                            <input type="password" class="form-control" placeholder="Repite la contraseña" id="pass2" name="pass2" required>
+                            <input type="password" class="form-control" placeholder="Repite la contraseña" id="pass2" name="pass2" required max="10">
                             <input type="hidden" name="status" value="true">
                         </div>
                     </div>

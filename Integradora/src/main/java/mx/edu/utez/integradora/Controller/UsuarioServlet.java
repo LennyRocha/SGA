@@ -26,6 +26,7 @@ public class UsuarioServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //1) Obtener la información del formulario
+        HttpSession sesion = req.getSession();
         String correo = req.getParameter("correo");
         String contra = req.getParameter("contra");
         String ruta = req.getContextPath()+"/index.jsp";
@@ -34,24 +35,36 @@ public class UsuarioServlet extends HttpServlet {
         // las credenciales del form
         UsuarioDao dao = new UsuarioDao();
         Usuario u = dao.getOne(correo,contra);
+        boolean estadou = u.isEstado();
 
         if(u.getCorreo() == null){
             //No existe el usuario en la base de datos
-            HttpSession sesion = req.getSession();
             sesion.setAttribute("mensaje","Usuario o contraseña invalidos, intentalo nuevamente");
             resp.sendRedirect(ruta);
         }else{
-            //Si existe el usuario
-            HttpSession sesion = req.getSession();
-            sesion.setAttribute("name",u.getNombre_usuario());
-            sesion.setAttribute("type",u.getTipo_usuario());
-            sesion.setAttribute("usuario",u);
-            if(u.getTipo_usuario() == 1){
-                ruta=req.getContextPath()+"/Inicio.jsp";
-                sesion.setAttribute("tipoSesion","admin");
-            } else if (u.getTipo_usuario() == 2) {
-                ruta=req.getContextPath()+"/InicioAlmacenista.jsp";
-                sesion.setAttribute("tipoSesion","employee");
+            if(estadou){
+                sesion.setMaxInactiveInterval(60);
+                if(u.getTipo_usuario() == 1){
+                    ruta=req.getContextPath()+"/Inicio.jsp";
+                    sesion.setAttribute("tipoSesion","admin");
+                } else if (u.getTipo_usuario() == 2) {
+                    ruta=req.getContextPath()+"/InicioAlmacenista.jsp";
+                    sesion.setAttribute("tipoSesion","employee");
+                }
+                sesion.setAttribute("estadoUsuario", "activo");
+                //Si existe el usuario
+                sesion.setAttribute("name",u.getNombre_usuario());
+                sesion.setAttribute("type",u.getTipo_usuario());
+                sesion.setAttribute("usuario",u);
+            }else {
+                sesion.setAttribute("estadoUsuario", "inactivo");
+                if(u.getTipo_usuario() == 1){
+                    ruta=req.getContextPath()+"/Inicio.jsp";
+                    sesion.setAttribute("tipoSesion","admin");
+                } else if (u.getTipo_usuario() == 2) {
+                    ruta=req.getContextPath()+"/InicioAlmacenista.jsp";
+                    sesion.setAttribute("tipoSesion","employee");
+                }
             }
             resp.sendRedirect(ruta);
         }
