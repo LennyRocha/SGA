@@ -18,14 +18,19 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Registrar salida</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/Otro.css">
+    <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/Otro2.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/bootstrap.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/StyleHeader.css">
     <link rel="icon" type="image/png" sizes="32x32" href="ICONOS/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="ICONOS/favicon-16x16.png">
     <link rel="manifest" href="ICONOS/site.webmanifest">
 </head>
-<body bgcolor="#F2E9E4">
+<body>
+<style>
+    body{
+        background-color: #F2E9E4;
+    }
+</style>
 <jsp:include page="/Templates/Header2.jsp" />
 <%
     UsuarioDao dao = new UsuarioDao();
