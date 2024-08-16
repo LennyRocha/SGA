@@ -97,7 +97,7 @@
                             <div class="col-sm">
                                 <label>PREC UNIT</label>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Precio 1" id="precio1">
+                                <input type="tel" class="form-control" placeholder="Precio 1" id="precio1">
                             </div>
                             <div class="col-sm">
                                 <label>U. MED</label>
