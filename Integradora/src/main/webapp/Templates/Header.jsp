@@ -133,7 +133,7 @@
             </li>
             <li><hr class="nav-divider"></li>
             <li class="nav-item">
-                <a href="almacen.jsp" id="d" class="nav-link text-white" style="text-align: left;">
+                <a href="ver" id="d" class="nav-link text-white" style="text-align: left;">
                     <svg class="bi pe-none me-2" width="20" height="20" fill="black"><use xlink:href="#table" fill="black"/></svg>
                      Revisar almacen
                 </a>
