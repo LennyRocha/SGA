@@ -66,7 +66,11 @@
                         <h5 class="card-title"><%=p.getProducto_nombre()%></h5>
                         <p class="card-text">Precio: <%=p.getProducto_precio()%> MXN</p>
                         <p class="card-text">Cantidad: <%=p.getProducto_cantidad()%></p>
-                        <a href="#" class="btn btn-primary" style="pointer-events: none;">Ver</a>
+                        <%if(p.getProducto_cantidad() == 0){%>
+                            <span class="badge bg-danger">No diponible por el momento</span>
+                        <%}else{%>
+                            <span class="badge bg-primary">Disponible</span>
+                        <%}%>
                     </div>
                 </div>
             </div>

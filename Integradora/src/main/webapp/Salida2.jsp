@@ -25,7 +25,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="ICONOS/favicon-16x16.png">
     <link rel="manifest" href="ICONOS/site.webmanifest">
 </head>
-<body>
+<body bgcolor="#F2E9E4">
 <jsp:include page="/Templates/Header2.jsp" />
 <%
     UsuarioDao dao = new UsuarioDao();
@@ -128,6 +128,7 @@
                     </div>
                     <br>
                     <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" type="submit">Finalizar</button>
+                        <button type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="location.href='InicioAlmacenista.jsp'">Guardar</button>
                         <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg" onclick="location.href='InicioAlmacenista.jsp'">Cancelar</button></center>
                 </form>
             </div>
