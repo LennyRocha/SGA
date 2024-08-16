@@ -88,7 +88,7 @@
 <center><h1 class="featurette-heading fw-normal lh-1" id="tit">
     MENÚ DE USUARIOS
     <br>
-    <a href="registrarUsuario.jsp <%sesion.removeAttribute("usuario");%>" class="btn btn-outline-dark">Agregar usuario</a> <a href="Inicio.jsp" class="btn btn-outline-dark">REGRESAR</a>
+    <a href="registrarUsuario.jsp <%sesion.removeAttribute("usuario");%>" class="btn btn-outline-dark">Agregar usuario</a> <a href="Inicio.jsp" class="btn btn-outline-dark">Regresar</a>
 </h1></center>
 <%
     if(mensaje2!=null){

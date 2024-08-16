@@ -60,6 +60,24 @@ public class UsuarioDao {
         return Lista;
     }
 
+    public ArrayList<Usuario> getCorreos(){
+        ArrayList<Usuario> Lista = new ArrayList<>();
+        String query = "select correo from usuarios";
+
+        try(Connection con = DatabaseConnectionManager.getConnection();){
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Usuario u = new Usuario();
+                u.setCorreo(rs.getString("correo"));
+                Lista.add(u);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return Lista;
+    }
+
     public ArrayList<Usuario> getSome(){
         ArrayList<Usuario> List = new ArrayList<>();
         String query = "select * from usuarios where tipo_cuenta = 2 and estado = true";

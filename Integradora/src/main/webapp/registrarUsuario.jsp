@@ -154,6 +154,7 @@
     </div><!-- Inicio de columna -->
 </div>
 <div class="col"></div>
+<br>
 <% } %>
 <%
     String mensaje = (String) sesion.getAttribute("mensaje");
@@ -168,7 +169,7 @@
 </div>
 <% } %>
 <%
-    sesion.removeAttribute("usuario");
+    //sesion.removeAttribute("usuario");
     sesion.removeAttribute("mensaje");
 %>
 <script>

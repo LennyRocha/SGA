@@ -9,6 +9,7 @@ import mx.edu.utez.integradora.Dao.UsuarioDao;
 import mx.edu.utez.integradora.Model.Usuario;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name="RegistrarUsuarioServlet", value="/sign_in")
 public class RegistrarUsuarioServlet extends HttpServlet
@@ -35,22 +36,29 @@ public class RegistrarUsuarioServlet extends HttpServlet
                 u.setEstado(status_user);
                 UsuarioDao dao = new UsuarioDao();
                 //Mandar una respuesta
-                if (dao.insertUsuario(u)) {
-                    //Mandar al usuario al inicio de sesión
-                    req.getSession().setAttribute("mensaje2","Usuario registrado");
-                    req.getSession().setAttribute("name",nombre_user);
-                    System.out.println("<p style=\"color: red;\">Usuario Registrado</p>");
-                    ruta = req.getContextPath()+"/gestionUsuario.jsp";
-                } else {
-                    //Mandar un mensaje de errror y regesar al formulario de registro
-                    req.getSession().setAttribute("mensaje","No se pudo registrar");
-                    ruta = req.getContextPath()+"/registrarUsuario.jsp";
-                    System.out.println(nombre_user);
-                    System.out.println(contra1_user);
-                    System.out.println(correo_user);
-                    System.out.println(tipo_usuario);
-                    System.out.println(status_user);
-                    System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+                ArrayList<Usuario> correos = dao.getCorreos();
+                for(Usuario usu : correos){
+                    if(usu.getCorreo().equals(correo_user)){
+                        req.getSession().setAttribute("mensaje","Ese correo ya existe");
+                        ruta = req.getContextPath()+"/registrarUsuario.jsp";
+                    }else{
+                        if (dao.insertUsuario(u)) {
+                            //Mandar al usuario al inicio de sesión
+                            req.getSession().setAttribute("mensaje2","Usuario registrado");
+                            System.out.println("<p style=\"color: red;\">Usuario Registrado</p>");
+                            ruta = req.getContextPath()+"/gestionUsuario.jsp";
+                        } else {
+                            //Mandar un mensaje de errror y regesar al formulario de registro
+                            req.getSession().setAttribute("mensaje","No se pudo registrar");
+                            ruta = req.getContextPath()+"/registrarUsuario.jsp";
+                            System.out.println(nombre_user);
+                            System.out.println(contra1_user);
+                            System.out.println(correo_user);
+                            System.out.println(tipo_usuario);
+                            System.out.println(status_user);
+                            System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+                        }
+                    }
                 }
         }else if (operacion.equals("actualizar")){
             //Actualizar usuario
