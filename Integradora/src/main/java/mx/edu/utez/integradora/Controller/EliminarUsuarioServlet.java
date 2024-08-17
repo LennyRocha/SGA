@@ -26,6 +26,10 @@ public class EliminarUsuarioServlet extends HttpServlet
             Usuario u2 = dao.getOne(u.getId());
             String correo = u2.getCorreo();
             String name = u2.getNombre_usuario();
+            int contador = dao.getCounter();
+            if(contador > 3){
+                    session.setAttribute("mensaje", "Haz rebasado el límite de inhabilitación de usuarios, intentalo nuevamente mañana");
+            }else{}
             if (dao.disable(u)){
                     req.getSession().setAttribute("mensaje2","Usuario inhabilitado");
                     System.out.println("<p style=\"color: red;\">Usuario Eliminado</p>");

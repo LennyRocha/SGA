@@ -298,4 +298,19 @@ public class UsuarioDao {
         }
         return respuesta;
     }
+
+    public int getCounter()
+    {
+        int contador = 0;
+        String query = "select COUNT(*) AS Eliminados from Usuarios_inhabilitados";
+        try(PreparedStatement ps = DatabaseConnectionManager.getConnection().prepareStatement(query)){
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+               contador = rs.getInt("Eliminados");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return contador;
+    }
 }
