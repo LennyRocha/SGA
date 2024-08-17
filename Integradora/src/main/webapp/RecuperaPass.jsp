@@ -25,7 +25,7 @@
     Usuario u = new Usuario();
 %>
 <!-- Quitar despues -->
-<header class="container-fluid">
+<header class="container-fluid bg-gradient">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <p class="container-fluid" id="textheader2">

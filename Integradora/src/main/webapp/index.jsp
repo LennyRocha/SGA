@@ -13,13 +13,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="ICONOS/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="ICONOS/favicon-16x16.png">
     <link rel="manifest" href="ICONOS/site.webmanifest">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <%
     HttpSession sesion = request.getSession();
     sesion.removeAttribute("usuario");
 %>
-<header class="container-fluid">
+<header class="container-fluid bg-gradient">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <p class="container-fluid" id="tituloLogin" style="color: white">
@@ -106,6 +107,33 @@
 </main>
 <br>
 <br>
+<script>
+    // Function to get query parameters
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split('&').forEach(param => {
+            const [key, value] = param.split('=');
+            params[key] = value;
+        });
+        return params;
+    }
+
+    // Check for the 'alert' query parameter
+    const params = getQueryParams();
+    if (params.alert === 'success') {
+        Swal.fire({
+            title: 'Exito!',
+            text: 'Ha cerrado sesión correctamente.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+    }
+</script>
+<style>
+    .swal-title {
+        color: #1D3557; /* Change this to your desired color */
+    }
+</style>
 <%
     sesion.removeAttribute("usuario");
     sesion.removeAttribute("mensaje");

@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Importar iconos -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
         <title>Bootstrap</title>
@@ -56,7 +57,7 @@
 <header>
     <!-- Header -->
     <div class="navbar-expand-lg">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-gradient">
             <a id="botoncito" class="content" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                 <svg class="img-fluid" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect y="34.7727" width="45" height="10.2273" rx="5.11364" fill="white"/>
@@ -79,7 +80,7 @@
                             <rect width="30" height="6.81818" rx="3.40909" fill="white"/>
                         </svg>
                     </a>
-                    <a class="btn btn-outline-warning" href="index.jsp" id="salir">
+                    <a class="btn btn-outline-warning" id="salir"><!--href="index.jsp"-->
                         CERRAR SESIÓN
                     </a>
                 </div>
@@ -88,7 +89,7 @@
         <!-- Offcanvas -->
     </div>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
+        <div class="offcanvas-header bg-gradient">
             <svg class="img-fluid" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg" id="cursor"
                  data-bs-dismiss="offcanvas">
                 <rect y="34.7727" width="45" height="10.2273" rx="5.11364" fill="#FFDF8E"/>
@@ -154,7 +155,7 @@
             </li>
             <li><hr class="nav-divider"></li>
             <li class="nav-item">
-                <a href="index.jsp" id="g" class="nav-link text-white" style="text-align: left;">
+                <a href="#" id="g" class="nav-link text-white" style="text-align: left;">
                     <svg class="bi pe-none me-2" width="20" height="20"><use xlink:href="#leave"/></svg>
                      Salir
                 </a>
@@ -217,6 +218,7 @@
     .dropdown-divider{
         color: black;
     }
+
     .dropdown-item:active{
         background-color: #E63946;
     }
@@ -337,6 +339,46 @@
     #saludo{
         font-size: larger;
     }
+
+    .swal2-title {
+        color: #1D3557; /* Change this to your desired color */
+    }
     /*Aqui terminan*/
 </style>
+<script>
+    //Boton del header
+    document.getElementById('salir').addEventListener('click', function() {
+        Swal.fire({
+            title: "¡Salir!",
+            text: "¿Deseas cerrar sesión?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#198754",
+            cancelButtonColor: "#E63946",
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+        }).then((result) => {
+            if(result.isConfirmed){
+                window.location.href='index.jsp?alert=success';
+            }
+        });
+    });
+    //Boton del offcanvas
+    document.getElementById('g').addEventListener('click', function() {
+        Swal.fire({
+            title: "¡Salir!",
+            text: "¿Deseas cerrar sesión?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#198754",
+            cancelButtonColor: "#E63946",
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+        }).then((result) => {
+            if(result.isConfirmed){
+                window.location.href='index.jsp?alert=success';
+            }
+        });
+    });
+</script>
 <!--  Antes de añadir el header, recuerda que solo se cierra dicha etiqueta, body y html NO-->
