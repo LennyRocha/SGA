@@ -35,29 +35,39 @@ public class RegistrarUsuarioServlet extends HttpServlet
                 u.setTipo_usuario(tipo_usuario);
                 u.setEstado(status_user);
                 UsuarioDao dao = new UsuarioDao();
+                boolean disponible = false;
+                int i = 0;
                 //Mandar una respuesta
                 ArrayList<Usuario> correos = dao.getCorreos();
                 for(Usuario usu : correos){
                     if(usu.getCorreo().equals(correo_user)){
                         req.getSession().setAttribute("mensaje","Ese correo ya existe");
-                        ruta = req.getContextPath()+"/registrarUsuario.jsp";
+                        ruta = "registrarUsuario.jsp";
+                        break;
                     }else{
-                        if (dao.insertUsuario(u)) {
-                            //Mandar al usuario al inicio de sesión
-                            req.getSession().setAttribute("mensaje2","Usuario registrado");
-                            System.out.println("<p style=\"color: red;\">Usuario Registrado</p>");
-                            ruta = req.getContextPath()+"/gestionUsuario.jsp";
-                        } else {
-                            //Mandar un mensaje de errror y regesar al formulario de registro
-                            req.getSession().setAttribute("mensaje","No se pudo registrar");
-                            ruta = req.getContextPath()+"/registrarUsuario.jsp";
-                            System.out.println(nombre_user);
-                            System.out.println(contra1_user);
-                            System.out.println(correo_user);
-                            System.out.println(tipo_usuario);
-                            System.out.println(status_user);
-                            System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
-                        }
+                        i ++;
+                    }
+                }
+                if(i == correos.size()){
+                    disponible = true;
+                    i = 0;
+                }
+                if(disponible){
+                    if (dao.insertUsuario(u)) {
+                        //Mandar al usuario al inicio de sesión
+                        req.getSession().setAttribute("mensaje2","Usuario registrado");
+                        System.out.println("<p style=\"color: red;\">Usuario Registrado</p>");
+                        ruta = req.getContextPath()+"/gestionUsuario.jsp";
+                    } else {
+                        //Mandar un mensaje de errror y regesar al formulario de registro
+                        req.getSession().setAttribute("mensaje","No se pudo registrar");
+                        ruta = req.getContextPath()+"/registrarUsuario.jsp";
+                        System.out.println(nombre_user);
+                        System.out.println(contra1_user);
+                        System.out.println(correo_user);
+                        System.out.println(tipo_usuario);
+                        System.out.println(status_user);
+                        System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
                     }
                 }
         }else if (operacion.equals("actualizar")){

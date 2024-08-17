@@ -44,11 +44,11 @@
                     <div class="form-group mt-3 mb-2">
                         <label for="correo">Correo electrónico:* </label>
                         <div class="">
-                            <input class="form-control" id="correo" type="email" name="correo" required placeholder="Ingresa el correo electrónico">
+                            <input class="form-control" id="correo" type="email" name="correo" required placeholder="Ingresa el correo electrónico" maxlength="50">
                         </div>
                         <label for="contra">Contraseña:* </label>
                         <div class="">
-                            <input class="form-control" id="contra" type="password" name="contra" required placeholder="Ingresa tu contraseña">
+                            <input class="form-control" id="contra" type="password" name="contra" required placeholder="Ingresa tu contraseña" maxlength="10">
                         </div>
                         <a href="RecuperaPass.jsp">¿Olvidaste tu contraseña?</a>
                         <br>

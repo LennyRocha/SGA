@@ -43,7 +43,7 @@ public class UsuarioServlet extends HttpServlet {
             resp.sendRedirect(ruta);
         }else{
             if(estadou){
-                sesion.setMaxInactiveInterval(60);
+                System.out.println(estadou);
                 if(u.getTipo_usuario() == 1){
                     ruta=req.getContextPath()+"/Inicio.jsp";
                     sesion.setAttribute("tipoSesion","admin");
@@ -55,8 +55,10 @@ public class UsuarioServlet extends HttpServlet {
                 //Si existe el usuario
                 sesion.setAttribute("name",u.getNombre_usuario());
                 sesion.setAttribute("type",u.getTipo_usuario());
+                sesion.setAttribute("estadoU",u.isEstado());
                 sesion.setAttribute("usuario",u);
             }else {
+                System.out.println(estadou);
                 sesion.setAttribute("estadoUsuario", "inactivo");
                 if(u.getTipo_usuario() == 1){
                     ruta=req.getContextPath()+"/Inicio.jsp";

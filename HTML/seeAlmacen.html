@@ -203,7 +203,7 @@ width: 100px;
         <form class="card p-2">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Buscar por fecha">
-            <button type="search" class="btn btn-secondary">Buscar</button>
+            <button type="search" class="btn btn-secondary" id="miInput">Buscar</button>
           </div>
         </form>
       </div>
@@ -211,7 +211,7 @@ width: 100px;
         <h4 class="mb-3">PRODUCTOS ALMACENADOS</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" id="miTabla">
               <thead class="table-dark">
                 <th>Nombre del producto</th>
                 <th>Precio Unitario</th>
@@ -245,6 +245,28 @@ width: 100px;
   </main>
 </div>
 <br>
+<script>
+  function filtrarTabla() {
+    var input = document.getElementById('miInput');
+    var filter = input.value.toUpperCase();
+    var table = document.getElementById('miTabla');
+    var tr = table.getElementsByTagName('tr');
+
+    for (var i = 1; i < tr.length; i++) { // Empieza en 1 para saltar la fila de encabezado
+        var td = tr[i].getElementsByTagName('td')[0];
+        if (td) {
+            var txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+document.getElementById('miInput').addEventListener('keyup', filtrarTabla);
+</script>
 <footer class="footer mt-auto py-3 text-white-50" style="background-color: #1D3557;">
     <div class="container">
         <span class="text-muted">Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</span>

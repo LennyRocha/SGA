@@ -26,6 +26,7 @@
 <body>
 <%
     HttpSession sesion = (HttpSession) request.getSession();
+    //String estadoUsuario = (String) sesion.getAttribute("tipoUsuario");
     LocalDate fechaActual = LocalDate.now();
     Producto prod = (Producto) sesion.getAttribute("datosAlmacen");
     double totEnt = (double) sesion.getAttribute("totalEntrada");
@@ -44,7 +45,9 @@
             <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-success">RESUMEN</span>
-                    <span class="badge bg-success rounded-pill">i</span>
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="La siguiente lista muestra los ultimos movimientos dentro del almacén">
+                        <span class="badge bg-success rounded-pill">i</span>
+                    </span>
                 </h4>
                 <ul class="list-group mb-3">
                     <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -83,8 +86,8 @@
 
                 <form class="card p-2">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar por nombre">
-                        <button type="search" class="btn btn-secondary">Buscar</button>
+                        <input type="text" class="form-control" placeholder="Buscar por nombre" id="miInput">
+                        <button type="button" class="btn btn-secondary" id="miBoton">Borrar</button>
                     </div>
                 </form>
             </div>
@@ -93,7 +96,7 @@
                 <form class="needs-validation" novalidate>
                     <div class="row g-3">
                         <div class="overflow-scroll">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover" id="miTabla">
                             <thead class="table-dark">
                             <th>Nombre del producto</th>
                             <th>Precio Unitario</th>
@@ -138,7 +141,9 @@
 <%
     sesion.removeAttribute("datosAlmacen");
 %>
+<script src="${pageContext.request.contextPath}/JS/verAlmacen.js"></script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
