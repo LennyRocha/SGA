@@ -16,7 +16,7 @@ import java.io.IOException;
 public class EliminarUsuarioServlet extends HttpServlet
 {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String ruta;
+            String ruta = "";
             Usuario u = new Usuario();
             u.setId(Integer.parseInt(req.getParameter("id")));
             u.setCorreo(req.getParameter("correo"));
@@ -28,29 +28,32 @@ public class EliminarUsuarioServlet extends HttpServlet
             String name = u2.getNombre_usuario();
             int contador = dao.getCounter();
             if(contador > 3){
-                    session.setAttribute("mensaje", "Haz rebasado el límite de inhabilitación de usuarios, intentalo nuevamente mañana");
-            }else{}
-            if (dao.disable(u)){
-                    req.getSession().setAttribute("mensaje2","Usuario inhabilitado");
-                    System.out.println("<p style=\"color: red;\">Usuario Eliminado</p>");
+                    session.setAttribute("mensaje", "Haz rebasado el límite de inhabilitación de usuarios diario, intentalo nuevamente mañana");
                     ruta = req.getContextPath()+"/gestionUsuario.jsp";
-                    //session.removeAttribute("usuario");
-                /*try {
-                    GmailSender mail = new GmailSender();
-                    mail.sendMail(correo,"Aviso de inhabilitación","<H1>HOLA "+ name.toUpperCase()+"</H1>"+
-                            "<H2>La recuperación de tu contraseña fue exitosa, el cambio debe verse reflejado la proxmia vez que inicies sesión</H2>"+
-                            "<center><a href=http://localhost:8080/Integradora_war_exploded/index.jsp>Volver</a></center>"
-                    );
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                req.getSession().setAttribute("mensaje2","¡Contraseña corregida!");*/
-            } else {
-                    //Mandar un mensaje de errror y regesar al formulario de registro
-                    req.getSession().setAttribute("mensaje","No se pudo inhabilitar el usuario");
-                    ruta = req.getContextPath()+"/gestionUsuario.jsp";
-                    System.out.println("<p style=\"color: red;\">No se pudo, UnU, XD</p>");
-                    //session.removeAttribute("usuario");
+            }else{
+                    if (dao.disable(u)){
+                            dao.insertCorreo(correo);
+                            req.getSession().setAttribute("mensaje2","Usuario inhabilitado");
+                            System.out.println("<p style=\"color: red;\">Usuario Eliminado</p>");
+                            ruta = req.getContextPath()+"/gestionUsuario.jsp";
+                            //session.removeAttribute("usuario");
+                            /*try {
+                            GmailSender mail = new GmailSender();
+                            mail.sendMail(correo,"Aviso de inhabilitación","<H1>HOLA "+ name.toUpperCase()+"</H1>"+
+                                    "<H2>La recuperación de tu contraseña fue exitosa, el cambio debe verse reflejado la proxmia vez que inicies sesión</H2>"+
+                                    "<center><a href=http://localhost:8080/Integradora_war_exploded/index.jsp>Volver</a></center>"
+                            );
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                            req.getSession().setAttribute("mensaje2","¡Contraseña corregida!");*/
+                    } else {
+                            //Mandar un mensaje de errror y regesar al formulario de registro
+                            req.getSession().setAttribute("mensaje","No se pudo inhabilitar el usuario");
+                            ruta = req.getContextPath()+"/gestionUsuario.jsp";
+                            System.out.println("<p style=\"color: red;\">No se pudo, UnU, XD</p>");
+                            //session.removeAttribute("usuario");
+                    }
             }
             resp.sendRedirect(ruta);
     }

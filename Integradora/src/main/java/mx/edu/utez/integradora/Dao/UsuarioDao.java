@@ -299,6 +299,36 @@ public class UsuarioDao {
         return respuesta;
     }
 
+    public void insertCorreo(String correo)
+    {
+        boolean respuesta = false;
+        String query = "insert into Usuarios_inhabilitados (el_correo)values(?)";
+        try(Connection con = DatabaseConnectionManager.getConnection()){
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,correo);
+            if(ps.executeUpdate()==1){
+                respuesta = true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void insertCorreo2(String correo)
+    {
+        boolean respuesta = false;
+        String query = "insert into Usuarios_habilitados (el_correo) values(?)";
+        try(Connection con = DatabaseConnectionManager.getConnection()){
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,correo);
+            if(ps.executeUpdate()==1){
+                respuesta = true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public int getCounter()
     {
         int contador = 0;
@@ -307,6 +337,21 @@ public class UsuarioDao {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                contador = rs.getInt("Eliminados");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return contador;
+    }
+
+    public int getCounter2()
+    {
+        int contador = 0;
+        String query = "select COUNT(*) AS Agregados from Usuarios_habilitados";
+        try(PreparedStatement ps = DatabaseConnectionManager.getConnection().prepareStatement(query)){
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                contador = rs.getInt("Agregados");
             }
         }catch (SQLException e){
             e.printStackTrace();
