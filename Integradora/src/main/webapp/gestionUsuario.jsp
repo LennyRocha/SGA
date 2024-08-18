@@ -15,6 +15,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Usuarios</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/bootstrap.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/datatables.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/StyleLogin.css">
@@ -132,6 +133,7 @@
     sesion.removeAttribute("mensaje");
     sesion.removeAttribute("mensaje2");
 %>
+<script src="${pageContext.request.contextPath}/JS/sweetAlert.js"></script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>

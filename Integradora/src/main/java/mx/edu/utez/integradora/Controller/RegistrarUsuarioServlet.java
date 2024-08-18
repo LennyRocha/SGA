@@ -57,7 +57,7 @@ public class RegistrarUsuarioServlet extends HttpServlet
                         //Mandar al usuario al inicio de sesión
                         req.getSession().setAttribute("mensaje2","Usuario registrado");
                         System.out.println("<p style=\"color: red;\">Usuario Registrado</p>");
-                        ruta = req.getContextPath()+"/gestionUsuario.jsp";
+                        ruta = req.getContextPath()+"/gestionUsuario.jsp?alert=success";
                     } else {
                         //Mandar un mensaje de errror y regesar al formulario de registro
                         req.getSession().setAttribute("mensaje","No se pudo registrar");
