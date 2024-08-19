@@ -47,7 +47,7 @@
                     <br>
                     <br>
                     <center><div class="row" id="theRow">
-                        <a class="btn btn-info mt- mb-1" id="exit" href="index.jsp">SALIR</a>
+                        <a class="btn btn-info mt- mb-1" id="exit" href="#">SALIR</a>
                     </div></center>
                 </div>
                 <br>
@@ -56,6 +56,25 @@
         <div class="col"></div>
     </div>
 </main>
+<script>
+    document.getElementById('exit').addEventListener('click', function() {
+        Swal.fire({
+            title: "¡Salir!",
+            titleColor: '#1D3557',
+            text: "¿Deseas cerrar sesión?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#198754",
+            cancelButtonColor: "#E63946",
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+        }).then((result) => {
+            if(result.isConfirmed){
+                window.location.href='index.jsp?alert=success';
+            }
+        });
+    });
+</script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
 </body>
