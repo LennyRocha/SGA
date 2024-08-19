@@ -132,9 +132,12 @@
                     </div>
                     <br>
                     <div id="nuevosz" class="container-fluid"></div>
-                    <center><button class="btn btn-outline-primary btn-lg mr-2" id="save" type="submit">Finalizar</button>
+                    <center>
+                        <input type="hidden" value="" name="action">
+                        <button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="location.href='entrada?action=finalizar'">Finalizar</button>
                         <button type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="location.href='entrada?action=guardar'">Guardar</button>
-                        <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg" onclick="location.href='entrada?action=cancelar'">Cancelar</button></center>
+                        <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg" onclick="location.href='InicioAlmacenista.jsp'">Cancelar</button>
+                    </center>
                 </form>
             </div>
         </div>

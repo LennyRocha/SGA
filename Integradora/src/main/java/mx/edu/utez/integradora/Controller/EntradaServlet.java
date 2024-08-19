@@ -55,7 +55,8 @@ public class EntradaServlet extends HttpServlet {
         ArrayList<Producto> listProd = productoDao.getAll();
 
         String action = request.getParameter("action");
-        if ("finalizar".equalsIgnoreCase(action)) {
+        System.out.println(action);
+        if ("finalizar".equals(action)) {
             // Lógica para modificar los productos
             for (int i = 0; i < productNames.length; i++) {
                 for (Producto p : listProd) {
@@ -63,6 +64,9 @@ public class EntradaServlet extends HttpServlet {
                         try {
                             double price = Double.parseDouble(productPrices[i]);
                             int quantity = Integer.parseInt(productQuantities[i]);
+
+                            System.out.println(price);
+                            System.out.println(quantity);
 
                             p.setProducto_precio(price);
                             p.setProducto_cantidad(quantity);
@@ -98,25 +102,22 @@ public class EntradaServlet extends HttpServlet {
                     }
                 }
             }
-        } else if ("guardar".equalsIgnoreCase(action)) {
+        } else if ("guardar".equals(action)) {
             entrada.setEstado("pendiente");
             int contador = 0;
             if (entradasDao.insertEntrada(entrada)) {
-                for (Producto p : listProd) {
-
-                }
                 session.setAttribute("mensaje2", "Entrada guardada exitosamente.");
             } else {
                 session.setAttribute("mensaje", "Error al guardar la entrada.");
             }
-        } else if ("confirmar".equalsIgnoreCase(action)) {
+        } else if ("confirmar".equals(action)) {
             entrada.setEstado("exitoso");
             if (entradasDao.insertEntrada(entrada)) {
                 session.setAttribute("mensaje2", "Entrada confirmada exitosamente.");
             } else {
                 session.setAttribute("mensaje", "Error al confirmar la entrada.");
             }
-        } else if ("cancelar".equalsIgnoreCase(action)) {
+        } else if ("cancelar".equals(action)) {
             if (entradasDao.deleteEntrada(entrada.getEntrada_id())) {
                 session.setAttribute("mensaje2", "Entrada cancelada exitosamente.");
             } else {
@@ -124,7 +125,7 @@ public class EntradaServlet extends HttpServlet {
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/InicioAlmacenista.jsp");
+        response.sendRedirect(request.getContextPath() + "/Entrada1.jsp");
     }
 
     @Override

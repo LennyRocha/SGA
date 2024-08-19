@@ -36,7 +36,7 @@
 <div class="container">
     <main>
         <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src="IMG/cajaIcon.png" alt="" width="75" height="60">
+            <img class="d-block mx-auto mb-4" src="IMG/cajaIcon.png" alt="" width="85" height="85">
             <h2>MI ALMACEN</h2>
             <p class="lead">Consulta el estado del almacén desde la última fecha de corte.</p>
         </div>
