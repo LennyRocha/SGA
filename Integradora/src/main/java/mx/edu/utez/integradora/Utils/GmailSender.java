@@ -18,9 +18,7 @@ import jakarta.mail.Session;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Properties;
@@ -39,6 +37,36 @@ public class GmailSender {
         service = new Gmail.Builder(httpTransport, jsonFactory, getCredentials(httpTransport, jsonFactory))
                 .setApplicationName("AplicacionesWeb")
                 .build();
+    }
+
+    public static String makeHeader(){
+        // Leer el header
+        StringBuilder headerBuilder = new StringBuilder();
+        try (BufferedReader in = new BufferedReader(new FileReader("src/main/webapp/Templates/HeadCorreo.html"))) {
+            String str;
+            while ((str = in.readLine()) != null) {
+                headerBuilder.append(str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String header = headerBuilder.toString();
+        return header;
+    }
+
+    public static String makeFooter(){
+        // Leer el footer
+        StringBuilder footerBuilder = new StringBuilder();
+        try (BufferedReader in = new BufferedReader(new FileReader("src/main/webapp/Templates/FootCorreo.html"))) {
+            String str;
+            while ((str = in.readLine()) != null) {
+                footerBuilder.append(str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String footer = footerBuilder.toString();
+        return footer;
     }
 
     private static Credential getCredentials(final NetHttpTransport httpTransport, GsonFactory jsonFactory)
@@ -82,13 +110,16 @@ public class GmailSender {
     }
     public static void main (String[]args) throws Exception
     {
+        String header = makeHeader();
+        String footer = makeFooter();
+        StringBuilder htmlContent = new StringBuilder();
+        htmlContent.append("<br>")
+                .append("<H1 style='color:#1D3557;>HOLA ")
+                .append("</H1>")
+                .append("<H2>La recuperación de tu contraseña fue exitosa, el cambio debe verse reflejado la proxmia vez que inicies sesión</H2>")
+                .append("<center><a href=http://localhost:8080/Integradora_war_exploded/index.jsp style=\"color:#E63946;text-decoration:underline;\">Volver</a></center>")
+                .append("<br>");
         new GmailSender().sendMail("20233tn094@utez.edu.mx", "Los Cisco Paquitos Tracer",
-            "<h1>Integrantes de integradora</h1>" +
-                "<br>" +
-                "<h2>PEDROZA GARCIA AXEL YOSHUA" +
-                    "CERETH ALARCON FRANCISCO" +
-                    "RODRIGUEZ GUZMAN ALEXIS GIOVANNI" +
-                    "SANCHEZ ROCHA LEONARDO OBED" +
-                    "ONOFRE BADILLO MAURICIO</h2>");
+                header+htmlContent+footer);
     }
 }

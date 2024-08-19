@@ -51,7 +51,7 @@
             <div class=" form-container sign-in-container">
                 <form action="updateContra" method="post" id="miFormulario">
                     <label id="textheader3" class=" d-flex align-items-center mb-3 mb-md-0 me-md-auto">
-                        <img src="IMG/Cajon.png" alt="Logo" width="100" height="100" id="logo">
+                        <img src="IMG/cajaIcon.png" alt="Logo" width="100" height="100" id="logo">
                         NUEVA CONTRASEÑA
                     </label>
                     <div class="row">

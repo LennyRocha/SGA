@@ -69,6 +69,7 @@
             <%
                 String mensaje = (String) sesion.getAttribute("mensaje");
                 String mensaje2 = (String) sesion.getAttribute("mensaje2");
+                String exito = (String) sesion.getAttribute("exito");
 
                 if(mensaje!=null){
                     System.out.println(mensaje);%>
@@ -88,6 +89,7 @@
             </script>
             <%
                 sesion.removeAttribute("mensaje");
+                sesion.removeAttribute("exito");
                 } %>
             <%
                 if(mensaje2!=null){
@@ -99,6 +101,19 @@
                 </div>
             </div>
 
+            <% } %>
+            <% if(exito != null){ %>
+                <input type="hidden" value="exito"/>
+                <script>
+                    Swal.fire({
+                        title: '!Felicidades!',
+                        text: 'Ha cambiado su contraseña exitosamente.',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar',
+                        confirmButtonColor: '#4A4E69',
+                        confirmButtonBorderColor: '#4A4E69'
+                    });
+                </script>
             <% } %>
         </div>
         <div class="col"><div class="container-fluid"></div></div>
@@ -122,10 +137,12 @@
     const params = getQueryParams();
     if (params.alert === 'success') {
         Swal.fire({
-            title: 'Exito!',
+            title: '!Exito!',
             text: 'Ha cerrado sesión correctamente.',
             icon: 'success',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#4A4E69',
+            confirmButtonBorderColor: '#4A4E69'
         });
     }
 </script>
@@ -138,6 +155,7 @@
     sesion.removeAttribute("usuario");
     sesion.removeAttribute("mensaje");
     sesion.removeAttribute("mensaje2");
+    sesion.removeAttribute("exito");
 %>
 <script src='${pageContext.request.contextPath}/JS/bootstrap.js'></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.bundle.min.js"></script>

@@ -88,7 +88,7 @@
     </div>
 </div>
 <br>
-<footer class="footer mt-auto py-3 text-white-50" style="background-color: #1D3557;">
+<footer class="footer mt-auto py-3 text-white-50 bg-gradient" style="background-color: #1D3557;">
     <div class="container">
         <span class="text-muted">Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</span>
     </div>

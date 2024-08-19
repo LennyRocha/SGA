@@ -48,7 +48,7 @@
             <div class=" form-container sign-in-container">
                 <form action="recuContra" method="post" id="miFormulario">
                     <label id="textheader" class=" d-flex align-items-center mb-3 mb-md-0 me-md-auto">
-                        <img src="IMG/Cajon.png" alt="Logo" width="90" height="90" id="logo">
+                        <img src="IMG/cajaIcon.png" alt="Logo" width="90" height="90" id="logo">
                         RECUPERA TU CONTRASEÑA
                     </label>
                     <div class="row">
