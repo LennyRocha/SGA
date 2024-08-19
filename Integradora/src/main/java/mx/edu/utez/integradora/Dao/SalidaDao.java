@@ -156,7 +156,7 @@ public class SalidaDao {
                 "u.id, u.nombre " +
                 "FROM Salida s " +
                 "JOIN area_salida asa ON s.salida_area_id = asa.area_id " +
-                "JOIN Usuarios u ON s.salida_usuario_id = u.id where s.salida_estado = 'completado'";
+                "JOIN Usuarios u ON s.salida_usuario_id = u.id where s.salida_estado = 'exitoso'";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);

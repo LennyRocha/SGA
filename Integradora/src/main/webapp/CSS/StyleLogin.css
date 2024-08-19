@@ -294,3 +294,7 @@ rect:active
 {
     background-color: darkgrey;
 }
+
+.swal2-title {
+    color: #1D3557; /* Change this to your desired color */
+}

@@ -107,6 +107,7 @@
                 <script>
                     Swal.fire({
                         title: '!Felicidades!',
+                        titleColor: '#1D3557',
                         text: 'Ha cambiado su contraseña exitosamente.',
                         icon: 'success',
                         confirmButtonText: 'Aceptar',

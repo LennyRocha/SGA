@@ -13,6 +13,10 @@ input:required{
     border-color: #CED4DA;
 }
 
+input:read-only{
+    color: #E63946;
+}
+
 #addProv {
     height: 12%;
     padding: 0;

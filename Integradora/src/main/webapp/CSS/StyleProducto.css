@@ -88,3 +88,7 @@ input[type="date"]{
 #numero{
     color: #75778C;
 }
+
+.swal2-title {
+    color: #1D3557; /* Change this to your desired color */
+}

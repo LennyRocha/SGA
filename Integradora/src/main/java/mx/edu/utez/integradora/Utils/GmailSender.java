@@ -42,7 +42,7 @@ public class GmailSender {
     public static String makeHeader(){
         // Leer el header
         StringBuilder headerBuilder = new StringBuilder();
-        try (BufferedReader in = new BufferedReader(new FileReader("src/main/webapp/Templates/HeadCorreo.html"))) {
+        try (BufferedReader in = new BufferedReader(new FileReader("src/main/webapp/WEB-INF/Templates/HeadCorreo.html"))) {
             String str;
             while ((str = in.readLine()) != null) {
                 headerBuilder.append(str);
@@ -57,7 +57,7 @@ public class GmailSender {
     public static String makeFooter(){
         // Leer el footer
         StringBuilder footerBuilder = new StringBuilder();
-        try (BufferedReader in = new BufferedReader(new FileReader("src/main/webapp/Templates/FootCorreo.html"))) {
+        try (BufferedReader in = new BufferedReader(new FileReader("src/main/webapp/WEB-INF/Templates/FootCorreo.html"))) {
             String str;
             while ((str = in.readLine()) != null) {
                 footerBuilder.append(str);

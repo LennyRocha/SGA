@@ -26,7 +26,7 @@ public class EntradasDao {
 
             if (rs.next()) {
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
-                entrada.setEntrada_folio(rs.getInt("entrada_folio"));
+                entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getTimestamp("entrada_fecha"));
 
                 // Obtener información del proveedor
@@ -55,6 +55,45 @@ public class EntradasDao {
         return entrada;
     }
 
+    public Entradas getRecent() {
+        Entradas entrada = new Entradas();
+        String query = "SELECT e.*, p.*, u.* " +
+                "FROM Entrada e " +
+                "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
+                "JOIN Usuarios u ON e.entrada_usuario_id = u.id " +
+                "WHERE e.entrada_id = ?"+
+                "ORDER BY entrada_fecha DESC LIMIT 1";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                entrada.setEntrada_id(rs.getInt("entrada_id"));
+                entrada.setEntrada_folio(rs.getString("entrada_folio"));
+                entrada.setEntrada_fecha(rs.getTimestamp("entrada_fecha"));
+
+                // Obtener información del proveedor
+                Proveedor proveedor = new Proveedor();
+                proveedor.setProveedor_id(rs.getInt("proveedor_id"));
+                proveedor.setProveedor_nombre(rs.getString("proveedor_nombre"));
+                entrada.setProveedor(proveedor);
+
+                // Obtener información del usuario
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre_usuario(rs.getString("nombre"));
+                entrada.setUsuario(usuario);
+
+                entrada.setEstado(rs.getString("estado"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return entrada;
+    }
+
     public Entradas getOne(String folio) {
         Entradas entrada = new Entradas();
         String query = "SELECT e.*, p.*, u.* " +
@@ -70,7 +109,7 @@ public class EntradasDao {
 
             if (rs.next()) {
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
-                entrada.setEntrada_folio(rs.getInt("entrada_folio"));
+                entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getTimestamp("entrada_fecha"));
 
                 // Obtener información del proveedor
@@ -113,7 +152,7 @@ public class EntradasDao {
             while (rs.next()) {
                 Entradas entrada = new Entradas();
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
-                entrada.setEntrada_folio(rs.getInt("entrada_folio"));
+                entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getTimestamp("entrada_fecha"));
 
                 // Obtener información del proveedor
@@ -149,7 +188,7 @@ public class EntradasDao {
         String query = "SELECT e.*, p.*, u.* " +
                 "FROM Entrada e " +
                 "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
-                "JOIN Usuarios u ON e.entrada_usuario_id = u.id where e.entrada_estado = 'completada'";
+                "JOIN Usuarios u ON e.entrada_usuario_id = u.id where e.entrada_estado = 'exitoso'";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -158,7 +197,7 @@ public class EntradasDao {
             while (rs.next()) {
                 Entradas entrada = new Entradas();
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
-                entrada.setEntrada_folio(rs.getInt("entrada_folio"));
+                entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getTimestamp("entrada_fecha"));
 
                 // Obtener información del proveedor
@@ -204,7 +243,7 @@ public class EntradasDao {
             while (rs.next()) {
                 Entradas entrada = new Entradas();
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
-                entrada.setEntrada_folio(rs.getInt("entrada_folio"));
+                entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getTimestamp("entrada_fecha"));
 
                 // Obtener información del proveedor
@@ -245,7 +284,7 @@ public class EntradasDao {
 
             // Insertar la entrada
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, entrada.getEntrada_folio());
+            ps.setString(1, entrada.getEntrada_folio());
             ps.setTimestamp(2, entrada.getEntrada_fecha());
             ps.setInt(3, entrada.getProveedor().getProveedor_id());
             ps.setInt(4, entrada.getUsuario().getId());
@@ -287,7 +326,7 @@ public class EntradasDao {
 
             // Actualizar la entrada
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, entrada.getEntrada_folio());
+            ps.setString(1, entrada.getEntrada_folio());
             ps.setTimestamp(2, entrada.getEntrada_fecha());
             ps.setInt(3, entrada.getProveedor().getProveedor_id());
             ps.setInt(4, entrada.getUsuario().getId());

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Entradas implements Serializable {
     private int entrada_id;
-    private int entrada_folio;
+    private String entrada_folio;
     private int entrada_folio_factura;
     private Timestamp entrada_fecha;
     private Proveedor proveedor;
@@ -18,7 +18,7 @@ public class Entradas implements Serializable {
 
     }
 
-    public Entradas(int entrada_id, int entrada_folio, int entrada_folio_factura, Timestamp entrada_fecha, Proveedor proveedor, Usuario usuario, String estado, ArrayList<DetalleEntrada> detalles){
+    public Entradas(int entrada_id, String entrada_folio, int entrada_folio_factura, Timestamp entrada_fecha, Proveedor proveedor, Usuario usuario, String estado, ArrayList<DetalleEntrada> detalles){
         this.entrada_id = entrada_id;
         this.entrada_folio = entrada_folio;
         this.entrada_folio_factura = entrada_folio_factura;
@@ -29,7 +29,7 @@ public class Entradas implements Serializable {
         this.detalles = detalles;
     }
 
-    public Entradas(int entrada_folio, int entrada_folio_factura, Timestamp entrada_fecha, Proveedor proveedor, Usuario usuario , String estado, ArrayList<DetalleEntrada> detalles){
+    public Entradas(String entrada_folio, int entrada_folio_factura, Timestamp entrada_fecha, Proveedor proveedor, Usuario usuario , String estado, ArrayList<DetalleEntrada> detalles){
         this.entrada_folio = entrada_folio;
         this.entrada_fecha = entrada_fecha;
         this.entrada_folio_factura = entrada_folio_factura;
@@ -44,10 +44,10 @@ public class Entradas implements Serializable {
         this.entrada_id = entrada_id;
     }
 
-    public int getEntrada_folio() {
+    public String getEntrada_folio() {
         return entrada_folio;
     }
-    public void setEntrada_folio(int entrada_folio) {
+    public void setEntrada_folio(String entrada_folio) {
         this.entrada_folio = entrada_folio;
     }
 
