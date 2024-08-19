@@ -48,6 +48,9 @@ public class Salidas implements Serializable {
     public Usuario getUsuarios() {
         return usuarios;
     }
+    public String getUsuarioName() {
+        return usuarios.getNombre_usuario();
+    }
 
     public void setSalida_fecha(Timestamp salida_fecha) {
         this.salida_fecha = salida_fecha;
@@ -61,6 +64,9 @@ public class Salidas implements Serializable {
     }
     public Areas getAreas() {
         return areas;
+    }
+    public String getAreasSal() {
+        return areas.getArea_nombre();
     }
 
     public void setSalida_estado(String salida_estado) {

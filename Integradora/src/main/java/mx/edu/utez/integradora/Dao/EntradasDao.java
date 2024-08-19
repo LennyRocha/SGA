@@ -144,6 +144,51 @@ public class EntradasDao {
         return entradasList;
     }
 
+    public ArrayList<Entradas> getSome() {
+        ArrayList<Entradas> entradasList = new ArrayList<>();
+        String query = "SELECT e.*, p.*, u.* " +
+                "FROM Entrada e " +
+                "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
+                "JOIN Usuarios u ON e.entrada_usuario_id = u.id where e.entrada_estado = 'completada'";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Entradas entrada = new Entradas();
+                entrada.setEntrada_id(rs.getInt("entrada_id"));
+                entrada.setEntrada_folio(rs.getInt("entrada_folio"));
+                entrada.setEntrada_fecha(rs.getTimestamp("entrada_fecha"));
+
+                // Obtener información del proveedor
+                Proveedor proveedor = new Proveedor();
+                proveedor.setProveedor_id(rs.getInt("proveedor_id"));
+                proveedor.setProveedor_nombre(rs.getString("proveedor_nombre"));
+                entrada.setProveedor(proveedor);
+
+                // Obtener información del usuario
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre_usuario(rs.getString("nombre"));
+                entrada.setUsuario(usuario);
+
+                entrada.setEstado(rs.getString("entrada_estado"));
+
+                // Obtener los detalles asociados
+                DetalleEntradaDao detalleDao = new DetalleEntradaDao();
+                ArrayList<DetalleEntrada> detalles = detalleDao.getAllByEntradaId(entrada.getEntrada_id());
+                entrada.setDetalles(detalles);
+
+                entradasList.add(entrada);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return entradasList;
+    }
+
     public ArrayList<Entradas> getAllUnfinished() {
         ArrayList<Entradas> entradasList = new ArrayList<>();
         String query = "SELECT e.*, p.*, u.* " +

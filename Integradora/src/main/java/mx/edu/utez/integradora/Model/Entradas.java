@@ -64,6 +64,11 @@ public class Entradas implements Serializable {
     public Proveedor getProveedor() {
         return proveedor;
     }
+
+    public String getProveedorNombre() {
+        return proveedor.getProveedor_nombre();
+    }
+
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
     }
@@ -71,6 +76,11 @@ public class Entradas implements Serializable {
     public Usuario getUsuario() {
         return usuario;
     }
+
+    public String getUsuarioNombre() {
+        return usuario.getNombre_usuario();
+    }
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }

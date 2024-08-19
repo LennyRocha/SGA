@@ -37,7 +37,7 @@
         <div class="col"><div class="container-fluid"></div></div>
         <div class="col-4 offset-4 col-xs-8 offset-2" id="adminMenu"><!--form-->
             <center>
-                <div class="container-fluid" id="logito"><img src="${pageContext.request.contextPath}/IMG/cajaIcon.png" alt="Logo provisional" width="120" height="120"></div>
+                <div class="container-fluid" id="logito"><img src="IMG/cajaIcon.png" alt="Logo provisional" width="120" height="120"></div>
             </center>
             <div class=" form-container sign-in-container">
                 <form action="log_in" method="post" id="miFormulario">

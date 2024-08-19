@@ -51,11 +51,11 @@
                 <div class="row">
                     <div class="col">
                         <img class="img-fluid" class="img-thumbnail" src="IMG/Btn1_Hist.png" alt="Gesionar usuarios">
-                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-md" id="btnAdmin">ENTRADAS</button>
+                        <a class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-md" id="btnAdmin" href="HistEntrada.jsp">ENTRADAS</a>
                     </div>
                     <div class="col">
                         <img class="img-fluid" class="img-thumbnail" src="IMG/Btn2_Hist.png" alt="ver historial">
-                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-md" id="btnAdmin">SALIDAS</button>
+                        <a class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-md" id="btnAdmin" href="HistSalida.jsp">SALIDAS</a>
                     </div>
                     <br>
                     <br>

@@ -149,6 +149,53 @@ public class SalidaDao {
         return salidasList;
     }
 
+    public ArrayList<Salidas> getSome() {
+        ArrayList<Salidas> salidasList = new ArrayList<>();
+        String query = "SELECT s.salida_id, s.salida_folio, s.salida_fecha, s.salida_estado, " +
+                "asa.area_id, asa.area_nombre, asa.area_identidad, " +
+                "u.id, u.nombre " +
+                "FROM Salida s " +
+                "JOIN area_salida asa ON s.salida_area_id = asa.area_id " +
+                "JOIN Usuarios u ON s.salida_usuario_id = u.id where s.salida_estado = 'completado'";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Salidas salida = new Salidas();
+                salida.setSalida_id(rs.getInt("salida_id"));
+                salida.setSalida_folio(rs.getInt("salida_folio"));
+                salida.setSalida_fecha(rs.getTimestamp("salida_fecha"));
+                salida.setSalida_estado(rs.getString("salida_estado"));
+
+                // Obtener información del area
+                Areas area = new Areas();
+                area.setArea_id(rs.getInt("area_id"));
+                area.setArea_nombre(rs.getString("area_nombre"));
+                area.setArea_identidad(rs.getString("area_identidad"));
+                salida.setAreas(area);
+
+                // Obtener información del usuario
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre_usuario(rs.getString("nombre"));
+                salida.setUsuarios(usuario);
+
+                // Obtener los detalles asociados
+                DetalleSalidaDao detalleSDao = new DetalleSalidaDao();
+                ArrayList<DetalleSalida> detalles = detalleSDao.getAllBySalidaId(salida.getSalida_id());
+                salida.setDetalleSalida(detalles);
+
+                salidasList.add(salida);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return salidasList;
+    }
+
     public ArrayList<Salidas> getAllUnfinished() {
         ArrayList<Salidas> salidasList = new ArrayList<>();
         String query = "SELECT s.salida_id, s.salida_folio, s.salida_fecha, s.salida_estado, " +
