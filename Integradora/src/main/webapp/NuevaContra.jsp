@@ -32,7 +32,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <p class="container-fluid" id="textheader2">
-                <img src="IMG/cajaIcon.png" alt="Logo" width="60" height="60">
+                <img src="IMG/Cajon.png" alt="Logo" width="60" height="60">
                 ALMACENNOVA
             </p>
         </div>

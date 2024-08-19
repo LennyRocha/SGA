@@ -29,7 +29,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <p class="container-fluid" id="textheader2">
-                <img src="IMG/cajaIcon.png" alt="Logo" width="60" height="60">
+                <img src="IMG/Cajon.png" alt="Logo" width="60" height="60">
                 ALMACENNOVA
             </p>
         </div>
@@ -43,7 +43,7 @@
         <div class="col"><div class="container-fluid"></div></div>
         <div class="col-5 col-xs-6 offset-2 col-sm-4 offset-2 col-md-4 offset-2 col-lg-8 offset-2 col-xl-4 offset-4"><!--form-->
             <center>
-                <div class="container-fluid"><img src="IMG/cajaIcon.png" alt="Logo provisional" width="120" height="120" id="logos"></div>
+                <div class="container-fluid"><img src="IMG/cajaIcon2.png" alt="Logo provisional" width="120" height="120" id="logos"></div>
             </center>
             <div class=" form-container sign-in-container">
                 <form action="recuContra" method="post" id="miFormulario">
