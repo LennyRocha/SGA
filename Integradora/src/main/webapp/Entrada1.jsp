@@ -20,6 +20,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Registrar entrada</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/bootstrap.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/StyleHeader.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/Otro.css">
@@ -62,7 +63,7 @@
         <div class="col">
             <br>
             <div class="container-fluid" id="contInicio">
-                <form action="#" method="post" id="entrada">
+                <form action="entrada?operacion=finalizar" method="post" id="entrada">
                     <div class="container-sm">
                         <h1 id="tit">REGISTRAR ENTRADA</h1>
                     </div>
@@ -73,9 +74,9 @@
                             <label>Folio:*</label>
                             <input type="text" class="form-control" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=folio%>">
                             <label>Fecha:*</label>
-                            <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual">
+                            <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual" name="fecha" required>
                             <label>Empleado:*</label>
-                            <input type="text" class="form-control" id="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;">
+                            <input type="text" class="form-control" id="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;" name="employees">
                         </div>
                         <div class="col">
                             <label>Proveedor:*</label>
@@ -83,21 +84,19 @@
                             <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addProv">+</button>
                             </span>
                             <br>
-                            <select class="form-select form-control" name="types" id="types">
+                            <select class="form-select form-control" name="suppliers" id="types" required>
                                 <option value="" disabled selected>Selecciona un proveedor</option>
                                 <% for(Proveedor p : listP){ %>
                                 <option value="<%=p.getProveedor_nombre()%>"><%=p.getProveedor_nombre()%></option>
                                 <% } %>
                             </select>
                             <label>Folio de factura:*</label>
-                            <input type="text" class="form-control" maxlength="32" placeholder="Ingresa el folio de factura">
+                            <input type="text" class="form-control" maxlength="32" placeholder="Ingresa el folio de factura" name="fact" required>
                         </div>
                     </div>
-                </form>
                 <br>
                 <hr>
                 <br>
-                <form action="entrada" method="post" id="producto">
                     <div class="container-fluid" id="cf">
                         <div class="row">
                             <div class="col-auto">

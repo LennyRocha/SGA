@@ -1,6 +1,7 @@
 package mx.edu.utez.integradora.Model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ public class Entradas implements Serializable {
     private int entrada_id;
     private String entrada_folio;
     private int entrada_folio_factura;
-    private Timestamp entrada_fecha;
+    private Date entrada_fecha;
     private Proveedor proveedor;
     private Usuario usuario;
     private String estado;
@@ -18,7 +19,7 @@ public class Entradas implements Serializable {
 
     }
 
-    public Entradas(int entrada_id, String entrada_folio, int entrada_folio_factura, Timestamp entrada_fecha, Proveedor proveedor, Usuario usuario, String estado, ArrayList<DetalleEntrada> detalles){
+    public Entradas(int entrada_id, String entrada_folio, int entrada_folio_factura, Date entrada_fecha, Proveedor proveedor, Usuario usuario, String estado, ArrayList<DetalleEntrada> detalles){
         this.entrada_id = entrada_id;
         this.entrada_folio = entrada_folio;
         this.entrada_folio_factura = entrada_folio_factura;
@@ -29,7 +30,7 @@ public class Entradas implements Serializable {
         this.detalles = detalles;
     }
 
-    public Entradas(String entrada_folio, int entrada_folio_factura, Timestamp entrada_fecha, Proveedor proveedor, Usuario usuario , String estado, ArrayList<DetalleEntrada> detalles){
+    public Entradas(String entrada_folio, int entrada_folio_factura, Date entrada_fecha, Proveedor proveedor, Usuario usuario , String estado, ArrayList<DetalleEntrada> detalles){
         this.entrada_folio = entrada_folio;
         this.entrada_fecha = entrada_fecha;
         this.entrada_folio_factura = entrada_folio_factura;
@@ -54,10 +55,10 @@ public class Entradas implements Serializable {
     public int getEntrada_folio_factura() {return entrada_folio_factura;}
     public void setEntrada_folio_factura(int entrada_folio_factura) {this.entrada_folio_factura = entrada_folio_factura; }
 
-    public Timestamp getEntrada_fecha() {
+    public Date getEntrada_fecha() {
         return entrada_fecha;
     }
-    public void setEntrada_fecha(Timestamp entrada_fecha) {
+    public void setEntrada_fecha(Date entrada_fecha) {
         this.entrada_fecha = entrada_fecha;
     }
 

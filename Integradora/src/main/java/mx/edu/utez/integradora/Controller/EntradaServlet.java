@@ -10,6 +10,7 @@ import mx.edu.utez.integradora.Dao.*;
 import mx.edu.utez.integradora.Model.*;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,8 @@ public class EntradaServlet extends HttpServlet {
         ProductoDao productoDao = new ProductoDao();
 
         try {
-            String folio = String.valueOf(Integer.parseInt(request.getParameter("folio")));
-            Timestamp fecha = Timestamp.valueOf(request.getParameter("fecha"));
+            String folio = request.getParameter("folio");
+            Date fecha = Date.valueOf(request.getParameter("fecha"));
             String empleado = request.getParameter("employees");
             String proveedor = request.getParameter("suppliers");
             int folioFact = Integer.parseInt(request.getParameter("fact"));
@@ -54,7 +55,7 @@ public class EntradaServlet extends HttpServlet {
         ArrayList<Producto> listProd = productoDao.getAll();
 
         String action = request.getParameter("action");
-        if ("modificar".equalsIgnoreCase(action)) {
+        if ("finalizar".equalsIgnoreCase(action)) {
             // Lógica para modificar los productos
             for (int i = 0; i < productNames.length; i++) {
                 for (Producto p : listProd) {
