@@ -95,7 +95,7 @@
                             <div class="col-sm">
                                 <label>PRECIO UNIT</label>
                                 <br>
-                                <input type="tel" class="form-control" placeholder="Precio 1" id="precio1">
+                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precio1">
                             </div>
                             <div class="col-sm">
                                 <label>--</label>

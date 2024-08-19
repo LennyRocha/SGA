@@ -33,11 +33,11 @@ public class ProveedorServlet extends HttpServlet {
                 session.setAttribute("proveedor", p);
                 if (pDao.deleteProveedor(p)){
                     req.getSession().setAttribute("mensaje2","Proveedor eliminado");
-                    System.out.println("<p style=\"color: red;\">Usuario Eliminado</p>");
+                    //System.out.println("<p style=\"color: red;\">Usuario Eliminado</p>");
                 } else {
                     //Mandar un mensaje de errror y regesar al formulario de registro
                     req.getSession().setAttribute("mensaje","No se pudo eliminar al proveedor");
-                    System.out.println("<p style=\"color: red;\">No se pudo, UnU, XD</p>");
+                    //System.out.println("<p style=\"color: red;\">No se pudo, UnU, XD</p>");
                 }
                 resp.sendRedirect(ruta);
             break;

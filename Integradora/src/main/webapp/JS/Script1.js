@@ -23,7 +23,7 @@ nuevoz.addEventListener("click", () => {
     const input = document.createElement("input");
     input.setAttribute("type", "text");
     input.setAttribute("name", "Producto" + i);
-    input.setAttribute("id", "Producto"+i);
+    input.setAttribute("id", "Producto" + i);
     input.setAttribute("placeholder", "Producto " + i);
     input.setAttribute("class", "form-control");
     input.setAttribute("required", "required");
@@ -34,7 +34,7 @@ nuevoz.addEventListener("click", () => {
     const input2 = document.createElement("input");
     input2.setAttribute("type", "number");
     input2.setAttribute("name", "Cantidad" + i);
-    input2.setAttribute("id", "Cantidad"+i);
+    input2.setAttribute("id", "Cantidad" + i);
     input2.setAttribute("placeholder", "Cantidad " + i);
     input2.setAttribute("class", "form-control");
     col2.appendChild(input2);
@@ -44,7 +44,7 @@ nuevoz.addEventListener("click", () => {
     const input3 = document.createElement("input");
     input3.setAttribute("type", "text");
     input3.setAttribute("name", "Precio" + i);
-    input3.setAttribute("id", "Precio"+i);
+    input3.setAttribute("id", "Precio" + i);
     input3.setAttribute("placeholder", "Precio " + i);
     input3.setAttribute("class", "form-control");
     col3.appendChild(input3);
@@ -54,7 +54,7 @@ nuevoz.addEventListener("click", () => {
     const input4 = document.createElement("input");
     input4.setAttribute("type", "text");
     input4.setAttribute("name", "Unidad" + i);
-    input4.setAttribute("id", "Unidad"+i);
+    input4.setAttribute("id", "Unidad" + i);
     input4.setAttribute("placeholder", "Unidad " + i);
     input4.setAttribute("class", "form-control");
     col4.appendChild(input4);
@@ -109,4 +109,8 @@ document.getElementById("fecha").setAttribute('min', today);
 
 const saveP = document.getElementById("producto");
 const watch = document.getElementById("watch");
+
+function validarNumero(input) {
+    input.value = input.value.replace(/[^0-9.]/g, '');
+}
 

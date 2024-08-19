@@ -42,8 +42,6 @@ public class ContraServlet extends HttpServlet
             StringBuilder htmlContent = new StringBuilder();
             if (dao.insertCod(rands,correo)){
                 Usuario u = dao.getEmail(correo);
-                System.out.println(u.getNombre_usuario());
-                System.out.println(u.getCorreo());
                 String name = u.getNombre_usuario();
                 htmlContent.append("<br>")
                         .append("<H1 style='color:#1D3557;'>HOLA ")
@@ -68,7 +66,6 @@ public class ContraServlet extends HttpServlet
                 sesion.setAttribute("codigo",rands);
                 sesion.setAttribute("name",name);
                 sesion.setAttribute("correo",correo);
-                System.out.println("Working Directory = " + System.getProperty("user.dir"));
             }
         }
         resp.sendRedirect(ruta);

@@ -97,7 +97,7 @@
                             <div class="col-sm">
                                 <label>PREC UNIT</label>
                                 <br>
-                                <input type="tel" class="form-control" placeholder="Precio 1" id="precio1">
+                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precio1">
                             </div>
                             <div class="col-sm">
                                 <label>U. MED</label>
@@ -110,7 +110,7 @@
                             <div class="col-sm">
                                 <label>PREC TOTAL</label>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Precio Total 1" id="precioT1">
+                                <input type="text" class="form-control" placeholder="Precio Total 1" id="precioT1" readonly>
                             </div>
                             <div class="col-sm">
                                 <label>--</label>

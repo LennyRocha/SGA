@@ -10,6 +10,32 @@ import java.io.IOException;
         //colocar aqui todo despues
         "/Inicio.jsp",
         "/InicioAlmacenista.jsp",
+        //Comentar, descomentar solo cuando ya esté
+        //Admin
+        /*"/sign_in",
+        "/delete",
+        "/revive",
+        "/ver",
+        "/gestionUsuario.jsp",
+        "/registrarUsuario.jsp",
+        "/verAlmacen.jsp",
+        //Almacenista
+        "/area",
+        "/entrada",
+        "/salida",
+        "/proveedor",
+        "/unidad",
+        "/Entrada1.jsp",
+        "/Salida2.jsp",
+        "/pendientes.jsp",
+        //Ambos
+        "/recuContra",
+        "/updateContra",
+        "/log_in",
+        "/Catalogo.jsp",
+        "/menuHist.jsp",
+        "/recuperaPass.jsp",
+        "/NuevaContra.jsp",*/
 })
 
 public class ActiveSessionFilter implements Filter {

@@ -119,3 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var today = new Date().toISOString().split('T')[0];
 document.getElementById("fecha").setAttribute('min', today);
+
+function validarNumero(input) {
+    input.value = input.value.replace(/[^0-9.]/g, '');
+}

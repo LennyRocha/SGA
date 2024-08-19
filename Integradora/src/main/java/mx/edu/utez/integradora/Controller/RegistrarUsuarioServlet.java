@@ -56,18 +56,18 @@ public class RegistrarUsuarioServlet extends HttpServlet
                     if (dao.insertUsuario(u)) {
                         //Mandar al usuario al inicio de sesión
                         req.getSession().setAttribute("mensaje2","Usuario registrado");
-                        System.out.println("<p style=\"color: red;\">Usuario Registrado</p>");
+                        //System.out.println("<p style=\"color: red;\">Usuario Registrado</p>");
                         ruta = req.getContextPath()+"/gestionUsuario.jsp?alert=success";
                     } else {
                         //Mandar un mensaje de errror y regesar al formulario de registro
                         req.getSession().setAttribute("mensaje","No se pudo registrar");
                         ruta = req.getContextPath()+"/registrarUsuario.jsp";
-                        System.out.println(nombre_user);
-                        System.out.println(contra1_user);
-                        System.out.println(correo_user);
-                        System.out.println(tipo_usuario);
-                        System.out.println(status_user);
-                        System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+                        //System.out.println(nombre_user);
+                        //System.out.println(contra1_user);
+                        //System.out.println(correo_user);
+                        //System.out.println(tipo_usuario);
+                        //System.out.println(status_user);
+                        //System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
                     }
                 }
         }else if (operacion.equals("actualizar")){
@@ -99,8 +99,4 @@ public class RegistrarUsuarioServlet extends HttpServlet
         }
         resp.sendRedirect(ruta);
     }
-    //configurar la clase para que sea servlet Ya
-    //manejar el metodo dePost para obtener la info del formulario de registro Ya
-    //usar el dao con el insert de una persona Ya?
-    //una vez registreado el usuario, redirigir al index Ya
 }

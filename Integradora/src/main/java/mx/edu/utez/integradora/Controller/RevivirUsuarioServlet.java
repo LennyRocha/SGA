@@ -31,7 +31,7 @@ public class RevivirUsuarioServlet extends HttpServlet
                     if (dao.reenable(u)){
                             dao.insertCorreo2(correo);
                             req.getSession().setAttribute("mensaje2","Usuario rehabilitado");
-                            System.out.println("<p style=\"color: red;\">Usuario Rehabilitado</p>");
+                            //System.out.println("<p style=\"color: red;\">Usuario Rehabilitado</p>");
                             ruta = req.getContextPath()+"/gestionUsuario.jsp";
                             //session.removeAttribute("usuario");
                             /*try {
@@ -48,7 +48,7 @@ public class RevivirUsuarioServlet extends HttpServlet
                             //Mandar un mensaje de errror y regesar al formulario de registro
                             req.getSession().setAttribute("mensaje","No se pudo rehabilitar el usuario");
                             ruta = req.getContextPath()+"/gestionUsuario.jsp";
-                            System.out.println("<p style=\"color: red;\">No se pudo, UnU, XD</p>");
+                            //System.out.println("<p style=\"color: red;\">No se pudo, UnU, XD</p>");
                             //session.removeAttribute("usuario");
                     }
             }

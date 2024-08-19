@@ -24,11 +24,11 @@ public class UpdateContraServlet extends HttpServlet
         String name = req.getParameter("nombre");
         String codigo = req.getParameter("codigo");
         String contra2 = req.getParameter("nuevaContra");
-        System.out.println("recibio:");
+        /*System.out.println("recibio:");
         System.out.println(correo);
         System.out.println(name);
         System.out.println(codigo);
-        System.out.println(contra2);
+        System.out.println(contra2);*/
         Usuario u = new Usuario();
         u.setCorreo(correo);
         u.setNombre_usuario(name);
@@ -47,7 +47,6 @@ public class UpdateContraServlet extends HttpServlet
                     .append("<center><a href=http://localhost:8080/Integradora_war_exploded/index.js")
                     .append("\" style=\"color:#E63946;text-decoration:underline;\">Volver</a></center>")
                     .append("<br>");
-            System.out.println(htmlContent);
             try {
                 GmailSender mail = new GmailSender();
                 mail.sendMail(correo,"Recuperación exitosa",

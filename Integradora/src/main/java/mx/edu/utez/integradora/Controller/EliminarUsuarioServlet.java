@@ -51,7 +51,7 @@ public class EliminarUsuarioServlet extends HttpServlet
                             //Mandar un mensaje de errror y regesar al formulario de registro
                             req.getSession().setAttribute("mensaje","No se pudo inhabilitar el usuario");
                             ruta = req.getContextPath()+"/gestionUsuario.jsp";
-                            System.out.println("<p style=\"color: red;\">No se pudo, UnU, XD</p>");
+                            //out.println("<p style=\"color: red;\">No se pudo, UnU, XD</p>");
                             //session.removeAttribute("usuario");
                     }
             }
