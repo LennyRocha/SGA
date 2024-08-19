@@ -31,7 +31,6 @@
 <body>
 <jsp:include page="/Templates/Header2.jsp" />
 <%
-    //Poner arriba más tarde
     HttpSession sesion = (HttpSession) request.getSession();
 
     EntradasDao eDao = new EntradasDao();
@@ -56,7 +55,7 @@
     <!--<input type="text" id="selectedBreadcrumbValue" value="" name="selector" readonly/>-->
     <br>
     <div class="overflow-auto" style="display: none" id="entradas">
-    <% if(ent.isEmpty()){%>
+        <% if(ent.isEmpty()){%>
         <h1 class="text-success">¡NO HAY ENTRADAS PENDIENTES!</h1>
         <%}else{
             for(Entradas e : ent) { %>
@@ -97,96 +96,13 @@
         <%}
         }%>
     </div>
-    <br>
-    <div class="register-card">
-        <div class="register-info">
-            <p>Folio: XXXXXXX</p>
-            <p>Última modificación: xx/xx/xxxx</p>
-        </div>
-        <button class="continue-button button-sm">Continuar registro</button>
-        <div class="dropdown">
-            <span class="options" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">&#8942;</span>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">BORRAR</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="register-card">
-        <div class="register-info">
-            <p>Folio: XXXXXXX</p>
-            <p>Última modificación: xx/xx/xxxx</p>
-        </div>
-        <button class="continue-button button-sm">Continuar registro</button>
-        <div class="dropdown">
-            <span class="options" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">&#8942;</span>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">BORRAR</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="register-card">
-        <div class="register-info">
-            <p>Folio: XXXXXXX</p>
-            <p>Última modificación: xx/xx/xxxx</p>
-        </div>
-        <button class="continue-button button-sm">Continuar registro</button>
-        <div class="dropdown">
-            <span class="options" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">&#8942;</span>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">BORRAR</a></li>
-            </ul>
-        </div>
-    </div>
-    <br>
 </main>
 <%
     sesion.removeAttribute("usuario");
     sesion.removeAttribute("mensaje");
     sesion.removeAttribute("mensaje2");
 %>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    });
-
-    const entradas = document.getElementById("entradas");
-    const salidas = document.getElementById("salidas");
-
-    function selectBreadcrumb(element) {
-        // Remove 'selected' class from all breadcrumb items
-        var breadcrumbs = document.querySelectorAll('.breadcrumb li');
-        breadcrumbs.forEach(function(breadcrumb) {
-            breadcrumb.classList.remove('selected');
-        });
-
-        // Add 'selected' class to the clicked breadcrumb item
-        element.parentElement.classList.add('selected');
-
-        // Get the value of the selected breadcrumb
-        var selectedValue = element.parentElement.getAttribute('data-value');
-        console.log("Selected breadcrumb value:", selectedValue);
-
-        // Perform different operations based on the selected value
-        // Example:
-        if (selectedValue === "1") {
-            console.log("Home selected");
-            entradas.style.display = "block";
-            salidas.style.display = "none";
-            // Perform operation for Entradas
-        } else if (selectedValue === "2") {
-            console.log("Library selected");
-            salidas.style.display = "block";
-            entradas.style.display = "none";
-            // Perform operation for Salidas
-        }
-
-        // Store the selected value in the hidden input field
-        document.getElementById('selectedBreadcrumbValue').value = selectedValue;
-    }
-</script>
+<script src="${pageContext.request.contextPath}/JS/pendientes.js"></script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src='${pageContext.request.contextPath}/JS/bootstrap.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

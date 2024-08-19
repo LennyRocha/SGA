@@ -350,6 +350,7 @@
     document.getElementById('salir').addEventListener('click', function() {
         Swal.fire({
             title: "¡Salir!",
+            titleColor: '#1D3557',
             text: "¿Deseas cerrar sesión?",
             icon: "warning",
             showCancelButton: true,
@@ -367,6 +368,7 @@
     document.getElementById('g').addEventListener('click', function() {
         Swal.fire({
             title: "¡Salir!",
+            titleColor: '#1D3557',
             text: "¿Deseas cerrar sesión?",
             icon: "warning",
             showCancelButton: true,
