@@ -137,7 +137,7 @@
                     <center>
                         <button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="enviar()">Finalizar</button>
                         <a type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="enviarSolicitud('guardar')">Guardar</a>
-                        <a type="button" id="cancelar" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp">Cancelar</a>
+                        <a type="button" id="cancelar" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp?alert=cancel">Cancelar</a>
                     </center>
                 </form>
             </div>

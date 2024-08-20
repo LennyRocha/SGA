@@ -62,7 +62,7 @@
             title: "¡Salir!",
             titleColor: '#1D3557',
             text: "¿Deseas cerrar sesión?",
-            icon: "warning",
+            icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#198754",
             cancelButtonColor: "#E63946",

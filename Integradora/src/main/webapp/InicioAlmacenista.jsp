@@ -64,7 +64,7 @@
             title: "¡Salir!",
             titleColor: '#1D3557',
             text: "¿Deseas cerrar sesión?",
-            icon: "warning",
+            icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#198754",
             cancelButtonColor: "#E63946",
@@ -76,6 +76,28 @@
             }
         });
     });
+
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split('&').forEach(param => {
+            const [key, value] = param.split('=');
+            params[key] = value;
+        });
+        return params;
+    }
+
+    const params = getQueryParams();
+
+    if (params.alert === 'cancel') {
+        Swal.fire({
+            title: '¡Cancelado!',
+            text: 'Entrada cancelada.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#4A4E69',
+            confirmButtonBorderColor: '#4A4E69',
+        });
+    }
 </script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>

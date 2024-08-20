@@ -114,6 +114,7 @@ function getQueryParams() {
 }
 
 const params = getQueryParams();
+
 if (params.alert === 'si') {
     Swal.fire({
         title: '¡Exito!',
@@ -161,12 +162,13 @@ if (params.alert === 'succes') {
 function mostrarCarga() {
     Swal.fire({
         title: 'Procesando...',
-        html: 'Por favor espera',
+        text: 'Por favor espera',
         allowOutsideClick: false,
+        timer: 5000, // La alerta se cerrará automáticamente después de 5 segundos
+        timerProgressBar: true,
         willOpen: () => {
             Swal.showLoading();
         },
-        timer: 5000 // La alerta se cerrará automáticamente después de 5 segundos
     });
 }
 
