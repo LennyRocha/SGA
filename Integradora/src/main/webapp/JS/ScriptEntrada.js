@@ -163,7 +163,7 @@ function mostrarCarga() {
     Swal.fire({
         title: 'Procesando...',
         text: 'Por favor espera',
-        allowOutsideClick: false,
+
         timer: 5000, // La alerta se cerrará automáticamente después de 5 segundos
         timerProgressBar: true,
         willOpen: () => {

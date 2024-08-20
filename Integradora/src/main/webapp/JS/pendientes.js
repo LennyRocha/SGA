@@ -62,3 +62,16 @@ if (params.alert === 'success') {
         confirmButtonBorderColor: '#4A4E69',
     });
 }
+
+
+function enviarFormulario(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    window.location.href="entrada";
+}
+
+function quitarFormulario(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    window.location.href="entrada";
+}
