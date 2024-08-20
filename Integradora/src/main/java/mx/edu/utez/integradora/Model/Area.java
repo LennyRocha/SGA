@@ -2,21 +2,21 @@ package mx.edu.utez.integradora.Model;
 
 import java.io.Serializable;
 
-public class Areas implements Serializable {
+public class Area implements Serializable {
 
     private int area_id;
     private String area_nombre;
     private char area_identidad;
 
-    public Areas() {}
+    public Area() {}
 
-    public Areas(int area_id, String area_nombre, char area_identidad) {
+    public Area(int area_id, String area_nombre, char area_identidad) {
         this.area_id = area_id;
         this.area_nombre = area_nombre;
         this.area_identidad = area_identidad;
     }
 
-    public Areas(String area_nombre, char area_identidad) {
+    public Area(String area_nombre, char area_identidad) {
         this.area_nombre = area_nombre;
         this.area_identidad = area_identidad;
     }

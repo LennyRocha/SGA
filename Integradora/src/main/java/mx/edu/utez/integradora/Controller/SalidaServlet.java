@@ -46,16 +46,15 @@ public class SalidaServlet extends HttpServlet {
             String empleado = request.getParameter("employees");
             System.out.println(empleado);
 
-
             Usuario usuario = usuarioDao.getOne(empleado);
-            Area AreaObj = areaDao.getOne(areas);
+            Area AreaObj = areaDao.getOne2(area);
 
             salida.setSalida_folio(folio);
+            salida.setAreas(AreaObj);
             salida.setSalida_fecha(fecha);
             salida.setUsuarios(usuario);
-            salida.setArea(area);
-            salida.
-                    salida.setEstado("exito");
+            salida.setSalida_fecha(fecha);
+            salida.setSalida_estado("exito");
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }

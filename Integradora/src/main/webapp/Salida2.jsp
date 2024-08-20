@@ -1,8 +1,9 @@
 <%@ page import="mx.edu.utez.integradora.Model.Usuario" %>
 <%@ page import="mx.edu.utez.integradora.Dao.UsuarioDao" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="mx.edu.utez.integradora.Model.Areas" %>
+<%@ page import="mx.edu.utez.integradora.Model.Area" %>
 <%@ page import="mx.edu.utez.integradora.Dao.AreaDao" %>
+<%@ page import="mx.edu.utez.integradora.Model.Area" %>
 <%--
   Created by IntelliJ IDEA.
   User: Lenny
@@ -36,7 +37,7 @@
     UsuarioDao dao = new UsuarioDao();
     AreaDao aDao = new AreaDao();
     ArrayList<Usuario> list = dao.getSome();
-    ArrayList<Areas> listA = aDao.getAll();
+    ArrayList<Area> listA = aDao.getAll();
     HttpSession sesion = (HttpSession) request.getSession();
     String name = (String) sesion.getAttribute("name");
 %>
@@ -60,18 +61,18 @@
                               <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addArea">+</button>
                             </span>
                             <br>
-                            <select class="form-select form-control" name="types" id="areas">
+                            <select class="form-select form-control" name="types" id="area" name="area">
                                 <option value="" disabled selected>Selecciona un area</option>
-                                <% for(Areas a : listA){ %>
+                                <% for(Area a : listA){ %>
                                 <option value="<%=a.getArea_identidad()%>"><%=a.getArea_nombre()%></option>
                                 <% } %>
                             </select>
                         </div>
                         <div class="col">
                             <label>Fecha:*</label>
-                            <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual">
+                            <input type="date" class="form-control" id="fecha" name="fecha" aria-placeholder="Fecha actual">
                             <label>Empleado:*</label>
-                            <input type="text" class="form-control" id="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;">
+                            <input type="text" class="form-control" id="empleado" name="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;">
                         </div>
                     </div>
                 <br>

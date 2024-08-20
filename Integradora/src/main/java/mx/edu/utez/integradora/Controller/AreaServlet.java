@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.integradora.Dao.AreaDao;
-import mx.edu.utez.integradora.Model.Areas;
+import mx.edu.utez.integradora.Model.Area;
 
 import java.io.IOException;
 
@@ -23,12 +23,12 @@ public class AreaServlet extends HttpServlet{
         switch (operacion){
             case "get":
                 int areaId = Integer.parseInt(req.getParameter("id_area"));
-                Areas as = asDao.getOne(areaId);
+                Area as = asDao.getOne(areaId);
                 session.setAttribute("area", as);
                 resp.sendRedirect(ruta);
                 break;
             case "delete":
-                Areas asa = new Areas();
+                Area asa = new Area();
                 asa.setArea_id(Integer.parseInt(req.getParameter("id_area")));
                 session.setAttribute("area", asa);
                 if (asDao.deleteArea(asa)){
@@ -48,7 +48,7 @@ public class AreaServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String operacion = req.getParameter("operacion");
         String ruta = req.getContextPath()+"/registrarEntrada.jsp";
-        Areas as = new Areas();
+        Area as = new Area();
         AreaDao asDao = new AreaDao();
         switch (operacion){
             case "add":

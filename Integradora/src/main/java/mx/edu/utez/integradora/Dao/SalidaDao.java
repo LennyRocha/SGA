@@ -31,7 +31,7 @@ public class SalidaDao {
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
-                Areas area = new Areas();
+                Area area = new Area();
                 area.setArea_id(rs.getInt("area_id"));
                 area.setArea_nombre(rs.getString("area_nombre"));
                 area.setArea_identidad(rs.getString("area_identidad"));
@@ -78,7 +78,7 @@ public class SalidaDao {
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
-                Areas area = new Areas();
+                Area area = new Area();
                 area.setArea_id(rs.getInt("area_id"));
                 area.setArea_nombre(rs.getString("area_nombre"));
                 area.setArea_identidad(rs.getString("area_identidad"));
@@ -123,7 +123,7 @@ public class SalidaDao {
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
-                Areas area = new Areas();
+                Area area = new Area();
                 area.setArea_id(rs.getInt("area_id"));
                 area.setArea_nombre(rs.getString("area_nombre"));
                 area.setArea_identidad(rs.getString("area_identidad"));
@@ -170,7 +170,7 @@ public class SalidaDao {
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
-                Areas area = new Areas();
+                Area area = new Area();
                 area.setArea_id(rs.getInt("area_id"));
                 area.setArea_nombre(rs.getString("area_nombre"));
                 area.setArea_identidad(rs.getString("area_identidad"));
@@ -218,7 +218,7 @@ public class SalidaDao {
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
-                Areas area = new Areas();
+                Area area = new Area();
                 area.setArea_id(rs.getInt("area_id"));
                 area.setArea_nombre(rs.getString("area_nombre"));
                 area.setArea_identidad(rs.getString("area_identidad"));
