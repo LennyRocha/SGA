@@ -1,5 +1,5 @@
-const nuevosz = document.getElementById("nuevosz");
-const nuevoz = document.getElementById("nuevoz");
+const nuevos = document.getElementById("nuevos");
+const nuevo = document.getElementById("nuevo");
 const save = document.getElementById("save");
 
 let i = 2;
