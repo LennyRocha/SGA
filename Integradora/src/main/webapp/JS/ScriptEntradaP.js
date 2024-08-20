@@ -22,7 +22,7 @@
               col1.setAttribute("class", "col-sm");
               const input = document.createElement("input");
               input.setAttribute("type", "text");
-              input.setAttribute("name", "Producto" + i);
+              input.setAttribute("name", "Producto[]");
               input.setAttribute("id", "Producto"+i);
               input.setAttribute("placeholder", "Producto " + i);
               input.setAttribute("class", "form-control");
@@ -33,7 +33,7 @@
               col2.setAttribute("class", "col-sm");
               const input2 = document.createElement("input");
               input2.setAttribute("type", "number");
-              input2.setAttribute("name", "Cantidad" + i);
+              input2.setAttribute("name", "Cantidad[]");
               input2.setAttribute("id", "Cantidad"+i);
               input2.setAttribute("placeholder", "Cantidad " + i);
               input2.setAttribute("class", "form-control");
@@ -43,21 +43,11 @@
               col3.setAttribute("class", "col-sm");
               const input3 = document.createElement("input");
               input3.setAttribute("type", "text");
-              input3.setAttribute("name", "Precio" + i);
+              input3.setAttribute("name", "Precio[]");
               input3.setAttribute("id", "Precio"+i);
               input3.setAttribute("placeholder", "Precio " + i);
               input3.setAttribute("class", "form-control");
               col3.appendChild(input3);
-
-              const col4 = document.createElement("div");
-              col4.setAttribute("class", "col");
-              const input4 = document.createElement("input");
-              input4.setAttribute("type", "text");
-              input4.setAttribute("name", "Unidad" + i);
-              input4.setAttribute("id", "Unidad"+i);
-              input4.setAttribute("placeholder", "Unidad " + i);
-              input4.setAttribute("class", "form-control");
-              col4.appendChild(input4);
 
               const col5 = document.createElement("div");
               col5.setAttribute("class", "col");
@@ -86,10 +76,8 @@
               wrappers.appendChild(br);
 
               nuevos.appendChild(wrappers);
-      
-              i++;
 
-              document.getElementById("contador").innerHTML = i;
+              i++;
             });
 
             function borrar(element) {
@@ -107,3 +95,72 @@
 
             var today = new Date().toISOString().split('T')[0];
             document.getElementById("fecha").setAttribute('min', today);
+
+            function postThis() {
+              document.getElementById("action").value = "finalizar";
+              console.log(document.getElementById("action").value);
+              document.getElementById("entrada").submit();
+            }
+
+            function postThus() {
+              document.getElementById("action").value = "guardar";
+              console.log(document.getElementById("action").value);
+              document.getElementById("entrada").submit();
+            }
+
+            function getQueryParams() {
+              const params = {};
+              window.location.search.substring(1).split('&').forEach(param => {
+                const [key, value] = param.split('=');
+                params[key] = value;
+              });
+              return params;
+            }
+
+            const params = getQueryParams();
+            if (params.alert === 'si') {
+              Swal.fire({
+                title: '¡Exito!',
+                text: 'Entrada exitosa.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#4A4E69',
+                confirmButtonBorderColor: '#4A4E69',
+              });
+            }
+
+            const params = getQueryParams();
+            if (params.alert === 'chi') {
+              Swal.fire({
+                title: '¡Exito!',
+                text: 'Entrada guardada correctamente.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#4A4E69',
+                confirmButtonBorderColor: '#4A4E69',
+              });
+            }
+
+            const params = getQueryParams();
+            if (params.alert === 'succesfull') {
+              Swal.fire({
+                title: '¡Exito!',
+                text: 'Entrada completada.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#4A4E69',
+                confirmButtonBorderColor: '#4A4E69',
+              });
+            }
+
+            const params = getQueryParams();
+            if (params.alert === 'succes') {
+              Swal.fire({
+                title: '¡Exito!',
+                text: 'Entrada eliminada.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#4A4E69',
+                confirmButtonBorderColor: '#4A4E69',
+              });
+            }

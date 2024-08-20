@@ -57,7 +57,7 @@
         int count = 0;
     %>
     <div class="container">
-        <div class="overflow-scroll">
+        <div class="overflow-auto">
         <div class="row">
             <% for(Producto p : lista) { %>
             <div class="col-sm-6">
@@ -90,7 +90,7 @@
 <br>
 <footer class="footer mt-auto py-3 text-white-50 bg-gradient" style="background-color: #1D3557;">
     <div class="container">
-        <span class="text-muted">Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</span>
+        <span class="text-muted">Patrocinado por: <a href="https://utez.edu.mx/" class="text-white">© UTEZ</a></span>
     </div>
 </footer>
 <script>

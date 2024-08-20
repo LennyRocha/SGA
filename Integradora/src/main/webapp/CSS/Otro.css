@@ -14,7 +14,12 @@ input:required{
 }
 
 input:read-only{
-    color: #E63946;
+    color: #CED4DA;;
+}
+
+#folio{
+    border-color: #CED4DA;
+    color: #75778C;
 }
 
 #addProv {

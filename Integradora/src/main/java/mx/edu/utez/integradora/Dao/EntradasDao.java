@@ -187,7 +187,7 @@ public class EntradasDao {
         String query = "SELECT e.*, p.*, u.* " +
                 "FROM Entrada e " +
                 "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
-                "JOIN Usuarios u ON e.entrada_usuario_id = u.id where e.entrada_estado = 'exitoso'";
+                "JOIN Usuarios u ON e.entrada_usuario_id = u.id where e.entrada_estado = 'exito'";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -275,7 +275,7 @@ public class EntradasDao {
 
     public boolean insertEntrada(Entradas entrada) {
         boolean respuesta = false;
-        String query = "INSERT INTO Entrada (entrada_folio, entrada_fecha, entrada_proveedor_id, entrada_usuario_id, entrada_usuario_id) " +
+        String query = "INSERT INTO Entrada (entrada_folio, entrada_fecha, entrada_proveedor_id, entrada_usuario_id, entrada_estado) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -295,14 +295,14 @@ public class EntradasDao {
                     entrada.setEntrada_id(generatedKeys.getInt(1));
 
                     // Insertar los detalles asociados
-                    DetalleEntradaDao detalleDao = new DetalleEntradaDao();
+                    /*DetalleEntradaDao detalleDao = new DetalleEntradaDao();
                     for (DetalleEntrada detalle : entrada.getDetalles()) {
                         detalle.setEntradas(entrada); // Asignar la entrada a cada detalle
                         if (!detalleDao.insertDetalleEntrada(detalle)) {
                             con.rollback();
                             return false;
                         }
-                    }
+                    }*/
                 }
                 con.commit();
                 respuesta = true;

@@ -36,6 +36,9 @@
     String mensaje2 = (String) sesion.getAttribute("mensaje2");
     String error = (String) sesion.getAttribute("error");
 
+    int uno = 1;
+    int dos = 2;
+
     EntradasDao eDao = new EntradasDao();
     ArrayList<Entradas> listE = eDao.getAll();
     UsuarioDao dao = new UsuarioDao();
@@ -72,7 +75,7 @@
                     <div class="row">
                         <div class="col">
                             <label>Folio:*</label>
-                            <input type="text" class="form-control" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=folio%>" name="folio">
+                            <input type="text" class="form-control" id="folio" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=folio%>" name="folio">
                             <label>Fecha:*</label>
                             <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual" name="fecha" pattern="yyyy-MM-dd" required>
                             <label>Empleado:*</label>
@@ -107,17 +110,17 @@
                             <div class="col-sm">
                                 <label>PRODUCTO</label>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required maxlength="50" name="producto" required>
+                                <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required maxlength="50" name="producto[]" required>
                             </div>
                             <div class="col-sm">
                                 <label>CANTIDAD</label>
                                 <br>
-                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1" min="0" name="Cantidad" required>
+                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1" min="0" name="Cantidad[]" required>
                             </div>
                             <div class="col-sm">
                                 <label>PRECIO UNIT</label>
                                 <br>
-                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precio1" name="Precio" required>
+                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precio1" name="Precio[]" required>
                             </div>
                             <div class="col-sm">
                                 <label>--</label>
@@ -134,9 +137,9 @@
                     <div id="nuevosz" class="container-fluid"></div>
                     <center>
                         <input type="hidden" value="" name="action">
-                        <button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="location.href='entrada?action=finalizar'">Finalizar</button>
-                        <button type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="location.href='entrada?action=guardar'">Guardar</button>
-                        <button type="button" id="cancelar" class="btn btn-outline-warning btn-lg" onclick="location.href='InicioAlmacenista.jsp'">Cancelar</button>
+                        <button class="btn btn-outline-primary btn-lg mr-2" id="save" type="submit">Finalizar</button>
+                        <a type="button" id="guardar" class="btn btn-outline-success btn-lg" href="entrada?action=guardar">Guardar</a>
+                        <a type="button" id="cancelar" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp">Cancelar</a>
                     </center>
                 </form>
             </div>
@@ -181,7 +184,6 @@
     </div>
 </div>
 <br>
-<input type="hidden" value="" id="contador"/>
 <script>
     Swal.fire({
         title: '!Exito!',
