@@ -21,6 +21,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Registros pendientes</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/bootstrap.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/pendientes.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/StyleHeader.css">
@@ -93,7 +94,7 @@
         <%}
         }%>
     </div></center>
-    <div class="align-content-center" style="display: none; width: 100%;" id="salidas">
+    <center><div class="align-content-center" style="display: none; width: 100%;" id="salidas">
         <% if(sal.isEmpty()){%>
         <center><h1 class="text-success">¡NO HAY SALIDAS PENDIENTES!</h1></center>
         <%}else{
@@ -114,7 +115,7 @@
         </div>
         <%}
         }%>
-    </div>
+    </div></center><!---->
     <br>
     <%
         if(mensaje2!=null){%>
@@ -124,6 +125,16 @@
             <%=mensaje2%>
         </div>
     </div>
+    <script>
+        Swal.fire({
+            title: '¡Exito!',
+            text: 'Pendiente eliminado, huevon.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#4A4E69',
+            confirmButtonBorderColor: '#4A4E69',
+        });
+    </script>
     <br>
     <% } %>
     <%if(mensaje!=null){ %>

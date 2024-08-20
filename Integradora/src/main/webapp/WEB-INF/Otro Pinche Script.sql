@@ -48,6 +48,8 @@ CREATE TABLE IF NOT EXISTS Entrada (
     CONSTRAINT entrada_usuario_fk FOREIGN KEY (entrada_usuario_id) REFERENCES Usuarios (id)
 );
 
+ALTER TABLE Entrada ADD COLUMN entrada_folio_factura INT NOT NULL;
+
 -- Crear la tabla de Detalle_Entrada
 CREATE TABLE IF NOT EXISTS Detalle_Entrada (
     detalle_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

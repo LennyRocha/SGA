@@ -58,6 +58,9 @@
     Entradas ent = (Entradas) sesion.getAttribute("ent");
     ArrayList<Proveedor> listP = pDao.getAll();
 %>
+<span data-bs-toggle="tooltip" data-bs-placement="top" title="Regresar">
+    <button id="back" onclick="location.href='InicioAlmacenista.jsp'" class="btn btn-outline-primary btn-lg" style="margin-left: 10px"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
+</span>
 <main>
     <div class="container-fluid">
         <div class="col"></div>
@@ -92,7 +95,7 @@
                                 <% } %>
                             </select>
                             <label>Folio de factura:*</label>
-                            <input type="text" class="form-control" maxlength="32" placeholder="Ingresa el folio de factura" name="fact" required>
+                            <input type="text" class="form-control" maxlength="32" placeholder="Ingresa el folio de factura" name="fact" required max="10">
                         </div>
                     </div>
                 <br>
@@ -135,7 +138,7 @@
                     <div id="nuevosz" class="container-fluid"></div>
                     <input type="hidden" value="" name="action" id="validator">
                     <center>
-                        <button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="enviar()">Finalizar</button>
+                        <a class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="enviar('registrar')">Finalizar</a>
                         <a type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="enviarSolicitud('guardar')">Guardar</a>
                         <a type="button" id="cancelar" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp?alert=cancel">Cancelar</a>
                     </center>
@@ -227,5 +230,6 @@
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/ScriptEntrada.js"></script>
 <script src='${pageContext.request.contextPath}/JS/bootstrap.js'></script>
+<script src="${pageContext.request.contextPath}/JS/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -178,7 +178,8 @@ function enviarSolicitud(action) {
     document.getElementById('entrada').submit();
 }
 
-function enviar() {
+function enviar(action) {
     mostrarCarga();
+    document.getElementById('validator').value = action;
     document.getElementById('entrada').submit();
 }

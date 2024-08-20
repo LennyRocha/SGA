@@ -9,7 +9,7 @@
 <br>
 <footer class="footer mt-auto py-3 text-white-50 bg-gradient" style="background-color: #1D3557;">
     <div class="container">
-        <span class="text-muted">Patrocinado por: <a href="https://utez.edu.mx/" class="text-white">© UTEZ</a></span>
+        <span class="text-white">Patrocinado por: <strong><a href="http://www.utez.edu.mx/" class="text-white">© UTEZ</a></strong></span>
     </div>
 </footer>
 

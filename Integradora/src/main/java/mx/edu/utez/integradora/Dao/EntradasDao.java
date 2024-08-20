@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class EntradasDao {
 
+    private static Savepoint A = null;
+
     public Entradas getOne(int entrada_id) {
         Entradas entrada = new Entradas();
         String query = "SELECT e.*, p.*, u.* " +
@@ -28,6 +30,7 @@ public class EntradasDao {
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
                 entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getDate("entrada_fecha"));
+                entrada.setEntrada_folio_factura(rs.getInt("entrada_folio_factura"));
 
                 // Obtener información del proveedor
                 Proveedor proveedor = new Proveedor();
@@ -71,6 +74,7 @@ public class EntradasDao {
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
                 entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getDate("entrada_fecha"));
+                entrada.setEntrada_folio_factura(rs.getInt("entrada_folio_factura"));
 
                 // Obtener información del proveedor
                 Proveedor proveedor = new Proveedor();
@@ -110,6 +114,7 @@ public class EntradasDao {
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
                 entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getDate("entrada_fecha"));
+                entrada.setEntrada_folio_factura(rs.getInt("entrada_folio_factura"));
 
                 // Obtener información del proveedor
                 Proveedor proveedor = new Proveedor();
@@ -153,6 +158,7 @@ public class EntradasDao {
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
                 entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getDate("entrada_fecha"));
+                entrada.setEntrada_folio_factura(rs.getInt("entrada_folio_factura"));
 
                 // Obtener información del proveedor
                 Proveedor proveedor = new Proveedor();
@@ -198,6 +204,7 @@ public class EntradasDao {
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
                 entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getDate("entrada_fecha"));
+                entrada.setEntrada_folio_factura(rs.getInt("entrada_folio_factura"));
 
                 // Obtener información del proveedor
                 Proveedor proveedor = new Proveedor();
@@ -244,6 +251,7 @@ public class EntradasDao {
                 entrada.setEntrada_id(rs.getInt("entrada_id"));
                 entrada.setEntrada_folio(rs.getString("entrada_folio"));
                 entrada.setEntrada_fecha(rs.getDate("entrada_fecha"));
+                entrada.setEntrada_folio_factura(rs.getInt("entrada_folio_factura"));
 
                 // Obtener información del proveedor
                 Proveedor proveedor = new Proveedor();
@@ -275,8 +283,8 @@ public class EntradasDao {
 
     public boolean insertEntrada(Entradas entrada) {
         boolean respuesta = false;
-        String query = "INSERT INTO Entrada (entrada_folio, entrada_fecha, entrada_proveedor_id, entrada_usuario_id, entrada_estado) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Entrada (entrada_folio, entrada_fecha, entrada_proveedor_id, entrada_usuario_id, entrada_estado, entrada_folio_factura) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             con.setAutoCommit(false);
@@ -288,6 +296,7 @@ public class EntradasDao {
             ps.setInt(3, entrada.getProveedor().getProveedor_id());
             ps.setInt(4, entrada.getUsuario().getId());
             ps.setString(5, entrada.getEstado());
+            ps.setInt(6, entrada.getEntrada_folio_factura());
 
             if (ps.executeUpdate() > 0) {
                 ResultSet generatedKeys = ps.getGeneratedKeys();
@@ -318,7 +327,7 @@ public class EntradasDao {
 
     public boolean updateEntrada(Entradas entrada) {
         boolean respuesta = false;
-        String query = "UPDATE Entrada SET entrada_folio = ?, entrada_fecha = ?, entrada_proveedor_id = ?, entrada_usuario_id = ?, entrada_estado = ? WHERE entrada_id = ?";
+        String query = "UPDATE Entrada SET entrada_folio = ?, entrada_fecha = ?, entrada_proveedor_id = ?, entrada_usuario_id = ?, entrada_estado = ?, entrada_folio_factura = ? WHERE entrada_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             con.setAutoCommit(false);
@@ -330,7 +339,8 @@ public class EntradasDao {
             ps.setInt(3, entrada.getProveedor().getProveedor_id());
             ps.setInt(4, entrada.getUsuario().getId());
             ps.setString(5, entrada.getEstado());
-            ps.setInt(6, entrada.getEntrada_id());
+            ps.setInt(6, entrada.getEntrada_folio_factura());
+            ps.setInt(7, entrada.getEntrada_id());
 
             if (ps.executeUpdate() > 0) {
                 // Actualizar los detalles asociados
@@ -356,27 +366,27 @@ public class EntradasDao {
 
     public boolean deleteEntrada(int entrada_id) {
         boolean respuesta = false;
-        String query = "DELETE FROM Entrada WHERE entrada_id = ?";
+        String queryDetalle = "DELETE FROM Detalle_entrada WHERE entrada_id = ?";
+        String queryEntrada = "DELETE FROM Entrada WHERE entrada_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             con.setAutoCommit(false);
 
-            // Eliminar la entrada
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, entrada_id);
-
-            if (ps.executeUpdate() > 0) {
-                con.commit();
-                respuesta = true;
-            } else {
-                con.rollback();
+            // Eliminar los detalles asociados primero
+            try (PreparedStatement psDetalle = con.prepareStatement(queryDetalle)) {
+                psDetalle.setInt(1, entrada_id);
+                psDetalle.executeUpdate();
             }
 
-            // Eliminar los detalles asociados
-            DetalleEntradaDao detalleDao = new DetalleEntradaDao();
-            if (!detalleDao.deleteByEntradaId(entrada_id)) {
-                con.rollback();
-                return false;
+            // Luego eliminar la entrada
+            try (PreparedStatement psEntrada = con.prepareStatement(queryEntrada)) {
+                psEntrada.setInt(1, entrada_id);
+                if (psEntrada.executeUpdate() > 0) {
+                    con.commit();
+                    respuesta = true;
+                } else {
+                    con.rollback();
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

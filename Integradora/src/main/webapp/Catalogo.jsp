@@ -46,7 +46,9 @@
     <button id="back" onclick="location.href='<%=ruta%>'" class="btn btn-outline-primary btn-lg" style="margin-left: 10px"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
 </span>
 <div class="container-sm" style="max-width: 960px">
-    <center><h1 id="tituloLogin">CATÁLOGO</h1></center>
+    <div class="container-sm">
+        <center><h1 style="letter-spacing: 4.4em;">CATÁLOGO DE PRODUCTOS</h1></center>
+    </div>
     <br>
     <%
         String mensaje = (String) sesion.getAttribute("mensaje");
@@ -90,7 +92,7 @@
 <br>
 <footer class="footer mt-auto py-3 text-white-50 bg-gradient" style="background-color: #1D3557;">
     <div class="container">
-        <span class="text-muted">Patrocinado por: <a href="https://utez.edu.mx/" class="text-white">© UTEZ</a></span>
+        <span class="text-white">Patrocinado por: <strong><a href="http://www.utez.edu.mx/" class="text-white">© UTEZ</a></strong></span>
     </div>
 </footer>
 <script>
