@@ -32,6 +32,7 @@ public class EntradaServlet extends HttpServlet {
         ProductoDao productoDao = new ProductoDao();
         DetalleEntradaDao deDao = new DetalleEntradaDao();
         DetalleEntrada entradaDetalle = new DetalleEntrada();
+        Producto producto = new Producto();
 
         String ruta ="/Entrada1.jsp";
         String action = request.getParameter("action");
@@ -98,9 +99,15 @@ public class EntradaServlet extends HttpServlet {
             entradaDetalle.setProductos(pr);
             entradaDetalle.setValor_total(sumAll);
             entradList.add(entradaDetalle);
-            entrada.setDetalles(entradList);
         } else {
             System.out.println("No se recibieron productos.");
+        }
+        entrada.setDetalles(entradList);
+
+        if(entrada.getDetalles() != null) {
+            System.out.println("Arraylist lleno");
+        }else{
+            System.out.println("Arraylist vacio");
         }
 
         //if (Objects.equals(action, "finalizar")){
@@ -110,9 +117,6 @@ public class EntradaServlet extends HttpServlet {
                 boolean productoEncontrado = false;
 
                 for (Producto p : listProd) {
-                    System.out.println("producto: " + p.getProducto_nombre());
-                    System.out.println("productNames: " + productNames[i]);
-
                     if (p.getProducto_nombre().equals(productNames[i])) {
                         p.setProducto_cantidad(p.getProducto_cantidad() + Integer.parseInt(productQuantities[i]));
                         if (productoDao.anadirProducto(p.getProducto_nombre(), p.getProducto_cantidad())) {
@@ -138,11 +142,71 @@ public class EntradaServlet extends HttpServlet {
                     }
                 }
             }
-            session.setAttribute("mensaje2", "Entrada exitosamente");
+            session.setAttribute("mensaje2", "Entrada guardada exitosamente");
             ruta = "/Entrada1.jsp?alert=si";
         }else{
             System.out.println("No se insertó");
             session.setAttribute("mensaje", "No se puede insertar la entrada");
+        }
+
+        if (Objects.equals(action, "guardar")) {
+            int entradaNumero = 0;
+
+            try {
+                String folio = request.getParameter("folio");
+                System.out.println(folio);
+                String fecha = request.getParameter("fecha");
+                System.out.println(fecha);
+                String empleado = request.getParameter("employees");
+                System.out.println(empleado);
+                String proveedor = request.getParameter("suppliers");
+                System.out.println(proveedor);
+                int folioFact = Integer.parseInt(request.getParameter("fact"));
+                System.out.println(folioFact);
+                entradaNumero = folio.charAt(2);
+
+                Usuario usuario = usuarioDao.getOne(empleado);
+                Proveedor proveedorObj = proveedorDao.getOne(proveedor);
+
+                entrada.setEntrada_folio(folio);
+                entrada.setEntrada_fecha(Date.valueOf(fecha));
+                entrada.setUsuario(usuario);
+                entrada.setProveedor(proveedorObj);
+                entrada.setEntrada_folio_factura(folioFact);
+                entrada.setEstado("pendiente");
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+
+            if(entradasDao.insertEntrada(entrada)){
+                for (int i = 1; i < Objects.requireNonNull(productNames).length; i++) {
+
+                    producto.setProducto_nombre(productNames[i]);
+                    producto.setProducto_precio(Double.parseDouble(productPrices[i]));
+                    producto.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
+
+                    productList.add(producto);
+                }
+                System.out.println(action);
+                session.setAttribute("mensaje2", "Entrada exitosamente guardada");
+                session.setAttribute("entradaNumero", entradaNumero);
+                session.setAttribute("listaPend"+entradaNumero, productList);
+
+                ruta = "/Entrada1.jsp?alert=chi";
+                entradaNumero ++;
+            }else{
+                session.setAttribute("mensaje", "No se puede guardar la entrada");
+            }
+        }
+
+        if(Objects.equals(action, "terminar")){
+            session.setAttribute(action,"terminar");
+            response.sendRedirect("entrada");
+        }
+
+        if(Objects.equals(action, "quitar")){
+            session.setAttribute(action,"quitar");
+            response.sendRedirect("entrada");
         }
             System.out.println(action);
         //}
@@ -157,20 +221,26 @@ public class EntradaServlet extends HttpServlet {
         HttpSession session = req.getSession();
         EntradasDao eDao = new EntradasDao();
         String ruta = "/Entrada1.jsp";
-        String action = req.getParameter("action");
+        String action1 = (String) session.getAttribute("action1");
+        System.out.println("La accion es: "+action1);
+        String action2 = (String) session.getAttribute("action2");
+        System.out.println("La accion es: "+action2);
         int entradaNumero = 0;
+        Entradas entrada = new Entradas();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        ProveedorDao proveedorDao = new ProveedorDao();
+        EntradasDao entradasDao = new EntradasDao();
+        ProductoDao productoDao = new ProductoDao();
+        DetalleEntradaDao deDao = new DetalleEntradaDao();
+        DetalleEntrada entradaDetalle = new DetalleEntrada();
+        Producto producto = new Producto();
 
+        /*
         if (Objects.equals(action, "guardar")) {
-            Entradas entrada = new Entradas();
-            UsuarioDao usuarioDao = new UsuarioDao();
-            ProveedorDao proveedorDao = new ProveedorDao();
-            EntradasDao entradasDao = new EntradasDao();
-            ProductoDao productoDao = new ProductoDao();
-
             try {
                 String folio = req.getParameter("folio");
                 System.out.println(folio);
-                Date fecha = Date.valueOf(req.getParameter("fecha"));
+                String fecha = req.getParameter("fecha");
                 System.out.println(fecha);
                 String empleado = req.getParameter("employees");
                 System.out.println(empleado);
@@ -184,7 +254,7 @@ public class EntradaServlet extends HttpServlet {
                 Proveedor proveedorObj = proveedorDao.getOne(proveedor);
 
                 entrada.setEntrada_folio(folio);
-                entrada.setEntrada_fecha(fecha);
+                entrada.setEntrada_fecha(Date.valueOf(fecha));
                 entrada.setUsuario(usuario);
                 entrada.setProveedor(proveedorObj);
                 entrada.setEntrada_folio_factura(folioFact);
@@ -193,68 +263,57 @@ public class EntradaServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-            String nombre1 = req.getParameter("producto");
-            double precio = Double.parseDouble(req.getParameter("Precio"));
-            int cantidad = Integer.parseInt(req.getParameter("Cantidad"));
+            String[] productNames = req.getParameterValues("producto[]");
+            String[] productPrices = req.getParameterValues("Precio[]");
+            String[] productQuantities = req.getParameterValues("Cantidad[]");
 
-            String[] productNames = new String[cantidad];
-            Double[] productPrices = new Double[cantidad];
-            int[] productQuantities = new int[cantidad];
-
-            List<Producto> productList = new ArrayList<>();
+            ArrayList<Producto> productList = new ArrayList<>();
+            ArrayList<DetalleEntrada> entradList = new ArrayList<>();
             ArrayList<Producto> listProd = productoDao.getAll();
-            Producto prod = new Producto();
-
-            productNames[0] = nombre1;
-            productPrices[0] = precio;
-            productQuantities[0] = cantidad;
-
-            prod.setProducto_nombre(productNames[0]);
-            prod.setProducto_precio(productPrices[0]);
-            prod.setProducto_cantidad(productQuantities[0]);
 
             if(entradasDao.insertEntrada(entrada)){
-                for (int i = 1; i <= cantidad; i++) {
+                for (int i = 1; i < Objects.requireNonNull(productNames).length; i++) {
 
-                    productNames[i] = req.getParameter("producto" + i);
-                    productPrices[i] = Double.valueOf(req.getParameter("Precio" + i));
-                    productQuantities[i] = Integer.parseInt(req.getParameter("Cantidad" + i));
+                    producto.setProducto_nombre(productNames[i]);
+                    producto.setProducto_precio(Double.parseDouble(productPrices[i]));
+                    producto.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
 
-                    prod.setProducto_nombre(productNames[i]);
-                    prod.setProducto_precio(productPrices[i]);
-                    prod.setProducto_cantidad(productQuantities[i]);
-
-                    productList.add(prod);
+                    productList.add(producto);
                 }
                 System.out.println(action);
                 session.setAttribute("mensaje2", "Entrada exitosamente guardada");
                 session.setAttribute("entradaNumero", entradaNumero);
                 session.setAttribute("listaPend"+entradaNumero, productList);
 
-                ruta = "/entrada1.jsp?alert=chi";
+                ruta = "/Entrada1.jsp?alert=chi";
                 entradaNumero ++;
             }else{
                 session.setAttribute("mensaje", "No se puede guardar la entrada");
             }
             resp.sendRedirect(req.getContextPath() + ruta);
-        }
+        }*/
 
-        if(action.equals("terminar")){
-            int id = Integer.parseInt(req.getParameter("idEnt"));
-            Entradas ent = eDao.getOne(id);
+        if(Objects.equals(action1, "continuar")){
+            String folio = session.getAttribute("folioE").toString();
+            System.out.println("El folio es: "+folio);
+            Entradas ent = eDao.getOne(folio);
             session.setAttribute("entrada", ent);
             resp.sendRedirect(req.getContextPath() + "/Entrada1.jsp?alert=sucessfull");
+            session.removeAttribute("action");
         }
-        if(action.equals("quitar")){
-            int id = Integer.parseInt(req.getParameter("idEnt"));
+        if(Objects.equals(action2, "quitar")){
+            int id = (int) session.getAttribute("Eid");
+            System.out.println("El  id es: "+id);
             if(eDao.deleteEntrada(id)){
-                session.setAttribute("mensaje", "Entrada eliminada exitosamente.");
-                ruta = "/pendientes.jsp?alert=succes";
+                session.setAttribute("mensaje2", "Entrada eliminada exitosamente.");
+                session.removeAttribute("entradaNumero");
+                session.removeAttribute("listaPend"+entradaNumero);
+                resp.sendRedirect(req.getContextPath()+"/pendientes.jsp?alert=succes");
             }else{
-                session.setAttribute("mensaje2", "Error al eliminar la entrada.");
-                ruta = "/pendientes.jsp";
+                session.setAttribute("mensaje", "Error al eliminar la entrada.");
+                resp.sendRedirect(req.getContextPath()+"/pendientes.jsp");
             }
-            resp.sendRedirect(req.getContextPath()+ruta);
+            session.removeAttribute("action");
         }
     }
 }

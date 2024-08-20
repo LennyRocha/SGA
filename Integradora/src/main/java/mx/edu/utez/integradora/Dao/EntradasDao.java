@@ -61,7 +61,7 @@ public class EntradasDao {
                 "FROM Entrada e " +
                 "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
                 "JOIN Usuarios u ON e.entrada_usuario_id = u.id " +
-                "ORDER BY entrada_fecha DESC LIMIT 1";
+                "ORDER BY entrada_id DESC LIMIT 1";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -361,13 +361,6 @@ public class EntradasDao {
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             con.setAutoCommit(false);
 
-            // Eliminar los detalles asociados
-            DetalleEntradaDao detalleDao = new DetalleEntradaDao();
-            if (!detalleDao.deleteByEntradaId(entrada_id)) {
-                con.rollback();
-                return false;
-            }
-
             // Eliminar la entrada
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, entrada_id);
@@ -377,6 +370,13 @@ public class EntradasDao {
                 respuesta = true;
             } else {
                 con.rollback();
+            }
+
+            // Eliminar los detalles asociados
+            DetalleEntradaDao detalleDao = new DetalleEntradaDao();
+            if (!detalleDao.deleteByEntradaId(entrada_id)) {
+                con.rollback();
+                return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -24,7 +24,7 @@ nuevo.addEventListener("click", () => {
     col1.setAttribute("class", "col-sm");
     const input = document.createElement("input");
     input.setAttribute("type", "text");
-    input.setAttribute("name", "Producto[]");
+    input.setAttribute("name", "producto[]");
     input.setAttribute("id", "Producto"+i);
     input.setAttribute("placeholder", "Producto " + i);
     input.setAttribute("class", "form-control");

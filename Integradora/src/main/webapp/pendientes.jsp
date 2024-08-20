@@ -57,43 +57,57 @@
     <br>
     <!--<input type="text" id="selectedBreadcrumbValue" value="" name="selector" readonly/>-->
     <br>
-    <div class="overflow-auto" style="display: none" id="entradas">
+    <center><div style="display: none; width: 100%;" id="entradas">
         <% if(ent.isEmpty()){%>
-        <h1 class="text-success">¡NO HAY ENTRADAS PENDIENTES!</h1>
+        <center><h1 class="text-success">¡NO HAY ENTRADAS PENDIENTES!</h1></center>
         <%}else{
             for(Entradas e : ent) { %>
         <div class="register-card">
             <div class="register-info">
-                <p>Folio: <%=e.getEntrada_folio()%></p>
-                <p>Última modificación: <%=e.getEntrada_fecha()%></p>
+                <p name="folioE">Folio: <%=e.getEntrada_folio()%></p>
+                <p name="fechaE">Última modificación: <%=e.getEntrada_fecha()%></p>
             </div>
-            <button class="continue-button button-sm" onclick="location.href='entrada?operacion=terminar'">Continuar registro</button>
+            <button class="continue-button button-sm" onclick="enviarFormulario()">Continuar registro</button>
             <div class="dropdown">
                 <span class="options" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">&#8942;</span>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="entrada?operacion=quitar">BORRAR</a></li>
+                    <li><a class="dropdown-item" onclick="quitarFormulario()">BORRAR</a></li>
                 </ul>
             </div>
             <input type="hidden" value="<%=e.getEntrada_id()%>" name="idEnt">
         </div>
+        <script>
+            function enviarFormulario() {
+                <%sesion.setAttribute("folioE",e.getEntrada_folio());%>
+                <%sesion.setAttribute("action1","continuar");%>
+                <%sesion.setAttribute("action2",null);%>
+                window.location.href="entrada";
+            }
+            function quitarFormulario() {
+                <%sesion.setAttribute("Eid",e.getEntrada_id());%>
+                <%sesion.setAttribute("action2","quitar");%>
+                <%sesion.setAttribute("action1",null);%>
+                window.location.href="entrada";
+            }
+        </script>
         <%}
         }%>
-    </div>
-    <div class="overflow-auto" style="display: none" id="salidas">
+    </div></center>
+    <div class="align-content-center" style="display: none; width: 100%;" id="salidas">
         <% if(sal.isEmpty()){%>
-        <h1 class="text-success">¡NO HAY SALIDAS PENDIENTES!</h1>
+        <center><h1 class="text-success">¡NO HAY SALIDAS PENDIENTES!</h1></center>
         <%}else{
             for(Salidas s : sal) { %>
         <div class="register-card">
             <div class="register-info">
-                <p>Folio: <%=s.getSalida_folio()%></p>
-                <p>Última modificación: <%=s.getSalida_fecha()%></p>
+                <p name="folioS">Folio: <%=s.getSalida_folio()%></p>
+                <p name="fechaS">Última modificación: <%=s.getSalida_fecha()%></p>
             </div>
-            <button class="continue-button button-sm" onclick="location.href='salida?operacion=terminar'">Continuar registro</button>
+            <button class="continue-button button-sm" onclick="location.href='salida?action=terminar'">Continuar registro</button>
             <div class="dropdown">
                 <span class="options" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">&#8942;</span>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="salida?operacion=quitar">BORRAR</a></li>
+                    <li><a class="dropdown-item" href="salida?action=quitar">BORRAR</a></li>
                 </ul>
             </div>
             <input type="hidden" value="<%=s.getSalida_id()%>" name="idSal">
@@ -101,6 +115,7 @@
         <%}
         }%>
     </div>
+    <br>
     <%
         if(mensaje2!=null){%>
     <div class="alert alert-success d-flex align-items-center" role="alert">
@@ -132,6 +147,7 @@
     sesion.removeAttribute("usuario");
     sesion.removeAttribute("mensaje");
     sesion.removeAttribute("mensaje2");
+    //sesion.removeAttribute("action");
 %>
 <script src="${pageContext.request.contextPath}/JS/pendientes.js"></script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>

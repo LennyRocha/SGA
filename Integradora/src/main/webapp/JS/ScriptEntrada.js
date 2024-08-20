@@ -1,6 +1,6 @@
-/*const nuevos = document.getElementById("nuevos");
-const nuevo = document.getElementById("nuevo");
-const save = document.getElementById("save");*/
+const nuevosz = document.getElementById("nuevosz");
+const nuevoz = document.getElementById("nuevoz");
+const save = document.getElementById("save");
 let i = 2;
 
 const svgString = `
@@ -22,7 +22,7 @@ nuevoz.addEventListener("click", () => {
     col1.setAttribute("class", "col-sm");
     const input = document.createElement("input");
     input.setAttribute("type", "text");
-    input.setAttribute("name", "Producto[]");
+    input.setAttribute("name", "producto[]");
     input.setAttribute("id", "Producto" + i);
     input.setAttribute("placeholder", "Producto " + i);
     input.setAttribute("class", "form-control");
@@ -81,8 +81,6 @@ nuevoz.addEventListener("click", () => {
     i++;
 });
 
-document.getElementById("counter").innerHTML = i;
-
 function borrar(element) {
     element.parentElement.parentElement.parentElement.remove();
     i--;
@@ -127,7 +125,6 @@ if (params.alert === 'si') {
     });
 }
 
-const params = getQueryParams();
 if (params.alert === 'chi') {
     Swal.fire({
         title: '¡Exito!',
@@ -139,7 +136,6 @@ if (params.alert === 'chi') {
     });
 }
 
-const params = getQueryParams();
 if (params.alert === 'succesfull') {
     Swal.fire({
         title: '¡Exito!',
@@ -151,7 +147,6 @@ if (params.alert === 'succesfull') {
     });
 }
 
-const params = getQueryParams();
 if (params.alert === 'succes') {
     Swal.fire({
         title: '¡Exito!',
@@ -163,3 +158,25 @@ if (params.alert === 'succes') {
     });
 }
 
+function mostrarCarga() {
+    Swal.fire({
+        title: 'Procesando...',
+        html: 'Por favor espera',
+        allowOutsideClick: false,
+        willOpen: () => {
+            Swal.showLoading();
+        },
+        timer: 5000 // La alerta se cerrará automáticamente después de 5 segundos
+    });
+}
+
+function enviarSolicitud(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    document.getElementById('entrada').submit();
+}
+
+function enviar() {
+    mostrarCarga();
+    document.getElementById('entrada').submit();
+}

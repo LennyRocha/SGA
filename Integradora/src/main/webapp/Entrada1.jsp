@@ -48,13 +48,11 @@
     LocalDate fecha = LocalDate.now();
     String folio = "";
     int idEnt = 0;
-    if(!listE.isEmpty()) {
         if(entrada != null) {
             idEnt = entrada.getEntrada_id();
         }else{
             folio = "ID01"+fecha+"E";
         }
-    }
     idEnt = idEnt+1;
     folio = "ID"+idEnt+fecha+"E";
     Entradas ent = (Entradas) sesion.getAttribute("ent");
@@ -135,10 +133,10 @@
                     </div>
                     <br>
                     <div id="nuevosz" class="container-fluid"></div>
+                    <input type="hidden" value="" name="action" id="validator">
                     <center>
-                        <input type="hidden" value="" name="action">
-                        <button class="btn btn-outline-primary btn-lg mr-2" id="save" type="submit">Finalizar</button>
-                        <a type="button" id="guardar" class="btn btn-outline-success btn-lg" href="entrada?action=guardar">Guardar</a>
+                        <button class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="enviar()">Finalizar</button>
+                        <a type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="enviarSolicitud('guardar')">Guardar</a>
                         <a type="button" id="cancelar" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp">Cancelar</a>
                     </center>
                 </form>
@@ -227,7 +225,7 @@
     sesion.removeAttribute("ent");
 %>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
-<script src="${pageContext.request.contextPath}/JS/Script1.js"></script>
+<script src="${pageContext.request.contextPath}/JS/ScriptEntrada.js"></script>
 <script src='${pageContext.request.contextPath}/JS/bootstrap.js'></script>
 </body>
 </html>
