@@ -88,6 +88,8 @@
               nuevos.appendChild(wrappers);
       
               i++;
+
+              document.getElementById("contador").innerHTML = i;
             });
 
             function borrar(element) {

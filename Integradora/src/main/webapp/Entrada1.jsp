@@ -63,7 +63,7 @@
         <div class="col">
             <br>
             <div class="container-fluid" id="contInicio">
-                <form action="entrada?operacion=finalizar" method="post" id="entrada">
+                <form action="entrada" method="post" id="entrada">
                     <div class="container-sm">
                         <h1 id="tit">REGISTRAR ENTRADA</h1>
                     </div>
@@ -72,9 +72,9 @@
                     <div class="row">
                         <div class="col">
                             <label>Folio:*</label>
-                            <input type="text" class="form-control" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=folio%>">
+                            <input type="text" class="form-control" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=folio%>" name="folio">
                             <label>Fecha:*</label>
-                            <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual" name="fecha" required>
+                            <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual" name="fecha" pattern="yyyy-MM-dd" required>
                             <label>Empleado:*</label>
                             <input type="text" class="form-control" id="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;" name="employees">
                         </div>
@@ -107,17 +107,17 @@
                             <div class="col-sm">
                                 <label>PRODUCTO</label>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required maxlength="50">
+                                <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required maxlength="50" name="producto" required>
                             </div>
                             <div class="col-sm">
                                 <label>CANTIDAD</label>
                                 <br>
-                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1" min="0">
+                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1" min="0" name="Cantidad" required>
                             </div>
                             <div class="col-sm">
                                 <label>PRECIO UNIT</label>
                                 <br>
-                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precio1">
+                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precio1" name="Precio" required>
                             </div>
                             <div class="col-sm">
                                 <label>--</label>
@@ -181,6 +181,7 @@
     </div>
 </div>
 <br>
+<input type="hidden" value="" id="contador"/>
 <script>
     Swal.fire({
         title: '!Exito!',
