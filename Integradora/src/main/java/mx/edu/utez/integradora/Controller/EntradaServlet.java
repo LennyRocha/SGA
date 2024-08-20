@@ -79,7 +79,6 @@ public class EntradaServlet extends HttpServlet {
             int sumCant = 0;
             double sumPrec = 0;
             double sumAll = 0;
-            Producto pr = new Producto();
             System.out.println("Número de productos: " + productNames.length);
             for (int i = 0; i < productNames.length; i++) {
                 System.out.println("Producto: " + productNames[i]);
@@ -88,17 +87,7 @@ public class EntradaServlet extends HttpServlet {
 
                 sumCant += Integer.parseInt(productQuantities[i]);
                 sumPrec += Double.parseDouble(productPrices[i]);
-
-                pr.setProducto_nombre(productNames[i]);
-                pr.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
-                pr.setProducto_precio(Double.parseDouble(productPrices[i]));
             }
-            sumAll = sumCant * sumPrec;
-            entradaDetalle.setEntradas(entrada);
-            entradaDetalle.setCantidad(sumCant);
-            entradaDetalle.setProductos(pr);
-            entradaDetalle.setValor_total(sumAll);
-            entradList.add(entradaDetalle);
         } else {
             System.out.println("No se recibieron productos.");
         }
@@ -106,20 +95,24 @@ public class EntradaServlet extends HttpServlet {
 
         if(entrada.getDetalles() != null) {
             System.out.println("Arraylist lleno");
+            System.out.println(entradList.size());
         }else{
             System.out.println("Arraylist vacio");
         }
 
         //if (Objects.equals(action, "finalizar")){
         if (entradasDao.insertEntrada(entrada)) {
+            boolean confirma = false;
             System.out.println("Si se insertó");
             for (int i = 0; i < Objects.requireNonNull(productNames).length; i++) {
                 boolean productoEncontrado = false;
 
                 for (Producto p : listProd) {
-                    if (p.getProducto_nombre().equals(productNames[i])) {
+                    if ((p.getProducto_nombre()).equalsIgnoreCase(productNames[i])){
                         p.setProducto_cantidad(p.getProducto_cantidad() + Integer.parseInt(productQuantities[i]));
                         if (productoDao.anadirProducto(p.getProducto_nombre(), p.getProducto_cantidad())) {
+                            confirma = true;
+                            productList.add(p);
                             session.setAttribute("Exito", "Producto modificado exitosamente");
                         } else {
                             session.setAttribute("Fallo", "Producto modificado no exitosamente");
@@ -136,9 +129,25 @@ public class EntradaServlet extends HttpServlet {
                     prods.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
 
                     if (productoDao.insertProducto(prods)) {
+                        confirma = true;
+                        productList.add(productoDao.getOne(prods.getProducto_nombre()));
                         session.setAttribute("Exito", "Producto insertado exitosamente");
                     } else {
                         session.setAttribute("Fallo", "Producto insertado no exitosamente");
+                    }
+                }
+            }
+
+            if(confirma && !productList.isEmpty()){
+                for(Producto prop : productList){
+                    entradaDetalle.setEntradas(entrada);
+                    entradaDetalle.setCantidad(prop.getProducto_cantidad());
+                    entradaDetalle.setProductos(prop);
+                    entradaDetalle.setValor_total(prop.getProducto_cantidad() * prop.getProducto_precio());
+                    entradList.add(entradaDetalle);
+                    if(deDao.insertDetalleEntrada(entradaDetalle)){
+                        System.out.println(entradList.size());
+                        System.out.println("Detalle insertado del producto: "+entradaDetalle.getProductos().getProducto_nombre());
                     }
                 }
             }
@@ -187,10 +196,20 @@ public class EntradaServlet extends HttpServlet {
 
                     productList.add(producto);
                 }
+                for(Producto propi : productList){
+                    entradaDetalle.setEntradas(entrada);
+                    entradaDetalle.setCantidad(propi.getProducto_cantidad());
+                    entradaDetalle.setProductos(propi);
+                    entradaDetalle.setValor_total(propi.getProducto_cantidad() * propi.getProducto_precio());
+                    entradList.add(entradaDetalle);
+                        System.out.println(entradList.size());
+                        System.out.println("Detalle guardado del producto: "+entradaDetalle.getProductos().getProducto_nombre());
+                    System.out.println("Detalle guardado del producto: "+entradaDetalle.getEntradas().getEntrada_folio());
+                }
                 System.out.println(action);
                 session.setAttribute("mensaje2", "Entrada exitosamente guardada");
-                session.setAttribute("entradaNumero", entradaNumero);
-                session.setAttribute("listaPend"+entradaNumero, productList);
+                session.setAttribute("entradList", entradList);
+                session.setAttribute("listaPend", productList);
 
                 ruta = "/Entrada1.jsp?alert=chi";
                 entradaNumero ++;

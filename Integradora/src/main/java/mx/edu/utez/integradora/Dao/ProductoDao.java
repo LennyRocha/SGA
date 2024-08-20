@@ -32,6 +32,27 @@ public class ProductoDao {
         return p;
     }
 
+    public Producto getOne(String nombre) {
+        Producto p = new Producto();
+        String query = "SELECT * FROM Producto WHERE producto_id = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                p.setProducto_id(rs.getInt("producto_id"));
+                p.setProducto_nombre(rs.getString("producto_nombre"));
+                p.setProducto_precio(rs.getDouble("producto_precio"));
+                p.setProducto_cantidad(rs.getInt("producto_cantidad"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return p;
+    }
+
     public ArrayList<Producto> getAll() {
         ArrayList<Producto> lista = new ArrayList<>();
         String query = "SELECT * FROM Producto WHERE producto_cantidad > 0";
