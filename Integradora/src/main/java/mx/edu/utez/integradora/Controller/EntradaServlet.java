@@ -236,10 +236,8 @@ public class EntradaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         EntradasDao eDao = new EntradasDao();
-        String action1 = (String) session.getAttribute("action1");
-        System.out.println("La accion1 es: "+action1);
-        String action2 = (String) session.getAttribute("action2");
-        System.out.println("La accion2 es: "+action2);
+        String action = req.getParameter("action");
+        System.out.println("La accion2 es: "+action);
         int entradaNumero = 0;
         Entradas entrada = new Entradas();
         UsuarioDao usuarioDao = new UsuarioDao();
@@ -308,7 +306,7 @@ public class EntradaServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + ruta);
         }*/
 
-        if(Objects.equals(action1, "continuar")){
+        if(Objects.equals(action, "continuar")){
             String folio = session.getAttribute("folioE").toString();
             System.out.println("El folio es: "+folio);
             Entradas ent = eDao.getOne(folio);
@@ -316,7 +314,7 @@ public class EntradaServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/Entrada1.jsp?alert=sucessfull");
             session.removeAttribute("action");
         }
-        if(Objects.equals(action2, "quitar")){
+        if(Objects.equals(action, "quitar")){
             int id = (int) session.getAttribute("Eid");
             System.out.println("El  id es: "+id);
             if(eDao.deleteEntrada(id)){

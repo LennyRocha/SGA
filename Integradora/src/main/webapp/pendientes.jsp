@@ -59,38 +59,25 @@
     <!--<input type="text" id="selectedBreadcrumbValue" value="" name="selector" readonly/>-->
     <br>
     <center><div style="display: none; width: 100%;" id="entradas">
+        <input type="hidden" value="" name="action" id="validator">
         <% if(ent.isEmpty()){%>
         <center><h1 class="text-success">¡NO HAY ENTRADAS PENDIENTES!</h1></center>
         <%}else{
             for(Entradas e : ent) { %>
         <div class="register-card">
             <div class="register-info">
-                <p name="folioE">Folio: <%=e.getEntrada_folio()%></p>
-                <p name="fechaE">Última modificación: <%=e.getEntrada_fecha()%></p>
+                <p name="folioE" id="fol">Folio: <%=e.getEntrada_folio()%></p>
+                <p name="fechaE" id="fech">Última modificación: <%=e.getEntrada_fecha()%></p>
             </div>
-            <button class="continue-button button-sm" onclick="enviarFormulario()">Continuar registro</button>
+            <button class="continue-button button-sm" onclick="enviarFormulario('continuar')">Continuar registro</button>
             <div class="dropdown">
                 <span class="options" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">&#8942;</span>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" onclick="quitarFormulario()">BORRAR</a></li>
+                    <li><a class="dropdown-item" onclick="quitarFormulario('quitar')">BORRAR</a></li>
                 </ul>
             </div>
             <input type="hidden" value="<%=e.getEntrada_id()%>" name="idEnt">
         </div>
-        <script>
-            function enviarFormulario() {
-                <%sesion.setAttribute("folioE",e.getEntrada_folio());%>
-                <%sesion.setAttribute("action1","continuar");%>
-                <%sesion.setAttribute("action2",null);%>
-                window.location.href="entrada";
-            }
-            function quitarFormulario() {
-                <%sesion.setAttribute("Eid",e.getEntrada_id());%>
-                <%sesion.setAttribute("action2","quitar");%>
-                <%sesion.setAttribute("action1",null);%>
-                window.location.href="entrada";
-            }
-        </script>
         <%}
         }%>
     </div></center>
