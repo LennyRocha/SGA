@@ -123,3 +123,83 @@ document.getElementById("fecha").setAttribute('min', today);
 function validarNumero(input) {
     input.value = input.value.replace(/[^0-9.]/g, '');
 }
+
+function getQueryParams() {
+    const params = {};
+    window.location.search.substring(1).split('&').forEach(param => {
+        const [key, value] = param.split('=');
+        params[key] = value;
+    });
+    return params;
+}
+
+const params = getQueryParams();
+
+if (params.alert === 'si') {
+    Swal.fire({
+        title: '¡Exito!',
+        text: 'Salida exitosa.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#4A4E69',
+        confirmButtonBorderColor: '#4A4E69',
+    });
+}
+
+if (params.alert === 'chi') {
+    Swal.fire({
+        title: '¡Exito!',
+        text: 'Salida guardada correctamente.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#4A4E69',
+        confirmButtonBorderColor: '#4A4E69',
+    });
+}
+
+if (params.alert === 'succesfull') {
+    Swal.fire({
+        title: '¡Exito!',
+        text: 'Salida recuperada exitosamente.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#4A4E69',
+        confirmButtonBorderColor: '#4A4E69',
+    });
+}
+
+if (params.alert === 'succes') {
+    Swal.fire({
+        title: '¡Exito!',
+        text: 'Salida eliminada.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#4A4E69',
+        confirmButtonBorderColor: '#4A4E69',
+    });
+}
+
+function mostrarCarga() {
+    Swal.fire({
+        title: 'Procesando...',
+        text: 'Por favor espera',
+
+        timer: 5000, // La alerta se cerrará automáticamente después de 5 segundos
+        timerProgressBar: true,
+        willOpen: () => {
+            Swal.showLoading();
+        },
+    });
+}
+
+function enviarSolicitudSalida(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    document.getElementById('salida').submit();
+}
+
+function enviarSalida(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    document.getElementById('salida').submit();
+}
