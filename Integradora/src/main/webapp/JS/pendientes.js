@@ -74,4 +74,20 @@ function quitarFormulario(action) {
     mostrarCarga();
     document.getElementById('validator').value = action;
     window.location.href="entrada";
+
+}
+
+function enviarFormularioSalida(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    window.location.href="salida";
+
+
+}
+
+function quitarFormularioSalida(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    window.location.href="salida";
+
 }

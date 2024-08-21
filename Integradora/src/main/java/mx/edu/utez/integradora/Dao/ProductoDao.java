@@ -113,6 +113,24 @@ public class ProductoDao {
         return respuesta;
     }
 
+    public boolean restarProducto(String nombreProducto, int cantidad) {
+        boolean respuesta = false;
+        String query = "UPDATE Producto SET producto_cantidad = producto_cantidad - ? WHERE producto_nombre = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, cantidad);
+            ps.setString(2, nombreProducto);
+
+            if (ps.executeUpdate() > 0) {
+                respuesta = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return respuesta;
+    }
+
     public boolean deleteProducto(Producto prod) {
         boolean respuesta = false;
         String query = "DELETE FROM Producto WHERE producto_id = ?";

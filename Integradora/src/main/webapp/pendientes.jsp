@@ -91,11 +91,11 @@
                 <p name="folioS">Folio: <%=s.getSalida_folio()%></p>
                 <p name="fechaS">Última modificación: <%=s.getSalida_fecha()%></p>
             </div>
-            <button class="continue-button button-sm" onclick="location.href='salida?action=terminar'">Continuar registro</button>
+            <button class="continue-button button-sm" onclick="enviarFormularioSalida('continuar')">Continuar registro</button>
             <div class="dropdown">
                 <span class="options" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">&#8942;</span>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="salida?action=quitar">BORRAR</a></li>
+                    <li><a class="dropdown-item" onclick="quitarFormularioSalida('quitar')">BORRAR</a></li>
                 </ul>
             </div>
             <input type="hidden" value="<%=s.getSalida_id()%>" name="idSal">

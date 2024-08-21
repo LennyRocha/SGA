@@ -248,63 +248,7 @@ public class EntradaServlet extends HttpServlet {
         DetalleEntrada entradaDetalle = new DetalleEntrada();
         Producto producto = new Producto();
 
-        /*
-        if (Objects.equals(action, "guardar")) {
-            try {
-                String folio = req.getParameter("folio");
-                System.out.println(folio);
-                String fecha = req.getParameter("fecha");
-                System.out.println(fecha);
-                String empleado = req.getParameter("employees");
-                System.out.println(empleado);
-                String proveedor = req.getParameter("suppliers");
-                System.out.println(proveedor);
-                int folioFact = Integer.parseInt(req.getParameter("fact"));
-                System.out.println(folioFact);
-                entradaNumero = folio.charAt(2);
 
-                Usuario usuario = usuarioDao.getOne(empleado);
-                Proveedor proveedorObj = proveedorDao.getOne(proveedor);
-
-                entrada.setEntrada_folio(folio);
-                entrada.setEntrada_fecha(Date.valueOf(fecha));
-                entrada.setUsuario(usuario);
-                entrada.setProveedor(proveedorObj);
-                entrada.setEntrada_folio_factura(folioFact);
-                entrada.setEstado("pendiente");
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-
-            String[] productNames = req.getParameterValues("producto[]");
-            String[] productPrices = req.getParameterValues("Precio[]");
-            String[] productQuantities = req.getParameterValues("Cantidad[]");
-
-            ArrayList<Producto> productList = new ArrayList<>();
-            ArrayList<DetalleEntrada> entradList = new ArrayList<>();
-            ArrayList<Producto> listProd = productoDao.getAll();
-
-            if(entradasDao.insertEntrada(entrada)){
-                for (int i = 1; i < Objects.requireNonNull(productNames).length; i++) {
-
-                    producto.setProducto_nombre(productNames[i]);
-                    producto.setProducto_precio(Double.parseDouble(productPrices[i]));
-                    producto.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
-
-                    productList.add(producto);
-                }
-                System.out.println(action);
-                session.setAttribute("mensaje2", "Entrada exitosamente guardada");
-                session.setAttribute("entradaNumero", entradaNumero);
-                session.setAttribute("listaPend"+entradaNumero, productList);
-
-                ruta = "/Entrada1.jsp?alert=chi";
-                entradaNumero ++;
-            }else{
-                session.setAttribute("mensaje", "No se puede guardar la entrada");
-            }
-            resp.sendRedirect(req.getContextPath() + ruta);
-        }*/
 
         if(Objects.equals(action, "continuar")){
             String folio = session.getAttribute("folioE").toString();

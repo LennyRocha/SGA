@@ -36,33 +36,6 @@ public class SalidaServlet extends HttpServlet {
         String action = request.getParameter("action");
         System.out.println("La accion elegida es: "+action);
 
-        try {
-            String folio = request.getParameter("folio");
-            System.out.println(folio);
-            String area = request.getParameter("area");
-            System.out.println(area);
-            Date fecha = Date.valueOf(request.getParameter("fecha"));
-            System.out.println(fecha);
-            String empleado = request.getParameter("employees");
-            System.out.println(empleado);
-
-            Usuario usuario = usuarioDao.getOne(empleado);
-            Area AreaObj = areaDao.getOne2(area);
-
-            salida.setSalida_folio(folio);
-            salida.setAreas(AreaObj);
-            salida.setSalida_fecha(fecha);
-            salida.setUsuarios(usuario);
-            salida.setSalida_fecha(fecha);
-            salida.setSalida_estado("exito");
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        /*String nombre1 = request.getParameter("producto");
-        double precio = Double.parseDouble(request.getParameter("Precio"));
-        int cantidad = Integer.parseInt(request.getParameter("Cantidad"));*/
-
         String[] productNames = request.getParameterValues("producto[]");
         String[] productPrices = request.getParameterValues("Precio[]");
         String[] productQuantities = request.getParameterValues("Cantidad[]");
@@ -71,66 +44,123 @@ public class SalidaServlet extends HttpServlet {
         ArrayList<DetalleSalida> salidaList = new ArrayList<>();
         ArrayList<Producto> listProd = productoDao.getAll();
 
-        if (productNames != null) {
-            int sumCant = 0;
-            double sumPrec = 0;
-            double sumAll = 0;
-            Producto pr = new Producto();
-            System.out.println("Número de productos: " + productNames.length);
-            for (int i = 0; i < productNames.length; i++) {
-                System.out.println("Producto: " + productNames[i]);
-                System.out.println("Cantidad: " + productQuantities[i]);
-                System.out.println("Precio: " + productPrices[i]);
+        if (Objects.equals(action, "registrar")){
+            try {
+                String folio = request.getParameter("folio");
+                System.out.println(folio);
+                String area = request.getParameter("area");
+                System.out.println(area);
+                Date fecha = Date.valueOf(request.getParameter("fecha"));
+                System.out.println(fecha);
+                String empleado = request.getParameter("employees");
+                System.out.println(empleado);
 
-                sumCant += Integer.parseInt(productQuantities[i]);
-                sumPrec += Double.parseDouble(productPrices[i]);
+                Usuario usuario = usuarioDao.getOne(empleado);
+                Area AreaObj = areaDao.getOne2(area);
 
-                pr.setProducto_nombre(productNames[i]);
-                pr.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
-                pr.setProducto_precio(Double.parseDouble(productPrices[i]));
+                salida.setSalida_folio(folio);
+                salida.setAreas(AreaObj);
+                salida.setSalida_fecha(fecha);
+                salida.setUsuarios(usuario);
+                salida.setSalida_estado("exito");
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
-            sumAll = sumCant * sumPrec;
-            salidaDetalle.setSalidas(salida);
-            salidaDetalle.setCantidad(sumCant);
-            salidaDetalle.setProductos_salida(pr);
-            salidaDetalle.setValor_salida(sumAll);
-            salidaList.add(salidaDetalle);
-        } else {
-            System.out.println("No se recibieron productos.");
-        }
-        salida.setDetalleSalida(salidaList);
 
-        if(salida.getDetalleSalida() != null) {
-            System.out.println("Arraylist lleno");
-        }else{
-            System.out.println("Arraylist vacio");
-        }
+            if (productNames != null) {
+                int sumCant = 0;
+                double sumPrec = 0;
+                double sumAll = 0;
+                Producto pr = new Producto();
+                System.out.println("Número de productos: " + productNames.length);
+                for (int i = 0; i < productNames.length; i++) {
+                    System.out.println("Producto: " + productNames[i]);
+                    System.out.println("Cantidad: " + productQuantities[i]);
+                    System.out.println("Precio: " + productPrices[i]);
 
-        //if (Objects.equals(action, "finalizar")){
-        if (salidaDao.insertSalida(salida)) {
-            System.out.println("Si se restaron");
-            for (int i = 0; i < Objects.requireNonNull(productNames).length; i++) {
-                boolean productoEncontrado = false;
+                    sumCant += Integer.parseInt(productQuantities[i]);
+                    sumPrec += Double.parseDouble(productPrices[i]);
 
-                for (Producto p : listProd) {
-                    if (p.getProducto_nombre().equals(productNames[i])) {
-                        p.setProducto_cantidad(p.getProducto_cantidad() - Integer.parseInt(productQuantities[i]));
-                        if (productoDao.anadirProducto(p.getProducto_nombre(), p.getProducto_cantidad())) {
-                            session.setAttribute("Exito", "Producto modificado exitosamente");
-                        } else {
-                            session.setAttribute("Fallo", "Producto modificado no exitosamente");
+                    pr.setProducto_nombre(productNames[i]);
+                    pr.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
+                    pr.setProducto_precio(Double.parseDouble(productPrices[i]));
+                }
+                sumAll = sumCant * sumPrec;
+                salidaDetalle.setSalidas(salida);
+                salidaDetalle.setCantidad(sumCant);
+                salidaDetalle.setProductos_salida(pr);
+                salidaDetalle.setValor_salida(sumAll);
+                salidaList.add(salidaDetalle);
+            } else {
+                System.out.println("No se recibieron productos.");
+            }
+            salida.setDetalleSalida(salidaList);
+
+            if(salida.getDetalleSalida() != null) {
+                System.out.println("Arraylist lleno");
+            }else{
+                System.out.println("Arraylist vacio");
+            }
+
+            //if (Objects.equals(action, "finalizar")){
+            if (salidaDao.insertSalida(salida)) {
+                boolean confirma = false;
+                System.out.println("Si se insertó");
+                for (int i = 0; i < Objects.requireNonNull(productNames).length; i++) {
+                    boolean productoEncontrado = false;
+
+                    for (Producto p : listProd) {
+                        if ((p.getProducto_nombre()).equalsIgnoreCase(productNames[i])){
+                            p.setProducto_cantidad(p.getProducto_cantidad() - Integer.parseInt(productQuantities[i]));
+                            if (productoDao.restarProducto(p.getProducto_nombre(), p.getProducto_cantidad())) {
+                                confirma = true;
+                                productList.add(p);
+                                session.setAttribute("Exito", "Producto modificado exitosamente");
+                            } else {
+                                session.setAttribute("Fallo", "Producto modificado no exitosamente");
+                            }
+                            productoEncontrado = true;
+                            break;
                         }
-                        productoEncontrado = true;
-                        break;
+                    }
+
+                    if (!productoEncontrado) {
+                        Producto prods = new Producto();
+                        prods.setProducto_nombre(productNames[i]);
+                        prods.setProducto_precio(Double.parseDouble(productPrices[i]));
+                        prods.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
+
+                        if (productoDao.insertProducto(prods)) {
+                            confirma = true;
+                            productList.add(productoDao.getOne(prods.getProducto_nombre()));
+                            session.setAttribute("Exito", "Producto restado exitosamente");
+                        } else {
+                            session.setAttribute("Fallo", "Producto restado no exitosamente");
+                        }
                     }
                 }
+
+                if(confirma && !productList.isEmpty()){
+                    for(Producto prop : productList){
+                        salidaDetalle.setSalidas(salida);
+                        salidaDetalle.setCantidad(prop.getProducto_cantidad());
+                        salidaDetalle.setProductos_salida(prop);
+                        salidaDetalle.setValor_salida(prop.getProducto_cantidad() * prop.getProducto_precio());
+                        salidaList.add(salidaDetalle);
+                        if(dsDao.insertDetalleSalida(salidaDetalle)){
+                            System.out.println(salidaList.size());
+                            System.out.println("Detalle insertado del producto: "+salidaDetalle.getProductos_salida().getProducto_nombre());
+                        }
+                    }
+                }
+                session.setAttribute("mensaje2", "Salida guardada exitosamente");
+                ruta = "/Salida2.jsp?alert=si";
+            }else{
+                System.out.println("No se insertó");
+                session.setAttribute("mensaje", "No se puede insertar la salida");
             }
-            session.setAttribute("mensaje2", "Entrada guardada exitosamente");
-            ruta = "/Entrada1.jsp?alert=si";
-        }else{
-            System.out.println("No se insertó");
-            session.setAttribute("mensaje", "No se puede insertar la entrada");
         }
+
 
         if (Objects.equals(action, "guardar")) {
             int salidaNumero = 0;
