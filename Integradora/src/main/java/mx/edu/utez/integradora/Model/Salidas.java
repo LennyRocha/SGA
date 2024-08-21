@@ -1,11 +1,8 @@
 package mx.edu.utez.integradora.Model;
 
-import org.eclipse.tags.shaded.org.apache.xpath.objects.XString;
-
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class Salidas implements Serializable {
     private int salida_id;
@@ -58,7 +55,7 @@ public class Salidas implements Serializable {
     public void setSalida_fecha(Date salida_fecha) {
         this.salida_fecha = salida_fecha;
     }
-    public Date getSalida_fecha() {
+    public java.sql.Date getSalida_fecha() {
         return salida_fecha;
     }
 

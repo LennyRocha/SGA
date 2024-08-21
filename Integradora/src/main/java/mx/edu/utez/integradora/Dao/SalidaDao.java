@@ -26,8 +26,8 @@ public class SalidaDao {
             if (rs.next()) {
                 salida = new Salidas();
                 salida.setSalida_id(rs.getInt("salida_id"));
-                salida.setSalida_folio(rs.getInt("salida_folio"));
-                salida.setSalida_fecha(rs.getTimestamp("salida_fecha"));
+                salida.setSalida_folio(rs.getString("salida_folio"));
+                salida.setSalida_fecha(rs.getDate("salida_fecha"));
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
@@ -73,8 +73,8 @@ public class SalidaDao {
             if (rs.next()) {
                 salida = new Salidas();
                 salida.setSalida_id(rs.getInt("salida_id"));
-                salida.setSalida_folio(rs.getInt("salida_folio"));
-                salida.setSalida_fecha(rs.getTimestamp("salida_fecha"));
+                salida.setSalida_folio(rs.getString("salida_folio"));
+                salida.setSalida_fecha(rs.getDate("salida_fecha"));
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
@@ -118,8 +118,8 @@ public class SalidaDao {
             while (rs.next()) {
                 Salidas salida = new Salidas();
                 salida.setSalida_id(rs.getInt("salida_id"));
-                salida.setSalida_folio(rs.getInt("salida_folio"));
-                salida.setSalida_fecha(rs.getTimestamp("salida_fecha"));
+                salida.setSalida_folio(rs.getString("salida_folio"));
+                salida.setSalida_fecha(rs.getDate("salida_fecha"));
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
@@ -165,8 +165,8 @@ public class SalidaDao {
             while (rs.next()) {
                 Salidas salida = new Salidas();
                 salida.setSalida_id(rs.getInt("salida_id"));
-                salida.setSalida_folio(rs.getInt("salida_folio"));
-                salida.setSalida_fecha(rs.getTimestamp("salida_fecha"));
+                salida.setSalida_folio(rs.getString("salida_folio"));
+                salida.setSalida_fecha(rs.getDate("salida_fecha"));
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
@@ -213,8 +213,8 @@ public class SalidaDao {
             while (rs.next()) {
                 Salidas salida = new Salidas();
                 salida.setSalida_id(rs.getInt("salida_id"));
-                salida.setSalida_folio(rs.getInt("salida_folio"));
-                salida.setSalida_fecha(rs.getTimestamp("salida_fecha"));
+                salida.setSalida_folio(rs.getString("salida_folio"));
+                salida.setSalida_fecha(rs.getDate("salida_fecha"));
                 salida.setSalida_estado(rs.getString("salida_estado"));
 
                 // Obtener información del area
@@ -254,8 +254,8 @@ public class SalidaDao {
 
             // Insertar la salida
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, salida.getSalida_folio());
-            ps.setTimestamp(2, salida.getSalida_fecha());
+            ps.setString(1, salida.getSalida_folio());
+            ps.setDate(2, salida.getSalida_fecha());
             ps.setInt(3, salida.getAreas().getArea_id());
             ps.setInt(4, salida.getUsuarios().getId());
             ps.setString(5, salida.getSalida_estado());
@@ -297,8 +297,8 @@ public class SalidaDao {
 
             // Actualizar la salida
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, salida.getSalida_folio());
-            ps.setTimestamp(2, salida.getSalida_fecha());
+            ps.setString(1, salida.getSalida_folio());
+            ps.setDate(2, salida.getSalida_fecha());
             ps.setInt(3, salida.getAreas().getArea_id());
             ps.setInt(4, salida.getUsuarios().getId());
             ps.setString(5, salida.getSalida_estado());

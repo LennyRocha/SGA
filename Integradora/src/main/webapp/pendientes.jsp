@@ -59,15 +59,16 @@
     <!--<input type="text" id="selectedBreadcrumbValue" value="" name="selector" readonly/>-->
     <br>
     <center><div style="display: none; width: 100%;" id="entradas">
-        <input type="hidden" value="" name="action" id="validator">
         <% if(ent.isEmpty()){%>
         <center><h1 class="text-success">¡NO HAY ENTRADAS PENDIENTES!</h1></center>
         <%}else{
             for(Entradas e : ent) { %>
+        <form action="entrada" method="get" id="pendiente">
+        <input type="hidden" value="" name="action" id="validator">
         <div class="register-card">
             <div class="register-info">
-                <p name="folioE" id="fol">Folio: <%=e.getEntrada_folio()%></p>
-                <p name="fechaE" id="fech">Última modificación: <%=e.getEntrada_fecha()%></p>
+                <p id="fol">Folio: <%=e.getEntrada_folio()%></p>
+                <p id="fech">Última modificación: <%=e.getEntrada_fecha()%></p>
             </div>
             <button class="continue-button button-sm" onclick="enviarFormulario('continuar')">Continuar registro</button>
             <div class="dropdown">
@@ -76,8 +77,10 @@
                     <li><a class="dropdown-item" onclick="quitarFormulario('quitar')">BORRAR</a></li>
                 </ul>
             </div>
-            <input type="hidden" value="<%=e.getEntrada_id()%>" name="idEnt">
+            <input type="hidden" id="F" value="<%=e.getEntrada_folio()%>" name="FolioE">
+            <input type="hidden" id="Id" value="<%=e.getEntrada_id()%>" name="idEnt">
         </div>
+        </form>
         <%}
         }%>
     </div></center>

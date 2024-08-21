@@ -169,7 +169,7 @@
 </div>
 <% } %>
 <%
-    //sesion.removeAttribute("usuario");
+    sesion.removeAttribute("usuario");
     sesion.removeAttribute("mensaje");
 %>
 <script>

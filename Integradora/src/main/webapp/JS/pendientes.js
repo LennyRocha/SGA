@@ -67,11 +67,37 @@ if (params.alert === 'success') {
 function enviarFormulario(action) {
     mostrarCarga();
     document.getElementById('validator').value = action;
-    window.location.href="entrada";
+    document.getElementById('pendiente').submit();
 }
 
 function quitarFormulario(action) {
     mostrarCarga();
     document.getElementById('validator').value = action;
-    window.location.href="entrada";
+    document.getElementById('pendiente').submit();
+}
+
+function mostrarCarga() {
+    Swal.fire({
+        title: 'Abriendo...',
+        text: 'Por favor espera',
+
+        timer: 5000, // La alerta se cerrará automáticamente después de 5 segundos
+        timerProgressBar: true,
+        willOpen: () => {
+            Swal.showLoading();
+        },
+    });
+}
+
+function mostrarLaCarga() {
+    Swal.fire({
+        title: 'Borrando...',
+        text: 'Por favor espera',
+
+        timer: 5000, // La alerta se cerrará automáticamente después de 5 segundos
+        timerProgressBar: true,
+        willOpen: () => {
+            Swal.showLoading();
+        },
+    });
 }

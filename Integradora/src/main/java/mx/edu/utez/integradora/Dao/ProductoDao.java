@@ -150,6 +150,26 @@ public class ProductoDao {
         return respuesta;
     }
 
+    public boolean updateProduct(Producto prod) {
+        boolean respuesta = false;
+        String query = "UPDATE Producto SET producto_nombre = ?, producto_precio = ?, producto_cantidad = ? WHERE producto_id = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, prod.getProducto_nombre());
+            ps.setDouble(2, prod.getProducto_precio());
+            ps.setInt(3, prod.getProducto_cantidad());
+            ps.setInt(4, prod.getProducto_id());
+
+            if (ps.executeUpdate() > 0) {
+                respuesta = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return respuesta;
+    }
+
     public ArrayList<Producto> verCatalogo() {
         ArrayList<Producto> lista = new ArrayList<>();
         String query = "SELECT * FROM Catalogo";
