@@ -5,6 +5,23 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 });
 
+function enviarFormulario(action,id) {
+    mostrarCarga();
+    document.getElementById('validator_' + id).value = action;
+    console.log(document.getElementById('validator_' + id).value);
+    setTimeout(function() {
+        document.getElementById('pendienteE_' + id).submit();
+    }, 100); // 100 milisegundos de retraso
+}
+
+function quitarFormulario(action,id) {
+    mostrarCarga();
+    document.getElementById('validator_' + id).value = action;
+    setTimeout(function() {
+        document.getElementById('pendienteE_' + id).submit();
+    }, 100); // 100 milisegundos de retraso
+}
+
 const entradas = document.getElementById("entradas");
 const salidas = document.getElementById("salidas");
 
@@ -61,19 +78,6 @@ if (params.alert === 'success') {
         confirmButtonColor: '#4A4E69',
         confirmButtonBorderColor: '#4A4E69',
     });
-}
-
-
-function enviarFormulario(action) {
-    mostrarCarga();
-    document.getElementById('validator').value = action;
-    document.getElementById('pendiente').submit();
-}
-
-function quitarFormulario(action) {
-    mostrarCarga();
-    document.getElementById('validator').value = action;
-    document.getElementById('pendiente').submit();
 }
 
 function mostrarCarga() {

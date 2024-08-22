@@ -53,19 +53,10 @@
         }
     idEnt = idEnt+1;
     folio = "ID"+idEnt+fecha+"E";
-    boolean confirma;
-    Entradas ent = (Entradas) sesion.getAttribute("entrada");
-    ArrayList<Proveedor> listP = pDao.getAll();
     String folioT = (String) sesion.getAttribute("folioTerminar");
-    ArrayList<DetalleEntrada> listEnt = deDao.getAllByEntradaFolio(folioT);
-    if(folioT != null){
-        confirma = true;
-    }else{
-        confirma = false;
-    }
+    ArrayList<Proveedor> listP = pDao.getAll();
+    ArrayList<Producto> listEnters = (ArrayList<Producto>) sesion.getAttribute("Productos");
     System.out.println(folioT);
-    System.out.println(confirma);
-    System.out.println(ent.getEntrada_id());
 %>
 <span data-bs-toggle="tooltip" data-bs-placement="top" title="Regresar">
     <button id="back" onclick="location.href='InicioAlmacenista.jsp'" class="btn btn-outline-primary btn-lg" style="margin-left: 10px"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
@@ -76,129 +67,9 @@
         <div class="col">
             <br>
             <%
-                if(confirma == true){
-                ArrayList<Producto> listProd = new ArrayList<>();
-                ArrayList<DetalleEntrada> listEnt = deDao.getAllByEntradaFolio(ent.getEntrada_folio());
-                Entradas detEnt = listEnt.getFirst().getEntradas();
-
-                    System.out.println("no chingues");
-
-                for(DetalleEntrada dE : listEnt){
-                    Producto prod = dE.getProductos();
-                    listProd.add(prod);
-                }
+                if(folioT == null){
+                    System.out.println("Ahhhhhhhh");
             %>
-            <div class="container-fluid" id="contInicio">
-                <form action="entrada" method="post" id="entrada">
-                    <div class="container-sm">
-                        <h1 id="tit">FINALIZAR ENTRADA</h1>
-                    </div>
-                    <br>
-                    <!-- Inicio de columna -->
-                    <div class="row">
-                        <div class="col">
-                            <label>Folio:*</label>
-                            <input type="text" class="form-control" id="folioo" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=detEnt.getEntrada_folio()%>" name="folio">
-                            <label>Fecha:*</label>
-                            <input type="date" class="form-control" id="fechao" aria-placeholder="Fecha actual" name="fecha" pattern="yyyy-MM-dd" required value="<%=detEnt.getEntrada_fecha()%>" min="today">
-                            <label>Empleado:*</label>
-                            <input type="text" class="form-control" id="empleadoo" value="<%=name%>" readonly style="background-color: #D9D9D9;" name="employees">
-                        </div>
-                        <div class="col">
-                            <label>Proveedor:*</label>
-                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar proveedor">
-                            <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addProv">+</button>
-                            </span>
-                            <br>
-                            <select class="form-select form-control" name="suppliers" id="types2" required>
-                                <option value="" disabled>Selecciona un proveedor</option>
-                                <% for(Proveedor pr : listP){
-                                    if(pr.getProveedor_nombre().equalsIgnoreCase(detEnt.getProveedorNombre())){ %>
-                                <option value="<%=detEnt.getProveedorNombre()%>" selected><%detEnt.getProveedorNombre();%></option>
-                                    <% }else{%>
-                                <option value="<%=pr.getProveedor_nombre()%>"><%=pr.getProveedor_nombre()%></option>
-                                <% } }%>
-                            </select>
-                            <label>Folio de factura:*</label>
-                            <input type="text" class="form-control" maxlength="32" placeholder="Ingresa el folio de factura" name="fact" required max="10" value="<%=detEnt.getEntrada_folio_factura()%>">
-                        </div>
-                    </div>
-                    <br>
-                    <hr>
-                    <br>
-                    <%Producto prop = listProd.getFirst();%>
-                    <div class="container-fluid" id="CF">
-                        <div class="row">
-                            <div class="col-auto">
-                                <label>#</label>
-                                <br>
-                                <label id="Numeroo1">1</label>
-                            </div>
-                            <div class="col-sm">
-                                <label>PRODUCTO</label>
-                                <br>
-                                <input type="text" class="form-control" placeholder="Producto 1" id="productoo1" maxlength="50" name="producto[]" required value="<%=prop.getProducto_nombre()%>">
-                            </div>
-                            <div class="col-sm">
-                                <label>CANTIDAD</label>
-                                <br>
-                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidaad1" min="0" name="Cantidad[]" required value="<%=prop.getProducto_cantidad()%>">
-                            </div>
-                            <div class="col-sm">
-                                <label>PRECIO UNIT</label>
-                                <br>
-                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precioo1" name="Precio[]" required value="<%=prop.getProducto_precio()%>">
-                            </div>
-                            <div class="col-sm">
-                                <label>--</label>
-                                <br>
-                                <a class="btn btn-outline-success" type="button" id="nuevoz2">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C8.27614 2 8.5 2.22386 8.5 2.5V7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H8.5V13.5C8.5 13.7761 8.27614 14 8 14C7.72386 14 7.5 13.7761 7.5 13.5V8.5H2.5C2.22386 8.5 2 8.27614 2 8C2 7.72386 2.22386 7.5 2.5 7.5H7.5V2.5C7.5 2.22386 7.72386 2 8 2Z" fill="black"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="nuevosz2" class="container-fluid">
-                        <%for(Producto p :  listProd){%>
-                        <div class="row">
-                            <div class="col-auto">
-                                <label id="Numeroo"><%=uno%></label>
-                            </div>
-                            <div class="col-sm">
-                                <input type="text" class="form-control" placeholder="Producto 1" id="productoo" required maxlength="50" name="producto[]" value="<%=p.getProducto_nombre()%>">
-                            </div>
-                            <div class="col-sm">
-                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidaad" min="0" name="Cantidad[]" required value="<%=p.getProducto_cantidad()%>">
-                            </div>
-                            <div class="col-sm">
-                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" name="Precio[]" required value="<%=p.getProducto_precio()%>">
-                            </div>
-                            <div class="col-sm">
-                                <a class="btn btn-outline-danger" type="button" id="quitar" onclick="Borrar(this);">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2 8C2 7.72386 2.22386 7.5 2.5 7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H2.5C2.22386 8.5 2 8.27614 2 8Z" fill="black"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <%
-                            uno ++;
-                            }
-                        %>
-                    </div>
-                    <input type="hidden" value="<%=uno%>" name="counter" id="j">
-                    <input type="hidden" value="" name="action" id="validatorr">
-                    <center>
-                        <a class="btn btn-outline-primary btn-lg mr-2" id="save2" onclick="enviar('registrar')">Finalizar</a>
-                        <!--<a type="button" id="guardarr" class="btn btn-outline-success btn-lg" onclick="enviarSolicitud('guardar')">Guardar</a>-->
-                        <a type="button" id="cancelarr" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp?alert=cancel">Cancelar</a>
-                    </center>
-                </form>
-            </div>
-            <% }else{ %>
             <!-- Aqui -->
             <div class="container-fluid" id="contInicio" >
                 <form action="entrada" method="post" id="entrada">
@@ -212,7 +83,7 @@
                             <label>Folio:*</label>
                             <input type="text" class="form-control" id="folio" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=folio%>" name="folio">
                             <label>Fecha:*</label>
-                            <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual" name="fecha" pattern="yyyy-MM-dd" required>
+                            <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual" name="fecha" pattern="yyyy-MM-dd" required min="today">
                             <label>Empleado:*</label>
                             <input type="text" class="form-control" id="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;" name="employees">
                         </div>
@@ -232,9 +103,9 @@
                             <input type="text" class="form-control" maxlength="32" placeholder="Ingresa el folio de factura" name="fact" required max="10">
                         </div>
                     </div>
-                <br>
-                <hr>
-                <br>
+                    <br>
+                    <hr>
+                    <br>
                     <div class="container-fluid" id="cf">
                         <div class="row">
                             <div class="col-auto">
@@ -275,6 +146,125 @@
                         <a class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="enviar('registrar')">Finalizar</a>
                         <a type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="enviarSolicitud('guardar')">Guardar</a>
                         <a type="button" id="cancelar" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp?alert=cancel">Cancelar</a>
+                    </center>
+                </form>
+            </div>
+            <% }else{
+            Producto p1 = listEnters.get(0);
+            Entradas ent = (Entradas) sesion.getAttribute("entrada");
+
+            System.out.println("no chingues");
+                System.out.println(folioT);
+            %>
+            <div class="container-fluid" id="contInicio">
+                <form action="entrada" method="post" id="entradaa">
+                    <div class="container-sm">
+                        <h1 id="tit">FINALIZAR ENTRADA</h1>
+                    </div>
+                    <br>
+                    <!-- Inicio de columna -->
+                    <div class="row">
+                        <div class="col">
+                            <label>Folio:*</label>
+                            <input type="text" class="form-control" id="folioo" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=folioT%>" name="folio">
+                            <label>Fecha:*</label>
+                            <input type="date" class="form-control" id="fechao" aria-placeholder="Fecha actual" name="fecha" pattern="yyyy-MM-dd" required value="<%=ent.getEntrada_fecha()%>" min="today">
+                            <label>Empleado:*</label>
+                            <input type="text" class="form-control" id="empleadoo" value="<%=name%>" readonly style="background-color: #D9D9D9;" name="employees">
+                        </div>
+                        <div class="col">
+                            <label>Proveedor:*</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar proveedor">
+                            <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addProv">+</button>
+                            </span>
+                            <br>
+                            <select class="form-select form-control" name="suppliers" id="types2" required>
+                                <option value="" disabled>Selecciona un proveedor</option>
+                                <% for(Proveedor pr : listP){
+                                    if(pr.getProveedor_nombre().equalsIgnoreCase(ent.getProveedorNombre())){ %>
+                                <option value="<%=ent.getProveedorNombre()%>" selected><%ent.getProveedorNombre();%></option>
+                                <% }else{%>
+                                <option value="<%=pr.getProveedor_nombre()%>"><%=pr.getProveedor_nombre()%></option>
+                                <% } }%>
+                            </select>
+                            <label>Folio de factura:*</label>
+                            <input type="text" class="form-control" maxlength="32" placeholder="Ingresa el folio de factura" name="fact" required max="10" value="<%=ent.getEntrada_folio_factura()%>">
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="container-fluid" id="CF">
+                        <div class="row">
+                            <div class="col-auto">
+                                <label>#</label>
+                                <br>
+                                <label id="Numeroo1">1</label>
+                            </div>
+                            <div class="col-sm">
+                                <label>PRODUCTO</label>
+                                <br>
+                                <input type="text" class="form-control" placeholder="Producto 1" id="productoo1" maxlength="50" name="producto[]" required value="<%=p1.getProducto_nombre()%>">
+                            </div>
+                            <div class="col-sm">
+                                <label>CANTIDAD</label>
+                                <br>
+                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidaad1" min="0" name="Cantidad[]" required value="<%=p1.getProducto_cantidad()%>">
+                            </div>
+                            <div class="col-sm">
+                                <label>PRECIO UNIT</label>
+                                <br>
+                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precioo1" name="Precio[]" required value="<%=p1.getProducto_precio()%>">
+                            </div>
+                            <div class="col-sm">
+                                <label>--</label>
+                                <br>
+                                <a class="btn btn-outline-success" type="button" id="nuevoz2">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C8.27614 2 8.5 2.22386 8.5 2.5V7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H8.5V13.5C8.5 13.7761 8.27614 14 8 14C7.72386 14 7.5 13.7761 7.5 13.5V8.5H2.5C2.22386 8.5 2 8.27614 2 8C2 7.72386 2.22386 7.5 2.5 7.5H7.5V2.5C7.5 2.22386 7.72386 2 8 2Z" fill="black"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="nuevosz2" class="container-fluid">
+                        <%
+                            for(int i = 1; i < listEnters.size(); i++){
+                                Producto p = listEnters.get(i);
+                        %>
+                        <div class="row">
+                            <div class="col-auto">
+                                <label id="Numeroo"><%=uno%></label>
+                            </div>
+                            <div class="col-sm">
+                                <input type="text" class="form-control" placeholder="Producto 1" id="productoo" required maxlength="50" name="producto[]" value="<%=p.getProducto_nombre()%>">
+                            </div>
+                            <div class="col-sm">
+                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidaad" min="0" name="Cantidad[]" required value="<%=p.getProducto_cantidad()%>">
+                            </div>
+                            <div class="col-sm">
+                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" name="Precio[]" required value="<%=p.getProducto_precio()%>">
+                            </div>
+                            <div class="col-sm">
+                                <a class="btn btn-outline-danger" type="button" id="quitar" onclick="Borrar(this);">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2 8C2 7.72386 2.22386 7.5 2.5 7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H2.5C2.22386 8.5 2 8.27614 2 8Z" fill="black"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <%
+                                uno ++;
+                            }
+                        %>
+                    </div>
+                    <input type="hidden" value="<%=uno%>" name="counter" id="j">
+                    <input type="hidden" value="" name="action" id="validatorr">
+                    <center>
+                        <a class="btn btn-outline-primary btn-lg mr-2" id="save2" onclick="enviar('terminar')">Finalizar</a>
+                        <!--<a type="button" id="guardarr" class="btn btn-outline-success btn-lg" onclick="enviarSolicitud('guardar')">Guardar</a>-->
+                        <a type="button" id="cancelarr" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp?alert=cancel">Cancelar</a>
                     </center>
                 </form>
             </div>
@@ -355,12 +345,19 @@
         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
     </symbol>
 </svg>
+<script>
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById("fecha").setAttribute('min', today);
+    document.getElementById("fechao").setAttribute('min', today);
+</script>
 <%
     sesion.removeAttribute("usuario");
     sesion.removeAttribute("mensaje");
     sesion.removeAttribute("mensaje2");
     sesion.removeAttribute("error");
-    sesion.removeAttribute("ent");
+    sesion.removeAttribute("entrada");
+    sesion.removeAttribute("folioTerminar");
+    sesion.removeAttribute("Productos");
 %>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/ScriptEntrada.js"></script>

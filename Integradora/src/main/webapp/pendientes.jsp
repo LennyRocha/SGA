@@ -63,22 +63,23 @@
         <center><h1 class="text-success">¡NO HAY ENTRADAS PENDIENTES!</h1></center>
         <%}else{
             for(Entradas e : ent) { %>
-        <form action="entrada" method="get" id="pendiente">
-        <input type="hidden" value="" name="action" id="validator">
+        <%int uniqueID = e.getEntrada_id();%>
+        <form action="entrada" method="get" id="pendienteE_<%=uniqueID%>">
+        <input type="hidden" value="" name="action" id="validator_<%=uniqueID%>">
         <div class="register-card">
             <div class="register-info">
                 <p id="fol">Folio: <%=e.getEntrada_folio()%></p>
                 <p id="fech">Última modificación: <%=e.getEntrada_fecha()%></p>
             </div>
-            <button class="continue-button button-sm" onclick="enviarFormulario('continuar')">Continuar registro</button>
+            <button class="continue-button button-sm" onclick="enviarFormulario('continuar',<%=uniqueID%>)">Continuar registro</button>
             <div class="dropdown">
                 <span class="options" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">&#8942;</span>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" onclick="quitarFormulario('quitar')">BORRAR</a></li>
+                    <li><a class="dropdown-item" onclick="enviarFormulario('quitar',<%=uniqueID%>)">BORRAR</a></li>
                 </ul>
             </div>
-            <input type="hidden" id="F" value="<%=e.getEntrada_folio()%>" name="FolioE">
-            <input type="hidden" id="Id" value="<%=e.getEntrada_id()%>" name="idEnt">
+            <input type="hidden" id="F_<%=uniqueID%>" value="<%=e.getEntrada_folio()%>" name="FolioE">
+            <input type="hidden" id="Id_<%=uniqueID%>" value="<%=e.getEntrada_id()%>" name="idEnt">
         </div>
         </form>
         <%}

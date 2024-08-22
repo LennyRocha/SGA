@@ -178,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var today = new Date().toISOString().split('T')[0];
 document.getElementById("fecha").setAttribute('min', today);
+document.getElementById("fechao").setAttribute('min', today);
 
 const saveP = document.getElementById("producto");
 const watch = document.getElementById("watch");
