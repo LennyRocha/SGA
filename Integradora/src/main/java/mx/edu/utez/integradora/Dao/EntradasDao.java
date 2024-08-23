@@ -327,20 +327,19 @@ public class EntradasDao {
 
     public boolean updateEntrada(Entradas entrada) {
         boolean respuesta = false;
-        String query = "UPDATE Entrada SET entrada_folio = ?, entrada_fecha = ?, entrada_proveedor_id = ?, entrada_usuario_id = ?, entrada_estado = ?, entrada_folio_factura = ? WHERE entrada_id = ?";
+        String query = "UPDATE Entrada SET entrada_fecha = ?, entrada_proveedor_id = ?, entrada_usuario_id = ?, entrada_estado = ?, entrada_folio_factura = ? WHERE entrada_folio = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             con.setAutoCommit(false);
 
             // Actualizar la entrada
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, entrada.getEntrada_folio());
-            ps.setDate(2, entrada.getEntrada_fecha());
-            ps.setInt(3, entrada.getProveedor().getProveedor_id());
-            ps.setInt(4, entrada.getUsuario().getId());
-            ps.setString(5, entrada.getEstado());
-            ps.setInt(6, entrada.getEntrada_folio_factura());
-            ps.setInt(7, entrada.getEntrada_id());
+            ps.setDate(1, entrada.getEntrada_fecha());
+            ps.setInt(2, entrada.getProveedor().getProveedor_id());
+            ps.setInt(3, entrada.getUsuario().getId());
+            ps.setString(4, entrada.getEstado());
+            ps.setInt(5, entrada.getEntrada_folio_factura());
+            ps.setString(6, entrada.getEntrada_folio());
 
             if (ps.executeUpdate() > 0) {
                 // Actualizar los detalles asociados

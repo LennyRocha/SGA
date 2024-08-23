@@ -334,7 +334,7 @@
     #saludo{
         font-size: larger;
     }
-    .swal-title {
+    .Swal-title {
         color: #1D3557; /* Change this to your desired color */
     }
     /*Aqui terminan*/

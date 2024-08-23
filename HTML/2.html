@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 2</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <script>
+    // Function to get query parameters
+    function getQueryParams() {
+      const params = {};
+      window.location.search.substring(1).split('&').forEach(param => {
+        const [key, value] = param.split('=');
+        params[key] = value;
+      });
+      return params;
+    }
+
+    // Check for the 'alert' query parameter
+    const params = getQueryParams();
+    if (params.alert === 'success') {
+      Swal.fire({
+        title: 'Welcome!',
+        text: 'You have successfully navigated to Page 2.',
+        icon: 'success',
+        confirmButtonText: 'Great'
+      });
+    }
+  </script>
+</body>
+</html>

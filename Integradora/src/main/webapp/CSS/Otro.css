@@ -17,6 +17,10 @@ input:read-only{
     color: #CED4DA;;
 }
 
+input{
+    color: #75778C;
+}
+
 #folio{
     border-color: #CED4DA;
     color: #75778C;

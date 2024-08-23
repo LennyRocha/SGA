@@ -119,7 +119,7 @@
     <script>
         Swal.fire({
             title: '¡Exito!',
-            text: 'Pendiente eliminado, huevon.',
+            text: '<%=mensaje2%>',
             icon: 'success',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#4A4E69',
