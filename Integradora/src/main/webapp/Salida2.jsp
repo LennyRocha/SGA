@@ -197,11 +197,10 @@
                         <div id="editA" style="display: none;">
                             <div class="mb-3" id="viejaArea">
                                 <%Area area = new Area();%>
-                                <select class="form-select form-control" id="types" required name="nombre_area_antigua">
+                                <select class="form-select form-control" id="types" required name="id_area">
                                     <option value="" disabled selected>Selecciona una area</option>
                                     <% for(Area a : listA){ %>
-                                    <option value="<%=a.getArea_identidad()%>"><%=a.getArea_identidad()%> - <%=a.getArea_nombre()%></option>
-                                    <option value="<%=a.getArea_id()%>" style="display: none" name="id_area"><%=a.getArea_id()%></option>
+                                    <option value="<%=a.getArea_id()%>"><%=a.getArea_identidad()%> - <%=a.getArea_nombre()%></option>
                                     <%}%>
                                 </select>
                                 <div class="mb-3">

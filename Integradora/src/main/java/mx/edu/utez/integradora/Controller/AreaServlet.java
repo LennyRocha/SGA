@@ -83,17 +83,9 @@ public class AreaServlet extends HttpServlet{
                 }
                 break;
             case "edit":
-                String new_nombre_area = req.getParameter("nombre_proveedor");
+                String new_nombre_area = req.getParameter("nombre_area_nueva");
                 int id_area = Integer.parseInt(req.getParameter("id_area"));
-                char new_letra_area = req.getParameter("letra_area").charAt(0);
-                ArrayList<Area> areass = asDao.getAll();
-                boolean lamismaArea = false;
-                for (Area a : areass) {
-                    if (a.getArea_identidad() == new_letra_area) {
-                        lamismaArea = true;
-                    }
-                }
-                if (!lamismaArea) {
+                char new_letra_area = req.getParameter("identidad_area_nueva").charAt(0);
                     as.setArea_nombre(new_nombre_area);
                     as.setArea_id(id_area);
                     as.setArea_identidad(String.valueOf(new_letra_area));
@@ -111,10 +103,6 @@ public class AreaServlet extends HttpServlet{
                         System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
                     }
                     resp.sendRedirect(ruta);
-                }else{
-                    req.getSession().setAttribute("mensaje", "La letra que deseas asignar, ya la posee ptra área, prueba con otra");
-                    resp.sendRedirect(ruta);
-                }
                 break;
             //resp.sendRedirect(ruta);
         }
