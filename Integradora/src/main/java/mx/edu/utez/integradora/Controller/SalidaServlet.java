@@ -95,7 +95,7 @@ public class SalidaServlet extends HttpServlet {
                 salidaDetalle.setSalidas(salida);
                 salidaDetalle.setCantidad(sumCant);
                 salidaDetalle.setProductos_salida(pr);
-                salidaDetalle.setUnidad_medida(String.valueOf(um));
+                salidaDetalle.setUnidad_medida(um);
                 salidaDetalle.setValor_salida(sumAll);
                 salidaList.add(salidaDetalle);
             } else {
@@ -155,7 +155,7 @@ public class SalidaServlet extends HttpServlet {
                         salidaDetalle.setProductos_salida(prop);
                         salidaDetalle.setValor_salida(prop.getProducto_cantidad() * prop.getProducto_precio());
                         salidaList.add(salidaDetalle);
-                        salidaDetalle.setUnidad_medida(String.valueOf(unidmed));
+                        salidaDetalle.setUnidad_medida(unidmed);
                         if(dsDao.insertDetalleSalida(salidaDetalle)){
                             System.out.println(salidaList.size());
                             System.out.println("Detalle insertado del producto: "+salidaDetalle.getProductos_salida().getProducto_nombre());
@@ -225,7 +225,7 @@ public class SalidaServlet extends HttpServlet {
                         salidaDetalle.setProductos_salida(propi);
                         salidaDetalle.setValor_salida(propi.getProducto_cantidad() * propi.getProducto_precio());
                         salidaList.add(salidaDetalle);
-                        salidaDetalle.setUnidad_medida(String.valueOf(unidmed));
+                        salidaDetalle.setUnidad_medida(unidmed);
                         if (dsDao.insertDetalleSalida(salidaDetalle)) {
                             System.out.println(salidaList.size());
                             System.out.println("Detalle guardado del producto: " + salidaDetalle.getProductos_salida().getProducto_nombre());
@@ -268,7 +268,7 @@ public class SalidaServlet extends HttpServlet {
                 salida.setSalida_fecha(fecha);
                 salida.setUsuarios(usuario);
                 salida.setAreas(AreaObj);
-                salidaDetalle.setUnidad_medida(unidad);
+                salidaDetalle.setUnidad_medida(unidmed);
                 salida.setSalida_estado("exito");
             } catch (NumberFormatException e) {
                 e.printStackTrace();
