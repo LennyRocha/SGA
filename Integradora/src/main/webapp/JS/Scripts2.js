@@ -1,6 +1,7 @@
-const nuevos = document.getElementById("nuevos");
-const nuevo = document.getElementById("nuevo");
+const nuevosz3 = document.getElementById("nuevosz3");
+const nuevoz3 = document.getElementById("nuevoz3");
 const save = document.getElementById("save");
+
 let i = 2;
 
 const svgString = `
@@ -9,8 +10,7 @@ const svgString = `
 </svg>
 `;
 
-nuevo.addEventListener("click", () => {
-
+nuevoz3.addEventListener("click", () => {
     const wrapper = document.createElement("div");
     wrapper.setAttribute("class", "row-wrapper");
 
@@ -24,7 +24,7 @@ nuevo.addEventListener("click", () => {
     const input = document.createElement("input");
     input.setAttribute("type", "text");
     input.setAttribute("name", "producto[]");
-    input.setAttribute("id", "Producto"+i);
+    input.setAttribute("id", "Producto" + i);
     input.setAttribute("placeholder", "Producto " + i);
     input.setAttribute("class", "form-control");
     col1.appendChild(input);
@@ -34,8 +34,9 @@ nuevo.addEventListener("click", () => {
     const input2 = document.createElement("input");
     input2.setAttribute("type", "number");
     input2.setAttribute("name", "Cantidad[]");
-    input2.setAttribute("id", "Cantidad"+i);
-    input2.setAttribute("oninput", "calculateTotal(this,"+i+")");
+    input2.setAttribute("id", "cantidad" + i);
+    input2.setAttribute("min", "0");  // Valor mínimo
+    input2.setAttribute("oninput", `calculateTotal(this, ${i})`);
     input2.setAttribute("placeholder", "Cantidad " + i);
     input2.setAttribute("class", "form-control");
     col2.appendChild(input2);
@@ -43,10 +44,12 @@ nuevo.addEventListener("click", () => {
     const col3 = document.createElement("div");
     col3.setAttribute("class", "col-sm");
     const input3 = document.createElement("input");
-    input3.setAttribute("type", "text");
+    input3.setAttribute("type", "tel");
     input3.setAttribute("name", "Precio[]");
-    input3.setAttribute("id", "Precio"+i);
-    input3.setAttribute("oninput", "validarNumero(this); calculateTotal(this,"+i+")");
+    input3.setAttribute("id", "precio" + i);
+    input3.setAttribute("min", "0.00");  // Valor mínimo
+    input3.setAttribute("step", "0.01");
+    input3.setAttribute("oninput", `calculateTotal(this, ${i}); validarNumero(this)`);
     input3.setAttribute("placeholder", "Precio " + i);
     input3.setAttribute("class", "form-control");
     col3.appendChild(input3);
@@ -56,18 +59,17 @@ nuevo.addEventListener("click", () => {
     const input4 = document.createElement("input");
     input4.setAttribute("type", "text");
     input4.setAttribute("name", "Unidad[]");
-    input4.setAttribute("id", "Unidad"+i);
+    input4.setAttribute("id", "Unidad" + i);
     input4.setAttribute("placeholder", "Unidad " + i);
     input4.setAttribute("class", "form-control");
     col4.appendChild(input4);
-
 
     const col7 = document.createElement("div");
     col7.setAttribute("class", "col-sm");
     const input5 = document.createElement("input");
     input5.setAttribute("type", "text");
-    input5.setAttribute("name", "precioT[]");
-    input5.setAttribute("id", "precioT"+i);
+    input5.setAttribute("name", "PrecioT[]");
+    input5.setAttribute("id", "PrecioT" + i);
     input5.setAttribute("placeholder", "Precio Total " + i);
     input5.setAttribute("class", "form-control");
     col7.appendChild(input5);
@@ -100,7 +102,7 @@ nuevo.addEventListener("click", () => {
     wrapper.appendChild(div);
     wrapper.appendChild(br);
 
-    nuevos.appendChild(wrapper);
+    nuevosz3.appendChild(wrapper);
 
     i++;
 });
@@ -108,7 +110,6 @@ nuevo.addEventListener("click", () => {
 function borrar(element) {
     element.parentElement.parentElement.parentElement.remove();
     i--;
-
 
 }
 
@@ -121,120 +122,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var today = new Date().toISOString().split('T')[0];
 document.getElementById("fecha").setAttribute('min', today);
-
-function validarNumero(input) {
-    input.value = input.value.replace(/[^0-9.]/g, '');
-}
-
-function getQueryParams() {
-    const params = {};
-    window.location.search.substring(1).split('&').forEach(param => {
-        const [key, value] = param.split('=');
-        params[key] = value;
-    });
-    return params;
-}
-
-const params = getQueryParams();
-
-if (params.alert === 'si') {
-    Swal.fire({
-        title: '¡Exito!',
-        text: 'Salida exitosa.',
-        icon: 'success',
-        confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#4A4E69',
-        confirmButtonBorderColor: '#4A4E69',
-    });
-}
-
-if (params.alert === 'chi') {
-    Swal.fire({
-        title: '¡Exito!',
-        text: 'Salida guardada correctamente.',
-        icon: 'success',
-        confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#4A4E69',
-        confirmButtonBorderColor: '#4A4E69',
-    });
-}
-
-if (params.alert === 'succesfull') {
-    Swal.fire({
-        title: '¡Exito!',
-        text: 'Salida recuperada exitosamente.',
-        icon: 'success',
-        confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#4A4E69',
-        confirmButtonBorderColor: '#4A4E69',
-    });
-}
-
-if (params.alert === 'succes') {
-    Swal.fire({
-        title: '¡Exito!',
-        text: 'Salida eliminada.',
-        icon: 'success',
-        confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#4A4E69',
-        confirmButtonBorderColor: '#4A4E69',
-    });
-}
-
-function mostrarCarga() {
-    Swal.fire({
-        title: 'Procesando...',
-        text: 'Por favor espera',
-
-        timer: 5000, // La alerta se cerrará automáticamente después de 5 segundos
-        timerProgressBar: true,
-        willOpen: () => {
-            Swal.showLoading();
-        },
-    });
-}
-
-function enviarSolicitudSalida(action) {
-    mostrarCarga();
-    document.getElementById('validator').value = action;
-    document.getElementById('salida').submit();
-}
-
-function enviarSalida(action) {
-    mostrarCarga();
-    document.getElementById('validator').value = action;
-    document.getElementById('salida').submit();
-}
-
-function calculateTotal(element, num) {
-    const row = element.closest('div');
-    const cantidad = row.querySelector('.Cantidad'+num).value;
-    const precio = row.querySelector('.Precio'+num).value;
-    const precioTotal = row.querySelector('.precioT'+num);
-
-    precioTotal.value = cantidad * precio;
-
-    updateTotals(num);
-}
-
-function updateTotals(num) {
-    const rows = document.querySelectorAll('#calc div');
-    let totalProductos = 0;
-    let montoTotal = 0;
-
-    rows.forEach(row => {
-        const cantidad = parseFloat(row.querySelector('.cantidad'+num).value) || 0;
-        const precioTotal = parseFloat(row.querySelector('.precioT'+num).value) || 0;
-
-        totalProductos += cantidad;
-        montoTotal += precioTotal;
-    });
-
-    document.getElementById('precFin').value = totalProductos;
-    document.getElementById('precFin').value = montoTotal;
-}
-
-function doSomething(element, num){
-    validarNumero(element)
-    calculateTotal(element,num)
-}

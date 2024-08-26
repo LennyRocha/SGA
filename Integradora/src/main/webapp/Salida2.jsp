@@ -34,6 +34,41 @@
         background-color: #F2E9E4;
     }
 </style>
+<script>
+    function calculateTotal(element, index) {
+        const cantidad = document.getElementById('Cantidad'+index).value;
+        const precio = document.getElementById('Precio'+index).value;
+        const precioTotal = document.getElementById('PrecioT'+index);
+
+        precioTotal.value = cantidad * precio;
+
+        document.getElementById('precFin').value = precioTotal;
+
+        updateTotals();
+    }
+
+    function validarNumero(input) {
+        input.value = input.value.replace(/[^0-9.]/g, '');
+    }
+
+    function updateTotals() {
+        const cantidadInputs = document.querySelectorAll('[name="Cantidad[]"]');
+        const precioTotalInputs = document.querySelectorAll('[name="PrecioT[]"]');
+        let totalProductos = 0;
+        let montoTotal = 0;
+
+        cantidadInputs.forEach(input => {
+            totalProductos += parseFloat(input.value) || 0;
+        });
+
+        precioTotalInputs.forEach(input => {
+            montoTotal += parseFloat(input.value) || 0;
+        });
+
+        document.getElementById('prodFin').value = totalProductos;
+        document.getElementById('precFin').value = montoTotal;
+    }
+</script>
 <jsp:include page="/Templates/Header2.jsp" />
 <%
     HttpSession sesion = (HttpSession) request.getSession();
@@ -88,7 +123,7 @@
                 <br>
                 <hr>
                 <br>
-                    <div class="container-sm">
+                    <div class="container-sm" id="calc">
                         <div class="row">
                             <div class="col-auto">
                                 <label>#</label>
@@ -98,17 +133,17 @@
                             <div class="col-sm">
                                 <label>PRODUCTO<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required maxlength="50">
+                                <input type="text" class="form-control" placeholder="Producto 1" id="Producto1" required maxlength="50" name="Producto[]">
                             </div>
                             <div class="col-sm">
                                 <label>CANTIDAD<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1" min="0">
+                                <input type="number" class="form-control" placeholder="Cantidad 1" id="Cantidad1" min="0" oninput="calculateTotal(this,1)" name="Cantidad[]">
                             </div>
                             <div class="col-sm">
                                 <label>PREC UNIT<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precio1">
+                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this); calculateTotal(this,1)" min="0" step="0.01" maxlength="10" id="Precio1" name="Precio[]">
                             </div>
                             <div class="col-sm">
                                 <label>U. MED<strong style="color: darkred">*</strong></label>
@@ -116,7 +151,7 @@
                                   <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="addUnid">+</button>
                                 </span>
                                 <br>
-                                <select class="form-select form-control" name="types" id="unidad" name="unidad">
+                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]">
                                     <option value="" disabled selected>Selecciona una unidad</option>
                                     <% for(UnidMed u : listU){ %>
                                     <option value="<%=u.getUnidad_nombre()%>"><%=u.getUnidad_nombre()%></option>
@@ -126,12 +161,12 @@
                             <div class="col-sm">
                                 <label>PREC TOTAL</label>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Precio Total 1" id="precioT1" readonly>
+                                <input type="text" class="form-control" placeholder="Precio Total 1" id="PrecioT1" readonly name="PrecioT[]">
                             </div>
                             <div class="col-sm">
                                 <label>--</label>
                                 <br>
-                                <a class="btn btn-outline-success" type="button" id="nuevo">
+                                <a class="btn btn-outline-success" type="button" id="nuevoz3">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C8.27614 2 8.5 2.22386 8.5 2.5V7.5H13.5C13.7761 7.5 14 7.72386 14 8C14 8.27614 13.7761 8.5 13.5 8.5H8.5V13.5C8.5 13.7761 8.27614 14 8 14C7.72386 14 7.5 13.7761 7.5 13.5V8.5H2.5C2.22386 8.5 2 8.27614 2 8C2 7.72386 2.22386 7.5 2.5 7.5H7.5V2.5C7.5 2.22386 7.72386 2 8 2Z" fill="black"/>
                                     </svg>
@@ -139,7 +174,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="nuevos" class="container-sm"></div>
+                    <div id="nuevosz3" class="container-sm"></div>
                     <br>
                     <div class="row">
                         <div class="col"><label for="prodFin">Total de productos:</label></div>
@@ -413,7 +448,7 @@
     sesion.removeAttribute("error");
     sesion.removeAttribute("ent");
 %>
-<script src="${pageContext.request.contextPath}/JS/Script2.js"></script>
+<script src="${pageContext.request.contextPath}/JS/Scripts2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>

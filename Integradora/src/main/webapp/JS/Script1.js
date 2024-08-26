@@ -50,6 +50,7 @@ nuevoz2.addEventListener("click", () => {
     input3.setAttribute("type", "text");
     input3.setAttribute("name", "Precio[]");
     input3.setAttribute("id", "Precio");
+    input3.setAttribute("oninput", "validarNumero(this)");
     input3.setAttribute("placeholder", "Precio " + unoJs);
     input3.setAttribute("class", "form-control");
     col3.appendChild(input3);

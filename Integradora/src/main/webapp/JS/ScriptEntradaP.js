@@ -45,6 +45,7 @@
               input3.setAttribute("type", "text");
               input3.setAttribute("name", "Precio" + i);
               input3.setAttribute("id", "Precio"+i);
+              input3.setAttribute("oninput", "validarNumero(this)");
               input3.setAttribute("placeholder", "Precio " + i);
               input3.setAttribute("class", "form-control");
               col3.appendChild(input3);
