@@ -10,6 +10,7 @@ import mx.edu.utez.integradora.Dao.AreaDao;
 import mx.edu.utez.integradora.Model.Area;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name="AreaServlet", value="/area")
 public class AreaServlet extends HttpServlet{
@@ -50,46 +51,70 @@ public class AreaServlet extends HttpServlet{
         String ruta = req.getContextPath()+"/Salida2.jsp";
         Area as = new Area();
         AreaDao asDao = new AreaDao();
-        switch (operacion){
+        switch (operacion) {
             case "add":
                 String nombre_area = req.getParameter("nombre_area");
                 char letra_area = req.getParameter("letra_area").charAt(0);
-                as.setArea_nombre(nombre_area);
-                as.setArea_identidad(String.valueOf(letra_area));
-                if (asDao.insertArea(as)) {
-                    req.getSession().setAttribute("mensaje2","Area registrada");
-                    req.getSession().setAttribute("nomArea",nombre_area);
-                    req.getSession().setAttribute("letArea",letra_area);
-                    System.out.println("<p style=\"color: red;\">Area Registrada</p>");
-                } else {
-                    req.getSession().setAttribute("mensaje","No se pudo registrar la area");
-                    System.out.println(nombre_area);
-                    System.out.println(letra_area);
-                    System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+                ArrayList<Area> areas = asDao.getAll();
+                boolean mismaArea = false;
+                for (Area a : areas) {
+                    if (a.getArea_identidad() == letra_area) {
+                        mismaArea = true;
+                    }
                 }
-                resp.sendRedirect(ruta);
+                if (!mismaArea) {
+                    as.setArea_nombre(nombre_area);
+                    as.setArea_identidad(String.valueOf(letra_area));
+                    if (asDao.insertArea(as)) {
+                        req.getSession().setAttribute("mensaje2", "Area registrada");
+                        req.getSession().setAttribute("nomArea", nombre_area);
+                        req.getSession().setAttribute("letArea", letra_area);
+                        System.out.println("<p style=\"color: red;\">Area Registrada</p>");
+                    } else {
+                        req.getSession().setAttribute("mensaje", "No se pudo registrar la area");
+                        System.out.println(nombre_area);
+                        System.out.println(letra_area);
+                        System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+                    }
+                    resp.sendRedirect(ruta);
+                }else{
+                    req.getSession().setAttribute("mensaje", "La letra del área ya existe");
+                    resp.sendRedirect(ruta);
+                }
                 break;
             case "edit":
                 String new_nombre_area = req.getParameter("nombre_proveedor");
                 int id_area = Integer.parseInt(req.getParameter("id_area"));
                 char new_letra_area = req.getParameter("letra_area").charAt(0);
-                as.setArea_nombre(new_nombre_area);
-                as.setArea_id(id_area);
-                as.setArea_identidad(String.valueOf(new_letra_area));
-                if (asDao.updateArea(as)) {
-                    //Mandar al usuario al inicio de sesión
-                    req.getSession().setAttribute("mensaje2","Area actualizada");
-                    req.getSession().setAttribute("nomArea", new_nombre_area);
-                    System.out.println("<p style=\"color: red;\">Area Registrada</p>");
-                } else {
-                    //Mandar un mensaje de errror y regesar al formulario de registro
-                    req.getSession().setAttribute("mensaje","No se pudo actualizar la area");
-                    System.out.println(new_nombre_area);
-                    System.out.println(id_area);
-                    System.out.println(new_letra_area);
-                    System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+                ArrayList<Area> areass = asDao.getAll();
+                boolean lamismaArea = false;
+                for (Area a : areass) {
+                    if (a.getArea_identidad() == new_letra_area) {
+                        lamismaArea = true;
+                    }
                 }
-                resp.sendRedirect(ruta);
+                if (!lamismaArea) {
+                    as.setArea_nombre(new_nombre_area);
+                    as.setArea_id(id_area);
+                    as.setArea_identidad(String.valueOf(new_letra_area));
+                    if (asDao.updateArea(as)) {
+                        //Mandar al usuario al inicio de sesión
+                        req.getSession().setAttribute("mensaje2", "Area actualizada");
+                        req.getSession().setAttribute("nomArea", new_nombre_area);
+                        System.out.println("<p style=\"color: red;\">Area Registrada</p>");
+                    } else {
+                        //Mandar un mensaje de errror y regesar al formulario de registro
+                        req.getSession().setAttribute("mensaje", "No se pudo actualizar la area");
+                        System.out.println(new_nombre_area);
+                        System.out.println(id_area);
+                        System.out.println(new_letra_area);
+                        System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+                    }
+                    resp.sendRedirect(ruta);
+                }else{
+                    req.getSession().setAttribute("mensaje", "La letra que deseas asignar, ya la posee ptra área, prueba con otra");
+                    resp.sendRedirect(ruta);
+                }
                 break;
             //resp.sendRedirect(ruta);
         }

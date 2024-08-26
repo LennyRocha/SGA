@@ -64,24 +64,24 @@
                     <!-- Inicio de columna -->
                     <div class="row">
                         <div class="col">
-                            <label>Folio:*</label>
+                            <label>Folio:<strong style="color: darkred">*</strong></label>
                             <input type="text" class="form-control" placeholder="Folio" readonly style="background-color: #D9D9D9;">
-                            <label>Área de salida:*</label>
+                            <label>Área de salida:<strong style="color: darkred">*</strong></label>
                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar area de salida">
                               <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addArea">+</button>
                             </span>
                             <br>
-                            <select class="form-select form-control" name="types" id="area" name="area">
+                            <select class="form-select form-control" id="area" name="area">
                                 <option value="" disabled selected>Selecciona un area</option>
                                 <% for(Area a : listA){ %>
-                                <option value="<%=a.getArea_identidad()%>"><%=a.getArea_identidad()%></option>
+                                <option value="<%=a.getArea_identidad()%>"><%=a.getArea_identidad()%> - <%=a.getArea_nombre()%></option>
                                 <% } %>
                             </select>
                         </div>
                         <div class="col">
-                            <label>Fecha:*</label>
+                            <label>Fecha:<strong style="color: darkred">*</strong></label>
                             <input type="date" class="form-control" id="fecha" name="fecha" aria-placeholder="Fecha actual">
-                            <label>Empleado:*</label>
+                            <label>Empleado:<strong style="color: darkred">*</strong></label>
                             <input type="text" class="form-control" id="empleado" name="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;">
                         </div>
                     </div>
@@ -96,22 +96,22 @@
                                 <label id="numero">1</label>
                             </div>
                             <div class="col-sm">
-                                <label>PRODUCTO</label>
+                                <label>PRODUCTO<strong style="color: darkred">*</strong></label>
                                 <br>
                                 <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required maxlength="50">
                             </div>
                             <div class="col-sm">
-                                <label>CANTIDAD</label>
+                                <label>CANTIDAD<strong style="color: darkred">*</strong></label>
                                 <br>
                                 <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1" min="0">
                             </div>
                             <div class="col-sm">
-                                <label>PREC UNIT</label>
+                                <label>PREC UNIT<strong style="color: darkred">*</strong></label>
                                 <br>
                                 <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precio1">
                             </div>
                             <div class="col-sm">
-                                <label>U. MED</label>
+                                <label>U. MED<strong style="color: darkred">*</strong></label>
                                 <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">
                                   <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addUnid">+</button>
                                 </span>
@@ -148,9 +148,13 @@
                         <div class="col"><input type="text" class="form-control" placeholder="Monto total" id="precFin" readonly></div>
                     </div>
                     <br>
+                    <center>
+                    <strong class="text-muted">* Obligatorio</strong>
+                    <br>
                     <a class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="enviarSalida('registrar')">Finalizar</a>
                     <a type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="enviarSolicitudSalida('guardar')">Guardar</a>
                     <a type="button" id="cancelar" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp?alert=cancel">Cancelar</a>
+                    </center>
                 </form>
             </div>
             <br>
@@ -187,6 +191,7 @@
                         <div class="mb-3" id="nvaArea" style="display: none;">
                             <label for="newArea" class="col-form-label">Nueva area de salida:</label>
                             <input type="text" class="form-control" id="newArea" name="nombre_area">
+                            <label for="newArea" class="col-form-label">Nueva letra asociada:</label>
                             <input type="text" class="form-control" id="newArea1" name="letra_area">
                         </div>
                         <div id="editA" style="display: none;">
@@ -195,26 +200,24 @@
                                 <select class="form-select form-control" id="types" required name="nombre_area_antigua">
                                     <option value="" disabled selected>Selecciona una area</option>
                                     <% for(Area a : listA){ %>
-                                    <option value="<%=a.getArea_identidad()%>"><%=a.getArea_identidad()%></option>
-                                    <option value="<%=a.getArea_id()%>" style="display: none;" name="id_area"><%=a.getArea_id()%></option>
-                                    <%
-                                            area.setArea_id(a.getArea_id());
-                                            area.setArea_identidad(a.getArea_ident(a.getArea_identidad()));
-                                        }
-                                    %>
+                                    <option value="<%=a.getArea_identidad()%>"><%=a.getArea_identidad()%> - <%=a.getArea_nombre()%></option>
+                                    <option value="<%=a.getArea_id()%>" style="display: none" name="id_area"><%=a.getArea_id()%></option>
+                                    <%}%>
                                 </select>
-                                <!--<input type="hidden" value="<%=area.getArea_id()%>">-->
                                 <div class="mb-3">
-                                    <label for="nuevoName" class="col-form-label">Nuevo nombre:</label>
+                                    <label for="nuevoName" class="col-form-label"><strong style="color: darkred">*</strong>Nuevo nombre:</label>
                                     <input type="text" class="form-control" id="nuevoName" name="nombre_area_nueva">
+                                    <label for="nuevoName" class="col-form-label"><strong style="color: darkred">*</strong>Nueva letra de asociación:</label>
                                     <input type="text" class="form-control" id="nuevaIdent" name="identidad_area_nueva">
                                     <input type="hidden" value="" name="operacion" id="op">
+                                    <br>
+                                    <strong class="text-muted" style="font-style: italic">* Ambos son obligatorios, en caso de no querer modificar alguno, selecciona el valor anterior.</strong>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer" style="background-color: #EB616B">
-                        <button type="submit" class="btn btn-success" id="saveChanges">Enviar</button>
+                        <button type="submit" class="btn btn-success" id="saveChanges">Guardar</button>
                         <button type="button" class="btn btn-warning" id="close" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
@@ -299,9 +302,7 @@
                                     <option value="<%=u.getUnidad_nombre()%>"><%=u.getUnidad_nombre()%></option>
                                     <option value="<%=u.getUnidad_id()%>" style="display: none;" name="id_unidad"><%=u.getUnidad_id()%></option>
                                     <%
-                                            unidMed.setUnidad_id(u.getUnidad_id());
-                                            unidMed.setUnidad_nombre(u.getUnidad_nombre());
-                                        }
+                                    }
                                     %>
                                 </select>
                                 <!--<input type="hidden" value="<%=unidMed.getUnidad_id()%>">-->
@@ -314,7 +315,7 @@
                         </div>
                     </div>
                     <div class="modal-footer" style="background-color: #EB616B">
-                        <button type="submit" class="btn btn-success" id="saveChanges">Enviar</button>
+                        <button type="submit" class="btn btn-success" id="saveChanges">Guardar</button>
                         <button type="button" class="btn btn-warning" id="close" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>

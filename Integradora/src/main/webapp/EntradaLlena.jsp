@@ -95,15 +95,15 @@
                     <!-- Inicio de columna -->
                     <div class="row">
                         <div class="col">
-                            <label>Folio:*</label>
+                            <label>Folio:<strong style="color: darkred">*</strong></label>
                             <input type="text" class="form-control" id="folio" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=folioT%>" name="folio">
-                            <label>Fecha:*</label>
+                            <label>Fecha:<strong style="color: darkred">*</strong></label>
                             <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual" name="fecha" pattern="yyyy-MM-dd" required value="<%=ent.getEntrada_fecha()%>" min="today">
-                            <label>Empleado:*</label>
+                            <label>Empleado:<strong style="color: darkred">*</strong></label>
                             <input type="text" class="form-control" id="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;" name="employees">
                         </div>
                         <div class="col">
-                            <label>Proveedor:*</label>
+                            <label>Proveedor:<strong style="color: darkred">*</strong></label>
                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar proveedor">
                             <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addProv">+</button>
                             </span>
@@ -197,6 +197,9 @@
                     <%uno = 2;%>
                     <input type="hidden" value="" name="action" id="validatorr">
                     <center>
+                        <strong class="text-muted">* Obligatorio</strong>
+                        <br>
+                        <br>
                         <a class="btn btn-outline-primary btn-lg mr-2" id="save2" onclick="enviar('terminar')">Concluir</a>
                         <a type="button" id="cancelarr" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp?alert=cancel">Cancelar</a>
                     </center>
@@ -259,7 +262,7 @@
                         </div>
                     </div>
                     <div class="modal-footer" style="background-color: #EB616B">
-                        <button type="submit" class="btn btn-success" id="saveChanges">Enviar</button>
+                        <button type="submit" class="btn btn-success" id="saveChanges">Guardar</button>
                         <button type="button" class="btn btn-warning" id="close" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>

@@ -79,15 +79,15 @@
                     <!-- Inicio de columna -->
                     <div class="row">
                         <div class="col">
-                            <label>Folio:*</label>
+                            <label>Folio:<strong style="color: darkred">*</strong></label>
                             <input type="text" class="form-control" id="folio" placeholder="Folio" readonly style="background-color: #D9D9D9;" value="<%=folio%>" name="folio">
-                            <label>Fecha:*</label>
+                            <label>Fecha:<strong style="color: darkred">*</strong></label>
                             <input type="date" class="form-control" id="fecha" aria-placeholder="Fecha actual" name="fecha" pattern="yyyy-MM-dd" required>
-                            <label>Empleado:*</label>
+                            <label>Empleado:<strong style="color: darkred">*</strong></label>
                             <input type="text" class="form-control" id="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;" name="employees">
                         </div>
                         <div class="col">
-                            <label>Proveedor:*</label>
+                            <label>Proveedor:<strong style="color: darkred">*</strong></label>
                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar proveedor">
                             <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addProv">+</button>
                             </span>
@@ -113,17 +113,17 @@
                                 <label id="numero">1</label>
                             </div>
                             <div class="col-sm">
-                                <label>PRODUCTO</label>
+                                <label>PRODUCTO<strong style="color: darkred">*</strong></label>
                                 <br>
                                 <input type="text" class="form-control" placeholder="Producto 1" id="producto1" required maxlength="50" name="producto[]">
                             </div>
                             <div class="col-sm">
-                                <label>CANTIDAD</label>
+                                <label>CANTIDAD<strong style="color: darkred">*</strong></label>
                                 <br>
                                 <input type="number" class="form-control" placeholder="Cantidad 1" id="cantidad1" min="0" name="Cantidad[]" required>
                             </div>
                             <div class="col-sm">
-                                <label>PRECIO UNIT</label>
+                                <label>PRECIO UNIT<strong style="color: darkred">*</strong></label>
                                 <br>
                                 <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this)" min="0" step="0.01" maxlength="10" id="precio1" name="Precio[]" required>
                             </div>
@@ -142,6 +142,9 @@
                     <div id="nuevosz" class="container-fluid"></div>
                     <input type="hidden" value="" name="action" id="validator">
                     <center>
+                        <strong class="text-muted">* Obligatorio</strong>
+                        <br>
+                        <br>
                         <a class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="enviar('registrar')">Finalizar</a>
                         <a type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="enviarSolicitud('guardar')">Guardar</a>
                         <a type="button" id="cancelar" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp?alert=cancel">Cancelar</a>
@@ -205,7 +208,7 @@
                         </div>
                 </div>
                 <div class="modal-footer" style="background-color: #EB616B">
-                    <button type="submit" class="btn btn-success" id="saveChanges">Enviar</button>
+                    <button type="submit" class="btn btn-success" id="saveChanges">Guardar</button>
                     <button type="button" class="btn btn-warning" id="close" data-bs-dismiss="modal">Cancelar</button>
                 </div>
                 </form>
