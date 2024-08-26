@@ -200,7 +200,13 @@ function enviarSolicitudSalida(action) {
     document.getElementById('salida').submit();
 }
 
-function enviarSalida(action) {
+function enviar(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    document.getElementById('salida').submit();
+}
+
+function enviarSolicitud(action) {
     mostrarCarga();
     document.getElementById('validator').value = action;
     document.getElementById('salida').submit();

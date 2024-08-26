@@ -6,6 +6,9 @@
 <%@ page import="mx.edu.utez.integradora.Model.Area" %>
 <%@ page import="mx.edu.utez.integradora.Model.UnidMed" %>
 <%@ page import="mx.edu.utez.integradora.Dao.UnidadDao" %>
+<%@ page import="mx.edu.utez.integradora.Model.Salidas" %>
+<%@ page import="mx.edu.utez.integradora.Dao.SalidaDao" %>
+<%@ page import="java.time.LocalDate" %>
 <%--
   Created by IntelliJ IDEA.
   User: Lenny
@@ -85,6 +88,18 @@
     ArrayList<Area> listA = aDao.getAll();
     ArrayList<UnidMed> listU = uDao.getAll();
     String name = (String) sesion.getAttribute("name");
+    SalidaDao sDao = new SalidaDao();
+    Salidas salida = sDao.getRecent();
+    LocalDate fecha = LocalDate.now();
+    String folio = "";
+    int idSal = 0;
+    if(salida != null) {
+        idSal =salida.getSalida_id();
+    }else{
+        folio = "ID01"+fecha+"S";
+    }
+    idSal = idSal+1;
+    folio = "ID"+idSal+fecha+"S";
 %>
 <main>
     <div class="container-fluid">
@@ -100,7 +115,7 @@
                     <div class="row">
                         <div class="col">
                             <label>Folio:<strong style="color: darkred">*</strong></label>
-                            <input type="text" class="form-control" placeholder="Folio" readonly style="background-color: #D9D9D9;">
+                            <input type="text" class="form-control" placeholder="Folio" value="<%=folio%>" readonly style="background-color: #D9D9D9;">
                             <label>Área de salida:<strong style="color: darkred">*</strong></label>
                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar area de salida">
                               <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addArea">+</button>
@@ -186,8 +201,8 @@
                     <center>
                     <strong class="text-muted">* Obligatorio</strong>
                     <br>
-                    <a class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="enviarSalida('registrar')">Finalizar</a>
-                    <a type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="enviarSolicitudSalida('guardar')">Guardar</a>
+                    <a class="btn btn-outline-primary btn-lg mr-2" id="save" onclick="enviar('registrar')">Finalizar</a>
+                    <a type="button" id="guardar" class="btn btn-outline-success btn-lg" onclick="enviarSolicitud('guardar')">Guardar</a>
                     <a type="button" id="cancelar" class="btn btn-outline-warning btn-lg" href="InicioAlmacenista.jsp?alert=cancel">Cancelar</a>
                     </center>
                 </form>
@@ -445,6 +460,7 @@
     sesion.removeAttribute("ent");
 %>
 <script src="${pageContext.request.contextPath}/JS/Scripts2.js"></script>
+<script src="${pageContext.request.contextPath}/JS/scriptSalida.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
