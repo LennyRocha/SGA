@@ -59,12 +59,11 @@ public class SalidaDao {
         Salidas salida = new Salidas();
 
         String query = "SELECT s.salida_id, s.salida_folio, s.salida_fecha, s.salida_estado, " +
-                "asa.area_id, asa.area_nombre, asa.area_identidad, um.unidad_id" +
+                "asa.area_id, asa.area_nombre, asa.area_identidad," +
                 "u.id, u.nombre " +
                 "FROM Salida s " +
-                "JOIN area_salida asa ON s.salida_area_id = asa.area_id " +
+                "JOIN Area_salida asa ON s.salida_area_id = asa.area_id " +
                 "JOIN Usuarios u ON s.salida_usuario_id = u.id " +
-                "JOIN Unidad_medida um ON d.unidad_id = um.unidad_id " +
                 "ORDER BY salida_folio DESC LIMIT 1";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -309,14 +308,14 @@ public class SalidaDao {
                     salida.setSalida_id(generatedKeys.getInt(1));
 
                     // Insertar los detalles asociados
-                    DetalleSalidaDao detallesDao = new DetalleSalidaDao();
+                    /*DetalleSalidaDao detallesDao = new DetalleSalidaDao();
                     for (DetalleSalida detalle : salida.getDetalleSalida()) {
                         detalle.setSalidas(salida); // Asignar la salida a cada detalle
                         if (!detallesDao.insertDetalleSalida(detalle)) {
                             con.rollback();
                             return false;
                         }
-                    }
+                    }*/
                 }
                 con.commit();
                 respuesta = true;

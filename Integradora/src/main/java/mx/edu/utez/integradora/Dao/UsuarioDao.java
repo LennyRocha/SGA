@@ -17,7 +17,7 @@ public class UsuarioDao {
     //con el fin de hacer el inicio de sesión
     public Usuario getOne(String correo_usuario, String contra){
         Usuario u = new Usuario();
-        String query = "select * from usuarios where correo = ? and contra = sha2(?,256)";
+        String query = "select * from Usuarios where correo = ? and contra = sha2(?,256)";
 
         try(Connection con = DatabaseConnectionManager.getConnection();){
             PreparedStatement ps = con.prepareStatement(query);
@@ -39,7 +39,7 @@ public class UsuarioDao {
 
     public ArrayList<Usuario> getAll(){
         ArrayList<Usuario> Lista = new ArrayList<>();
-        String query = "select * from usuarios";
+        String query = "select * from Usuarios";
 
         try(Connection con = DatabaseConnectionManager.getConnection();){
             PreparedStatement ps = con.prepareStatement(query);
@@ -62,7 +62,7 @@ public class UsuarioDao {
 
     public ArrayList<Usuario> getCorreos(){
         ArrayList<Usuario> Lista = new ArrayList<>();
-        String query = "select correo from usuarios";
+        String query = "select correo from Usuarios";
 
         try(Connection con = DatabaseConnectionManager.getConnection();){
             PreparedStatement ps = con.prepareStatement(query);
@@ -80,7 +80,7 @@ public class UsuarioDao {
 
     public ArrayList<Usuario> getSome(){
         ArrayList<Usuario> List = new ArrayList<>();
-        String query = "select * from usuarios where tipo_cuenta = 2 and estado = true";
+        String query = "select * from Usuarios where tipo_cuenta = 2 and estado = true";
 
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
@@ -104,7 +104,7 @@ public class UsuarioDao {
     public boolean insertUsuario(Usuario u)
     {
         boolean respuesta = false;
-        String query = "insert into usuarios(nombre,contra,correo,tipo_cuenta,estado)values(?,sha2(?,256),?,?,?)";
+        String query = "insert into Usuarios(nombre,contra,correo,tipo_cuenta,estado)values(?,sha2(?,256),?,?,?)";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1,u.getNombre_usuario());
@@ -124,7 +124,7 @@ public class UsuarioDao {
     public Usuario getOne(int id)
     {
         Usuario u = new Usuario();
-        String query = "select * from usuarios where id = ?";
+        String query = "select * from Usuarios where id = ?";
         try(PreparedStatement ps = DatabaseConnectionManager.getConnection().prepareStatement(query)){
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
@@ -145,7 +145,7 @@ public class UsuarioDao {
     public Usuario getOne(String nombre)
     {
         Usuario u = new Usuario();
-        String query = "select * from usuarios where nombre = ?";
+        String query = "select * from Usuarios where nombre = ?";
         try(PreparedStatement ps = DatabaseConnectionManager.getConnection().prepareStatement(query)){
             ps.setString(1,nombre);
             ResultSet rs = ps.executeQuery();
@@ -165,7 +165,7 @@ public class UsuarioDao {
 
     public Usuario getEmail(String correo){
         Usuario u = new Usuario();
-        String query = "select * from usuarios where correo = ?";
+        String query = "select * from Usuarios where correo = ?";
 
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
@@ -183,7 +183,7 @@ public class UsuarioDao {
 
     public boolean update(Usuario u) {
         boolean respuesta = false;
-        String query = "update usuarios set nombre = ?, correo = ?, tipo_cuenta = ? where id = ?";
+        String query = "update Usuarios set nombre = ?, correo = ?, tipo_cuenta = ? where id = ?";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1,u.getNombre_usuario());
@@ -201,7 +201,7 @@ public class UsuarioDao {
 
     public boolean disable(Usuario u) {
         boolean respuesta = false;
-        String query = "update usuarios set estado = false where id = ?";
+        String query = "update Usuarios set estado = false where id = ?";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,u.getId());
@@ -216,7 +216,7 @@ public class UsuarioDao {
 
     public boolean reenable(Usuario u) {
         boolean respuesta = false;
-        String query = "update usuarios set estado = true where id = ?";
+        String query = "update Usuarios set estado = true where id = ?";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,u.getId());
@@ -231,7 +231,7 @@ public class UsuarioDao {
 
     public boolean delete (Usuario u){
         boolean respuesta = false;
-        String query = "delete from usuarios where id = ?";
+        String query = "delete from Usuarios where id = ?";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,u.getId());
@@ -248,7 +248,7 @@ public class UsuarioDao {
     public boolean insertCod(String codigo, String correo)
     {
         boolean respuesta = false;
-        String query = "update usuarios set codigoVerif = ? where correo = ?";
+        String query = "update Usuarios set codigoVerif = ? where correo = ?";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1,codigo);
@@ -265,7 +265,7 @@ public class UsuarioDao {
 
     public boolean updatePass(String contra, String codigo) {
         boolean respuesta = false;
-        String query = "update usuarios set contra = sha2(?,256) where codigoVerif = ?";
+        String query = "update Usuarios set contra = sha2(?,256) where codigoVerif = ?";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1,contra);
@@ -282,7 +282,7 @@ public class UsuarioDao {
     public boolean findCodigo(String codigo) {
         boolean respuesta = false;
         Usuario usr = new Usuario();
-        String query = "select * from usuarios where codigoverif = ?";
+        String query = "select * from Usuarios where codigoverif = ?";
         try (PreparedStatement ps = DatabaseConnectionManager.getConnection().prepareStatement(query)){
             ps.setString(1,codigo);
             ResultSet rs = ps.executeQuery();

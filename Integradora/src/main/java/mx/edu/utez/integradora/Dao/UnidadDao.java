@@ -14,7 +14,7 @@ public class UnidadDao {
 
     public UnidMed getOne (int id){
         UnidMed um = new UnidMed();
-        String query = "select * from unidad_medida where unidad_id = ?";
+        String query = "select * from Unidad_medida where unidad_id = ?";
 
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
@@ -22,6 +22,7 @@ public class UnidadDao {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 um.setUnidad_nombre(rs.getString("unidad_nombre"));
+                um.setUnidad_id(rs.getInt("unidad_id"));
             }
         } catch(SQLException e){
             e.printStackTrace();
@@ -31,7 +32,7 @@ public class UnidadDao {
 
     public ArrayList<UnidMed> getAll(){
         ArrayList<UnidMed> Lista = new ArrayList<>();
-        String query = "select * from unidad_medida";
+        String query = "select * from Unidad_medida";
 
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
@@ -51,7 +52,7 @@ public class UnidadDao {
     public boolean insertUnidad(UnidMed um)
     {
         boolean respuesta = false;
-        String query = "insert into unidad_medida(unidad_nombre)values(?)";
+        String query = "insert into Unidad_medida(unidad_nombre)values(?)";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1,um.getUnidad_nombre());
@@ -66,7 +67,7 @@ public class UnidadDao {
 
     public boolean updateUnidad(UnidMed um) {
         boolean respuesta = false;
-        String query = "update unidad_medida set unidad_nombre = ? where unidad_id = ?";
+        String query = "update Unidad_medida set unidad_nombre = ? where unidad_id = ?";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1,um.getUnidad_nombre());
@@ -82,7 +83,7 @@ public class UnidadDao {
 
     public boolean deleteUnidad (UnidMed um){
         boolean respuesta = false;
-        String query = "delete from unidad_medida where unidad_id = ?";
+        String query = "delete from Unidad_medida where unidad_id = ?";
         try(Connection con = DatabaseConnectionManager.getConnection()){
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,um.getUnidad_id());

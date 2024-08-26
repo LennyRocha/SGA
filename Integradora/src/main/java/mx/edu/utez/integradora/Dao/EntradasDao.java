@@ -18,7 +18,7 @@ public class EntradasDao {
         String query = "SELECT e.*, p.*, u.* " +
                 "FROM Entrada e " +
                 "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
-                "JOIN Usuarios u ON e.entrada_usuario_id = u.id " +
+                "JOIN Usuarios u ON e.entrada_usuario_nombre = u.nombre " +
                 "WHERE e.entrada_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -63,7 +63,7 @@ public class EntradasDao {
         String query = "SELECT e.*, p.*, u.* " +
                 "FROM Entrada e " +
                 "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
-                "JOIN Usuarios u ON e.entrada_usuario_id = u.id " +
+                "JOIN Usuarios u ON e.entrada_usuario_nombre = u.nombre " +
                 "ORDER BY entrada_id DESC LIMIT 1";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -102,7 +102,7 @@ public class EntradasDao {
         String query = "SELECT e.*, p.*, u.* " +
                 "FROM Entrada e " +
                 "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
-                "JOIN Usuarios u ON e.entrada_usuario_id = u.id " +
+                "JOIN Usuarios u ON e.entrada_usuario_nombre = u.nombre " +
                 "WHERE e.entrada_folio = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -147,7 +147,7 @@ public class EntradasDao {
         String query = "SELECT e.*, p.*, u.* " +
                 "FROM Entrada e " +
                 "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
-                "JOIN Usuarios u ON e.entrada_usuario_id = u.id";
+                "JOIN Usuarios u ON e.entrada_usuario_nombre = u.nombre";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -193,7 +193,7 @@ public class EntradasDao {
         String query = "SELECT e.*, p.*, u.* " +
                 "FROM Entrada e " +
                 "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
-                "JOIN Usuarios u ON e.entrada_usuario_id = u.id where e.entrada_estado = 'exito'";
+                "JOIN Usuarios u ON e.entrada_usuario_nombre = u.nombre where e.entrada_estado = 'exito'";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
@@ -239,7 +239,7 @@ public class EntradasDao {
         String query = "SELECT e.*, p.*, u.* " +
                 "FROM Entrada e " +
                 "JOIN Proveedor p ON e.entrada_proveedor_id = p.proveedor_id " +
-                "JOIN Usuarios u ON e.entrada_usuario_id = u.id " +
+                "JOIN Usuarios u ON e.entrada_usuario_nombre = u.nombre " +
                 "WHERE e.entrada_estado = 'pendiente'";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -283,7 +283,7 @@ public class EntradasDao {
 
     public boolean insertEntrada(Entradas entrada) {
         boolean respuesta = false;
-        String query = "INSERT INTO Entrada (entrada_folio, entrada_fecha, entrada_proveedor_id, entrada_usuario_id, entrada_estado, entrada_folio_factura) " +
+        String query = "INSERT INTO Entrada (entrada_folio, entrada_fecha, entrada_proveedor_id, entrada_usuario_nombre, entrada_estado, entrada_folio_factura) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -294,7 +294,7 @@ public class EntradasDao {
             ps.setString(1, entrada.getEntrada_folio());
             ps.setDate(2, entrada.getEntrada_fecha());
             ps.setInt(3, entrada.getProveedor().getProveedor_id());
-            ps.setInt(4, entrada.getUsuario().getId());
+            ps.setString(4, entrada.getUsuario().getNombre_usuario());
             ps.setString(5, entrada.getEstado());
             ps.setInt(6, entrada.getEntrada_folio_factura());
 
@@ -327,7 +327,7 @@ public class EntradasDao {
 
     public boolean updateEntrada(Entradas entrada) {
         boolean respuesta = false;
-        String query = "UPDATE Entrada SET entrada_fecha = ?, entrada_proveedor_id = ?, entrada_usuario_id = ?, entrada_estado = ?, entrada_folio_factura = ? WHERE entrada_folio = ?";
+        String query = "UPDATE Entrada SET entrada_fecha = ?, entrada_proveedor_id = ?, entrada_usuario_nombre = ?, entrada_estado = ?, entrada_folio_factura = ? WHERE entrada_folio = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             con.setAutoCommit(false);
@@ -336,7 +336,7 @@ public class EntradasDao {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setDate(1, entrada.getEntrada_fecha());
             ps.setInt(2, entrada.getProveedor().getProveedor_id());
-            ps.setInt(3, entrada.getUsuario().getId());
+            ps.setString(3, entrada.getUsuario().getNombre_usuario());
             ps.setString(4, entrada.getEstado());
             ps.setInt(5, entrada.getEntrada_folio_factura());
             ps.setString(6, entrada.getEntrada_folio());

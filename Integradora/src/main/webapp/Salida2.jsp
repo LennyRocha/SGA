@@ -8,6 +8,9 @@
 <%@ page import="mx.edu.utez.integradora.Dao.UnidadDao" %>
 <%@ page import="mx.edu.utez.integradora.Model.Salidas" %>
 <%@ page import="mx.edu.utez.integradora.Dao.SalidaDao" %>
+<%@ page import="mx.edu.utez.integradora.Dao.ProductoDao" %>
+<%@ page import="mx.edu.utez.integradora.Model.Producto" %>
+
 <%@ page import="java.time.LocalDate" %>
 <%--
   Created by IntelliJ IDEA.
@@ -87,6 +90,8 @@
     ArrayList<Usuario> list = dao.getSome();
     ArrayList<Area> listA = aDao.getAll();
     ArrayList<UnidMed> listU = uDao.getAll();
+    ProductoDao pDao = new ProductoDao();
+    ArrayList<Producto> listP = pDao.getAll();
     String name = (String) sesion.getAttribute("name");
     SalidaDao sDao = new SalidaDao();
     Salidas salida = sDao.getRecent();
@@ -101,6 +106,9 @@
     idSal = idSal+1;
     folio = "ID"+idSal+fecha+"S";
 %>
+<span data-bs-toggle="tooltip" data-bs-placement="top" title="Regresar">
+    <button id="back" onclick="location.href='InicioAlmacenista.jsp'" class="btn btn-outline-primary btn-lg" style="margin-left: 10px"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
+</span>
 <main>
     <div class="container-fluid">
         <div class="col"></div>
@@ -115,7 +123,7 @@
                     <div class="row">
                         <div class="col">
                             <label>Folio:<strong style="color: darkred">*</strong></label>
-                            <input type="text" class="form-control" placeholder="Folio" value="<%=folio%>" readonly style="background-color: #D9D9D9;">
+                            <input type="text" class="form-control" placeholder="Folio" value="<%=folio%>" readonly style="background-color: #D9D9D9;" name="folio">
                             <label>Área de salida:<strong style="color: darkred">*</strong></label>
                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar area de salida">
                               <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addArea">+</button>
@@ -124,7 +132,7 @@
                             <select class="form-select form-control" id="area" name="area">
                                 <option value="" disabled selected>Selecciona un area</option>
                                 <% for(Area a : listA){ %>
-                                <option value="<%=a.getArea_identidad()%>"><%=a.getArea_identidad()%> - <%=a.getArea_nombre()%></option>
+                                <option value="<%=a.getArea_id()%>"><%=a.getArea_identidad()%> - <%=a.getArea_nombre()%></option>
                                 <% } %>
                             </select>
                         </div>
@@ -148,7 +156,12 @@
                             <div class="col-sm">
                                 <label>PRODUCTO<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Producto 1" id="Producto1" required maxlength="50" name="Producto[]">
+                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]">
+                                    <option value="" disabled selected>Selecciona un producto</option>
+                                    <% for(Producto p : listP){ %>
+                                    <option value="<%=p.getProducto_id()%>"><%=p.getProducto_nombre()%></option>
+                                    <% } %>
+                                </select>
                             </div>
                             <div class="col-sm">
                                 <label>CANTIDAD<strong style="color: darkred">*</strong></label>
@@ -169,7 +182,7 @@
                                 <select class="form-select form-control" name="types" id="unidad" name="Unidad[]">
                                     <option value="" disabled selected>Selecciona una unidad</option>
                                     <% for(UnidMed u : listU){ %>
-                                    <option value="<%=u.getUnidad_nombre()%>"><%=u.getUnidad_nombre()%></option>
+                                    <option value="<%=u.getUnidad_id()%>"><%=u.getUnidad_nombre()%></option>
                                     <% } %>
                                 </select>
                             </div>
@@ -190,6 +203,7 @@
                         </div>
                     </div>
                     <div id="nuevosz3" class="container-sm"></div>
+                    <input type="hidden" value="" name="action" id="validator">
                     <br>
                     <div class="row">
                         <div class="col"><label for="prodFin">Total de productos:</label></div>
@@ -460,7 +474,6 @@
     sesion.removeAttribute("ent");
 %>
 <script src="${pageContext.request.contextPath}/JS/Scripts2.js"></script>
-<script src="${pageContext.request.contextPath}/JS/scriptSalida.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>

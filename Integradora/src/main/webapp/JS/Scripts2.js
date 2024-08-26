@@ -1,3 +1,28 @@
+function mostrarCarga() {
+    Swal.fire({
+        title: 'Procesando...',
+        text: 'Por favor espera',
+
+        timer: 5000, // La alerta se cerrará automáticamente después de 5 segundos
+        timerProgressBar: true,
+        willOpen: () => {
+            Swal.showLoading();
+        },
+    });
+}
+
+function enviar(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    document.getElementById('salida').submit();
+}
+
+function enviarSolicitud(action) {
+    mostrarCarga();
+    document.getElementById('validator').value = action;
+    document.getElementById('salida').submit();
+}
+
 const nuevosz3 = document.getElementById("nuevosz3");
 const nuevoz3 = document.getElementById("nuevoz3");
 const save = document.getElementById("save");
@@ -21,12 +46,18 @@ nuevoz3.addEventListener("click", () => {
 
     const col1 = document.createElement("div");
     col1.setAttribute("class", "col-sm");
-    const input = document.createElement("input");
-    input.setAttribute("type", "text");
+    const input = document.createElement("select");
     input.setAttribute("name", "producto[]");
     input.setAttribute("id", "Producto" + i);
     input.setAttribute("placeholder", "Producto " + i);
     input.setAttribute("class", "form-control");
+    // Suponiendo que tienes una lista de productos (listP) en JavaScript
+    listP.forEach(p => {
+        const option = document.createElement("option");
+        option.setAttribute("value", p.producto_id);  // O `p.getProducto_id()` dependiendo de cómo obtienes el ID
+        option.textContent = p.producto_nombre;  // O `p.getProducto_nombre()` dependiendo de cómo obtienes el nombre
+        input.appendChild(option);
+    });
     col1.appendChild(input);
 
     const col2 = document.createElement("div");

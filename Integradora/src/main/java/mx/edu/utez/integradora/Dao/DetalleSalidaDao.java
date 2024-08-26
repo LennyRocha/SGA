@@ -132,15 +132,17 @@ public class DetalleSalidaDao {
 
     public boolean insertDetalleSalida(DetalleSalida detalleSalida) {
         boolean respuesta = false;
-        String query = "INSERT INTO Detalle_Salida (salida_id, salida_producto_id, detalle_salida_cantidad, unidad_id, valor_salida) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Detalle_Salida (salida_id, salida_producto_id, salida_folio, detalle_salida_cantidad, unidad_id, valor_salida, cantidad) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, detalleSalida.getSalidas().getSalida_id()); // Foreign key from Salida
             ps.setInt(2, detalleSalida.getProductos_salida().getProducto_id()); // Foreign key from Producto
-            ps.setInt(3, detalleSalida.getCantidad());
-            ps.setInt(4, detalleSalida.getUnidad_medida().getUnidad_id()); // Foreign key from Unidad_medida
-            ps.setDouble(5, detalleSalida.getValor_salida());
+            ps.setInt(3, detalleSalida.getSalidas().getSalida_id());
+            ps.setInt(4, detalleSalida.getCantidad());
+            ps.setInt(5, detalleSalida.getUnidad_medida().getUnidad_id()); // Foreign key from Unidad_medida
+            ps.setDouble(6, detalleSalida.getValor_salida());
+            ps.setInt(7,1 );
 
             if (ps.executeUpdate() > 0) {
                 respuesta = true;

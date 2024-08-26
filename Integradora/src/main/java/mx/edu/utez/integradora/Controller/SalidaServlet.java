@@ -55,12 +55,8 @@ public class SalidaServlet extends HttpServlet {
                 System.out.println(fecha);
                 String empleado = request.getParameter("empleado");
                 System.out.println(empleado);
-                String unidad = request.getParameter("unidades");
-                System.out.println(unidad);
-
                 Usuario usuario = usuarioDao.getOne(empleado);
                 Area AreaObj = areaDao.getOne2(area);
-                UnidMed unidmedObj = unidadDao.getOne(Integer.parseInt(unidad));
 
                 salida.setSalida_folio(folio);
                 salida.setAreas(AreaObj);
@@ -156,6 +152,7 @@ public class SalidaServlet extends HttpServlet {
                         salidaDetalle.setValor_salida(prop.getProducto_cantidad() * prop.getProducto_precio());
                         salidaList.add(salidaDetalle);
                         salidaDetalle.setUnidad_medida(unidmed);
+                        System.out.println(salidaDetalle.getSalidas().getSalida_folio());
                         if(dsDao.insertDetalleSalida(salidaDetalle)){
                             System.out.println(salidaList.size());
                             System.out.println("Detalle insertado del producto: "+salidaDetalle.getProductos_salida().getProducto_nombre());

@@ -23,6 +23,7 @@ public class AreaDao {
             //3) Obtener la información
             if(rs.next()){
                 //Entonces llenamos la información del usuario
+                a.setArea_id(rs.getInt("area_id"));
                 a.setArea_nombre(rs.getString("area_nombre"));
                 a.setArea_identidad(rs.getString("area_identidad"));
             }
@@ -43,6 +44,7 @@ public class AreaDao {
             //3) Obtener la información
             if(rs.next()){
                 //Entonces llenamos la información del usuario
+                a.setArea_id(rs.getInt("area_id"));
                 a.setArea_nombre(rs.getString("area_nombre"));
                 a.setArea_identidad(rs.getString("area_identidad"));
             }

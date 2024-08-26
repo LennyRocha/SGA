@@ -11,6 +11,7 @@ import mx.edu.utez.integradora.Model.UnidMed;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @WebServlet(name="UnidadServlet", value="/unidad")
 public class UnidadServlet extends HttpServlet {
@@ -57,7 +58,7 @@ public class UnidadServlet extends HttpServlet {
                 ArrayList<UnidMed> unidmed = uDao.getAll();
                 boolean mismaUnidad = false;
                 for (UnidMed u : unidmed) {
-                    if (u.getUnidad_nombre() == unidad_nombre) {
+                    if (Objects.equals(u.getUnidad_nombre(), unidad_nombre)) {
                         mismaUnidad = true;
                     }
                 }
