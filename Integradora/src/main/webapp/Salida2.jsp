@@ -113,7 +113,7 @@
                             <div class="col-sm">
                                 <label>U. MED<strong style="color: darkred">*</strong></label>
                                 <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar unidad de medida">
-                                  <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addUnid">+</button>
+                                  <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="addUnid">+</button>
                                 </span>
                                 <br>
                                 <select class="form-select form-control" name="types" id="unidad" name="unidad">
@@ -264,10 +264,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="unidadmedida" method="post" id="unidadmedidaz">
+                <form action="unidad" method="post" id="unidadmedidaz">
                     <div class="modal-header" style="background-color: #1D3557">
                         <img src="IMG/cajaIcon.png" alt="logito" width="30" height="30">
                         <h5 class="modal-title text-white" id="exampleModalLabel">GESTIÓN DE UNIDADES DE MEDIDA</h5>
