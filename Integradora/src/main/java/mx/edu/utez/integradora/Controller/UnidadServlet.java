@@ -10,6 +10,7 @@ import mx.edu.utez.integradora.Dao.UnidadDao;
 import mx.edu.utez.integradora.Model.UnidMed;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name="UnidadServlet", value="/unidad")
 public class UnidadServlet extends HttpServlet {
@@ -47,42 +48,57 @@ public class UnidadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String operacion = req.getParameter("operacion");
-        String ruta = req.getContextPath()+"/registrarEntrada.jsp";
+        String ruta = req.getContextPath()+"/Salida2.jsp";
         UnidMed ume = new UnidMed();
         UnidadDao uDao = new UnidadDao();
-        switch (operacion){
+        switch (operacion) {
             case "add":
-                String nombre_area = req.getParameter("nombre_unidad");
-                ume.setUnidad_nombre(nombre_area);
-                if (uDao.insertUnidad(ume)) {
-                    req.getSession().setAttribute("mensaje2","Unidad registrada");
-                    req.getSession().setAttribute("nomUnid",nombre_area);
-                    System.out.println("<p style=\"color: red;\">Unidad Registrada</p>");
-                } else {
-                    req.getSession().setAttribute("mensaje","No se pudo registrar la unidad de medida");
-                    System.out.println(nombre_area);
-                    System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+                String unidad_nombre = req.getParameter("nombre_unidad");
+                ArrayList<UnidMed> unidmed = uDao.getAll();
+                boolean mismaUnidad = false;
+                for (UnidMed u : unidmed) {
+                    if (u.getUnidad_nombre() == unidad_nombre) {
+                        mismaUnidad = true;
+                    }
                 }
-                resp.sendRedirect(ruta);
+                if (!mismaUnidad) {
+                    ume.setUnidad_nombre(unidad_nombre);
+                    if (uDao.insertUnidad(ume)) {
+                        req.getSession().setAttribute("mensaje2", "Unidad registrada");
+                        req.getSession().setAttribute("nomUnidad", unidad_nombre);
+                        System.out.println("<p style=\"color: red;\">Unidad Registrada</p>");
+                    } else {
+                        req.getSession().setAttribute("mensaje", "No se pudo registrar la unidad");
+                        System.out.println(unidad_nombre);
+                        System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
+                    }
+                    resp.sendRedirect(ruta);
+                }else{
+                    req.getSession().setAttribute("mensaje", "La unidad ya existe");
+                    resp.sendRedirect(ruta);
+                }
                 break;
             case "edit":
-                String new_nombre_unidad = req.getParameter("nombre_unidad");
-                int id_unidad = Integer.parseInt(req.getParameter("id_unidad"));
-                ume.setUnidad_nombre(new_nombre_unidad);
-                ume.setUnidad_id(id_unidad);
+                String new_nombre_uni = req.getParameter("nombre_unidad_nueva");
+                int unidad_id = Integer.parseInt(req.getParameter("id_unidad"));
+                ume.setUnidad_nombre(new_nombre_uni);
+                ume.setUnidad_id(unidad_id);
                 if (uDao.updateUnidad(ume)) {
-                    req.getSession().setAttribute("mensaje2","Unidad actualizada");
-                    req.getSession().setAttribute("nomUnid",new_nombre_unidad);
+                    //Mandar al usuario al inicio de sesión
+                    req.getSession().setAttribute("mensaje2", "Unidad actualizada");
+                    req.getSession().setAttribute("nomArea", new_nombre_uni);
                     System.out.println("<p style=\"color: red;\">Unidad Registrada</p>");
                 } else {
                     //Mandar un mensaje de errror y regesar al formulario de registro
-                    req.getSession().setAttribute("mensaje","No se pudo actualizar la unidad");
-                    System.out.println(new_nombre_unidad);
-                    System.out.println(id_unidad);
+                    req.getSession().setAttribute("mensaje", "No se pudo actualizar la unidad");
+                    System.out.println(new_nombre_uni);
+                    System.out.println(unidad_id);
                     System.out.println("<p style=\"color: red;\">No se pudo, UnU</p>");
                 }
                 resp.sendRedirect(ruta);
                 break;
+            //resp.sendRedirect(ruta);
         }
+
     }
 }
