@@ -34,9 +34,9 @@ nuevoz3.addEventListener("click", () => {
     const input2 = document.createElement("input");
     input2.setAttribute("type", "number");
     input2.setAttribute("name", "Cantidad[]");
-    input2.setAttribute("id", "cantidad" + i);
+    input2.setAttribute("id", "Cantidad" + i);
     input2.setAttribute("min", "0");  // Valor mínimo
-    input2.setAttribute("oninput", `calculateTotal(this, ${i})`);
+    input2.setAttribute("oninput", `calculateTotal(this,\`+i+\`)`);
     input2.setAttribute("placeholder", "Cantidad " + i);
     input2.setAttribute("class", "form-control");
     col2.appendChild(input2);
@@ -46,10 +46,10 @@ nuevoz3.addEventListener("click", () => {
     const input3 = document.createElement("input");
     input3.setAttribute("type", "tel");
     input3.setAttribute("name", "Precio[]");
-    input3.setAttribute("id", "precio" + i);
+    input3.setAttribute("id", "Precio" + i);
     input3.setAttribute("min", "0.00");  // Valor mínimo
     input3.setAttribute("step", "0.01");
-    input3.setAttribute("oninput", `calculateTotal(this, ${i}); validarNumero(this)`);
+    input3.setAttribute("oninput", `calculateTotal(this,${i}); validarNumero(this)`);
     input3.setAttribute("placeholder", "Precio " + i);
     input3.setAttribute("class", "form-control");
     col3.appendChild(input3);
@@ -72,6 +72,7 @@ nuevoz3.addEventListener("click", () => {
     input5.setAttribute("id", "PrecioT" + i);
     input5.setAttribute("placeholder", "Precio Total " + i);
     input5.setAttribute("class", "form-control");
+    input5.setAttribute("readonly", "readonly");
     col7.appendChild(input5);
 
     const col5 = document.createElement("div");

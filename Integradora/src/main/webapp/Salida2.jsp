@@ -35,7 +35,7 @@
     }
 </style>
 <script>
-    function calculateTotal(element, index) {
+    function calculateTotal(element,index) {
         const cantidad = document.getElementById('Cantidad'+index).value;
         const precio = document.getElementById('Precio'+index).value;
         const precioTotal = document.getElementById('PrecioT'+index);
