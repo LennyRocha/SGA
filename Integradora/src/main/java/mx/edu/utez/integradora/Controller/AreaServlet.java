@@ -47,7 +47,7 @@ public class AreaServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String operacion = req.getParameter("operacion");
-        String ruta = req.getContextPath()+"/registrarEntrada.jsp";
+        String ruta = req.getContextPath()+"/Salida2.jsp";
         Area as = new Area();
         AreaDao asDao = new AreaDao();
         switch (operacion){

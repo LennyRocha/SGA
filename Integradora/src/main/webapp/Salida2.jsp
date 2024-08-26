@@ -4,6 +4,8 @@
 <%@ page import="mx.edu.utez.integradora.Model.Area" %>
 <%@ page import="mx.edu.utez.integradora.Dao.AreaDao" %>
 <%@ page import="mx.edu.utez.integradora.Model.Area" %>
+<%@ page import="mx.edu.utez.integradora.Model.UnidMed" %>
+<%@ page import="mx.edu.utez.integradora.Dao.UnidadDao" %>
 <%--
   Created by IntelliJ IDEA.
   User: Lenny
@@ -34,11 +36,19 @@
 </style>
 <jsp:include page="/Templates/Header2.jsp" />
 <%
+    HttpSession sesion = (HttpSession) request.getSession();
+    String mensaje = (String) sesion.getAttribute("mensaje");
+    String mensaje2 = (String) sesion.getAttribute("mensaje2");
+    String error = (String) sesion.getAttribute("error");
+    String exito = (String) sesion.getAttribute("exito");
+    String alertProv = (String) sesion.getAttribute("alertProv");
+    String alertProv2 = (String) sesion.getAttribute("alertProv2");
     UsuarioDao dao = new UsuarioDao();
     AreaDao aDao = new AreaDao();
+    UnidadDao uDao = new UnidadDao();
     ArrayList<Usuario> list = dao.getSome();
     ArrayList<Area> listA = aDao.getAll();
-    HttpSession sesion = (HttpSession) request.getSession();
+    ArrayList<UnidMed> listU = uDao.getAll();
     String name = (String) sesion.getAttribute("name");
 %>
 <main>
@@ -47,7 +57,7 @@
         <div class="col">
             <br>
             <div class="container-fluid" id="contInicio">
-                <form action="#" method="post" id="entrada">
+                <form action="salida" method="post" id="salida">
                     <div class="container-sm">
                         <h1 id="tit">REGISTRAR SALIDA</h1>
                     </div>
@@ -64,7 +74,7 @@
                             <select class="form-select form-control" name="types" id="area" name="area">
                                 <option value="" disabled selected>Selecciona un area</option>
                                 <% for(Area a : listA){ %>
-                                <option value="<%=a.getArea_identidad()%>"><%=a.getArea_nombre()%></option>
+                                <option value="<%=a.getArea_identidad()%>"><%=a.getArea_identidad()%></option>
                                 <% } %>
                             </select>
                         </div>
@@ -106,7 +116,12 @@
                                   <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addUnid">+</button>
                                 </span>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Unidad 1" id="unidad1">
+                                <select class="form-select form-control" name="types" id="unidad" name="unidad">
+                                    <option value="" disabled selected>Selecciona una unidad</option>
+                                    <% for(UnidMed u : listU){ %>
+                                    <option value="<%=u.getUnidad_nombre()%>"><%=u.getUnidad_nombre()%></option>
+                                    <% } %>
+                                </select>
                             </div>
                             <div class="col-sm">
                                 <label>PREC TOTAL</label>
@@ -144,29 +159,205 @@
     </div>
     <div class="col"></div>
     <!-- Modal -->
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                <form action="area" method="post" id="areasalidaz">
+                    <div class="modal-header" style="background-color: #1D3557">
+                        <img src="IMG/cajaIcon.png" alt="logito" width="30" height="30">
+                        <h5 class="modal-title text-white" id="exampleModalLabel">GESTIÓN DE AREAS DE SALIDA</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6 class="align-content-center" id="titModal">SELECCIONA UNA OPCIÓN</h6>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="add">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Agregar
+                            </label>
                         </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="edit">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Modificar
+                            </label>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary"  id="close" onclick="exit()">Exit</button>
-                </div>
+                        <br>
+                        <div class="mb-3" id="nvaArea" style="display: none;">
+                            <label for="newArea" class="col-form-label">Nueva area de salida:</label>
+                            <input type="text" class="form-control" id="newArea" name="nombre_area">
+                            <input type="text" class="form-control" id="newArea1" name="letra_area">
+                        </div>
+                        <div id="editA" style="display: none;">
+                            <div class="mb-3" id="viejaArea">
+                                <%Area area = new Area();%>
+                                <select class="form-select form-control" id="types" required name="nombre_area_antigua">
+                                    <option value="" disabled selected>Selecciona una area</option>
+                                    <% for(Area a : listA){ %>
+                                    <option value="<%=a.getArea_identidad()%>"><%=a.getArea_identidad()%></option>
+                                    <option value="<%=a.getArea_id()%>" style="display: none;" name="id_area"><%=a.getArea_id()%></option>
+                                    <%
+                                            area.setArea_id(a.getArea_id());
+                                            area.setArea_identidad(a.getArea_ident(a.getArea_identidad()));
+                                        }
+                                    %>
+                                </select>
+                                <!--<input type="hidden" value="<%=area.getArea_id()%>">-->
+                                <div class="mb-3">
+                                    <label for="nuevoName" class="col-form-label">Nuevo nombre:</label>
+                                    <input type="text" class="form-control" id="nuevoName" name="nombre_area_nueva">
+                                    <input type="text" class="form-control" id="nuevaIdent" name="identidad_area_nueva">
+                                    <input type="hidden" value="" name="operacion" id="op">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background-color: #EB616B">
+                        <button type="submit" class="btn btn-success" id="saveChanges">Enviar</button>
+                        <button type="button" class="btn btn-warning" id="close" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+                <script>
+                    let operationSelected = false;
+
+                    document.getElementById('exampleRadios1').addEventListener('click', function() {
+                        document.getElementById("titModal").style.display = "none";
+                        document.getElementById("editA").style.display = "none";
+                        document.getElementById("nvaArea").style.display = "block";
+                        document.getElementById("op").value = "add";
+                        operationSelected = true;
+                    });
+
+                    document.getElementById('exampleRadios2').addEventListener('click', function() {
+                        document.getElementById("titModal").style.display = "none";
+                        document.getElementById("nvaArea").style.display = "none";
+                        document.getElementById("editA").style.display = "block";
+                        document.getElementById("op").value = "edit";
+                        operationSelected = true;
+                    });
+
+
+                    document.getElementById('saveChanges').addEventListener('click', function() {
+                        const radios = document.querySelectorAll('.form-check-input[type="radio"]');
+
+                        if (operationSelected) {
+                            document.getElementById("areasalidaz").submit();
+
+                            // Restablecer el formulario y los elementos del modal
+                            setTimeout(function() {
+                                document.getElementById("areasalidaz").reset();
+                                document.getElementById("titModal").style.display = "block";
+                                document.getElementById("nvaArea").style.display = "none";
+                                document.getElementById("editA").style.display = "none";
+                                // Si es necesario, restablecer el valor de los radios
+                                radios.forEach(radio => radio.checked = false);
+                            }, 500);
+                        } else {
+                            alert("Por favor, selecciona una operación.");
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="unidadmedida" method="post" id="unidadmedidaz">
+                    <div class="modal-header" style="background-color: #1D3557">
+                        <img src="IMG/cajaIcon.png" alt="logito" width="30" height="30">
+                        <h5 class="modal-title text-white" id="exampleModalLabel">GESTIÓN DE UNIDADES DE MEDIDA</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6 class="align-content-center" id="titModal">SELECCIONA UNA OPCIÓN</h6>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="add">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Agregar
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="edit">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Modificar
+                            </label>
+                        </div>
+                        <br>
+                        <div class="mb-3" id="nvaUni" style="display: none;">
+                            <label for="newArea" class="col-form-label">Nueva area de salida:</label>
+                            <input type="text" class="form-control" id="newUni" name="nombre_unidad">
+                        </div>
+                        <div id="editU" style="display: none;">
+                            <div class="mb-3" id="viejaUni">
+                                <%UnidMed unidMed = new UnidMed();%>
+                                <select class="form-select form-control" id="types" required name="nombre_unidad_antigua">
+                                    <option value="" disabled selected>Selecciona una area</option>
+                                    <% for(UnidMed u : listU){ %>
+                                    <option value="<%=u.getUnidad_nombre()%>"><%=u.getUnidad_nombre()%></option>
+                                    <option value="<%=u.getUnidad_id()%>" style="display: none;" name="id_unidad"><%=u.getUnidad_id()%></option>
+                                    <%
+                                            unidMed.setUnidad_id(u.getUnidad_id());
+                                            unidMed.setUnidad_nombre(u.getUnidad_nombre());
+                                        }
+                                    %>
+                                </select>
+                                <!--<input type="hidden" value="<%=unidMed.getUnidad_id()%>">-->
+                                <div class="mb-3">
+                                    <label for="nuevoName" class="col-form-label">Nuevo nombre:</label>
+                                    <input type="text" class="form-control" id="nuevoName" name="nombre_unidad_nueva">
+                                    <input type="hidden" value="" name="operacion" id="op">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background-color: #EB616B">
+                        <button type="submit" class="btn btn-success" id="saveChanges">Enviar</button>
+                        <button type="button" class="btn btn-warning" id="close" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+                <script>
+                    let operationSelected = false;
+
+                    document.getElementById('exampleRadios1').addEventListener('click', function() {
+                        document.getElementById("titModal").style.display = "none";
+                        document.getElementById("editU").style.display = "none";
+                        document.getElementById("nvaUni").style.display = "block";
+                        document.getElementById("op").value = "add";
+                        operationSelected = true;
+                    });
+
+                    document.getElementById('exampleRadios2').addEventListener('click', function() {
+                        document.getElementById("titModal").style.display = "none";
+                        document.getElementById("nvaUni").style.display = "none";
+                        document.getElementById("editU").style.display = "block";
+                        document.getElementById("op").value = "edit";
+                        operationSelected = true;
+                    });
+
+
+                    document.getElementById('saveChanges').addEventListener('click', function() {
+                        const radios = document.querySelectorAll('.form-check-input[type="radio"]');
+
+                        if (operationSelected) {
+                            document.getElementById("unidadmedidaz").submit();
+
+                            // Restablecer el formulario y los elementos del modal
+                            setTimeout(function() {
+                                document.getElementById("unidadmedidaz").reset();
+                                document.getElementById("titModal").style.display = "block";
+                                document.getElementById("nvaUni").style.display = "none";
+                                document.getElementById("editU").style.display = "none";
+                                // Si es necesario, restablecer el valor de los radios
+                                radios.forEach(radio => radio.checked = false);
+                            }, 500);
+                        } else {
+                            alert("Por favor, selecciona una operación.");
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>

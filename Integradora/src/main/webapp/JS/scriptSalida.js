@@ -1,7 +1,6 @@
 const nuevos = document.getElementById("nuevos");
 const nuevo = document.getElementById("nuevo");
 const save = document.getElementById("save");
-
 let i = 2;
 
 const svgString = `

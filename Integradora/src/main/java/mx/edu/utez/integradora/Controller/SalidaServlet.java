@@ -39,6 +39,7 @@ public class SalidaServlet extends HttpServlet {
         String[] productNames = request.getParameterValues("producto[]");
         String[] productPrices = request.getParameterValues("Precio[]");
         String[] productQuantities = request.getParameterValues("Cantidad[]");
+        String[] productUnity = request.getParameterValues("Unidad[]");
 
         ArrayList<Producto> productList = new ArrayList<>();
         ArrayList<DetalleSalida> salidaList = new ArrayList<>();
@@ -52,11 +53,14 @@ public class SalidaServlet extends HttpServlet {
                 System.out.println(area);
                 Date fecha = Date.valueOf(request.getParameter("fecha"));
                 System.out.println(fecha);
-                String empleado = request.getParameter("employees");
+                String empleado = request.getParameter("empleado");
                 System.out.println(empleado);
+                String unidad = request.getParameter("unidades");
+                System.out.println(unidad);
 
                 Usuario usuario = usuarioDao.getOne(empleado);
                 Area AreaObj = areaDao.getOne2(area);
+                UnidMed unidmedObj = unidadDao.getOne(Integer.parseInt(unidad));
 
                 salida.setSalida_folio(folio);
                 salida.setAreas(AreaObj);
@@ -72,6 +76,7 @@ public class SalidaServlet extends HttpServlet {
                 double sumPrec = 0;
                 double sumAll = 0;
                 Producto pr = new Producto();
+                UnidMed um = new UnidMed();
                 System.out.println("Número de productos: " + productNames.length);
                 for (int i = 0; i < productNames.length; i++) {
                     System.out.println("Producto: " + productNames[i]);
@@ -84,11 +89,13 @@ public class SalidaServlet extends HttpServlet {
                     pr.setProducto_nombre(productNames[i]);
                     pr.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
                     pr.setProducto_precio(Double.parseDouble(productPrices[i]));
+                    um.setUnidad_nombre(productUnity[i]);
                 }
                 sumAll = sumCant * sumPrec;
                 salidaDetalle.setSalidas(salida);
                 salidaDetalle.setCantidad(sumCant);
                 salidaDetalle.setProductos_salida(pr);
+                salidaDetalle.setUnidad_medida(um);
                 salidaDetalle.setValor_salida(sumAll);
                 salidaList.add(salidaDetalle);
             } else {
