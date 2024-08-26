@@ -264,103 +264,99 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form action="unidad" method="post" id="unidadmedidaz">
                     <div class="modal-header" style="background-color: #1D3557">
                         <img src="IMG/cajaIcon.png" alt="logito" width="30" height="30">
-                        <h5 class="modal-title text-white" id="exampleModalLabel">GESTIÓN DE UNIDADES DE MEDIDA</h5>
+                        <h5 class="modal-title text-white" id="exampleModalLabel2">GESTIÓN DE UNIDADES DE MEDIDA</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h6 class="align-content-center" id="titModal">SELECCIONA UNA OPCIÓN</h6>
+                        <h6 class="align-content-center" id="titModal2">SELECCIONA UNA OPCIÓN</h6>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="add">
-                            <label class="form-check-label" for="exampleRadios1">
+                            <input class="form-check-input" type="radio" name="exampleRadios2" id="exampleRadios1_2" value="add">
+                            <label class="form-check-label" for="exampleRadios1_2">
                                 Agregar
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="edit">
-                            <label class="form-check-label" for="exampleRadios2">
+                            <input class="form-check-input" type="radio" name="exampleRadios2" id="exampleRadios2_2" value="edit">
+                            <label class="form-check-label" for="exampleRadios2_2">
                                 Modificar
                             </label>
                         </div>
                         <br>
                         <div class="mb-3" id="nvaUni" style="display: none;">
-                            <label for="newArea" class="col-form-label">Nueva area de salida:</label>
+                            <label for="newUni" class="col-form-label">Nueva unidad de medida:</label>
                             <input type="text" class="form-control" id="newUni" name="nombre_unidad">
                         </div>
                         <div id="editU" style="display: none;">
                             <div class="mb-3" id="viejaUni">
                                 <%UnidMed unidMed = new UnidMed();%>
-                                <select class="form-select form-control" id="types" required name="nombre_unidad_antigua">
-                                    <option value="" disabled selected>Selecciona una area</option>
+                                <select class="form-select form-control" id="types2" required name="id_unidad">
+                                    <option value="" disabled selected>Selecciona una unidad de medida</option>
                                     <% for(UnidMed u : listU){ %>
-                                    <option value="<%=u.getUnidad_nombre()%>"><%=u.getUnidad_nombre()%></option>
-                                    <option value="<%=u.getUnidad_id()%>" style="display: none;" name="id_unidad"><%=u.getUnidad_id()%></option>
-                                    <%
-                                    }
-                                    %>
+                                    <option value="<%=u.getUnidad_id()%>"><%=u.getUnidad_nombre()%></option>
+                                    <%}%>
                                 </select>
-                                <!--<input type="hidden" value="<%=unidMed.getUnidad_id()%>">-->
                                 <div class="mb-3">
-                                    <label for="nuevoName" class="col-form-label">Nuevo nombre:</label>
-                                    <input type="text" class="form-control" id="nuevoName" name="nombre_unidad_nueva">
-                                    <input type="hidden" value="" name="operacion" id="op">
+                                    <label for="nuevoName2" class="col-form-label">Nuevo nombre:</label>
+                                    <input type="text" class="form-control" id="nuevoName2" name="nombre_unidad_nueva">
+                                    <input type="hidden" value="" name="operacion" id="op2">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer" style="background-color: #EB616B">
-                        <button type="submit" class="btn btn-success" id="saveChanges">Guardar</button>
-                        <button type="button" class="btn btn-warning" id="close" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success" id="saveChanges2">Guardar</button>
+                        <button type="button" class="btn btn-warning" id="close2" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
-                <script>
-                    let operationSelected = false;
-
-                    document.getElementById('exampleRadios1').addEventListener('click', function() {
-                        document.getElementById("titModal").style.display = "none";
-                        document.getElementById("editU").style.display = "none";
-                        document.getElementById("nvaUni").style.display = "block";
-                        document.getElementById("op").value = "add";
-                        operationSelected = true;
-                    });
-
-                    document.getElementById('exampleRadios2').addEventListener('click', function() {
-                        document.getElementById("titModal").style.display = "none";
-                        document.getElementById("nvaUni").style.display = "none";
-                        document.getElementById("editU").style.display = "block";
-                        document.getElementById("op").value = "edit";
-                        operationSelected = true;
-                    });
-
-
-                    document.getElementById('saveChanges').addEventListener('click', function() {
-                        const radios = document.querySelectorAll('.form-check-input[type="radio"]');
-
-                        if (operationSelected) {
-                            document.getElementById("unidadmedidaz").submit();
-
-                            // Restablecer el formulario y los elementos del modal
-                            setTimeout(function() {
-                                document.getElementById("unidadmedidaz").reset();
-                                document.getElementById("titModal").style.display = "block";
-                                document.getElementById("nvaUni").style.display = "none";
-                                document.getElementById("editU").style.display = "none";
-                                // Si es necesario, restablecer el valor de los radios
-                                radios.forEach(radio => radio.checked = false);
-                            }, 500);
-                        } else {
-                            alert("Por favor, selecciona una operación.");
-                        }
-                    });
-                </script>
             </div>
         </div>
     </div>
+
+    <script>
+        let operationSelected2 = false;
+
+        document.getElementById('exampleRadios1_2').addEventListener('click', function() {
+            document.getElementById("titModal2").style.display = "none";
+            document.getElementById("editU").style.display = "none";
+            document.getElementById("nvaUni").style.display = "block";
+            document.getElementById("op2").value = "add";
+            operationSelected2 = true;
+        });
+
+        document.getElementById('exampleRadios2_2').addEventListener('click', function() {
+            document.getElementById("titModal2").style.display = "none";
+            document.getElementById("nvaUni").style.display = "none";
+            document.getElementById("editU").style.display = "block";
+            document.getElementById("op2").value = "edit";
+            operationSelected2 = true;
+        });
+
+        document.getElementById('saveChanges2').addEventListener('click', function() {
+            const radios2 = document.querySelectorAll('.form-check-input[type="radio"]');
+
+            if (operationSelected2) {
+                document.getElementById("unidadmedidaz").submit();
+
+                // Restablecer el formulario y los elementos del modal
+                setTimeout(function() {
+                    document.getElementById("unidadmedidaz").reset();
+                    document.getElementById("titModal2").style.display = "block";
+                    document.getElementById("nvaUni").style.display = "none";
+                    document.getElementById("editU").style.display = "none";
+                    radios2.forEach(radio => radio.checked = false);
+                }, 500);
+            } else {
+                alert("Por favor, selecciona una operación.");
+            }
+        });
+    </script>
+
 </main>
 <%
     if(mensaje2!=null){%>

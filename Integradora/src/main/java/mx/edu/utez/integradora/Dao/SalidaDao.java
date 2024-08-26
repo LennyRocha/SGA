@@ -55,6 +55,49 @@ public class SalidaDao {
         return salida;
     }
 
+    public Salidas getRecent() {
+        Salidas salida = new Salidas();
+
+        String query = "SELECT s.salida_id, s.salida_folio, s.salida_fecha, s.salida_estado, " +
+                "asa.area_id, asa.area_nombre, asa.area_identidad, um.unidad_id" +
+                "u.id, u.nombre " +
+                "FROM Salida s " +
+                "JOIN area_salida asa ON s.salida_area_id = asa.area_id " +
+                "JOIN Usuarios u ON s.salida_usuario_id = u.id " +
+                "JOIN Unidad_medida um ON d.unidad_id = um.unidad_id " +
+                "ORDER BY salida_folio DESC LIMIT 1";
+
+        try (Connection con = DatabaseConnectionManager.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                salida = new Salidas();
+                salida.setSalida_id(rs.getInt("salida_id"));
+                salida.setSalida_folio(rs.getString("salida_folio"));
+                salida.setSalida_fecha(rs.getDate("salida_fecha"));
+                salida.setSalida_estado(rs.getString("salida_estado"));
+
+                // Obtener información del area
+                Area area = new Area();
+                area.setArea_id(rs.getInt("area_id"));
+                area.setArea_nombre(rs.getString("area_nombre"));
+                area.setArea_identidad(rs.getString("area_identidad"));
+                salida.setAreas(area);
+
+                // Obtener información del usuario
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre_usuario(rs.getString("nombre"));
+                salida.setUsuarios(usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return salida;
+    }
+
     public Salidas getOne(String salida_folio) {
         Salidas salida = null;
         String query = "SELECT s.salida_id, s.salida_folio, s.salida_fecha, s.salida_estado, " +
