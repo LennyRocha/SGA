@@ -45,10 +45,10 @@
                         <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" onclick="location.href='ver'">ALMACÉN</button>
                     </div>
                     <br>
-                    <br>
+                    <!-- <br>
                     <center><div class="row" id="theRow">
                         <a class="btn btn-info mt- mb-1" id="exit" href="#">SALIR</a>
-                    </div></center>
+                    </div></center> -->
                 </div>
                 <br>
             </div>

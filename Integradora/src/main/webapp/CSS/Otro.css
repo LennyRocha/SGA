@@ -9,6 +9,10 @@ input:invalid{
     color: #E63946;
 }
 
+.campo-invalido {
+    border: 4px solid #E63946;
+}
+
 input:required{
     border-color: #CED4DA;
 }

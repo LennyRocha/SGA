@@ -140,7 +140,7 @@
                               <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addArea">+</button>
                             </span>
                             <br>
-                            <select class="form-select form-control" id="area" name="area" style="color: #75778C">
+                            <select class="form-select form-control" id="area" name="area" style="color: #75778C" required>
                                 <option value="" disabled selected>Selecciona un area</option>
                                 <% for(Area a : listA){ %>
                                 <option value="<%=a.getArea_id()%>"><%=a.getArea_identidad()%> - <%=a.getArea_nombre()%></option>
@@ -149,7 +149,7 @@
                         </div>
                         <div class="col">
                             <label>Fecha:<strong style="color: darkred">*</strong></label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" aria-placeholder="Fecha actual">
+                            <input type="date" class="form-control" id="fecha" name="fecha" aria-placeholder="Fecha actual" required>
                             <label>Empleado:<strong style="color: darkred">*</strong></label>
                             <input type="text" class="form-control" id="empleado" name="empleado" value="<%=name%>" readonly style="background-color: #D9D9D9;">
                         </div>
@@ -167,22 +167,22 @@
                             <div class="col-sm">
                                 <label>PRODUCTO<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]" style="color: #75778C">
+                                <select class="form-select form-control" name="types" id="Producto1" name="producto[]" style="color: #75778C" onchange="actualizarMaximo(1)" required>
                                     <option value="" disabled selected>Producto 1</option>
                                     <% for(Producto p : listP){ %>
-                                    <option value="<%=p.getProducto_id()%>"><%=p.getProducto_nombre()%></option>
+                                    <option value="<%=p.getProducto_nombre()%>" data-stock="<%=p.getProducto_cantidad()%>"><%=p.getProducto_nombre()%></option>
                                     <% } %>
                                 </select>
                             </div>
                             <div class="col-sm">
                                 <label>CANTIDAD<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <input type="number" class="form-control" placeholder="Cantidad 1" id="Cantidad1" min="0" oninput="calculateTotal(this,1)" name="Cantidad[]">
+                                <input type="number" class="form-control" placeholder="Cantidad 1" id="Cantidad1" min="0" oninput="calculateTotal(this,1)" name="Cantidad[]" required>
                             </div>
                             <div class="col-sm">
                                 <label>PREC UNIT<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this); calculateTotal(this,1)" min="0" step="0.01" maxlength="10" id="Precio1" name="Precio[]">
+                                <input type="tel" class="form-control" placeholder="Precio 1" oninput="validarNumero(this); calculateTotal(this,1)" min="0" step="0.01" maxlength="10" id="Precio1" name="Precio[]" required>
                             </div>
                             <div class="col-sm">
                                 <label>U. MED<strong style="color: darkred">*</strong></label>
@@ -190,7 +190,7 @@
                                   <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="addUnid">+</button>
                                 </span>
                                 <br>
-                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]" style="color: #75778C">
+                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]" style="color: #75778C" required>
                                     <option value="" disabled selected>Unidad 1</option>
                                     <% for(UnidMed u : listU){ %>
                                     <option value="<%=u.getUnidad_id()%>"><%=u.getUnidad_nombre()%></option>

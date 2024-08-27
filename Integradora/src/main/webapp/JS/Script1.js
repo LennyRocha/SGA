@@ -9,8 +9,32 @@ const svgString = `
 
 function enviar(action) {
     mostrarCarga();
-    document.getElementById('validator').value = action;
-    document.getElementById('entrada').submit();
+    const formulario = document.getElementById('entrada');
+    const inputs = formulario.querySelectorAll('input[required], select[required], textarea[required]');
+    let formularioValido = true;
+
+    inputs.forEach(input => {
+        if (!input.value) {
+            formularioValido = false;
+            input.classList.add('campo-invalido'); // Añade una clase para resaltar el campo vacío
+        } else {
+            input.classList.remove('campo-invalido');
+        }
+    });
+
+    if (formularioValido) {
+        document.getElementById('validator').value = action;
+        formulario.submit(); // Envía el formulario si todos los campos están llenos
+    } else {
+        Swal.fire({
+            icon: 'Error',
+            title: '¡Campos incompletos!',
+            text: 'Por favor, completa todos los campos obligatorios.',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#4A4E69',
+            confirmButtonBorderColor: '#4A4E69'
+        });
+    }
 }
 
 nuevoz2.addEventListener("click", () => {
@@ -40,6 +64,7 @@ nuevoz2.addEventListener("click", () => {
     input2.setAttribute("type", "number");
     input2.setAttribute("name", "Cantidad[]");
     input2.setAttribute("id", "Cantidad");
+    input2.setAttribute("min", "0");
     input2.setAttribute("placeholder", "Cantidad " + unoJs);
     input2.setAttribute("class", "form-control");
     col2.appendChild(input2);

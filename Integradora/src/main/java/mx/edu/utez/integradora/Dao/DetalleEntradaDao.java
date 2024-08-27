@@ -174,7 +174,7 @@ public class DetalleEntradaDao {
                 ps.setInt(2, pro.getProducto_id()); // Foreign key from Producto
                 ps.setInt(3, detalle.getCantidad());
                 ps.setDouble(4, detalle.getValor_total());
-                ps.setString(5, detalle.getEntradas().getEntrada_folio());
+                ps.setInt(5, detalle.getDetalle_id());
                 if (ps.executeUpdate() > 0) {
                     respuesta = true;
                 }

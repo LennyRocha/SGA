@@ -14,19 +14,75 @@ console.log(arrayList);
 
 function enviar(action) {
     mostrarCarga();
-    document.getElementById('validator').value = action;
-    document.getElementById('salida').submit();
+    const formulario = document.getElementById('salida');
+    const inputs = formulario.querySelectorAll('input[required], select[required], textarea[required]');
+    let formularioValido = true;
+
+    inputs.forEach(input => {
+        if (!input.value) {
+            formularioValido = false;
+            input.classList.add('campo-invalido'); // Añade una clase para resaltar el campo vacío
+        } else {
+            input.classList.remove('campo-invalido');
+        }
+    });
+
+    if (formularioValido) {
+        document.getElementById('validator').value = action;
+        formulario.submit(); // Envía el formulario si todos los campos están llenos
+    } else {
+        Swal.fire({
+            icon: 'Error',
+            title: '¡Campos incompletos!',
+            text: 'Por favor, completa todos los campos obligatorios.',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#4A4E69',
+            confirmButtonBorderColor: '#4A4E69'
+        });
+    }
 }
 
 function enviarSolicitud(action) {
     mostrarCarga();
-    document.getElementById('validator').value = action;
-    document.getElementById('salida').submit();
+    const formulario = document.getElementById('salida');
+    const inputs = formulario.querySelectorAll('input[required], select[required], textarea[required]');
+    let formularioValido = true;
+
+    inputs.forEach(input => {
+        if (!input.value) {
+            formularioValido = false;
+            input.classList.add('campo-invalido'); // Añade una clase para resaltar el campo vacío
+        } else {
+            input.classList.remove('campo-invalido');
+        }
+    });
+
+    if (formularioValido) {
+        document.getElementById('validator').value = action;
+        formulario.submit(); // Envía el formulario si todos los campos están llenos
+    } else {
+        Swal.fire({
+            icon: 'Error',
+            title: '¡Campos incompletos!',
+            text: 'Por favor, completa todos los campos obligatorios.',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#4A4E69',
+            confirmButtonBorderColor: '#4A4E69'
+        });
+    }
 }
 
 const nuevosz3 = document.getElementById("nuevosz3");
 const nuevoz3 = document.getElementById("nuevoz3");
 const save = document.getElementById("save");
+
+function actualizarMaximo(num) {
+    const selectProducto = document.getElementById('Producto'+num);
+    const inputCantidad = document.getElementById('Cantidad'+num);
+    const stockDisponible = selectProducto.options[selectProducto.selectedIndex].getAttribute('data-stock');
+
+    inputCantidad.max = stockDisponible;
+}
 
 let elMax = 0;
 
@@ -57,6 +113,7 @@ nuevoz3.addEventListener("click", () => {
     input.setAttribute("id", "Producto"+i);
     input.setAttribute("class", "form-select form-control");
     input.setAttribute("style", "color: #75778C;");
+    input.setAttribute("onchange", `actualizarMaximo(${i})`);
 
     // Opción por defecto
     const option2 = document.createElement("option");
@@ -69,6 +126,7 @@ nuevoz3.addEventListener("click", () => {
     arrayList.forEach(producto => {
         const option = document.createElement("option");
         option.setAttribute("value", producto.producto_nombre); // Puedes cambiar esto según lo que necesites
+        option.setAttribute("data-stock", producto.producto_cantidad);
         option.textContent = `${producto.producto_nombre}`;
         elMax = `${producto.producto_cantidad}`
         input.appendChild(option);
@@ -86,6 +144,7 @@ nuevoz3.addEventListener("click", () => {
     input2.setAttribute("oninput", `calculateTotal(this,\`+i+\`)`);
     input2.setAttribute("placeholder", "Cantidad " + i);
     input2.setAttribute("class", "form-control");
+    input2.setAttribute("required", "required");
     col2.appendChild(input2);
 
     const col3 = document.createElement("div");
@@ -99,6 +158,7 @@ nuevoz3.addEventListener("click", () => {
     input3.setAttribute("oninput", `calculateTotal(this,${i}); validarNumero(this)`);
     input3.setAttribute("placeholder", "Precio " + i);
     input3.setAttribute("class", "form-control");
+    input3.setAttribute("required", "required");
     col3.appendChild(input3);
 
     const col4 = document.createElement("div");

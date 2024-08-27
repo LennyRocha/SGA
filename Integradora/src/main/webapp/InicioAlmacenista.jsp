@@ -50,9 +50,9 @@
                     <br>
                 </div>
                 <br>
-                <div class="row" id="theRow">
+                <!-- <div class="row" id="theRow">
                     <a class="btn btn-info mt- mb-1" id="exit" href="#">SALIR</a>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="col"></div>

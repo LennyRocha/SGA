@@ -13,8 +13,8 @@ input:required{
     border-color: #CED4DA;
 }
 
-input:read-only{
-    color: #CED4DA;;
+.campo-invalido {
+    border: 4px solid #E63946;
 }
 
 input{
