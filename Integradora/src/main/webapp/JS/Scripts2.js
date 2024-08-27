@@ -10,6 +10,7 @@ function mostrarCarga() {
         },
     });
 }
+console.log(arrayList);
 
 function enviar(action) {
     mostrarCarga();
@@ -26,6 +27,8 @@ function enviarSolicitud(action) {
 const nuevosz3 = document.getElementById("nuevosz3");
 const nuevoz3 = document.getElementById("nuevoz3");
 const save = document.getElementById("save");
+
+let elMax = 0;
 
 let i = 2;
 
@@ -44,18 +47,30 @@ nuevoz3.addEventListener("click", () => {
 
     const br = document.createElement("br");
 
+
     const col1 = document.createElement("div");
     col1.setAttribute("class", "col-sm");
+
     const input = document.createElement("select");
+    input.setAttribute("type", "text");
     input.setAttribute("name", "producto[]");
-    input.setAttribute("id", "Producto" + i);
-    input.setAttribute("placeholder", "Producto " + i);
-    input.setAttribute("class", "form-control");
-    // Suponiendo que tienes una lista de productos (listP) en JavaScript
-    listP.forEach(p => {
+    input.setAttribute("id", "Producto"+i);
+    input.setAttribute("class", "form-select form-control");
+    input.setAttribute("style", "color: #75778C;");
+
+    // Opción por defecto
+    const option2 = document.createElement("option");
+    option2.setAttribute("value", "");
+    option2.textContent = "Producto "+i;
+    option2.setAttribute("disabled", "disabled");
+    option2.setAttribute("selected", "selected");
+    input.appendChild(option2);
+    // Añadir opciones del arrayList
+    arrayList.forEach(producto => {
         const option = document.createElement("option");
-        option.setAttribute("value", p.producto_id);  // O `p.getProducto_id()` dependiendo de cómo obtienes el ID
-        option.textContent = p.producto_nombre;  // O `p.getProducto_nombre()` dependiendo de cómo obtienes el nombre
+        option.setAttribute("value", producto.producto_nombre); // Puedes cambiar esto según lo que necesites
+        option.textContent = `${producto.producto_nombre}`;
+        elMax = `${producto.producto_cantidad}`
         input.appendChild(option);
     });
     col1.appendChild(input);
@@ -67,6 +82,7 @@ nuevoz3.addEventListener("click", () => {
     input2.setAttribute("name", "Cantidad[]");
     input2.setAttribute("id", "Cantidad" + i);
     input2.setAttribute("min", "0");  // Valor mínimo
+    //input2.setAttribute("max", elMax);  // Valor máximo
     input2.setAttribute("oninput", `calculateTotal(this,\`+i+\`)`);
     input2.setAttribute("placeholder", "Cantidad " + i);
     input2.setAttribute("class", "form-control");
@@ -87,12 +103,27 @@ nuevoz3.addEventListener("click", () => {
 
     const col4 = document.createElement("div");
     col4.setAttribute("class", "col-sm");
-    const input4 = document.createElement("input");
+    const input4 = document.createElement("select");
     input4.setAttribute("type", "text");
     input4.setAttribute("name", "Unidad[]");
     input4.setAttribute("id", "Unidad" + i);
     input4.setAttribute("placeholder", "Unidad " + i);
-    input4.setAttribute("class", "form-control");
+    input4.setAttribute("class", "form-select form-control");
+    input4.setAttribute("style", "color: #75778C;");
+    // Opción por defecto
+    const option3 = document.createElement("option");
+    option3.setAttribute("value", "");
+    option3.textContent = "Unidad "+i;
+    option3.setAttribute("disabled", "disabled");
+    option3.setAttribute("selected", "selected");
+    input4.appendChild(option3);
+    // Añadir opciones del arrayList
+    arrayListU.forEach(unidad => {
+        const option = document.createElement("option");
+        option.setAttribute("value", unidad.unidad_id); // Puedes cambiar esto según lo que necesites
+        option.textContent = `${unidad.unidad_nombre}`;
+        input4.appendChild(option);
+    });
     col4.appendChild(input4);
 
     const col7 = document.createElement("div");

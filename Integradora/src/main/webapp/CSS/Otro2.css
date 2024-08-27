@@ -13,6 +13,18 @@ input:required{
     border-color: #CED4DA;
 }
 
+input:read-only{
+    color: #CED4DA;;
+}
+
+input{
+    color: #75778C;
+}
+
+select{
+    color: #75778C;
+}
+
 #addProv {
     height: 12%;
     padding: 0;

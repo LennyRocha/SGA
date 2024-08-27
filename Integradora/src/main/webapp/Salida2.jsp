@@ -12,6 +12,7 @@
 <%@ page import="mx.edu.utez.integradora.Model.Producto" %>
 
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="com.google.gson.Gson" %>
 <%--
   Created by IntelliJ IDEA.
   User: Lenny
@@ -105,7 +106,17 @@
     }
     idSal = idSal+1;
     folio = "ID"+idSal+fecha+"S";
+
+    Gson gson = new Gson();
+    String json = gson.toJson(listP);
+    String jsons = gson.toJson(listU);
+    System.out.println(json);
+    System.out.println(jsons);
 %>
+<script>
+    var arrayList = JSON.parse('<%= json.replaceAll("\"", "\\\\\"") %>');
+    var arrayListU = JSON.parse('<%= jsons.replaceAll("\"", "\\\\\"") %>');
+</script>
 <span data-bs-toggle="tooltip" data-bs-placement="top" title="Regresar">
     <button id="back" onclick="location.href='InicioAlmacenista.jsp'" class="btn btn-outline-primary btn-lg" style="margin-left: 10px"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
 </span>
@@ -123,13 +134,13 @@
                     <div class="row">
                         <div class="col">
                             <label>Folio:<strong style="color: darkred">*</strong></label>
-                            <input type="text" class="form-control" placeholder="Folio" value="<%=folio%>" readonly style="background-color: #D9D9D9;" name="folio">
+                            <input type="text" class="form-control" placeholder="Folio" value="<%=folio%>" readonly style="background-color: #D9D9D9; color: #75778C" name="folio">
                             <label>Área de salida:<strong style="color: darkred">*</strong></label>
                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar area de salida">
                               <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addArea">+</button>
                             </span>
                             <br>
-                            <select class="form-select form-control" id="area" name="area">
+                            <select class="form-select form-control" id="area" name="area" style="color: #75778C">
                                 <option value="" disabled selected>Selecciona un area</option>
                                 <% for(Area a : listA){ %>
                                 <option value="<%=a.getArea_id()%>"><%=a.getArea_identidad()%> - <%=a.getArea_nombre()%></option>
@@ -156,8 +167,8 @@
                             <div class="col-sm">
                                 <label>PRODUCTO<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]">
-                                    <option value="" disabled selected>Selecciona un producto</option>
+                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]" style="color: #75778C">
+                                    <option value="" disabled selected>Producto 1</option>
                                     <% for(Producto p : listP){ %>
                                     <option value="<%=p.getProducto_id()%>"><%=p.getProducto_nombre()%></option>
                                     <% } %>
@@ -179,8 +190,8 @@
                                   <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="addUnid">+</button>
                                 </span>
                                 <br>
-                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]">
-                                    <option value="" disabled selected>Selecciona una unidad</option>
+                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]" style="color: #75778C">
+                                    <option value="" disabled selected>Unidad 1</option>
                                     <% for(UnidMed u : listU){ %>
                                     <option value="<%=u.getUnidad_id()%>"><%=u.getUnidad_nombre()%></option>
                                     <% } %>
