@@ -10,6 +10,7 @@ public class Producto implements Serializable {
     private double producto_precio;
     private int producto_cantidad;
     private List<Producto> producto_Lista_medida;
+    private int unidad_id;
 
     public Producto(){
 
@@ -28,8 +29,20 @@ public class Producto implements Serializable {
         this.producto_cantidad = producto_cantidad;
     }
 
+    public Producto(String producto_nombre, double producto_precio, int producto_cantidad, int unidad_id) {
+        this.producto_nombre = producto_nombre;
+        this.producto_precio = producto_precio;
+        this.producto_cantidad = producto_cantidad;
+        this.unidad_id = unidad_id;
+    }
+
     public Producto(ArrayList<Producto> producto_Lista_medida) {
         this.producto_Lista_medida = producto_Lista_medida;
+    }
+
+    public Producto(String producto_nombre, int unidad_id) {
+        this.producto_nombre = producto_nombre;
+        this.unidad_id = unidad_id;
     }
 
     public int getProducto_id() {
@@ -59,6 +72,9 @@ public class Producto implements Serializable {
     public void setProducto_cantidad(int producto_cantidad) {
         this.producto_cantidad = producto_cantidad;
     }
+
+    public int getUnidad_id() {return unidad_id;}
+    public void setUnidad_id(int unidad_id) {this.unidad_id = unidad_id;}
 
     public List<Producto> getProducto_Lista_medida() {
         return producto_Lista_medida;

@@ -40,6 +40,7 @@ public class SalidaServlet extends HttpServlet {
         String[] productPrices = request.getParameterValues("Precio[]");
         String[] productQuantities = request.getParameterValues("Cantidad[]");
         String[] productUnity = request.getParameterValues("Unidad[]");
+        String[] totPrice = request.getParameterValues("Total[]");
 
         ArrayList<Producto> productList = new ArrayList<>();
         ArrayList<DetalleSalida> salidaList = new ArrayList<>();
@@ -78,22 +79,24 @@ public class SalidaServlet extends HttpServlet {
                     System.out.println("Producto: " + productNames[i]);
                     System.out.println("Cantidad: " + productQuantities[i]);
                     System.out.println("Precio: " + productPrices[i]);
+                    System.out.println("Unidad: " + productUnity[i]);
+                    System.out.println("Precio total: " + totPrice[i]);
 
                     sumCant += Integer.parseInt(productQuantities[i]);
                     sumPrec += Double.parseDouble(productPrices[i]);
 
-                    pr.setProducto_nombre(productNames[i]);
+                    /*pr.setProducto_nombre(productNames[i]);
                     pr.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
                     pr.setProducto_precio(Double.parseDouble(productPrices[i]));
-                    um.setUnidad_nombre(productUnity[i]);
+                    um.setUnidad_nombre(productUnity[i]);*/
                 }
-                sumAll = sumCant * sumPrec;
+                /*sumAll = sumCant * sumPrec;
                 salidaDetalle.setSalidas(salida);
                 salidaDetalle.setCantidad(sumCant);
                 salidaDetalle.setProductos_salida(pr);
                 salidaDetalle.setUnidad_medida(um);
                 salidaDetalle.setValor_salida(sumAll);
-                salidaList.add(salidaDetalle);
+                salidaList.add(salidaDetalle);*/
             } else {
                 System.out.println("No se recibieron productos.");
             }
@@ -115,6 +118,7 @@ public class SalidaServlet extends HttpServlet {
 
                     for (Producto p : listProd) {
                         if ((p.getProducto_nombre()).equalsIgnoreCase(productNames[i])){
+                            p.setUnidad_id(Integer.parseInt(productUnity[i]));
                             p.setProducto_cantidad(p.getProducto_cantidad() - Integer.parseInt(productQuantities[i]));
                             if (productoDao.restarProducto(p.getProducto_nombre(), p.getProducto_cantidad())) {
                                 confirma = true;
@@ -133,10 +137,13 @@ public class SalidaServlet extends HttpServlet {
                         prods.setProducto_nombre(productNames[i]);
                         prods.setProducto_precio(Double.parseDouble(productPrices[i]));
                         prods.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
+                        prods.setUnidad_id(Integer.parseInt(productUnity[i]));
 
-                        if (productoDao.insertProducto(prods)) {
+                        if (productoDao.restarProducto(prods.getProducto_nombre(), prods.getProducto_cantidad())) {
                             confirma = true;
-                            productList.add(productoDao.getOne(prods.getProducto_nombre()));
+                            Producto pp = productoDao.getOne(prods.getProducto_nombre());
+                            pp.setProducto_id(Integer.parseInt(productUnity[i]));
+                            productList.add(pp);
                             session.setAttribute("Exito", "Producto restado exitosamente");
                         } else {
                             session.setAttribute("Fallo", "Producto restado no exitosamente");
@@ -151,7 +158,9 @@ public class SalidaServlet extends HttpServlet {
                         salidaDetalle.setProductos_salida(prop);
                         salidaDetalle.setValor_salida(prop.getProducto_cantidad() * prop.getProducto_precio());
                         salidaList.add(salidaDetalle);
+                        unidmed = unidadDao.getOne(prop.getUnidad_id());
                         salidaDetalle.setUnidad_medida(unidmed);
+                        System.out.println(unidmed.getUnidad_id());
                         System.out.println(salidaDetalle.getSalidas().getSalida_folio());
                         if(dsDao.insertDetalleSalida(salidaDetalle)){
                             System.out.println(salidaList.size());
