@@ -131,8 +131,6 @@ BEGIN
     ORDER BY p.producto_nombre;
 END //
 
-DELIMITER ;
-
 DELIMITER //
 CREATE EVENT control_de_usuarios
     ON SCHEDULE
@@ -143,7 +141,7 @@ CREATE EVENT control_de_usuarios
         TRUNCATE TABLE Usuarios_inhabilitados;
         TRUNCATE TABLE Usuarios_habilitados;
     END;
-END//
+DELIMITER //
 
 
 
