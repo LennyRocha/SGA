@@ -79,12 +79,16 @@ const save = document.getElementById("save");
 function actualizarMaximo(num) {
     const selectProducto = document.getElementById('Producto'+num);
     const inputCantidad = document.getElementById('Cantidad'+num);
+    const inputPrecio = document.getElementById('Precio'+num);
     const stockDisponible = selectProducto.options[selectProducto.selectedIndex].getAttribute('data-stock');
+    const stockPrecio = selectProducto.options[selectProducto.selectedIndex].getAttribute('data-price');
 
     inputCantidad.max = stockDisponible;
+    inputPrecio.innerText = stockPrecio;
 }
 
 let elMax = 0;
+let prec = 0;
 
 let i = 2;
 
@@ -127,8 +131,10 @@ nuevoz3.addEventListener("click", () => {
         const option = document.createElement("option");
         option.setAttribute("value", producto.producto_nombre); // Puedes cambiar esto según lo que necesites
         option.setAttribute("data-stock", producto.producto_cantidad);
+        option.setAttribute("data-price", producto.producto_precio);
         option.textContent = `${producto.producto_nombre}`;
         elMax = `${producto.producto_cantidad}`
+        prec = `${producto.producto_precio}`
         input.appendChild(option);
     });
     col1.appendChild(input);
@@ -152,7 +158,7 @@ nuevoz3.addEventListener("click", () => {
     const input3 = document.createElement("input");
     input3.setAttribute("type", "tel");
     input3.setAttribute("name", "Precio[]");
-    input3.setAttribute("id", "Precio" + i);
+    input3.setAttribute("id", "Precio"+i);
     input3.setAttribute("min", "0.00");  // Valor mínimo
     input3.setAttribute("step", "0.01");
     input3.setAttribute("oninput", `calculateTotal(this,${i}); validarNumero(this)`);

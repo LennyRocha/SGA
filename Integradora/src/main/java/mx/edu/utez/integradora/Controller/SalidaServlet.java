@@ -40,7 +40,7 @@ public class SalidaServlet extends HttpServlet {
         String[] productPrices = request.getParameterValues("Precio[]");
         String[] productQuantities = request.getParameterValues("Cantidad[]");
         String[] productUnity = request.getParameterValues("Unidad[]");
-        String[] totPrice = request.getParameterValues("Total[]");
+        String[] totPrice = request.getParameterValues("PrecioT[]");
 
         ArrayList<Producto> productList = new ArrayList<>();
         ArrayList<DetalleSalida> salidaList = new ArrayList<>();
@@ -84,19 +84,7 @@ public class SalidaServlet extends HttpServlet {
 
                     sumCant += Integer.parseInt(productQuantities[i]);
                     sumPrec += Double.parseDouble(productPrices[i]);
-
-                    /*pr.setProducto_nombre(productNames[i]);
-                    pr.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
-                    pr.setProducto_precio(Double.parseDouble(productPrices[i]));
-                    um.setUnidad_nombre(productUnity[i]);*/
                 }
-                /*sumAll = sumCant * sumPrec;
-                salidaDetalle.setSalidas(salida);
-                salidaDetalle.setCantidad(sumCant);
-                salidaDetalle.setProductos_salida(pr);
-                salidaDetalle.setUnidad_medida(um);
-                salidaDetalle.setValor_salida(sumAll);
-                salidaList.add(salidaDetalle);*/
             } else {
                 System.out.println("No se recibieron productos.");
             }
@@ -122,9 +110,11 @@ public class SalidaServlet extends HttpServlet {
                             p.setProducto_cantidad(p.getProducto_cantidad() - Integer.parseInt(productQuantities[i]));
                             if (productoDao.restarProducto(p.getProducto_nombre(), p.getProducto_cantidad())) {
                                 confirma = true;
+                                System.out.println("Producto restado exitosamente");
                                 productList.add(p);
                                 session.setAttribute("Exito", "Producto modificado exitosamente");
                             } else {
+                                System.out.println("Producto restado no exitosamente");
                                 session.setAttribute("Fallo", "Producto modificado no exitosamente");
                             }
                             productoEncontrado = true;
@@ -144,8 +134,10 @@ public class SalidaServlet extends HttpServlet {
                             Producto pp = productoDao.getOne(prods.getProducto_nombre());
                             pp.setProducto_id(Integer.parseInt(productUnity[i]));
                             productList.add(pp);
+                            System.out.println("Producto restado exitosamente");
                             session.setAttribute("Exito", "Producto restado exitosamente");
                         } else {
+                            System.out.println("Producto restado no exitosamente");
                             session.setAttribute("Fallo", "Producto restado no exitosamente");
                         }
                     }
@@ -183,18 +175,20 @@ public class SalidaServlet extends HttpServlet {
             try {
                 String folio = request.getParameter("folio");
                 System.out.println(folio);
-                String fecha = request.getParameter("fecha");
+                Date fecha = Date.valueOf(request.getParameter("fecha"));
                 System.out.println(fecha);
                 String area = request.getParameter("area");
                 System.out.println(area);
-                String empleado = request.getParameter("employees");
+                String empleado = request.getParameter("empleado");
                 System.out.println(empleado);
                 salidaNumero = folio.charAt(2);
                 Usuario usuario = usuarioDao.getOne(empleado);
+                Area AreaObj = areaDao.getOne2(area);
 
                 salida.setSalida_folio(folio);
-                salida.setSalida_fecha(Date.valueOf(fecha));
+                salida.setSalida_fecha(fecha);
                 salida.setUsuarios(usuario);
+                salida.setAreas(AreaObj);
                 salida.setSalida_estado("pendiente");
                 System.out.println("Entrada estado: "+salida.getSalida_estado());
             } catch (NumberFormatException e) {
@@ -218,6 +212,24 @@ public class SalidaServlet extends HttpServlet {
                             }
                             productoEncontrado = true;
                             break;
+                        }
+                    }
+
+                    if (!productoEncontrado) {
+                        Producto prods = new Producto();
+                        prods.setProducto_nombre(productNames[i]);
+                        prods.setProducto_precio(Double.parseDouble(productPrices[i]));
+                        prods.setProducto_cantidad(Integer.parseInt(productQuantities[i]));
+                        prods.setUnidad_id(Integer.parseInt(productUnity[i]));
+
+                        if (productoDao.restarProducto(prods.getProducto_nombre(), prods.getProducto_cantidad())) {
+                            confirma = true;
+                            Producto pp = productoDao.getOne(prods.getProducto_nombre());
+                            pp.setProducto_id(Integer.parseInt(productUnity[i]));
+                            productList.add(pp);
+                            session.setAttribute("Exito", "Producto restado exitosamente");
+                        } else {
+                            session.setAttribute("Fallo", "Producto restado no exitosamente");
                         }
                     }
                 }

@@ -167,7 +167,7 @@
                             <div class="col-sm">
                                 <label>PRODUCTO<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <select class="form-select form-control" name="types" id="Producto1" name="producto[]" style="color: #75778C" onchange="actualizarMaximo(1)" required>
+                                <select class="form-select form-control" id="Producto1" style="color: #75778C" onchange="actualizarMaximo(1)" required name="producto[]">
                                     <option value="" disabled selected>Producto 1</option>
                                     <% for(Producto p : listP){ %>
                                     <option value="<%=p.getProducto_nombre()%>" data-stock="<%=p.getProducto_cantidad()%>"><%=p.getProducto_nombre()%></option>
@@ -177,7 +177,7 @@
                             <div class="col-sm">
                                 <label>CANTIDAD<strong style="color: darkred">*</strong></label>
                                 <br>
-                                <input type="number" class="form-control" placeholder="Cantidad 1" id="Cantidad1" min="0" oninput="calculateTotal(this,1)" name="Cantidad[]" required>
+                                <input type="number" class="form-control" placeholder="Cantidad 1" id="Cantidad1" min="0" oninput="calculateTotal(this,1)" required name="Cantidad[]">
                             </div>
                             <div class="col-sm">
                                 <label>PREC UNIT<strong style="color: darkred">*</strong></label>
@@ -190,7 +190,7 @@
                                   <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="addUnid">+</button>
                                 </span>
                                 <br>
-                                <select class="form-select form-control" name="types" id="unidad" name="Unidad[]" style="color: #75778C" required>
+                                <select class="form-select form-control" id="Unidad1" style="color: #75778C" required name="Unidad[]">
                                     <option value="" disabled selected>Unidad 1</option>
                                     <% for(UnidMed u : listU){ %>
                                     <option value="<%=u.getUnidad_id()%>"><%=u.getUnidad_nombre()%></option>

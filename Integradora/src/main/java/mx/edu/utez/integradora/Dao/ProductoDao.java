@@ -115,7 +115,7 @@ public class ProductoDao {
 
     public boolean restarProducto(String nombreProducto, int cantidad) {
         boolean respuesta = false;
-        String query = "UPDATE Producto SET producto_cantidad = producto_cantidad - ? WHERE producto_nombre = ?";
+        String query = "UPDATE Producto SET producto_cantidad = (producto_cantidad - ?) WHERE producto_id = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection()) {
             PreparedStatement ps = con.prepareStatement(query);
