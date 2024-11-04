@@ -49,36 +49,38 @@
         document.body.style.backgroundColor = "#F2E9E4";
     </script>
     <%}%>
-    <table id="example" class="table table-striped table-hover table-bordered" style="width: 100%">
-        <thead id="theadx" style="background-color:  #595959;  align-items: center; color: white;">
-        <tr>
-            <th>Id_entrada</th>
-            <th>Folio</th>
-            <th>Folio factura</th>
-            <th>Fecha</th>
-            <th>Proveedor</th>
-            <th>Encargado</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-        if(histE.isEmpty()){ %>
-        <center><h1 class="text-success">¡NO HAY REGISTROS DISPONIBLES!</h1></center>
-        <% }else{
-            for(Entradas e: histE){%>
+    <div class="overflow-auto">
+        <table id="example" class="table table-striped table-hover table-bordered table-responsive" style="width: 100%">
+            <thead id="theadx" style="background-color:  #595959;  align-items: center; color: white;">
             <tr>
-                <th><%=e.getEntrada_id()%></th>
-                <th><%=e.getEntrada_folio()%></th>
-                <th><%=e.getEntrada_folio_factura()%></th>
-                <th><%=e.getEntrada_fecha()%></th>
-                <th><%=e.getProveedorNombre()%></th>
-                <th><%=e.getUsuarioNombre()%></th>
+                <th>Id_entrada</th>
+                <th>Folio</th>
+                <th>Folio factura</th>
+                <th>Fecha</th>
+                <th>Proveedor</th>
+                <th>Encargado</th>
             </tr>
-        <%}
-        }
-        %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <%
+            if(histE.isEmpty()){ %>
+            <center><h1 class="text-success">¡NO HAY REGISTROS DISPONIBLES!</h1></center>
+            <% }else{
+                for(Entradas e: histE){%>
+                <tr>
+                    <th><%=e.getEntrada_id()%></th>
+                    <th><%=e.getEntrada_folio()%></th>
+                    <th><%=e.getEntrada_folio_factura()%></th>
+                    <th><%=e.getEntrada_fecha()%></th>
+                    <th><%=e.getProveedorNombre()%></th>
+                    <th><%=e.getUsuarioNombre()%></th>
+                </tr>
+            <%}
+            }
+            %>
+            </tbody>
+        </table>
+    </div>
     <br>
     <center><h1 class="featurette-heading fw-normal lh-1" id="tit">
         HISTORIAL DE ENTRADAS

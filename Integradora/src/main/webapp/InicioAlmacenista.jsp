@@ -26,7 +26,7 @@
         <div class="col"></div>
         <div class="col-8 offset-2">
             <div class="container-sm">
-                <center><p style="font-size: 4vw;">BIENVENIDO ALMACENISTA</p></center>
+                <center><p class="fs-1">BIENVENIDO ALMACENISTA</p></center>
             </div>
             <div class="container-fluid" id="contInicio">
                 <br>

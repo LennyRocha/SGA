@@ -11,7 +11,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Inicio</title>
+    <title>Menú historial</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/bootstrap.css">
     <link rel="stylesheet" type='text/css' media='screen' href="${pageContext.request.contextPath}/CSS/StyleSmall.css">
@@ -42,24 +42,28 @@
 <%}%>
 <main>
     <div class="container-fluid">
-        <div class="col"></div>
-        <div class="col-8 offset-2">
+        <div class="flex-column mx-auto" style="max-width: 718px">
             <div class="container-fluid" id="contIniciox">
                 <div class="container-sm">
-                    <p style="font-size: 5vw;">VER HISTORIAL</p>
+                    <p class="fs-1">VER HISTORIAL</p>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <img class="img-fluid" class="img-thumbnail" src="IMG/Btn1_Hist.png" alt="Gesionar usuarios">
-                        <a class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-md" id="btnAdmin" href="HistEntrada.jsp">ENTRADAS</a>
+                <div class="row mx-auto">
+                    <div class="card text-center" style="width: 18rem; border: none">
+                        <img src="IMG/Btn1_Hist.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <a href="HistEntrada.jsp" class="btn btn-primary" style="color:#000; background-color: #D9D9D9; border-color:#D9D9D9;">ENTRADAS</a>
+                        </div>
                     </div>
-                    <div class="col">
-                        <img class="img-fluid" class="img-thumbnail" src="IMG/Btn2_Hist.png" alt="ver historial">
-                        <a class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-md" id="btnAdmin" href="HistSalida.jsp">SALIDAS</a>
+                    <div class="card" style="width: 18rem; border: none">
+                        <img src="IMG/Btn2_Hist.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <a class="btn btn-primary" style="color:#000; background-color: #D9D9D9; border-color:#D9D9D9;" href="HistSalida.jsp">SALIDAS</a>
+                        </div>
                     </div>
-                    <br>
-                    <br>
                 </div>
+                </div>
+            <br>
+            <br>
                 <div class="row" id="theRow">
                     <a class="btn btn-info mt- mb-1" id="exit" href="<%=ruta%>">VOLVER</a>
                 </div>
@@ -67,7 +71,6 @@
             <br>
             <br>
         </div>
-    </div>
 </main>
 <br>
 <br>

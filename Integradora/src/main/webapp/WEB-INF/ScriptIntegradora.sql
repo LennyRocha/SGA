@@ -143,10 +143,6 @@ CREATE EVENT control_de_usuarios
     END;
 DELIMITER //
 
-
-
-DROP EVENT control_de_usuarios;
-
 CREATE UNIQUE INDEX Idx_proveedores ON Proveedor (proveedor_nombre);
 CREATE INDEX Idx_areas ON Area_salida (area_identidad);
 CREATE INDEX Idx_unidades ON Unidad_medida (unidad_nombre);

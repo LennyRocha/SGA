@@ -79,12 +79,14 @@ const save = document.getElementById("save");
 function actualizarMaximo(num) {
     const selectProducto = document.getElementById('Producto'+num);
     const inputCantidad = document.getElementById('Cantidad'+num);
-    const inputPrecio = document.getElementById('Precio'+num);
     const stockDisponible = selectProducto.options[selectProducto.selectedIndex].getAttribute('data-stock');
     const stockPrecio = selectProducto.options[selectProducto.selectedIndex].getAttribute('data-price');
 
     inputCantidad.max = stockDisponible;
-    inputPrecio.innerText = stockPrecio;
+    document.getElementById('Precio'+num).value = stockPrecio;
+    console.log(document.getElementById('Precio'+num).value);
+    console.log(stockPrecio);
+    console.log(stockDisponible);
 }
 
 let elMax = 0;
@@ -133,8 +135,8 @@ nuevoz3.addEventListener("click", () => {
         option.setAttribute("data-stock", producto.producto_cantidad);
         option.setAttribute("data-price", producto.producto_precio);
         option.textContent = `${producto.producto_nombre}`;
-        elMax = `${producto.producto_cantidad}`
-        prec = `${producto.producto_precio}`
+        console.log("El precio es: "+producto.producto_precio);
+        console.log("La cantidad es: "+producto.producto_cantidad);
         input.appendChild(option);
     });
     col1.appendChild(input);

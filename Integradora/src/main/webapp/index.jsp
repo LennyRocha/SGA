@@ -56,6 +56,7 @@
                         <center><p><input class="w-100 btn btn-lg btn btn-info mt-3 mb-0" type="submit" id="enter" value="INICIAR SESIÓN" /></p></center>
                     </div>
                 </form>
+                <!-- <button class="btn btn-toolbar" onclick="doThis()">Ver Algo</button>-->
             </div>
             <br>
             <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -145,6 +146,45 @@
             confirmButtonColor: '#4A4E69',
             confirmButtonBorderColor: '#4A4E69'
         });
+    }
+</script>
+<script>
+    function showNotification(){
+        var notification = new Notification("Mensaje nuevo", {
+            body: "Como te va?",
+            icon: "src/main/webapp/IMG/UserI.png"
+        })
+
+        notification.onclick = (e) =>{
+            console.log("Funcionó")
+        }
+    }
+
+    function doThis(){
+        console.log("UnU")
+        console.log(Notification.permission)
+        if(Notification.permission === "granted" ){
+            console.log(Notification.permission);
+            var data = new Notification("Mensaje nuevo", {
+                body: "Como te va?",
+                icon: "http://localhost:8080/Integradora_war_exploded/IMG/cajaIcon.png",
+                vibrate: [200, 100, 200]
+            });
+            setTimeout(()=>{
+                data.close()
+            },5000)
+        }else if(Notification.permission === "denied" || Notification.permission === "default"){
+            Notification.requestPermission().then(function (permission) {
+                if(Notification.permission === "granted"){
+                    console.log(permission);
+                    var notification = new Notification("Mensaje nuevo", {
+                        body: "Como te va?",
+                        icon: "src/main/webapp/IMG/cajaIcon2.png",
+                        vibrate: [200, 100, 200]
+                    })
+                }
+            });
+        }
     }
 </script>
 <style>

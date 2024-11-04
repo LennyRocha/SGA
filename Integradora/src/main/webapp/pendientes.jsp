@@ -47,7 +47,7 @@
     <button id="back" onclick="location.href='InicioAlmacenista.jsp'" class="btn btn-outline-primary"><img src="IMG/Back.png" class="img-fluid" width="40" height="40"></button>
 </span>
 <main class="main-content">
-    <h2>REGISTROS PENDIENTES</h2>
+    <h2 class="fs-1 text-center">REGISTROS PENDIENTES</h2>
     <br>
     <nav aria-label="breadcrumb">
         <h5><ul class="breadcrumb">
@@ -66,7 +66,7 @@
         <%int uniqueID = e.getEntrada_id();%>
         <form action="entrada" method="get" id="pendienteE_<%=uniqueID%>">
         <input type="hidden" value="" name="action" id="validator_<%=uniqueID%>">
-        <div class="register-card">
+        <div class="register-card overflow-scroll" style="min-width: 320px;">
             <div class="register-info">
                 <p id="fol">Folio: <%=e.getEntrada_folio()%></p>
                 <p id="fech">Última modificación: <%=e.getEntrada_fecha()%></p>
@@ -85,12 +85,12 @@
         <%}
         }%>
     </div></center>
-    <center><div class="align-content-center" style="display: none; width: 100%;" id="salidas">
+    <center><div class="" style="display: none; width: 100%;" id="salidas">
         <% if(sal.isEmpty()){%>
         <center><h1 class="text-success">¡NO HAY SALIDAS PENDIENTES!</h1></center>
         <%}else{
             for(Salidas s : sal) { %>
-        <div class="register-card">
+        <div class="register-card overflow-scroll" style="min-width: 320px;">
             <div class="register-info">
                 <p name="folioS">Folio: <%=s.getSalida_folio()%></p>
                 <p name="fechaS">Última modificación: <%=s.getSalida_fecha()%></p>

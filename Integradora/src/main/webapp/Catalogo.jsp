@@ -47,7 +47,7 @@
 </span>
 <div class="container-sm" style="max-width: 960px">
     <div class="container-sm">
-        <center><h1 style="letter-spacing: 4.4em;">CATÁLOGO DE PRODUCTOS</h1></center>
+        <center><h1 style="letter-spacing: .5em;">CATÁLOGO DE PRODUCTOS</h1></center>
     </div>
     <br>
     <%
@@ -76,6 +76,15 @@
                     </div>
                 </div>
             </div>
+            <style>
+                @media (max-width: 575px) {
+                    .card{
+                        <%if (count == 1){%>
+                           margin-bottom: 60px;
+                        <%}%>
+                    }
+                }
+            </style>
             <%
                 count++;
                 if(count % 2 == 0) {

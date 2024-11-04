@@ -32,7 +32,8 @@
     String mensaje = (String) sesion.getAttribute("mensaje");
     String mensaje2 = (String) sesion.getAttribute("mensaje2");
 %>
-<table id="example" class="table table-striped table-hover table-bordered" style="width: 100%">
+<div class="overflow-auto">
+<table id="example" class="table table-striped table-hover table-bordered table-responsive-sm" style="width: 100%">
     <thead id="theadx" style="background-color:  #595959;  align-items: center; color: white;">
     <tr>
         <th>id</th>
@@ -85,6 +86,7 @@
     <% } %>
     </tbody>
 </table>
+</div>
 <br>
 <center><h1 class="featurette-heading fw-normal lh-1" id="tit">
     MENÚ DE USUARIOS

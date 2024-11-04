@@ -240,7 +240,6 @@ rect:active
     background-color: #D9D9D9;
     border-color:#D9D9D9;
     border-radius: 60px;
-    width: 176px;
 }
 
 #btnAdmin:hover{
@@ -297,4 +296,8 @@ rect:active
 
 .swal2-title {
     color: #1D3557; /* Change this to your desired color */
+}
+
+.card{
+    border-color: white;
 }

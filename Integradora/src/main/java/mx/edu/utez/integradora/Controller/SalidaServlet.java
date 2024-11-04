@@ -107,9 +107,11 @@ public class SalidaServlet extends HttpServlet {
                     for (Producto p : listProd) {
                         if ((p.getProducto_nombre()).equalsIgnoreCase(productNames[i])){
                             p.setUnidad_id(Integer.parseInt(productUnity[i]));
-                            p.setProducto_cantidad(p.getProducto_cantidad() - Integer.parseInt(productQuantities[i]));
-                            if (productoDao.restarProducto(p.getProducto_nombre(), p.getProducto_cantidad())) {
+                            int minus = (Integer.parseInt(productQuantities[i]));
+                            if (productoDao.restarProducto(p.getProducto_nombre(),minus)) {
                                 confirma = true;
+                                System.out.println(p.getProducto_cantidad());
+                                System.out.println(minus);
                                 System.out.println("Producto restado exitosamente");
                                 productList.add(p);
                                 session.setAttribute("Exito", "Producto modificado exitosamente");
