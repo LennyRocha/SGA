@@ -76,11 +76,11 @@
         <td><%=statuss%></td>
         <!-- Tipo <td><%=u.getTipo_usuario()%></td>-->
         <!-- Estado <td><%=u.isEstado()%></td>-->
-        <td><a class="btn btn-outline-warning" href="log_in?id=<%=u.getId()%>">Modificar</a></td>
+        <td><a class="btn btn-outline-warning" id="modificarA<%=u.getNombre_usuario()%>" href="log_in?id=<%=u.getId()%>">Modificar</a></td>
         <% if (statuss == "Activo"){ %>
-            <td><a class="btn btn-outline-danger" href="delete?id=<%=u.getId()%>">Deshabilitar</a></td>
+            <td><a class="btn btn-outline-danger" id="deshabilitarA<%=u.getNombre_usuario()%>" href="delete?id=<%=u.getId()%>">Deshabilitar</a></td>
         <%} else {%>
-            <td><a class="btn btn-outline-success" href="revive?id=<%=u.getId()%>">Rehabilitar</a></td>
+            <td><a class="btn btn-outline-success" id="rehabilitarA<%=u.getNombre_usuario()%>" href="revive?id=<%=u.getId()%>">Rehabilitar</a></td>
         <%}%>
     </tr>
     <% } %>
@@ -91,7 +91,7 @@
 <center><h1 class="featurette-heading fw-normal lh-1" id="tit">
     MENÚ DE USUARIOS
     <br>
-    <a href="registrarUsuario.jsp <%sesion.removeAttribute("usuario");%>" class="btn btn-outline-dark">Agregar usuario</a> <a href="Inicio.jsp" class="btn btn-outline-dark">Regresar</a>
+    <a href="registrarUsuario.jsp <%sesion.removeAttribute("usuario");%>" class="btn btn-outline-dark" id="addUser">Agregar usuario</a> <a href="Inicio.jsp" class="btn btn-outline-dark" id="getBack">Regresar</a>
 </h1></center>
 <%
     if(mensaje2!=null){

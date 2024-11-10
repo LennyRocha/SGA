@@ -34,15 +34,15 @@
                 <div class="row">
                     <div class="col">
                         <img class="img-fluid" src="IMG/Btn3_Admin.png" alt="Gesionar usuarios">
-                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" onclick="location.href='gestionUsuario.jsp'">USUARIOS</button>
+                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" name="users" onclick="location.href='gestionUsuario.jsp'">USUARIOS</button>
                     </div>
                     <div class="col">
                         <img class="img-fluid" src="IMG/Btn2_Admin.png" alt="ver historial">
-                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" onclick="location.href='menuHist.jsp'">HISTORIAL</button>
+                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" name="history" onclick="location.href='menuHist.jsp'">HISTORIAL</button>
                     </div>
                     <div class="col">
                         <img class="img-fluid" src="IMG/Btn1_Admin.png" alt="ver almacen">
-                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" onclick="location.href='ver'">ALMACÉN</button>
+                        <button class="btn btn-secondary.btn-sm mt-2 mb-3 w-100 btn btn-sm" id="btnAdmin" name="almacen" onclick="location.href='ver'">ALMACÉN</button>
                     </div>
                     <br>
                     <!-- <br>
